@@ -1,0 +1,22 @@
+{
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "editor.formatOnSave": false,
+  "editor.rulers": [80,120],
+  "editor.tabSize": 2,
+  "editor.renderLineHighlight": "gutter",
+  "emmet.syntaxProfiles": {
+        "javascript": "jsx"
+  },
+  "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "breadcrumbs.enabled": true,
+  "editor.parameterHints.enabled": true,
+  
+  "editor.codeActionsOnSave": { 
+     "source.fixAll.eslint": true,
+     "source.organizeImports": true 
+  }
+}
