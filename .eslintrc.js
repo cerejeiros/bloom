@@ -13,10 +13,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
   
-  parserOptions: {
-    project: './tsconfig.json',
-    
-  },
   plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
