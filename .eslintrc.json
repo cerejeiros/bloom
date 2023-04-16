@@ -1,0 +1,41 @@
+{
+    "extends": [
+        "airbnb",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "plugin:prettier/recommended"
+    ],
+    "plugins": ["@typescript-eslint", "react", "prettier"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "import/no-unresolved": 0,
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".ts", ".tsx"]
+            }
+        ],
+        "prettier/prettier": "off",
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error"],
+        "import/extensions": ["off", "never"],
+        "react/prop-types": 0,
+        "react/require-default-props": 0,
+        "no-shadow": "warn",
+        "@typescript-eslint/no-shadow": ["error"],
+        "react/no-unstable-nested-components": [
+            "warn",
+            { "allowAsProps": true }
+        ]
+    }
+}
+
