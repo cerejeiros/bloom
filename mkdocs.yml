@@ -1,0 +1,36 @@
+site_name: Cerejeiros
+theme:
+  palette:
+
+    # Light mode
+    - scheme: default
+      primary: pink
+      accent: pink
+      toggle:
+        icon: material/theme-light-dark
+        name: Mudar para o tema escuro
+
+    # Dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/theme-light-dark
+        name: Mudar para o tema claro
+
+  language: pt
+  name: material
+  features:
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+
+copyright: Copyright &copy; 2023 - 2023 Armazenaí
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/cerejeiros/mobile
+  generator: false
+  
+repo_url: https://github.com/cerejeiros/mobile
