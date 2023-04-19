@@ -2,7 +2,7 @@
 
  - Baixe a última versão LTS do [NodeJS](https://nodejs.org/en)
  - Abra o terminal do seu computador na pasta raíz do projeto, recomendo abrir pelo vscode com o atalho `Ctrl + J`
- - Baixe e instale o expo cli com o comando no terminal `npx expo install -- -g`
+ - Baixe e instale o expo cli com o comando no terminal `npm install expo-cli --global`
  - Na pasta raíz do projeto rode o comando no terminal `npm install`
  - Para iniciar o projeto rode o comando no terminal `npx expo start`
  - Você pode escolher como rodar o projeto, em seu celular pessoal (recomendado) ou em um simulador
