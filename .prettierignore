@@ -1,0 +1,5 @@
+.expo-shared/
+node_modules/
+assets/
+*.log
+.gitlab-ci.yml

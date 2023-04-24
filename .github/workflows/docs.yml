@@ -1,4 +1,4 @@
-name: ci-test
+name: docs-reflow
 on:
   push:
     branches:
