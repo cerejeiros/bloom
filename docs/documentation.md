@@ -1,0 +1,9 @@
+Projeto de DeS (2023.1) com o professor Sérgio Freitas da FGA (UnB) [[email de contado]](mailto:sergiofreitas@unb.br).
+
+**Reuniões:**
+
+1. 03/04 ideias iniciais e decisão de linguagem de programação [[gravação]](https://youtu.be/oCo3_l9yjag);
+2. 10/04 criação de Kanban com backlog inicial, e criação e organização de repósitorios [[gravação]](https://youtu.be/O5FdUxWQ-uo);
+3.  16/04 revisão da 1ª sprint, definição da 2ª sprint, escolha da logo e animação da tela inicial [[gravação]](https://youtu.be/jxAqiAvt2C0);
+4. 24/04 parte 1 Revisão da 2ª sprint, definição da 3ª sprint [[gravação]](https://youtu.be/WNyN6yPAbT0);
+5. 24/04 parte 2  Tópicos iniciais em React native [[gravação]](https://youtu.be/b4VeMpOEmks).
