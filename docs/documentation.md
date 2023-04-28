@@ -1,4 +1,4 @@
-Projeto de DeS (2023.1) com o professor Sérgio Freitas da FGA (UnB) [[email de contado]](mailto:sergiofreitas@unb.br).
+Projeto de Desenvolvimento de Software (2023.1) com o professor Sérgio Freitas da FGA (UnB) [[email de contato]](mailto:sergiofreitas@unb.br).
 
 **Reuniões:**
 
