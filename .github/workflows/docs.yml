@@ -2,8 +2,8 @@ name: docs-reflow
 on:
   push:
     branches:
-      - master 
       - main
+      - documentacao/docs
 permissions:
   contents: write
 jobs:
