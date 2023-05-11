@@ -8,4 +8,5 @@ Projeto de Desenvolvimento de Software (2023.1) com o professor Sérgio Freitas 
 4. 24/04 parte 1 Revisão da 2ª sprint, definição da 3ª sprint [[gravação]](https://youtu.be/WNyN6yPAbT0);
 5. 24/04 parte 2  Tópicos iniciais em React native [[gravação]](https://youtu.be/b4VeMpOEmks).
 6. 02/05 parte 1 Citação sobre outros aplicativos para base de comparação [[gravação]](https://youtu.be/aX6EJ64jHoY);
-7. 02/05 parte 2  Definição dos grupos para produção inicial do aplicativo[[gravação]](https://youtu.be/rBXUtj7sAX0).
+7. 02/05 parte 2  Definição dos grupos para produção inicial do aplicativo[[gravação]](https://youtu.be/rBXUtj7sAX0);
+8. 10/05 Revisão da antiga sprint, preparação da próxima, e definição da base do projeto [[gravação]](https://youtu.be/Sq1C0Nz8zZM).
