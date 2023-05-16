@@ -9,4 +9,7 @@ Projeto de Desenvolvimento de Software (2023.1) com o professor Sérgio Freitas 
 5. [x] 24/04 parte 2  Tópicos iniciais em React native [[gravação]](https://youtu.be/b4VeMpOEmks);
 6. [x] 02/05 parte 1 Citação sobre outros aplicativos para base de comparação [[gravação]](https://youtu.be/aX6EJ64jHoY);
 7. [x] 02/05 parte 2  Definição dos grupos para produção inicial do aplicativo[[gravação]](https://youtu.be/rBXUtj7sAX0);
-8. [x] 10/05 Revisão da antiga sprint, preparação da próxima, e definição da base do projeto [[gravação]](https://youtu.be/Sq1C0Nz8zZM).
+8. [x] 10/05 Revisão da antiga sprint, preparação da próxima, e definição da base do projeto [[gravação]](https://youtu.be/Sq1C0Nz8zZM);
+9. [ ] 15/05 Decidindo prótotipo do design do perfil de usuário [[gravação]](https://drive.google.com/file/d/12aYS3isiaclU01EWkF-XBJlAocpCyMh5/view?usp=sharing);
+10. [ ] 15/05 Discussão da apresentação do aplicativo 1ª parte [[gravação]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
+11. [ ] 15/05 Discussão da apresentação do aplicativo 2ª parte [[gravação]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
