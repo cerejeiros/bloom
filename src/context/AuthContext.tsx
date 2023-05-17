@@ -1,8 +1,9 @@
-import React, { createContext, ReactNode, useState } from "react";
+import { User } from "@supabase/supabase-js";
+import React, { createContext, ReactNode } from "react";
 import supabase from "../helpers/supabaseClient";
 
 export type AuthContextDataProps = {
-    user: boolean;
+    user: User | null;
     signIn: (email: string, password: string) => void;
     signOut: () => void;
     signUp: (email: string, password: string) => void;
@@ -19,41 +20,50 @@ export const AuthContext = createContext<AuthContextDataProps>(
 export default function AuthContextProvider({
     children,
 }: AuthContextProviderProps) {
-    const [user, setUser] = useState(false);
+    const [user, setUser] = React.useState<User | null>(null);
 
-    async function signIn(email: string, password: string) {
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email,
-            password,
-        });
+    const signIn = React.useCallback(
+        async (email: string, password: string) => {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
 
-        if (error) console.log("Error:", error);
-        else setUser(true);
-    }
+            if (error || !!data.user) console.log("Error:", error);
+            else setUser(data.user);
+        },
+        []
+    );
 
-    async function signUp(email: string, password: string) {
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-        });
+    const signUp = React.useCallback(
+        async (email: string, password: string) => {
+            const { data, error } = await supabase.auth.signUp({
+                email,
+                password,
+            });
+            if (error || !data?.user) {
+                console.log("Error:", error);
+            } else {
+                setUser(data.user);
+            }
+        },
+        []
+    );
 
-        if (error) {
-            console.log("Error:", error);
-        } else {
-            setUser(true);
-        }
-    }
-
-    async function signOut() {
+    const signOut = async () => {
         const { error } = await supabase.auth.signOut();
 
         if (error) console.log(error);
-        else setUser(false);
-    }
+        else setUser(null);
+    };
+
+    const memoizedFunctions = React.useMemo(
+        () => ({ signIn, user, signUp, signOut }),
+        [signIn, signUp, user]
+    );
 
     return (
-        // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <AuthContext.Provider value={{ user, signIn, signOut, signUp }}>
+        <AuthContext.Provider value={memoizedFunctions}>
             {children}
         </AuthContext.Provider>
     );
