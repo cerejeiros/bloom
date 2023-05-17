@@ -1,5 +1,4 @@
 name: eslint-workflow
-
 on:
     pull_request:
     push:
@@ -22,3 +21,4 @@ jobs:
                   eslint-args: "--ignore-path=.gitignore --quiet"
                   extensions: "js,jsx,ts,tsx"
                   annotations: true
+
