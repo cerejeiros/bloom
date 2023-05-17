@@ -24,7 +24,8 @@
                 "extensions": [".ts", ".tsx"]
             }
         ],
-        "prettier/prettier": "off",
+        "global-require": "off",
+        "prettier/prettier": "warn",
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
         "import/extensions": ["off", "never"],
@@ -38,4 +39,3 @@
         ]
     }
 }
-
