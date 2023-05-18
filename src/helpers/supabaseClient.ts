@@ -20,7 +20,7 @@ const supabaseAnonKey = process.env.SUPABASE_KEYgit;
 
 if (!supabaseUrl || !supabaseAnonKey) {
     console.error("Supabase enviroment variables could not be find!");
-    throw "FATAL ERROR";
+    throw new Error("FATAL ERROR");
 }
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey, {
