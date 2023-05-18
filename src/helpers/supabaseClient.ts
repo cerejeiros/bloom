@@ -16,7 +16,7 @@ const ExpoSecureStoreAdapter = {
 };
 
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseAnonKey = process.env.SUPABASE_KEY;
+const supabaseAnonKey = process.env.SUPABASE_KEYgit;
 
 if (!supabaseUrl || !supabaseAnonKey) {
     console.error("Supabase enviroment variables could not be find!");

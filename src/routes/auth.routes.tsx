@@ -3,7 +3,7 @@ import {
     NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 import React from "react";
-import Login from "../screens/login/login";
+import Login from "../screens/login/Login";
 
 type AuthRoutes = {
     signIn: undefined;

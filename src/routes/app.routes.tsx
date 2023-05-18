@@ -7,9 +7,9 @@ import {
 } from "@react-navigation/native-stack";
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import User from "../components/user";
 import Details from "../screens/details/Details";
 import Home from "../screens/home/Home";
+import User from "../screens/profile/User";
 
 type StackRoutesParams = {
     home: undefined;
