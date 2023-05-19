@@ -38,15 +38,15 @@ João Farias e Natan Almeida.
 
 João Farias, Kaio Salgado, Kauã Souza e Natan Almeida.
 
-10. [x] 15/05 Decidindo prótotipo do design do perfil de usuário [[áudio]](https://drive.google.com/file/d/12aYS3isiaclU01EWkF-XBJlAocpCyMh5/view?usp=sharing);
+10. [x] 08/05 Decidindo prótotipo do design do perfil de usuário [[áudio]](https://drive.google.com/file/d/12aYS3isiaclU01EWkF-XBJlAocpCyMh5/view?usp=sharing);
 
 Bruna Liberal e João Farias
 
-11. [x] 15/05 Discussão da apresentação do aplicativo 1ª parte [[áudio]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
+11. [x] 08/05 Discussão da apresentação do aplicativo 1ª parte [[áudio]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
 
 Bruna Liberal e João Farias
 
-12. [x] 15/05 Discussão da apresentação do aplicativo 2ª parte [[áudio]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
+12. [x] 08/05 Discussão da apresentação do aplicativo 2ª parte [[áudio]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
 
 Bruna Liberal e João Farias
 
