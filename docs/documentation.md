@@ -30,26 +30,28 @@ Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza P
 
 Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
 
-8. [ ] 07/05 Implementação inicial do perfil de usuário [[vídeo]](https://drive.google.com/file/d/1XB61Jdf-LdMIWr0ys6N97RTjtzkYUFQn/view);
+8. [x] 07/05 Implementação inicial do perfil de usuário [[vídeo]](https://drive.google.com/file/d/1XB61Jdf-LdMIWr0ys6N97RTjtzkYUFQn/view);
 
 João Farias e Natan Almeida.
 
-9. [ ] 07/05 Ideia e criação dos slides de apresentação do projeto [[vídeo]](https://drive.google.com/file/d/1ZezhbpmLyczMzsruozhcSelmjmluidLE/view)
+9. [x] 07/05 Ideia e criação dos slides de apresentação do projeto [[vídeo]](https://drive.google.com/file/d/1ZezhbpmLyczMzsruozhcSelmjmluidLE/view)
 
 João Farias, Kaio Salgado, Kauã Souza e Natan Almeida.
 
-10. [x] 10/05 Revisão da antiga sprint, preparação da próxima, e definição da base do projeto [[vídeo]](https://youtu.be/Sq1C0Nz8zZM);
+10. [x] 15/05 Decidindo prótotipo do design do perfil de usuário [[áudio]](https://drive.google.com/file/d/12aYS3isiaclU01EWkF-XBJlAocpCyMh5/view?usp=sharing);
+
+Bruna Liberal e João Farias
+
+11. [x] 15/05 Discussão da apresentação do aplicativo 1ª parte [[áudio]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
+
+Bruna Liberal e João Farias
+
+12. [x] 15/05 Discussão da apresentação do aplicativo 2ª parte [[áudio]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
+
+Bruna Liberal e João Farias
+
+13. [x] 10/05 Revisão da antiga sprint, preparação da próxima, e definição da base do projeto [[vídeo]](https://youtu.be/Sq1C0Nz8zZM);
 
 Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
 
-11. [ ] 15/05 Decidindo prótotipo do design do perfil de usuário [[áudio]](https://drive.google.com/file/d/12aYS3isiaclU01EWkF-XBJlAocpCyMh5/view?usp=sharing);
 
-Bruna Liberal e João Farias
-
-12. [ ] 15/05 Discussão da apresentação do aplicativo 1ª parte [[áudio]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
-
-Bruna Liberal e João Farias
-
-13. [ ] 15/05 Discussão da apresentação do aplicativo 2ª parte [[áudio]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
-
-Bruna Liberal e João Farias
