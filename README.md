@@ -36,3 +36,6 @@
 
 - [Expo](https://docs.expo.dev)
 - [React docs](https://react.dev)
+- [React Native docs](https://reactnative.dev/docs/environment-setup)
+- [Designs de páginas de login do Dribble](https://dribbble.com/tags/login)
+- [Testar paleta de cores](https://realtimecolors.com/?colors=000000-ffffff-4685ff-f2f2f2-ffb084)
