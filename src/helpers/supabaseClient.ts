@@ -18,6 +18,9 @@ const ExpoSecureStoreAdapter = {
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.SUPABASE_KEY;
 
+console.log(supabaseUrl);
+console.log(supabaseAnonKey);
+
 if (!supabaseUrl || !supabaseAnonKey) {
     console.error("Supabase enviroment variables could not be find!");
     throw new Error("FATAL ERROR");
@@ -31,5 +34,6 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey, {
         detectSessionInUrl: false,
     },
 });
+
 
 export default supabase;
