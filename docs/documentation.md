@@ -50,8 +50,11 @@ Bruna Liberal e João Farias
 
 Bruna Liberal e João Farias
 
-13. [x] 10/05 Revisão da antiga sprint, preparação da próxima, e definição da base do projeto [[vídeo]](https://youtu.be/Sq1C0Nz8zZM);
+13. [x] 15/05 Revisão da antiga sprint, preparação da próxima, e definição da base do projeto [[vídeo]](https://youtu.be/Sq1C0Nz8zZM);
 
 Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
+
+14. [x] 20/05 Consertando bug supabase [[vídeo]](https://youtu.be/_3Djb_jXkNo);
+Natan Almeida, João Farias
 
 
