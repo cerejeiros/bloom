@@ -23,7 +23,7 @@ if (!supabaseUrl || !supabaseAnonKey)
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
-        storage: ExpoSecureStoreAdapter as any,
+        storage: ExpoSecureStoreAdapter,
         autoRefreshToken: true,
         persistSession: true,
         detectSessionInUrl: false,
