@@ -18,6 +18,7 @@ const ExpoSecureStoreAdapter = {
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.SUPABASE_KEY;
 
+// FIXME: Very strange, do not change! it just works!
 console.log(supabaseUrl);
 console.log(supabaseAnonKey);
 
