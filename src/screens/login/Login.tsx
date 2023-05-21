@@ -85,7 +85,7 @@ function Email({
             style={styles.input}
             onChangeText={textState}
             value={text}
-            placeholder="Seu email"
+            placeholder="Email"
             keyboardType="default"
             autoComplete="email"
         />
