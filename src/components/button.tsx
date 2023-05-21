@@ -5,6 +5,7 @@ import colors from "../pallete";
 
 const styles = StyleSheet.create({
     button: {
+        marginTop: 10,
         alignItems: "center",
         justifyContent: "center",
         paddingVertical: 12,
