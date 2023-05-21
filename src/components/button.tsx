@@ -1,7 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { ButtonProps } from "react-native-elements";
-import colors from "../pallete";
 
 const styles = StyleSheet.create({
     button: {
@@ -12,7 +11,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 4,
         elevation: 3,
-        backgroundColor: colors.black[300],
+        backgroundColor: "black",
     },
     text: {
         fontSize: 16,

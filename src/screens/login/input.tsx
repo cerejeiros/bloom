@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import Button from "../../components/button";
 import { AuthContext } from "../../context/AuthContext";
-import colors from "../../pallete";
 
 const styles = StyleSheet.create({
     container: {
@@ -12,7 +11,7 @@ const styles = StyleSheet.create({
         height: 40,
         marginTop: 10,
         borderBottomWidth: 1,
-        borderColor: colors.black[100],
+        borderColor: "black",
         padding: 10,
         paddingLeft: 15,
         paddingRight: 25,
