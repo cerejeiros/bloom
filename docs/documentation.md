@@ -57,6 +57,6 @@ Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza P
 14. [x] 20/05 Consertando bug supabase [[vídeo]](https://youtu.be/_3Djb_jXkNo);
 Natan Almeida, João Farias
 
-15. [x] 20/05 Revisão da antiga sprint, definição de meta para a próxima e realocação de equipe [[vídeo]](https://youtu.be/DU-472fRkl4)
+15. [x] 22/05 Revisão da antiga sprint, definição de meta para a próxima e realocação de equipe [[vídeo]](https://youtu.be/DU-472fRkl4)
 
 Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
