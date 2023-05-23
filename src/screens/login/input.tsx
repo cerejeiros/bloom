@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
         padding: 0,
         paddingLeft: 40,
         paddingRight: 40,
-        //backgroundColor: colors.rose[900],
     },
     input: {
         height: 40,
