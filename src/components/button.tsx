@@ -1,7 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { ButtonProps } from "react-native-elements";
-import { color } from "react-native-reanimated";
 import colors from "../pallete";
 
 const styles = StyleSheet.create({
