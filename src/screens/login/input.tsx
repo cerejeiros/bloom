@@ -2,10 +2,14 @@ import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import Button from "../../components/button";
 import { AuthContext } from "../../context/AuthContext";
+import colors from "../../pallete";
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
+        padding: 0,
+        paddingLeft: 40,
+        paddingRight: 40,
+        //backgroundColor: colors.rose[900],
     },
     input: {
         height: 40,

@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, KeyboardAvoidingView, StyleSheet } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, Text } from "react-native";
+import colors from "../../pallete";
 import Input from "./input";
 // import Logo from "./logo";
 
@@ -8,10 +9,13 @@ const styles = StyleSheet.create({
         minWidth: "75%",
         flexGrow: 1,
         height: "100%",
-        backgroundColor: "#fff5f6",
+        backgroundColor: colors.blue[50],
         justifyContent: "center",
+        borderWidth: 3.5,
+        borderColor: colors.blue[200],
+        borderRadius: 15,
     },
-    title:{
+    title: {
         textAlign: "center",
         marginTop: 80,
         color: "#393939",

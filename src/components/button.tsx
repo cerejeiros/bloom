@@ -1,6 +1,8 @@
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { ButtonProps } from "react-native-elements";
+import { color } from "react-native-reanimated";
+import colors from "../pallete";
 
 const styles = StyleSheet.create({
     button: {
@@ -9,9 +11,12 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         paddingVertical: 12,
         paddingHorizontal: 32,
-        borderRadius: 4,
+        borderRadius: 35,
         elevation: 3,
-        backgroundColor: "black",
+        backgroundColor: colors.rose[300],
+        borderWidth: 2,
+        borderColor: colors.rose[100],
+
     },
     text: {
         fontSize: 16,
