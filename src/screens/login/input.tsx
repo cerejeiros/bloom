@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        marginTop: 10,
         borderBottomWidth: 1,
         borderColor: "black",
         padding: 10,
@@ -105,13 +104,7 @@ export default function Input() {
                 onPress={() => {
                     signUp(email, password);
                 }}
-                title="Registrar"
-            />
-            <Button 
-            style={styles.button} 
-            onPress={() => signOut()} 
-            title="Sair"
-            />
+                title="Registrar"/>        
         </View>
     );
 }
