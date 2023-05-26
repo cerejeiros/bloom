@@ -19,8 +19,11 @@ const styles = StyleSheet.create({
         paddingRight: 25,
         borderRadius: 0,
         minWidth: 100,
-        color: "#393939",
+        color: colors.black[500],
         fontSize: 15,
+    },
+    password: {
+        marginTop: 20,
     },
     title: {
         color: "black",
@@ -40,6 +43,7 @@ const styles = StyleSheet.create({
         color: colors.white[50],
     },
     button_out: {
+        margin: 10,
         borderColor: colors.rose[100],
         backgroundColor: colors.rose[50],
     },
@@ -89,7 +93,7 @@ function Password({
 }) {
     return (
         <TextInput
-            style={styles.input}
+            style={[styles.input, styles.password]}
             onChangeText={setPassword}
             placeholder="Senha"
             secureTextEntry

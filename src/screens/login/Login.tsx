@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         height: "100%",
         justifyContent: "space-around",
-        borderWidth: 3.5,
-        borderColor: colors.blue[200],
-        borderRadius: 15,
+        // borderWidth: 3.5,
+        // borderColor: colors.blue[200],
+        // borderRadius: 15,
         // backgroundColor: colors.blue[50],
     },
     background: {
@@ -40,12 +40,16 @@ const styles = StyleSheet.create({
         elevation: -1,
         zIndex: -1,
     },
+    titlecontainer: {
+        marginLeft: 35,
+    },
+
     title: {
         color: "#393939",
         fontSize: 35,
         fontWeight: "bold",
-        marginLeft: 50,
     },
+    message: {},
     button: {
         padding: 15,
         alignItems: "center",
@@ -80,7 +84,13 @@ function Login() {
     return (
         <KeyboardAvoidingView style={styles.container}>
             <Logo />
-            <Text style={styles.title}>Login</Text>
+            <View style={styles.titlecontainer}>
+                <Text style={styles.title}>Login</Text>
+                <Text style={styles.message}>
+                    {" "}
+                    Bem-Vindo de volta! Entre com seus dados.{" "}
+                </Text>
+            </View>
             <Input />
             <LinearGradient
                 // Background Linear Gradient
@@ -97,7 +107,7 @@ function Login() {
                 style={styles.background}
             />
             <View style={styles.warning}>
-                <Text>Novo ao Bloom?</Text>
+                <Text>Novo no Bloom?</Text>
                 <Text style={styles.link}>Registre-se</Text>
             </View>
         </KeyboardAvoidingView>

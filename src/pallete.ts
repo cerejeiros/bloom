@@ -40,6 +40,7 @@ const colors = {
     // TODO: Still needs a black main pallete colour.
     black: {
         400: "#9a9a9a",
+        500: "#393939",
     },
 };
 
