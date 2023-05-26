@@ -31,7 +31,7 @@
         "import/extensions": ["off", "never"],
         "react/prop-types": 0,
         "react/require-default-props": 0,
-        "no-shadow": "warn",
+        "no-shadow": "off",
         "@typescript-eslint/no-shadow": ["error"],
         "react/no-unstable-nested-components": [
             "warn",
