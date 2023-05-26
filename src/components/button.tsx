@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.rose[300],
         borderWidth: 2,
         borderColor: colors.rose[100],
-
     },
     text: {
         fontSize: 16,

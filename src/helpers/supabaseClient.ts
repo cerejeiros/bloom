@@ -1,5 +1,5 @@
 import "react-native-url-polyfill/auto";
-import {SUPABASE_URL, SUPABASE_KEY} from "@env";
+import { SUPABASE_URL, SUPABASE_KEY } from "@env";
 
 import { createClient } from "@supabase/supabase-js";
 import * as SecureStore from "expo-secure-store";
@@ -15,7 +15,6 @@ const ExpoSecureStoreAdapter = {
         SecureStore.deleteItemAsync(key);
     },
 };
-
 
 if (!SUPABASE_URL || !SUPABASE_KEY)
     throw new Error("Supabase enviroment variables could not be find!");
