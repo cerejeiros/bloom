@@ -104,7 +104,8 @@ export default function Input() {
                 onPress={() => {
                     signUp(email, password);
                 }}
-                title="Registrar"/>        
+                title="Registrar"
+            />
         </View>
     );
 }

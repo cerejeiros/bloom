@@ -22,17 +22,7 @@ const styles = StyleSheet.create({
         marginTop: 40,
         marginBottom: 60,
     },
-    apr: {
-        flexDirection: "row",
-        marginTop: 40,
-        marginBottom: 60,
-        alignItems: "center",
-    },
-    name: {
-        color: "#393939",
-        fontSize: 20,
-        fontWeight: "bold",
-    },
+
     circulo: {
         width: 400,
         height: 400,
@@ -48,10 +38,7 @@ function Login() {
     return (
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.circulo} />
-            <View style={styles.apr}>
-                <Logo />
-                <Text style={styles.name}>Bloom</Text>
-            </View>
+            <Logo />
             <Text style={styles.title}>Bem-vindo de volta!</Text>
             <Input />
         </KeyboardAvoidingView>
