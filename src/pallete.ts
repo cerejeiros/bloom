@@ -1,6 +1,7 @@
 const colors = {
     rose: {
         50: "#ffe6e8",
+        75: "#f8e1e3",
         100: "#ffccd1",
         200: "#FF99A3",
         300: "#FF6675",
@@ -13,6 +14,7 @@ const colors = {
     },
     blue: {
         50: "#EBF7F9",
+        75: "#dff0f4",
         100: "#D7F0F4",
         200: "#AFE1E9",
         300: "#88D2DD",
