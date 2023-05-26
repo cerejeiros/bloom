@@ -38,7 +38,9 @@ const colors = {
         900: "#1E1515",
     },
     // TODO: Still needs a black main pallete colour.
-    black: {},
+    black: {
+        400: "#9a9a9a",
+    },
 };
 
 export default colors;
