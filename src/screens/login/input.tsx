@@ -98,7 +98,7 @@ export default function Input() {
                 onPress={() => signIn(email, password)}
                 title="Entrar"
             />
-            <Text style={{ alignSelf: "center", marginVertical: 10 }}>Ou</Text>
+            <Text style={{ alignSelf: "center", marginVertical: 10 }}>ou</Text>
             <Button
                 style={styles.button}
                 onPress={() => {
