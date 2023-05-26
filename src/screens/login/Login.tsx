@@ -1,5 +1,10 @@
+// This page allows the end-user to log-in directly within the application,
+// It will give one input for a username or an email address (the distinction
+// has to be made by a validator).
+// And another input for a password, which will be hidden by default.
+
 import React from "react";
-import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
 import colors from "../../pallete";
 import Input from "./input";
 import Logo from "./logo";
@@ -39,7 +44,6 @@ function Login() {
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.circulo} />
             <Logo />
-            <Text style={styles.title}>Bem-vindo de volta!</Text>
             <Input />
         </KeyboardAvoidingView>
     );
