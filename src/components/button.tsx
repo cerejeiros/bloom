@@ -21,9 +21,29 @@
 // SOFTWARE.
 
 import React from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
-import { ButtonProps } from "react-native-elements";
+import {
+    GestureResponderEvent,
+    Pressable,
+    StyleProp,
+    StyleSheet,
+    Text,
+    TextStyle,
+    ViewStyle,
+} from "react-native";
 import colors from "../pallete";
+
+const enum Defaults {
+    Title = "Título",
+    Press_Message = "Durante aperto!",
+    Colour = "red",
+}
+
+type ButtonProps = {
+    style?: StyleProp<ViewStyle>;
+    title: string | React.ReactElement<NonNullable<unknown>>;
+    titleStyle?: StyleProp<TextStyle>;
+    onPress: ((event: GestureResponderEvent) => void) | undefined;
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -43,28 +63,21 @@ const styles = StyleSheet.create({
         lineHeight: 21,
         fontWeight: "bold",
         letterSpacing: 0.25,
-        color: "white",
+        color: Defaults.Colour,
     },
 });
-
-const enum Defaults {
-    Title = "Título",
-    Press_Message = "Durante aperto!",
-}
 
 function defaultOnPress(): void {
     // eslint-disable-next-line no-console
     console.log(Defaults.Press_Message);
 }
 
-export default function AButton(props: ButtonProps) {
+export default function Button(props: ButtonProps) {
     const {
         onPress = defaultOnPress,
         title = Defaults.Title,
-        // NOTE: Use title as an element instead of titleProps.
-        // titleProps,
-        style,
         titleStyle,
+        style,
     } = props;
 
     // Button with title as custom element.
