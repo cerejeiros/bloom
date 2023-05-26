@@ -2,7 +2,7 @@
     "editor.suggestSelection": "first",
     "editor.formatOnSave": true,
     "editor.rulers": [80, 120],
-    "editor.tabSize": 2,
+    "editor.tabSize": 4,
     "editor.renderLineHighlight": "gutter",
     "emmet.syntaxProfiles": {
         "javascript": "jsx"
