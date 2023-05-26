@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import Button from "../../components/button";
 import { AuthContext } from "../../context/AuthContext";
+import colors from "../../pallete";
 
 const styles = StyleSheet.create({
     container: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         borderBottomWidth: 1,
-        borderColor: "black",
+        borderColor: colors.black[400],
         padding: 10,
         paddingLeft: 15,
         paddingRight: 25,
@@ -30,16 +31,33 @@ const styles = StyleSheet.create({
     label: {
         paddingTop: 40,
         color: "black",
-        opacity: 0.5,
     },
     button: {
         margin: 10,
-        backgroundColor: "white",
+        backgroundColor: colors.rose[300],
+    },
+    button_text: {
+        color: colors.white[50],
+    },
+    button_out: {
+        borderColor: colors.rose[100],
+        backgroundColor: colors.rose[50],
+    },
+    button_out_text: {
+        color: colors.rose[300],
+    },
+    divider: {
+        alignSelf: "center",
+        marginVertical: 5,
+        textTransform: "lowercase",
     },
     link: {
         marginBottom: 10,
         marginTop: 10,
         alignSelf: "flex-end",
+        color: colors.blue[600],
+        fontSize: 12.5,
+        fontWeight: "bold",
     },
 });
 
@@ -55,7 +73,7 @@ function Email({
             style={styles.input}
             onChangeText={textState}
             value={text}
-            placeholder="email"
+            placeholder="Email ou Usuário"
             keyboardType="default"
             autoComplete="email"
         />
@@ -73,7 +91,7 @@ function Password({
         <TextInput
             style={styles.input}
             onChangeText={setPassword}
-            placeholder="senha"
+            placeholder="Senha"
             secureTextEntry
             value={password}
         />
@@ -88,23 +106,23 @@ export default function Input() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>Username ou Email:</Text>
             <Email text={email} textState={setEmail} />
-            <Text style={styles.label}>Senha:</Text>
             <Password password={password} setPassword={setPassword} />
             <Text style={styles.link}>Esqueceu sua senha?</Text>
             <Button
                 style={styles.button}
                 onPress={() => signIn(email, password)}
                 title="Entrar"
+                titleStyle={styles.button_text}
             />
-            <Text style={{ alignSelf: "center", marginVertical: 10 }}>ou</Text>
+            <Text style={styles.divider}>ou</Text>
             <Button
-                style={styles.button}
+                style={styles.button_out}
                 onPress={() => {
                     signUp(email, password);
                 }}
-                title="Registrar"
+                title="Entrar como convidado"
+                titleStyle={styles.button_out_text}
             />
         </View>
     );

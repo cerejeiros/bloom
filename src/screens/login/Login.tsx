@@ -5,7 +5,13 @@
 
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { Dimensions, KeyboardAvoidingView, StyleSheet } from "react-native";
+import {
+    Dimensions,
+    KeyboardAvoidingView,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
 import colors from "../../pallete";
 import Input from "./input";
 import Logo from "./logo";
@@ -19,7 +25,7 @@ const styles = StyleSheet.create({
         minWidth: "75%",
         flexDirection: "column",
         height: "100%",
-        justifyContent: "flex-start",
+        justifyContent: "space-around",
         borderWidth: 3.5,
         borderColor: colors.blue[200],
         borderRadius: 15,
@@ -35,12 +41,10 @@ const styles = StyleSheet.create({
         zIndex: -1,
     },
     title: {
-        textAlign: "center",
         color: "#393939",
         fontSize: 35,
         fontWeight: "bold",
-        marginTop: 40,
-        marginBottom: 60,
+        marginLeft: 50,
     },
     button: {
         padding: 15,
@@ -50,7 +54,16 @@ const styles = StyleSheet.create({
     text: {
         backgroundColor: "transparent",
         fontSize: 15,
-        color: "#fff",
+        color: "red",
+    },
+    warning: {
+        alignSelf: "center",
+        marginBottom: 30,
+        flexDirection: "row",
+        gap: 5,
+    },
+    link: {
+        color: colors.blue[600],
     },
     /* circulo: {
         width: 400,
@@ -67,6 +80,7 @@ function Login() {
     return (
         <KeyboardAvoidingView style={styles.container}>
             <Logo />
+            <Text style={styles.title}>Login</Text>
             <Input />
             <LinearGradient
                 // Background Linear Gradient
@@ -82,6 +96,10 @@ function Login() {
                 ]}
                 style={styles.background}
             />
+            <View style={styles.warning}>
+                <Text>Novo ao Bloom?</Text>
+                <Text style={styles.link}>Registre-se</Text>
+            </View>
         </KeyboardAvoidingView>
     );
 }
