@@ -22,7 +22,10 @@ export function AuthRoutes() {
     return (
         <Navigator screenOptions={{ headerShown: false }}>
             <Screen name="signIn" component={Login} />
+
             <Screen name="signUp" component={Signup} />
+            
+            
         </Navigator>
     );
 }

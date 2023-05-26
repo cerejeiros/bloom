@@ -13,6 +13,8 @@ import {
     View,
 } from "react-native";
 import colors from "../../pallete";
+import Input from "./input";
+import Logo from "./logo";
 
 // TODO: Make dimensions a global variable if, and only if width and height does
 //       not switch when rotating the screen.
@@ -81,12 +83,10 @@ const styles = StyleSheet.create({
 function Signup() {
     return (
         <KeyboardAvoidingView style={styles.container}>
+            <Logo />
             <View style={styles.titlecontainer}>
-                <Text style={styles.title}>Signup</Text>
-                <Text style={styles.message}>
-                    {" "}
-                    Bem-Vindo de volta! Entre com seus dados.{" "}
-                </Text>
+                <Text style={styles.title}>Registro</Text>
+                <Text style={styles.message}> Bem-vindo ao Bloom! </Text>
             </View>
             <LinearGradient
                 // Background Linear Gradient
@@ -102,9 +102,10 @@ function Signup() {
                 ]}
                 style={styles.background}
             />
+            <Input />
             <View style={styles.warning}>
-                <Text>Novo no Bloom?</Text>
-                <Text style={styles.link}>Registre-se</Text>
+                <Text>Já tem cadastro?</Text>
+                <Text style={styles.link}>Entrar</Text>
             </View>
         </KeyboardAvoidingView>
     );

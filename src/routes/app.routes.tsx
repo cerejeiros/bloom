@@ -27,6 +27,8 @@ const Drawer = createDrawerNavigator();
 
 // the stack routes is called in the tab routes
 function StackRoutes() {
+    const a = 1;
+
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen
