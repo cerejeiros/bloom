@@ -1,8 +1,10 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import Button from "../../components/button";
 import { AuthContext } from "../../context/AuthContext";
 import colors from "../../pallete";
+import { AuthRoutes } from "../../routes/auth.routes";
 
 const styles = StyleSheet.create({
     container: {
@@ -108,6 +110,8 @@ export default function Input() {
 
     const { signIn, signUp, signOut } = useContext(AuthContext);
 
+    const navigation = useNavigation<NavigationProp<AuthRoutes>>();
+
     return (
         <View style={styles.container}>
             <Email text={email} textState={setEmail} />
@@ -123,6 +127,7 @@ export default function Input() {
             <Button
                 style={styles.button_out}
                 onPress={() => {
+                    navigation.navigate("signUp");
                     signUp(email, password);
                 }}
                 title="Entrar como convidado"
