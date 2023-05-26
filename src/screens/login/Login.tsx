@@ -88,7 +88,7 @@ function Login() {
                 <Text style={styles.title}>Login</Text>
                 <Text style={styles.message}>
                     {" "}
-                    Bem-Vindo de volta! Entre com seus dados.{" "}
+                    Bem-vindo de volta! Entre com seus dados:{" "}
                 </Text>
             </View>
             <Input />
