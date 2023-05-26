@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 
 const enum Defaults {
     Title = "Título",
-    Press_Message = "Foi apertado!",
+    Press_Message = "Durante aperto!",
 }
 
 function defaultOnPress(): void {
@@ -57,10 +57,12 @@ function defaultOnPress(): void {
     console.log(Defaults.Press_Message);
 }
 
-export default function Button(props: ButtonProps) {
+export default function AButton(props: ButtonProps) {
     const {
         onPress = defaultOnPress,
         title = Defaults.Title,
+        // NOTE: Use title as an element instead of titleProps.
+        // titleProps,
         style,
         titleStyle,
     } = props;
