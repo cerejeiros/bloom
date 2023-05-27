@@ -6,7 +6,8 @@ import React from "react";
 import Login from "../screens/login/Login";
 import Signup from "../screens/signup/Signup";
 
-type AuthRoutes = {
+// TODO -  MOVE TO TYPES FOLDER
+export type AuthRoutes = {
     signIn: undefined;
     signUp: undefined;
 };
