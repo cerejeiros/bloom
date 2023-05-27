@@ -67,21 +67,27 @@ Bruna Liberal, João Farias, Kaio Salgado, Leonardo Castro, Luiza Pugas e Natan 
 17. [] 15/05 Reunião geral - revisão de sprints 2ª parte [[vídeo]](https://drive.google.com/file/d/1D1DfuOspj3_7C41MF51IDv6sgiLZE72O/view?usp=sharing)
 
 Bruna Liberal, João Farias, Kaio Salgado, Leonardo Castro, Luiza Pugas e Natan Almeida.
+
 18. [] 15/05 Reunião para terminar o Back-end e estudar o Front 1ª parte [[vídeo]](https://drive.google.com/file/d/17IdcPKf494UuJzJoN7ulPRHguRwcBS_h/view?usp=sharing)
 
 Kaio Salgado  e Luiza Pugas.
+
 19. [] 15/05 Reunião para terminar o Back-end e estudar o Front 2ª parte [[vídeo]](https://drive.google.com/file/d/1jWL1Ex1lpnC55kfxQuspwD-zY37SRhsH/view?usp=sharing)
 
 Kaio Salgado  e Luiza Pugas.
+
 20. [] 15/05 Reunião para terminar o Back-end e estudar o Front 3ª parte [[vídeo]](https://drive.google.com/file/d/16mXS-BU9tsdSnX89QruAZpigyjbUxsTH/view?usp=sharing)
 
 Kaio Salgado  e Luiza Pugas.
+
 21. [] 15/05 Reunião para terminar o Back-end e estudar o Front 4ª parte [[vídeo]](https://drive.google.com/file/d/1-6d_2U3Gs1DacRbWz0UK_WCGKcfQyHTm/view?usp=sharing)
 
 Kaio Salgado  e Luiza Pugas.
+
 22. [] 15/05 Reunião para terminar o Back-end e estudar o Front 5ª parte [[vídeo]](https://drive.google.com/file/d/19jSferQ-bfIlkW5j32TyvWzWnXrKoosN/view?usp=sharing)
 
 Kaio Salgado  e Luiza Pugas.
+
 23. [] 15/05 Reunião para terminar o Back-end e estudar o Front 6ª parte [[vídeo]](https://drive.google.com/file/d/1t6FKvMZzlCRsARRXhgo28vFyRp8WWX3_/view?usp=drive_link)
 
 Kaio Salgado  e Luiza Pugas.
