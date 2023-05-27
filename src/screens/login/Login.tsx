@@ -2,11 +2,12 @@
 // It will give one input for a username or an email address (the distinction
 // has to be made by a validator).
 // And another input for a password, which will be hidden by default.
-
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import colors from "../../pallete";
+import { AuthRoutes } from "../../routes/auth.routes";
 import Input from "./input";
 import Logo from "./logo";
 
@@ -71,6 +72,7 @@ const styles = StyleSheet.create({
 });
 
 function Login() {
+    const navigation = useNavigation<NavigationProp<AuthRoutes>>();
     return (
         <KeyboardAvoidingView style={styles.container}>
             <Logo />
@@ -86,19 +88,19 @@ function Login() {
                 // Background Linear Gradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                colors={[
-                    colors.rose[75],
-                    "transparent",
-                    colors.blue[75],
-                    "transparent",
-                    colors.rose[75],
-                    "transparent",
-                ]}
+                colors={[colors.rose[75], colors.blue[75], colors.rose[75]]}
                 style={styles.background}
             />
             <View style={styles.warning}>
                 <Text>Novo no Bloom?</Text>
-                <Text style={styles.link}>Registre-se</Text>
+                <Text
+                    style={styles.link}
+                    onPress={() => {
+                        navigation.navigate("signUp");
+                    }}
+                >
+                    Registre-se
+                </Text>
             </View>
         </KeyboardAvoidingView>
     );

@@ -3,24 +3,23 @@ import { Image, StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "row",
         marginTop: 40,
-        marginBottom: 60,
+        marginBottom: 0,
         alignItems: "center",
         // backgroundColor: "red",
         // alignSelf: "center",
     },
     icon: {
-        width: 50,
-        height: 50,
+        width: 120,
+        height: 120,
         marginLeft: 10,
     },
-    name: {
-        marginLeft: 10,
-        color: "#393939",
-        fontSize: 20,
-        fontWeight: "bold",
-    },
+    // name: {
+    //    marginLeft: 10,
+    //    color: "#393939",
+    //    fontSize: 20,
+    //    fontWeight: "bold",
+    // },
 });
 
 // Ainda acho que a logo pode ser usada de uma forma melhor na página de login,
@@ -31,9 +30,8 @@ export default function Logo() {
             <Image
                 alt="Bloom's Logo"
                 style={styles.icon}
-                source={require("../../../assets/logo_rounded.png")}
+                source={require("../../../assets/icon_120x120.png")}
             />
-            <Text style={styles.name}>Bloom</Text>
         </View>
     );
 }

@@ -25,8 +25,6 @@ export function AuthRoutes() {
             <Screen name="signIn" component={Login} />
 
             <Screen name="signUp" component={Signup} />
-            
-            
         </Navigator>
     );
 }

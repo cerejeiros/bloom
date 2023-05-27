@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import Button from "../../components/button";
 import { AuthContext } from "../../context/AuthContext";
 import colors from "../../pallete";
@@ -17,13 +17,11 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 15,
         paddingRight: 25,
+        marginBottom: 15,
         borderRadius: 0,
         minWidth: 100,
         color: colors.black[500],
         fontSize: 15,
-    },
-    password: {
-        marginTop: 20,
     },
     title: {
         color: "black",
@@ -77,9 +75,45 @@ function Email({
             style={styles.input}
             onChangeText={textState}
             value={text}
-            placeholder="Email ou Usuário"
+            placeholder="Email"
             keyboardType="default"
             autoComplete="email"
+        />
+    );
+}
+
+function Username({
+    text,
+    textState,
+}: {
+    text: string;
+    textState: Dispatch<SetStateAction<string>>;
+}) {
+    return (
+        <TextInput
+            style={styles.input}
+            onChangeText={textState}
+            value={text}
+            placeholder="Usuário"
+            keyboardType="default"
+        />
+    );
+}
+
+function Birth({
+    text,
+    textState,
+}: {
+    text: string;
+    textState: Dispatch<SetStateAction<string>>;
+}) {
+    return (
+        <TextInput
+            style={styles.input}
+            onChangeText={textState}
+            value={text}
+            placeholder="DD/MM/AAAA"
+            keyboardType="numeric"
         />
     );
 }
@@ -93,7 +127,7 @@ function Password({
 }) {
     return (
         <TextInput
-            style={[styles.input, styles.password]}
+            style={styles.input}
             onChangeText={setPassword}
             placeholder="Senha"
             secureTextEntry
@@ -105,28 +139,22 @@ function Password({
 export default function Input() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
+    const [birthday, setBirth] = useState("");
 
-    const { signIn, signUp, signOut } = useContext(AuthContext);
+    const { signUp } = useContext(AuthContext);
 
     return (
         <View style={styles.container}>
             <Email text={email} textState={setEmail} />
+            <Username text={username} textState={setUsername} />
+            <Birth text={birthday} textState={setBirth} />
             <Password password={password} setPassword={setPassword} />
-            <Text style={styles.link}>Esqueceu sua senha?</Text>
             <Button
                 style={styles.button}
-                onPress={() => signIn(email, password)}
-                title="Entrar"
+                onPress={() => signUp(email, password)}
+                title="Cadastrar"
                 titleStyle={styles.button_text}
-            />
-            <Text style={styles.divider}>ou</Text>
-            <Button
-                style={styles.button_out}
-                onPress={() => {
-                    signUp(email, password);
-                }}
-                title="Entrar como convidado"
-                titleStyle={styles.button_out_text}
             />
         </View>
     );

@@ -126,10 +126,7 @@ export default function Input() {
             <Text style={styles.divider}>ou</Text>
             <Button
                 style={styles.button_out}
-                onPress={() => {
-                    navigation.navigate("signUp");
-                    signUp(email, password);
-                }}
+                onPress={() => signIn(email, password)}
                 title="Entrar como convidado"
                 titleStyle={styles.button_out_text}
             />
