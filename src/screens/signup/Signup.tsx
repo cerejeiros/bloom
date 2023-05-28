@@ -3,16 +3,12 @@
 // has to be made by a validator).
 // And another input for a password, which will be hidden by default.
 
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import {
-    Dimensions,
-    KeyboardAvoidingView,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import colors from "../../pallete";
+import { AuthRoutes } from "../../routes/auth.routes";
 
 // TODO: Make dimensions a global variable if, and only if width and height does
 //       not switch when rotating the screen.
@@ -79,8 +75,10 @@ const styles = StyleSheet.create({
 });
 
 function Signup() {
+    const navigation = useNavigation<NavigationProp<AuthRoutes>>();
+
     return (
-        <KeyboardAvoidingView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.titlecontainer}>
                 <Text style={styles.title}>Signup</Text>
                 <Text style={styles.message}>
@@ -103,10 +101,17 @@ function Signup() {
                 style={styles.background}
             />
             <View style={styles.warning}>
-                <Text>Novo no Bloom?</Text>
-                <Text style={styles.link}>Registre-se</Text>
+                <Text>Já cadastrado?</Text>
+                <Text
+                    onPress={() => {
+                        navigation.navigate("signIn");
+                    }}
+                    style={styles.link}
+                >
+                    Logue-se
+                </Text>
             </View>
-        </KeyboardAvoidingView>
+        </View>
     );
 }
 

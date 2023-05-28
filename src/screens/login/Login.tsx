@@ -3,18 +3,20 @@
 // has to be made by a validator).
 // And another input for a password, which will be hidden by default.
 
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
     Dimensions,
     KeyboardAvoidingView,
+    ScrollView,
     StyleSheet,
     Text,
     View,
 } from "react-native";
 import colors from "../../pallete";
+import { AuthRoutes } from "../../routes/auth.routes";
 import Input from "./input";
-import Logo from "./logo";
 
 // TODO: Make dimensions a global variable if, and only if width and height does
 //       not switch when rotating the screen.
@@ -25,7 +27,8 @@ const styles = StyleSheet.create({
         minWidth: "75%",
         flexDirection: "column",
         height: "100%",
-        justifyContent: "space-around",
+        justifyContent: "center",
+        // justifyContent: "space-around",
         // borderWidth: 3.5,
         // borderColor: colors.blue[200],
         // borderRadius: 15,
@@ -49,7 +52,10 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontWeight: "bold",
     },
-    message: {},
+    message: {
+        marginTop: 100,
+        marginBottom: "10%",
+    },
     button: {
         padding: 15,
         alignItems: "center",
@@ -80,38 +86,48 @@ const styles = StyleSheet.create({
     }, */
 });
 
-function Login() {
+export default function Login() {
+    const navigation = useNavigation<NavigationProp<AuthRoutes>>();
+
     return (
-        <KeyboardAvoidingView style={styles.container}>
-            <Logo />
-            <View style={styles.titlecontainer}>
-                <Text style={styles.title}>Login</Text>
-                <Text style={styles.message}>
-                    {" "}
-                    Bem-vindo de volta! Entre com seus dados:{" "}
-                </Text>
-            </View>
-            <Input />
-            <LinearGradient
-                // Background Linear Gradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                colors={[
-                    colors.rose[75],
-                    "transparent",
-                    colors.blue[75],
-                    "transparent",
-                    colors.rose[75],
-                    "transparent",
-                ]}
-                style={styles.background}
-            />
-            <View style={styles.warning}>
-                <Text>Novo no Bloom?</Text>
-                <Text style={styles.link}>Registre-se</Text>
-            </View>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+            <ScrollView contentContainerStyle={[styles.container, { flex: 1 }]}>
+                {/* TODO: Logo tem que ser flexível para quando o teclado, ela
+                          ficar escondida ou removida da tela. */}
+                {/* <Logo /> */}
+                <View style={styles.titlecontainer}>
+                    <Text style={styles.message}>
+                        {" "}
+                        Bem-vindo de volta! Entre com seus dados:{" "}
+                    </Text>
+                </View>
+                <Input />
+                <LinearGradient
+                    // Background Linear Gradient
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    colors={[
+                        colors.rose[75],
+                        "transparent",
+                        colors.blue[75],
+                        "transparent",
+                        colors.rose[75],
+                        "transparent",
+                    ]}
+                    style={styles.background}
+                />
+                <View style={styles.warning}>
+                    <Text>Novo no Bloom?</Text>
+                    <Text
+                        onPress={() => {
+                            navigation.navigate("signUp");
+                        }}
+                        style={styles.link}
+                    >
+                        Registre-se
+                    </Text>
+                </View>
+            </ScrollView>
         </KeyboardAvoidingView>
     );
 }
-
-export default Login;
