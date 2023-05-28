@@ -4,10 +4,10 @@ import { ToastAndroid } from "react-native";
 import supabase from "../helpers/supabaseClient";
 
 export type AuthContextDataProps = {
-    user: User | null;
     signIn: (email: string, password: string) => void;
     signOut: () => void;
     signUp: (email: string, password: string) => void;
+    user: User | null;
 };
 
 type AuthContextProviderProps = {
@@ -29,14 +29,13 @@ export default function AuthContextProvider({
                 email,
                 password,
             });
-
+            console.log(email);
+            console.log(password);
             if (error || !data.user) {
                 // TODO - Use toast library for both IOS and Android
                 // Note this only show a Toast in android since IOS don't provide a built-in toast API.
                 console.log("entrar");
                 console.log(error);
-
-                console.log(data.user);
                 ToastAndroid.show(
                     error?.message ?? "Houve um erro no login!",
                     ToastAndroid.LONG
@@ -52,6 +51,10 @@ export default function AuthContextProvider({
                 email,
                 password,
             });
+
+            console.log(email);
+            console.log(password);
+
             if (error || !data?.user) {
                 console.log(data.user);
                 ToastAndroid.show(

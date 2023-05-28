@@ -2,13 +2,20 @@
 // It will give one input for a username or an email address (the distinction
 // has to be made by a validator).
 // And another input for a password, which will be hidden by default.
-
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import {
+    Dimensions,
+    KeyboardAvoidingView,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
+import Input from "./input";
+import Logo from "./logo";
 
 // TODO: Make dimensions a global variable if, and only if width and height does
 //       not switch when rotating the screen.
@@ -76,30 +83,21 @@ const styles = StyleSheet.create({
 
 function Signup() {
     const navigation = useNavigation<NavigationProp<AuthRoutes>>();
-
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container}>
+            <Logo />
             <View style={styles.titlecontainer}>
-                <Text style={styles.title}>Signup</Text>
-                <Text style={styles.message}>
-                    {" "}
-                    Bem-Vindo de volta! Entre com seus dados.{" "}
-                </Text>
+                <Text style={styles.title}>Cadastre-se</Text>
+                <Text style={styles.message}> Bem-vindo ao Bloom! </Text>
             </View>
             <LinearGradient
                 // Background Linear Gradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                colors={[
-                    colors.rose[75],
-                    "transparent",
-                    colors.blue[75],
-                    "transparent",
-                    colors.rose[75],
-                    "transparent",
-                ]}
+                colors={[colors.rose[75], colors.blue[75], colors.rose[75]]}
                 style={styles.background}
             />
+            <Input />
             <View style={styles.warning}>
                 <Text>Já cadastrado?</Text>
                 <Text
@@ -111,7 +109,7 @@ function Signup() {
                     Logue-se
                 </Text>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 

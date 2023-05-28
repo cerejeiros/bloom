@@ -7,7 +7,6 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
-    Dimensions,
     KeyboardAvoidingView,
     ScrollView,
     StyleSheet,
@@ -17,10 +16,6 @@ import {
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
 import Input from "./input";
-
-// TODO: Make dimensions a global variable if, and only if width and height does
-//       not switch when rotating the screen.
-const dimensions = Dimensions.get("screen");
 
 const styles = StyleSheet.create({
     container: {
