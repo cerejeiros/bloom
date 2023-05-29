@@ -53,11 +53,11 @@ export default function AuthContextProvider({
                 password,
             });
 
-            console.log(email);
-            console.log(password);
+            // console.log(email);
+            // console.log(password);
 
             if (error || !data?.user) {
-                console.log(data.user);
+                console.error("datauser", data.user);
                 ToastAndroid.show(
                     error?.message ?? "Houve um erro no login!",
                     ToastAndroid.LONG
@@ -71,15 +71,16 @@ export default function AuthContextProvider({
 
     const SignUpData = React.useCallback(
         async (usern: string, birth: string) => {
-            console.log(user);
             const { data, error } = await supabase
                 .from("user")
                 .update({
                     username: usern,
                     birthday: birth,
                 })
-                .eq("auth_id", user?.id);
-            console.log(data);
+                .eq("id", "20");
+            console.log(usern, birth);
+            // rconsole.log(user);
+            // console.log(data);
             console.log(error);
             if (error) {
                 ToastAndroid.show(error?.message ?? "erro", ToastAndroid.LONG);
@@ -96,8 +97,8 @@ export default function AuthContextProvider({
     };
 
     const memoizedFunctions = React.useMemo(
-        () => ({ signIn, user, signUp, signOut, SignUpData }),
-        [signIn, signUp, user, SignUpData]
+        () => ({ signUp, signIn, user, signOut, SignUpData }),
+        [signUp, signIn, user, SignUpData]
     );
 
     return (

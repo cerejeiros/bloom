@@ -67,6 +67,9 @@ const styles = StyleSheet.create({
     },
 });
 
+// eslint-disable-next-line no-promise-executor-return
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 function Email({
     text,
     textState,
@@ -180,8 +183,10 @@ export default function Input() {
             <Password password={password} setPassword={setPassword} />
             <Button
                 style={styles.button}
-                onPress={() => {
-                    signUp(email, password);
+                onPress={async () => {
+                    // console.log(email, password, username, birthday);
+                    // signUp(email, password);
+                    // sleep(10000);
                     SignUpData(username, birthday);
                 }}
                 title="Cadastrar"
