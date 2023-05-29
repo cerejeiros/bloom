@@ -3,11 +3,13 @@ import {
     NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 import React from "react";
+import Landing from "../screens/landing/Landing";
 import Login from "../screens/login/Login";
 import Signup from "../screens/signup/Signup";
 
 // TODO -  MOVE TO TYPES FOLDER
 export type AuthRoutes = {
+    landing: undefined;
     signIn: undefined;
     signUp: undefined;
 };
@@ -22,8 +24,8 @@ export function AuthRoutes() {
     // Atualize com R no terminal.
     return (
         <Navigator screenOptions={{ headerShown: false }}>
+            <Screen name="landing" component={Landing} />
             <Screen name="signIn" component={Login} />
-
             <Screen name="signUp" component={Signup} />
         </Navigator>
     );
