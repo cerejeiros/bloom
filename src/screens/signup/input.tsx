@@ -172,8 +172,8 @@ export default function Input() {
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
-
-    const { signUp, SignUpData } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
+    const { signUp, signUpData } = useContext(AuthContext);
 
     return (
         <View style={styles.container}>
@@ -187,8 +187,12 @@ export default function Input() {
                     // console.log(email, password, username, birthday);
                     // signUp(email, password);
                     // sleep(10000);
-                    SignUpData(username, birthday);
+                    setLoading(true);
+                    await signUp(email, password);
+                    await signUpData(email, birthday);
+                    setLoading(false);
                 }}
+                disabled={loading}
                 title="Cadastrar"
                 titleStyle={styles.button_text}
             />

@@ -43,6 +43,7 @@ type ButtonProps = {
     title: string | React.ReactElement<NonNullable<unknown>>;
     titleStyle?: StyleProp<TextStyle>;
     onPress: ((event: GestureResponderEvent) => void) | undefined;
+    disabled: boolean;
 };
 
 const styles = StyleSheet.create({
@@ -78,6 +79,7 @@ export default function Button(props: ButtonProps) {
         title = Defaults.Title,
         titleStyle,
         style,
+        disabled,
     } = props;
 
     // Button with title as custom element.
@@ -90,7 +92,11 @@ export default function Button(props: ButtonProps) {
 
     // Button with title as a string.
     return (
-        <Pressable style={[styles.container, style]} onPress={onPress}>
+        <Pressable
+            style={[styles.container, style]}
+            onPress={onPress}
+            disabled={disabled}
+        >
             <Text style={[styles.text, titleStyle]}>{title}</Text>
         </Pressable>
     );

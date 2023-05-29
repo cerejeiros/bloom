@@ -6,8 +6,8 @@ import supabase from "../helpers/supabaseClient";
 export type AuthContextDataProps = {
     signIn: (email: string, password: string) => void;
     signOut: () => void;
-    signUp: (email: string, password: string) => void;
-    SignUpData: (usern: string, birth: string) => void;
+    signUp: (email: string, password: string) => Promise<any>;
+    signUpData: (usern: string, birth: string) => Promise<any>;
     user: User | null;
 };
 
@@ -52,12 +52,10 @@ export default function AuthContextProvider({
                 email,
                 password,
             });
-
-            // console.log(email);
-            // console.log(password);
+            console.log("data retrived", email, password);
 
             if (error || !data?.user) {
-                console.error("datauser", data.user);
+                console.error(error);
                 ToastAndroid.show(
                     error?.message ?? "Houve um erro no login!",
                     ToastAndroid.LONG
@@ -65,26 +63,25 @@ export default function AuthContextProvider({
             } else {
                 setUser(data.user);
             }
+            return data;
         },
         []
     );
 
-    const SignUpData = React.useCallback(
+    const signUpData = React.useCallback(
         async (usern: string, birth: string) => {
             const { data, error } = await supabase
                 .from("user")
                 .update({
-                    username: usern,
+                    name: usern,
                     birthday: birth,
                 })
-                .eq("id", "20");
-            console.log(usern, birth);
-            // rconsole.log(user);
-            // console.log(data);
-            console.log(error);
+                .eq("auth_id", user?.id);
             if (error) {
                 ToastAndroid.show(error?.message ?? "erro", ToastAndroid.LONG);
+                console.log(error);
             }
+            return data;
         },
         [user]
     );
@@ -97,8 +94,8 @@ export default function AuthContextProvider({
     };
 
     const memoizedFunctions = React.useMemo(
-        () => ({ signUp, signIn, user, signOut, SignUpData }),
-        [signUp, signIn, user, SignUpData]
+        () => ({ signUp, signIn, user, signOut, signUpData }),
+        [signUp, signIn, user, signUpData]
     );
 
     return (
