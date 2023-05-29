@@ -7,6 +7,7 @@ export type AuthContextDataProps = {
     signIn: (email: string, password: string) => void;
     signOut: () => void;
     signUp: (email: string, password: string) => void;
+    SignUpData: (usern: string, birth: string) => void;
     user: User | null;
 };
 
@@ -68,6 +69,25 @@ export default function AuthContextProvider({
         []
     );
 
+    const SignUpData = React.useCallback(
+        async (usern: string, birth: string) => {
+            console.log(user);
+            const { data, error } = await supabase
+                .from("user")
+                .update({
+                    username: usern,
+                    birthday: birth,
+                })
+                .eq("auth_id", user?.id);
+            console.log(data);
+            console.log(error);
+            if (error) {
+                ToastAndroid.show(error?.message ?? "erro", ToastAndroid.LONG);
+            }
+        },
+        [user]
+    );
+
     const signOut = async () => {
         const { error } = await supabase.auth.signOut();
 
@@ -76,8 +96,8 @@ export default function AuthContextProvider({
     };
 
     const memoizedFunctions = React.useMemo(
-        () => ({ signIn, user, signUp, signOut }),
-        [signIn, signUp, user]
+        () => ({ signIn, user, signUp, signOut, SignUpData }),
+        [signIn, signUp, user, SignUpData]
     );
 
     return (

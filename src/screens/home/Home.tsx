@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
+import { AuthContext } from "../../context/AuthContext";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
 
 const styles = StyleSheet.create({
@@ -13,6 +14,10 @@ const styles = StyleSheet.create({
 
 export default function Home() {
     const navigation = useNavigation<StackNavigatorRoutesProps>();
+    const { user } = useContext(AuthContext);
+    useEffect(() => {
+        console.log(user?.id);
+    }, [user]);
 
     return (
         <View style={styles.container}>

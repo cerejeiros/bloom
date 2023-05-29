@@ -1,5 +1,9 @@
+import {
+    DateTimePickerAndroid,
+    DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { Keyboard, StyleSheet, TextInput, View } from "react-native";
 import Button from "../../components/button";
 import { AuthContext } from "../../context/AuthContext";
 import colors from "../../pallete";
@@ -107,12 +111,36 @@ function Birth({
     text: string;
     textState: Dispatch<SetStateAction<string>>;
 }) {
+    const [date, setDate] = useState(new Date(1598051730000));
+
+    const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+        if (selectedDate) {
+            const currentDate = selectedDate;
+            setDate(currentDate);
+            textState(date.toISOString().split("T")[0]);
+        } else {
+            console.log("Data inválida");
+        }
+    };
+    const openDatePicker = () => {
+        DateTimePickerAndroid.open({
+            value: date,
+            onChange,
+            mode: "date",
+            is24Hour: true,
+        });
+    };
+
     return (
         <TextInput
             style={styles.input}
+            onFocus={() => {
+                Keyboard.dismiss();
+                openDatePicker();
+            }}
             onChangeText={textState}
             value={text}
-            placeholder="DD/MM/AAAA"
+            placeholder="AAAA-MM-DD"
             keyboardType="numeric"
         />
     );
@@ -142,7 +170,7 @@ export default function Input() {
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
 
-    const { signUp } = useContext(AuthContext);
+    const { signUp, SignUpData } = useContext(AuthContext);
 
     return (
         <View style={styles.container}>
@@ -152,7 +180,10 @@ export default function Input() {
             <Password password={password} setPassword={setPassword} />
             <Button
                 style={styles.button}
-                onPress={() => signUp(email, password)}
+                onPress={() => {
+                    signUp(email, password);
+                    SignUpData(username, birthday);
+                }}
                 title="Cadastrar"
                 titleStyle={styles.button_text}
             />
