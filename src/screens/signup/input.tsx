@@ -85,6 +85,7 @@ function Birth({
             console.log("Data inválida");
         }
     };
+
     const openDatePicker = () => {
         DateTimePickerAndroid.open({
             value: date,

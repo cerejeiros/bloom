@@ -92,10 +92,31 @@ function Password({
     password: string;
     setPassword: Dispatch<SetStateAction<string>>;
 }) {
+    const checkPassword = (input: string) => {
+        if (!/[0-9]/.test(input)) {
+            return false;
+        }
+
+        // Verifica se a senha contém pelo menos uma letra maiúscula
+        if (!/[A-Z]/.test(input)) {
+            return false;
+        }
+
+        // Retorna true se a senha atender a ambos os critérios
+        return true;
+    };
+    const handlePasswordChange = (input: string) => {
+        setPassword(input);
+        if (!checkPassword(input)) {
+            console.error(input);
+        }
+    };
+
     return (
         <TextInput
             style={[styles.input, styles.password]}
             onChangeText={setPassword}
+            onEndEditing={(e: any) => handlePasswordChange(password)}
             placeholder="Senha"
             secureTextEntry
             value={password}
@@ -109,6 +130,20 @@ export default function Input() {
 
     const { signIn, signUp, signOut } = useContext(AuthContext);
 
+    const checkPassword = (input: string) => {
+        if (!/[0-9]/.test(input)) {
+            return false;
+        }
+
+        // Verifica se a senha contém pelo menos uma letra maiúscula
+        if (!/[A-Z]/.test(input)) {
+            return false;
+        }
+
+        // Retorna true se a senha atender a ambos os critérios
+        return true;
+    };
+
     return (
         <View style={styles.container}>
             <Email text={email} textState={setEmail} />
@@ -117,7 +152,7 @@ export default function Input() {
             <Button
                 style={styles.button}
                 onPress={() => {
-                    if (email && password) {
+                    if (email && checkPassword(password)) {
                         signIn(email, password);
                     } else {
                         console.error(
