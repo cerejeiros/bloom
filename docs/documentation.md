@@ -60,3 +60,7 @@ Natan Almeida, João Farias
 15. [x] 22/05 Revisão da antiga sprint, definição de meta para a próxima e realocação de equipe [[vídeo]](https://youtu.be/DU-472fRkl4)
 
 Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
+
+16. [ ] 22/05 Atualização dos repositórios de base e criação de validação de informações no registro e login [[vídeo]](https://youtu.be/U9-bqkEIMPM)
+
+Bruna Liberal, João Farias, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
