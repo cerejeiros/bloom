@@ -21,3 +21,6 @@ web-build/
 
 # For Supabase keys.
 *.env
+
+# Ignore zip files.
+*.zip
