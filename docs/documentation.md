@@ -61,6 +61,26 @@ Natan Almeida, João Farias
 
 Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
 
-16. [ ] 22/05 Atualização dos repositórios de base e criação de validação de informações no registro e login [[vídeo]](https://youtu.be/U9-bqkEIMPM)
+16. [] 15/05 Reunião geral - revisão de sprints 1ª parte [[vídeo]](https://drive.google.com/file/d/1rmBTz3Iy73He7na2OdTFsViEjxjE9iKf/view?usp=drive_link)
+
+Bruna Liberal, João Farias, Kaio Salgado, Leonardo Castro, Luiza Pugas e Natan Almeida.
+17. [] 15/05 Reunião geral - revisão de sprints 2ª parte [[vídeo]](https://drive.google.com/file/d/1D1DfuOspj3_7C41MF51IDv6sgiLZE72O/view?usp=sharing)
+
+Bruna Liberal, João Farias, Kaio Salgado, Leonardo Castro, Luiza Pugas e Natan Almeida.
+
+18. [] 15/05 Reunião para terminar o Back-end 1ª parte [[vídeo]](https://drive.google.com/file/d/1pmXCNupsJSpWuJPjSc2MHt29f5pyMwVI/view?usp=sharing)
+
+Kaio Salgado  e Luiza Pugas.
+
+19. [] 15/05 Reunião para terminar o Back-end 2ª parte [[vídeo]](https://drive.google.com/file/d/1O-nPHjGoe4WeQwkurTgQhVrXsiELTAeE/view?usp=sharing)
+
+Kaio Salgado  e Luiza Pugas.
+
+20. [] 15/05 Reunião para estudar e alterar o Front  [[vídeo]](https://drive.google.com/file/d/1WZZYIj4levJ2w4Qr5EoE6zjbx2d4wPlh/view?usp=drive_link)
+
+Kaio Salgado  e Luiza Pugas.
+
+21. [ ] 22/05 Atualização dos repositórios de base e criação de validação de informações no registro e login [[vídeo]](https://youtu.be/U9-bqkEIMPM)
 
 Bruna Liberal, João Farias, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
+
