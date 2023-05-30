@@ -80,6 +80,7 @@ function Email({
             placeholder="Email ou Usuário"
             keyboardType="default"
             autoComplete="email"
+            inputMode="email"
         />
     );
 }
@@ -115,9 +116,18 @@ export default function Input() {
             <Text style={styles.link}>Esqueceu sua senha?</Text>
             <Button
                 style={styles.button}
-                onPress={() => signIn(email, password)}
+                onPress={() => {
+                    if (email && password) {
+                        signIn(email, password);
+                    } else {
+                        console.error(
+                            "Porfavor preencha os campos que não estão preenchidos"
+                        );
+                    }
+                }}
                 title="Entrar"
                 titleStyle={styles.button_text}
+                disabled={false}
             />
             <Text style={styles.divider}>ou</Text>
             <Button
@@ -125,6 +135,7 @@ export default function Input() {
                 onPress={() => console.log("Just enter without account")}
                 title="Entrar como convidado"
                 titleStyle={styles.button_out_text}
+                disabled={false}
             />
         </View>
     );
