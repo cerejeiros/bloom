@@ -67,46 +67,6 @@ const styles = StyleSheet.create({
     },
 });
 
-// eslint-disable-next-line no-promise-executor-return
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-function Email({
-    text,
-    textState,
-}: {
-    text: string;
-    textState: Dispatch<SetStateAction<string>>;
-}) {
-    return (
-        <TextInput
-            style={styles.input}
-            onChangeText={textState}
-            value={text}
-            placeholder="Email"
-            keyboardType="default"
-            autoComplete="email"
-        />
-    );
-}
-
-function Username({
-    text,
-    textState,
-}: {
-    text: string;
-    textState: Dispatch<SetStateAction<string>>;
-}) {
-    return (
-        <TextInput
-            style={styles.input}
-            onChangeText={textState}
-            value={text}
-            placeholder="Usuário"
-            keyboardType="default"
-        />
-    );
-}
-
 function Birth({
     text,
     textState,
@@ -149,24 +109,6 @@ function Birth({
     );
 }
 
-function Password({
-    password,
-    setPassword,
-}: {
-    password: string;
-    setPassword: Dispatch<SetStateAction<string>>;
-}) {
-    return (
-        <TextInput
-            style={styles.input}
-            onChangeText={setPassword}
-            placeholder="Senha"
-            secureTextEntry
-            value={password}
-        />
-    );
-}
-
 export default function Input() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -177,20 +119,41 @@ export default function Input() {
 
     return (
         <View style={styles.container}>
-            <Email text={email} textState={setEmail} />
-            <Username text={username} textState={setUsername} />
+            <TextInput
+                style={styles.input}
+                onChangeText={setEmail}
+                value={email}
+                placeholder="Email"
+                keyboardType="default"
+                autoComplete="email"
+                inputMode="email"
+            />
+            <TextInput
+                style={styles.input}
+                onChangeText={setUsername}
+                value={username}
+                placeholder="Usuário"
+                keyboardType="default"
+            />
             <Birth text={birthday} textState={setBirth} />
-            <Password password={password} setPassword={setPassword} />
+            <TextInput
+                style={styles.input}
+                onChangeText={setPassword}
+                placeholder="Senha"
+                secureTextEntry
+                value={password}
+            />
             <Button
                 style={styles.button}
                 onPress={async () => {
-                    // console.log(email, password, username, birthday);
-                    // signUp(email, password);
-                    // sleep(10000);
-                    setLoading(true);
-                    await signUp(email, password);
-                    await signUpData(email, birthday);
-                    setLoading(false);
+                    if (email && username && birthday && password) {
+                        setLoading(true);
+                        await signUp(email, password);
+                        await signUpData(email, birthday);
+                        setLoading(false);
+                    } else {
+                        console.error("Algum dos campos não estão preenchidos");
+                    }
                 }}
                 disabled={loading}
                 title="Cadastrar"
