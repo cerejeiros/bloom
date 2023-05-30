@@ -118,6 +118,27 @@ export default function Input() {
     const [loading, setLoading] = useState(false);
     const { signUp, signUpData } = useContext(AuthContext);
 
+    const checkPassword = (input: string) => {
+        // Verifica se tem pelo menos um número.
+        if (!/[0-9]/.test(input)) return false;
+
+        // Verifica se a senha contém pelo menos uma letra maiúscula
+        if (!/[A-Z]/.test(input)) return false;
+
+        // Verificar se tem no minimo 9 caracteres.
+        if (input.length < 6) return false;
+
+        return true;
+    };
+
+    // Retorna true se a senha atender a ambos os critérios
+    const handlePasswordChange = (input: string) => {
+        // setPassword(input);
+        if (!checkPassword(input)) {
+            console.error("A senha não é bem formatada: ", input);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <TextInput
@@ -140,6 +161,7 @@ export default function Input() {
             <TextInput
                 style={styles.input}
                 onChangeText={setPassword}
+                onEndEditing={() => handlePasswordChange(password)}
                 placeholder="Senha"
                 secureTextEntry
                 value={password}
@@ -147,7 +169,13 @@ export default function Input() {
             <Button
                 style={styles.button}
                 onPress={async () => {
-                    if (email && username && birthday && password) {
+                    if (
+                        email &&
+                        username &&
+                        birthday &&
+                        password &&
+                        checkPassword(password)
+                    ) {
                         setLoading(true);
                         await signUp(email, password);
                         await signUpData(email, birthday);

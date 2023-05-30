@@ -3,8 +3,8 @@
 // Initial idea: https://github.com/cerejeiros/mobile/issues/5
 
 import Entypo from "@expo/vector-icons/Entypo";
-import * as SplashScreen from "expo-splash-screen";
-import React, { useCallback, useState } from "react";
+
+import React from "react";
 import { Text, View } from "react-native";
 
 // Keep the splash screen visible while we fetch resources
