@@ -30,18 +30,17 @@ export default function AuthContextProvider({
                 email,
                 password,
             });
-            console.log(email);
-            console.log(password);
+
             if (error || !data.user) {
                 // TODO - Use toast library for both IOS and Android
                 // Note this only show a Toast in android since IOS don't provide a built-in toast API.
-                console.log("entrar");
-                console.log(error);
                 ToastAndroid.show(
                     error?.message ?? "Houve um erro no login!",
                     ToastAndroid.LONG
                 );
             } else setUser(data.user);
+
+            return Promise.resolve();
         },
         []
     );
@@ -52,7 +51,6 @@ export default function AuthContextProvider({
                 email,
                 password,
             });
-            console.log("data retrived", email, password);
 
             if (error || !data?.user) {
                 console.error(error);
@@ -63,27 +61,28 @@ export default function AuthContextProvider({
             } else {
                 setUser(data.user);
             }
-            return data;
+            return Promise.resolve();
         },
         []
     );
 
     const signUpData = React.useCallback(
         async (usern: string, birth: string) => {
+            const userSupabase = (await supabase.auth.getUser()).data.user?.id;
             const { data, error } = await supabase
-                .from("user")
+                .from("profiles")
                 .update({
                     name: usern,
-                    birthday: birth,
                 })
-                .eq("auth_id", user?.id);
+                .eq("id", userSupabase);
+
             if (error) {
-                ToastAndroid.show(error?.message ?? "erro", ToastAndroid.LONG);
                 console.log(error);
+                ToastAndroid.show(error?.message ?? "erro", ToastAndroid.LONG);
             }
-            return data;
+            return Promise.resolve();
         },
-        [user]
+        []
     );
 
     const signOut = async () => {
