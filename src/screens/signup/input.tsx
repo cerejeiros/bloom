@@ -115,7 +115,7 @@ export default function Input() {
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [isloading, setIsLoading] = useState(false);
     const { signUp, signUpData } = useContext(AuthContext);
 
     const checkPassword = (input: string) => {
@@ -136,6 +136,23 @@ export default function Input() {
         // setPassword(input);
         if (!checkPassword(input)) {
             console.error("A senha não é bem formatada: ", input);
+        }
+    };
+
+    const handleSubmit = async () => {
+        if (
+            email &&
+            username &&
+            birthday &&
+            password &&
+            checkPassword(password)
+        ) {
+            setIsLoading(true);
+            await signUp(email, password);
+            await signUpData(email, birthday);
+            setIsLoading(false);
+        } else {
+            console.error("Algum dos campos não estão preenchidos");
         }
     };
 
@@ -168,23 +185,8 @@ export default function Input() {
             />
             <Button
                 style={styles.button}
-                onPress={async () => {
-                    if (
-                        email &&
-                        username &&
-                        birthday &&
-                        password &&
-                        checkPassword(password)
-                    ) {
-                        setLoading(true);
-                        await signUp(email, password);
-                        await signUpData(email, birthday);
-                        setLoading(false);
-                    } else {
-                        console.error("Algum dos campos não estão preenchidos");
-                    }
-                }}
-                disabled={loading}
+                onPress={handleSubmit}
+                disabled={isloading}
                 title="Cadastrar"
                 titleStyle={styles.button_text}
             />
