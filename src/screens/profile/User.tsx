@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import {
     Dimensions,
     Image,
@@ -8,7 +8,10 @@ import {
     Text,
     View,
 } from "react-native";
+import { AuthContext } from "../../context/AuthContext";
+import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
+import { UserData } from "../../types/shared";
 
 const { width } = Dimensions.get("window");
 
@@ -59,6 +62,27 @@ function Card({ children }: CardProps) {
 function User() {
     // const [bio, bioState] = React.useState("");
     // const [name, nameState] = React.useState("");
+    const [userData, setUserData] = useState<UserData | undefined>(undefined);
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", user?.id)
+                .limit(1)
+                .returns<UserData>();
+
+            if (data === null) {
+                alert("Erro ao procurar informações do perfil");
+                return;
+            }
+            setUserData(data);
+        };
+
+        fetchData();
+    }, [user]);
 
     return (
         <SafeAreaView style={styles.container}>
