@@ -13,11 +13,6 @@ const styles = StyleSheet.create({
 
 export default function Home() {
     const navigation = useNavigation<StackNavigatorRoutesProps>();
-    /* const { user } = useContext(AuthContext);
-    useEffect(() => {
-        console.log(user?.id);
-    }, [user]); */
-
     return (
         <View style={styles.container}>
             <Text>Home</Text>
