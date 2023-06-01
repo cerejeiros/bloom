@@ -142,7 +142,6 @@ export default function Input() {
                 }}
                 title="Entrar"
                 titleStyle={styles.button_text}
-                disabled={false}
             />
             <Text style={styles.divider}>ou</Text>
             <Button
@@ -150,7 +149,6 @@ export default function Input() {
                 onPress={() => console.log("Just enter without account")}
                 title="Entrar como convidado"
                 titleStyle={styles.button_out_text}
-                disabled={false}
             />
         </View>
     );

@@ -43,7 +43,7 @@ type ButtonProps = {
     title: string | React.ReactElement<NonNullable<unknown>>;
     titleStyle?: StyleProp<TextStyle>;
     onPress: ((event: GestureResponderEvent) => void) | undefined;
-    disabled: boolean;
+    disabled?: boolean;
 };
 
 const styles = StyleSheet.create({
@@ -77,9 +77,9 @@ export default function Button(props: ButtonProps) {
     const {
         onPress = defaultOnPress,
         title = Defaults.Title,
+        disabled = false,
         titleStyle,
         style,
-        disabled,
     } = props;
 
     // Button with title as custom element.
