@@ -1,6 +1,8 @@
+import { FontAwesome } from "@expo/vector-icons";
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import Button from "../../components/button";
+import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import colors from "../../pallete";
 
@@ -73,7 +75,7 @@ function Email({
     textState: Dispatch<SetStateAction<string>>;
 }) {
     return (
-        <TextInput
+        <InputIcon
             style={styles.input}
             onChangeText={textState}
             value={text}
@@ -81,6 +83,14 @@ function Email({
             keyboardType="default"
             autoComplete="email"
             inputMode="email"
+            position="left"
+            Icon={
+                <FontAwesome
+                    name="user-o"
+                    size={20}
+                    color={colors.black[400]}
+                />
+            }
         />
     );
 }
@@ -110,6 +120,7 @@ export default function Input() {
 
     const { signIn, signUp, signOut } = useContext(AuthContext);
 
+    // TODO: Move both functions (sign and signup) to one place in /src/helpers/.
     const checkPassword = (input: string) => {
         if (!/[0-9]/.test(input)) {
             return false;
