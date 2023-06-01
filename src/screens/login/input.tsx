@@ -136,20 +136,20 @@ export default function Input() {
                         signIn(email, password);
                     } else {
                         console.error(
-                            "Porfavor preencha os campos que não estão preenchidos"
+                            "Por favor preencha os campos que não estão preenchidos"
                         );
                     }
                 }}
                 title="Entrar"
                 titleStyle={styles.button_text}
             />
-            <Text style={styles.divider}>ou</Text>
+            {/* <Text style={styles.divider}>ou</Text>
             <Button
                 style={styles.button_out}
                 onPress={() => console.log("Just enter without account")}
                 title="Entrar como convidado"
                 titleStyle={styles.button_out_text}
-            />
+            /> */}
         </View>
     );
 }
