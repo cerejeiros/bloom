@@ -118,6 +118,7 @@ export default function Input() {
     const [isloading, setIsLoading] = useState(false);
     const { signUp, signUpData } = useContext(AuthContext);
 
+    // TODO: Move both functions (sign and signup) to one place in /src/helpers/.
     const checkPassword = (input: string) => {
         // Verifica se tem pelo menos um número.
         if (!/[0-9]/.test(input)) return false;
