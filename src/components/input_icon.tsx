@@ -20,8 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React from "react";
+import React, { useRef } from "react";
 import {
+    Pressable,
     StyleProp,
     StyleSheet,
     TextInput,
@@ -89,6 +90,8 @@ export default function InputIcon(props: InputProps) {
             );
     }
 
+    const inputRef = useRef<TextInput>(null);
+
     return (
         <View
             style={[
@@ -97,6 +100,7 @@ export default function InputIcon(props: InputProps) {
             ]}
         >
             <TextInput
+                ref={inputRef}
                 allowFontScaling={allowFontScaling}
                 style={[styles.input, style]}
                 autoCapitalize={autoCapitalize}
@@ -106,9 +110,12 @@ export default function InputIcon(props: InputProps) {
                 inputMode={inputMode}
             />
             {Icon && (
-                <View style={[styles.container_icon, styleIconContainer]}>
+                <Pressable
+                    style={[styles.container_icon, styleIconContainer]}
+                    onPress={() => inputRef.current?.focus()}
+                >
                     {Icon}
-                </View>
+                </Pressable>
             )}
         </View>
     );
