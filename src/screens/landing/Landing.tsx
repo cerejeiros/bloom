@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
+        fill: 1,
     },
     text: {
         color: colors.black[800],
@@ -63,13 +64,6 @@ export default function Landing() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <SVGLandingBottom
-                width="100%"
-                height="65%"
-                fill="red"
-                preserveAspectRatio="none"
-                style={styles.svg_bottom}
-            />
             {/* All types of optional seen pages should render inside here, we
                 can move each page by sliding the upper part of the screen */}
             <SafeAreaView style={styles.page_container}>
@@ -81,6 +75,13 @@ export default function Landing() {
             {/* TODO: Navigation dots here. */}
             {/* TODO: Options to skip page (style) */}
             <SafeAreaView style={styles.nav_container}>
+                <SVGLandingBottom
+                    width="100%"
+                    height="900"
+                    fill="red"
+                    // preserveAspectRatio="none"
+                    style={styles.svg_bottom}
+                />
                 <Button
                     title="Registrar"
                     style={styles.button_signup}
