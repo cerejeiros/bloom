@@ -36,6 +36,15 @@
         "react/no-unstable-nested-components": [
             "warn",
             { "allowAsProps": true }
+        ],
+        "react/jsx-props-no-spreading": [
+            1,
+            {
+                // "html": "ignore" | "enforce",
+                // "custom": "ignore" | "enforce",
+                // "explicitSpread": "ignore" | "enforce",
+                "exceptions": ["Image", "img", "Svg"]
+            }
         ]
     }
 }
