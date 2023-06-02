@@ -3,10 +3,9 @@
 // has to be made by a validator).
 // And another input for a password, which will be hidden by default.
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
-    Dimensions,
+    Image,
     KeyboardAvoidingView,
     StyleSheet,
     Text,
@@ -19,7 +18,7 @@ import Logo from "./logo";
 
 // TODO: Make dimensions a global variable if, and only if width and height does
 //       not switch when rotating the screen.
-const dimensions = Dimensions.get("screen");
+// const dimensions = Dimensions.get("screen");
 
 const styles = StyleSheet.create({
     container: {
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0,
         height: "100%",
-        elevation: -1,
+        width: "100%",
         zIndex: -1,
     },
     titlecontainer: {
@@ -90,12 +89,9 @@ function Signup() {
                 <Text style={styles.title}>Cadastre-se</Text>
                 <Text style={styles.message}> Bem-vindo ao Bloom! </Text>
             </View>
-            <LinearGradient
-                // Background Linear Gradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                colors={[colors.rose[75], colors.blue[75], colors.rose[75]]}
+            <Image
                 style={styles.background}
+                source={require("../../../assets/blurry-gradient-2.png")}
             />
             <Input />
             <View style={styles.warning}>
