@@ -72,7 +72,8 @@ export default function AuthContextProvider({
             const { data, error } = await supabase
                 .from("profiles")
                 .update({
-                    name: usern,
+                    username: usern,
+                    dateofbirth: birth,
                 })
                 .eq("id", userSupabase);
 
