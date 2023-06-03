@@ -171,8 +171,6 @@ export default function Input() {
         return data && data?.length > 0;
     };
 
-    const sendData = async () => {};
-
     const handleSubmit = async () => {
         if (!email) {
             alert("O email é obrigatório");
