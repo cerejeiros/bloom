@@ -97,3 +97,31 @@ Kaio Salgado, Luiza Pugas, Leonardo Castro,  Kauã Souza e Natan Almeida
 24. [] 30/05 Reunião para resolver bugs no Back-end 3ª parte [[vídeo]](https://drive.google.com/file/d/1-DJjDI1_H12hhwSmoCZRiPrdnCoeKbH8/view?usp=sharing)
 
 Kaio Salgado, Luiza Pugas, Leonardo Castro,  Kauã Souza e Natan Almeida
+
+25. [] 03/06 Reunião para resolver erros de sign up 1ª parte [[vídeo]](https://youtu.be/_BY5RquemNI)
+
+Bruna Liberal e Kaio Enzo
+
+26. [] 03/06 Reunião para resolver erros de sign up 2ª parte [[vídeo]](https://youtu.be/cQmHpJCXfpU)
+
+Bruna Liberal e Kaio Enzo
+
+27. [] 03/06 Reunião para resolver erros gerais 1ª parte [[vídeo]](https://youtu.be/rCcc-vSkYSo)
+
+Bruna Liberal, Kaio Salgado, Kaua Seichi
+
+28. [] 03/06 Reunião para resolver erros gerais 2ª parte [[vídeo]](https://www.youtube.com/watch?v=J_4zg71HPYM)
+
+29. [] 03/06 Reunião para tirar dúvidas e corrigir alguns erros de código 1ª parte [[vídeo]](https://youtu.be/T7-6eLt_f2w)
+
+Bruna Liberal e Kaio Salgado
+
+30. [] 03/06 Reunião para tirar dúvidas e corrigir alguns erros de código 2ª parte [[vídeo]](https://youtu.be/J_4zg71HPYM)
+
+Bruna Liberal e Kaio Salgado
+
+31. [] 03/06 Reunião para apagar funções inutilizadas [[vídeo]](https://youtu.be/pwBHGEdvQdI)
+
+Bruna Liberal e Kaio Salgado
+
+
