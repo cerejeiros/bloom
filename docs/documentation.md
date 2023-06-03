@@ -110,7 +110,7 @@ Bruna Liberal e Kaio Enzo
 
 Bruna Liberal, Kaio Salgado, Kaua Seichi
 
-28. [] 03/06 Reunião para resolver erros gerais 2ª parte [[vídeo]](https://www.youtube.com/watch?v=J_4zg71HPYM)
+28. [] 03/06 Reunião para resolver erros gerais 2ª parte [[vídeo]](https://youtu.be/3uwi8o92Wro)
 
 Bruna Liberal, Kaio Salgado, Kaua Seichi
 
