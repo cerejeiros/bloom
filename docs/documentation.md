@@ -85,6 +85,7 @@ Kaio Salgado  e Luiza Pugas.
 
 Bruna Liberal, João Farias, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
 >>>>>>> 854b91a46be3917114a30a60ac91019735425689
+
 22. [] 30/05 Reunião para resolver bugs no Back-end 1ª parte [[vídeo]](https://drive.google.com/file/d/19DBRaCjsr-4MSIHpRAx67YfKHKb6T3Ms/view?usp=drive_link)
 
 Kaio Salgado, Luiza Pugas, Leonardo Castro,  Kauã Souza e Natan Almeida
