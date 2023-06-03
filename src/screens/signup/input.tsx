@@ -3,11 +3,18 @@ import {
     DateTimePickerAndroid,
     DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import React, { Dispatch, SetStateAction, useContext, useState } from "react";
+import React, {
+    Dispatch,
+    SetStateAction,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import { Keyboard, StyleSheet, View } from "react-native";
 import Button from "../../components/button";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
+import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 
 const styles = StyleSheet.create({
@@ -131,41 +138,80 @@ export default function Input() {
     // TODO: Move both functions (sign and signup) to one place in /src/helpers/.
     const checkPassword = (input: string) => {
         // Verifica se tem pelo menos um número e uma letra maiúscula.
-        if (!/[0-9]/.test(input)) return false;
+        if (!/[0-9]/.test(input)) {
+            alert(
+                "A senha deve conter pelo menos um número e uma letra maiúscula"
+            );
+            return false;
+        }
 
         // Verifica se a senha contém pelo menos uma letra maiúscula
-        if (!/[A-Z]/.test(input)) return false;
+        if (!/[A-Z]/.test(input)) {
+            alert("A senha deve conter  pelo menos uma letra maiúscula");
+            return false;
+        }
 
         // Verificar se tem no minimo 6 caracteres.
-        if (input.length < 6) return false;
+        if (input.length < 6) {
+            alert("A senha deve conter no mínimo 6 caracteres");
+            return false;
+        }
 
         return true;
     };
 
-    // Retorna true se a senha atender a ambos os critérios
-    const handlePasswordChange = (input: string) => {
-        // setPassword(input);
-        if (!checkPassword(input)) {
-            console.error("A senha não é bem formatada: ", input);
-        }
+    const checkUsernameDuplicated = async () => {
+        const { data, error } = await supabase
+            .from("profiles")
+            .select("username")
+            .eq("username", username)
+            .returns<{ username: string }[] | null>();
+
+        console.error(error);
+        return data && data?.length > 0;
     };
 
+    const sendData = async () => {};
+
     const handleSubmit = async () => {
-        if (
-            email &&
-            username &&
-            birthday &&
-            password &&
-            checkPassword(password)
-        ) {
-            setIsLoading(true);
-            await signUp(email, password);
-            await signUpData(username, birthday);
-            setIsLoading(false);
-        } else {
-            console.error("Algum dos campos não estão preenchidos");
+        if (!email) {
+            alert("O email é obrigatório");
+            return false;
         }
+
+        if (!username) {
+            alert("O username é obrigatório");
+            return false;
+        }
+
+        const usernameIsDuplicated = await checkUsernameDuplicated();
+        if (usernameIsDuplicated) {
+            alert(`O username ${username} já existe`);
+            return false;
+        }
+
+        if (!birthday) {
+            alert(`A data é obrigatória`);
+            return false;
+        }
+
+        if (!checkPassword(password)) return false;
+
+        if (!password) {
+            alert("A senha é obrigatória");
+            return false;
+        }
+
+        setIsLoading(true);
+        await signUp(email, password);
+        await signUpData(username, birthday);
+        setIsLoading(false);
+        return true;
     };
+
+    useEffect(() => {
+        console.log(isloading);
+    }, [isloading]);
 
     return (
         <View style={styles.container}>
@@ -206,7 +252,6 @@ export default function Input() {
             <InputIcon
                 style={styles.input}
                 onChangeText={setPassword}
-                onEndEditing={() => handlePasswordChange(password)}
                 placeholder="Senha"
                 secureTextEntry
                 value={password}
