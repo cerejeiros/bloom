@@ -1,10 +1,12 @@
+import { FontAwesome, Fontisto } from "@expo/vector-icons";
 import {
     DateTimePickerAndroid,
     DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
-import { Keyboard, StyleSheet, TextInput, View } from "react-native";
+import { Keyboard, StyleSheet, View } from "react-native";
 import Button from "../../components/button";
+import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import colors from "../../pallete";
 
@@ -14,14 +16,15 @@ const styles = StyleSheet.create({
         paddingLeft: 40,
         paddingRight: 40,
     },
+    input_container: {
+        // marginBottom: 5,
+    },
     input: {
         height: 40,
         borderBottomWidth: 1,
         borderColor: colors.black[400],
-        padding: 10,
         paddingLeft: 15,
-        paddingRight: 25,
-        marginBottom: 15,
+        // paddingRight: 25,
         borderRadius: 0,
         minWidth: 100,
         color: colors.black[500],
@@ -96,7 +99,7 @@ function Birth({
     };
 
     return (
-        <TextInput
+        <InputIcon
             style={styles.input}
             onFocus={() => {
                 Keyboard.dismiss();
@@ -106,6 +109,13 @@ function Birth({
             value={text}
             placeholder="AAAA-MM-DD"
             keyboardType="numeric"
+            Icon={
+                <FontAwesome
+                    name="calendar"
+                    size={20}
+                    color={colors.black[400]}
+                />
+            }
         />
     );
 }
@@ -121,14 +131,13 @@ export default function Input() {
     // TODO: Move both functions (sign and signup) to one place in /src/helpers/.
     const checkPassword = (input: string) => {
         // Verifica se tem pelo menos um número e uma letra maiúscula.
-        if (!/[0-9]/.test(input) || !/[A-Z]/.test(input) || input.length < 6)
-            return false;
+        if (!/[0-9]/.test(input)) return false;
 
         // Verifica se a senha contém pelo menos uma letra maiúscula
-        // if (!/[A-Z]/.test(input)) return false;
+        if (!/[A-Z]/.test(input)) return false;
 
-        // Verificar se tem no minimo 9 caracteres.
-        // if (input.length < 6) return false;
+        // Verificar se tem no minimo 6 caracteres.
+        if (input.length < 6) return false;
 
         return true;
     };
@@ -160,7 +169,8 @@ export default function Input() {
 
     return (
         <View style={styles.container}>
-            <TextInput
+            <InputIcon
+                styleContainer={styles.input_container}
                 style={styles.input}
                 onChangeText={setEmail}
                 value={email}
@@ -168,22 +178,45 @@ export default function Input() {
                 keyboardType="default"
                 autoComplete="email"
                 inputMode="email"
+                // position="left"
+                Icon={
+                    <Fontisto
+                        name="email"
+                        size={20}
+                        color={colors.black[400]}
+                    />
+                }
             />
-            <TextInput
+            <InputIcon
+                styleContainer={styles.input_container}
                 style={styles.input}
                 onChangeText={setUsername}
                 value={username}
                 placeholder="Usuário"
                 keyboardType="default"
+                Icon={
+                    <FontAwesome
+                        name="user-o"
+                        size={20}
+                        color={colors.black[400]}
+                    />
+                }
             />
             <Birth text={birthday} textState={setBirth} />
-            <TextInput
+            <InputIcon
                 style={styles.input}
                 onChangeText={setPassword}
                 onEndEditing={() => handlePasswordChange(password)}
                 placeholder="Senha"
                 secureTextEntry
                 value={password}
+                Icon={
+                    <FontAwesome
+                        name="lock"
+                        size={20}
+                        color={colors.black[400]}
+                    />
+                }
             />
             <Button
                 style={styles.button}

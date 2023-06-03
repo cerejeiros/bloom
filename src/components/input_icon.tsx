@@ -33,6 +33,7 @@ import {
 
 export interface InputProps extends TextInputProps {
     styleIconContainer?: StyleProp<ViewStyle>;
+    styleContainer?: StyleProp<ViewStyle>;
     position?: "left" | "right";
     Icon?: React.ReactElement;
 }
@@ -41,6 +42,7 @@ export interface InputProps extends TextInputProps {
 const styles = StyleSheet.create({
     container: {
         // backgroundColor: "green",
+        marginTop: 25,
     },
     input: {
         color: "red",
@@ -70,8 +72,11 @@ export default function InputIcon(props: InputProps) {
         inputMode,
         style,
         styleIconContainer,
+        styleContainer,
         placeholder,
         Icon,
+        value,
+        onChangeText,
     } = props;
 
     // Define the position of the icon based on flexDirection property of the
@@ -96,6 +101,7 @@ export default function InputIcon(props: InputProps) {
         <View
             style={[
                 styles.container,
+                styleContainer,
                 Icon ? { flexDirection: direction } : null,
             ]}
         >
@@ -107,7 +113,9 @@ export default function InputIcon(props: InputProps) {
                 placeholder={placeholder}
                 keyboardType={keyboardType}
                 autoComplete={autoComplete}
+                onChangeText={onChangeText}
                 inputMode={inputMode}
+                value={value}
             />
             {Icon && (
                 <Pressable

@@ -1,6 +1,6 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Button from "../../components/button";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     password: {
-        marginTop: 20,
+        // marginTop: 20,
     },
     title: {
         color: "black",
@@ -103,13 +103,16 @@ function Password({
     setPassword: Dispatch<SetStateAction<string>>;
 }) {
     return (
-        <TextInput
+        <InputIcon
+            styleContainer={{ marginTop: 20 }}
             style={[styles.input, styles.password]}
             onChangeText={setPassword}
             // onEndEditing={(e: any) => handlePasswordChange(password)}
             placeholder="Senha"
             secureTextEntry
             value={password}
+            position="left"
+            Icon={<AntDesign name="lock" size={20} color={colors.black[400]} />}
         />
     );
 }
