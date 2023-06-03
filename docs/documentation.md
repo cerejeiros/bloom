@@ -112,6 +112,8 @@ Bruna Liberal, Kaio Salgado, Kaua Seichi
 
 28. [] 03/06 Reunião para resolver erros gerais 2ª parte [[vídeo]](https://www.youtube.com/watch?v=J_4zg71HPYM)
 
+Bruna Liberal, Kaio Salgado, Kaua Seichi
+
 29. [] 03/06 Reunião para tirar dúvidas e corrigir alguns erros de código 1ª parte [[vídeo]](https://youtu.be/T7-6eLt_f2w)
 
 Bruna Liberal e Kaio Salgado
