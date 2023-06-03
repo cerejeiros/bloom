@@ -80,3 +80,15 @@ Kaio Salgado  e Luiza Pugas.
 
 Kaio Salgado  e Luiza Pugas.
 
+21. [] 30/05 Reunião para resolver bugs no Back-end 1ª parte [[vídeo]](https://drive.google.com/file/d/19DBRaCjsr-4MSIHpRAx67YfKHKb6T3Ms/view?usp=drive_link)
+
+Kaio Salgado, Luiza Pugas, Leonardo Castro,  Kauã Souza e Natan Almeida
+
+22. [] 30/05 Reunião para resolver bugs no Back-end 2ª parte [[vídeo]](https://drive.google.com/file/d/1tWH2ykm1fIBB5mw6wO1pkg_9p6gbOqqo/view?usp=sharing)
+
+Kaio Salgado, Luiza Pugas, Leonardo Castro,  Kauã Souza e Natan Almeida
+
+23. [] 30/05 Reunião para resolver bugs no Back-end 3ª parte [[vídeo]](https://drive.google.com/file/d/1-DJjDI1_H12hhwSmoCZRiPrdnCoeKbH8/view?usp=sharing)
+
+Kaio Salgado, Luiza Pugas, Leonardo Castro,  Kauã Souza e Natan Almeida
+
