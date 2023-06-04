@@ -47,83 +47,69 @@ Bruna Liberal e João Farias
 Bruna Liberal e João Farias
 
 12. [x] 08/05 Discussão da apresentação do aplicativo 2ª parte [[áudio]](https://drive.google.com/file/d/1DQeybHv8wfz6V4rFa_KG2fHRNKmDh2w4/view?usp=share_link)
-
 Bruna Liberal e João Farias
 
 13. [x] 10/05 Revisão da antiga sprint, preparação da próxima, e definição da base do projeto [[vídeo]](https://youtu.be/Sq1C0Nz8zZM);
-
 Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
 
 14. [x] 20/05 Consertando bug supabase [[vídeo]](https://youtu.be/_3Djb_jXkNo);
 Natan Almeida, João Farias
 
 15. [x] 22/05 Revisão da antiga sprint, definição de meta para a próxima e realocação de equipe [[vídeo]](https://youtu.be/DU-472fRkl4)
-
 Bruna Liberal, João Farias, Kaio Salgado, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
 
 16. [x] 15/05 Reunião geral - revisão de sprints 1ª parte [[vídeo]](https://drive.google.com/file/d/1rmBTz3Iy73He7na2OdTFsViEjxjE9iKf/view?usp=drive_link)
-
 Bruna Liberal, João Farias, Kaio Salgado, Leonardo Castro, Luiza Pugas e Natan Almeida.
 
 17. [x] 15/05 Reunião geral - revisão de sprints 2ª parte [[vídeo]](https://drive.google.com/file/d/1D1DfuOspj3_7C41MF51IDv6sgiLZE72O/view?usp=sharing)
-
 Bruna Liberal, João Farias, Kaio Salgado, Leonardo Castro, Luiza Pugas e Natan Almeida.
 
 18. [x] 15/05 Reunião para terminar o Back-end 1ª parte [[vídeo]](https://drive.google.com/file/d/1pmXCNupsJSpWuJPjSc2MHt29f5pyMwVI/view?usp=sharing)
-
 Kaio Salgado  e Luiza Pugas.
 
 19. [x] 15/05 Reunião para terminar o Back-end 2ª parte [[vídeo]](https://drive.google.com/file/d/1O-nPHjGoe4WeQwkurTgQhVrXsiELTAeE/view?usp=sharing)
-
 Kaio Salgado  e Luiza Pugas.
 
 20. [x] 15/05 Reunião para estudar e alterar o Front  [[vídeo]](https://drive.google.com/file/d/1WZZYIj4levJ2w4Qr5EoE6zjbx2d4wPlh/view?usp=drive_link)
-
 Kaio Salgado  e Luiza Pugas.
 
 21. [x] 29/05 Atualização dos repositórios de base e criação de validação de informações no registro e login [[vídeo]](https://youtu.be/U9-bqkEIMPM)
-
 Bruna Liberal, João Farias, Kauã Souza, Leonardo Castro, Luiza Pugas e Natan Almeida.
->>>>>>> 854b91a46be3917114a30a60ac91019735425689
 
-22. [] 30/05 Reunião para resolver bugs no Back-end 1ª parte [[vídeo]](https://drive.google.com/file/d/19DBRaCjsr-4MSIHpRAx67YfKHKb6T3Ms/view?usp=drive_link)
-
+22. [ ] 30/05 Reunião para resolver bugs no Back-end 1ª parte [[vídeo]](https://drive.google.com/file/d/19DBRaCjsr-4MSIHpRAx67YfKHKb6T3Ms/view?usp=drive_link)
 Kaio Salgado, Luiza Pugas, Leonardo Castro,  Kauã Souza e Natan Almeida
 
-23. [] 30/05 Reunião para resolver bugs no Back-end 2ª parte [[vídeo]](https://drive.google.com/file/d/1tWH2ykm1fIBB5mw6wO1pkg_9p6gbOqqo/view?usp=sharing)
-
+23. [ ] 30/05 Reunião para resolver bugs no Back-end 2ª parte [[vídeo]](https://drive.google.com/file/d/1tWH2ykm1fIBB5mw6wO1pkg_9p6gbOqqo/view?usp=sharing)
 Kaio Salgado, Luiza Pugas, Leonardo Castro,  Kauã Souza e Natan Almeida
 
-24. [] 30/05 Reunião para resolver bugs no Back-end 3ª parte [[vídeo]](https://drive.google.com/file/d/1-DJjDI1_H12hhwSmoCZRiPrdnCoeKbH8/view?usp=sharing)
-
+24. [ ] 30/05 Reunião para resolver bugs no Back-end 3ª parte [[vídeo]](https://drive.google.com/file/d/1-DJjDI1_H12hhwSmoCZRiPrdnCoeKbH8/view?usp=sharing)
 Kaio Salgado, Luiza Pugas, Leonardo Castro,  Kauã Souza e Natan Almeida
 
-25. [] 03/06 Reunião para resolver erros de sign up 1ª parte [[vídeo]](https://youtu.be/_BY5RquemNI)
-
+25. [ ] 03/06 Reunião para resolver erros de sign up 1ª parte [[vídeo]](https://youtu.be/_BY5RquemNI)
 Bruna Liberal e Kaio Enzo
 
-26. [] 03/06 Reunião para resolver erros de sign up 2ª parte [[vídeo]](https://youtu.be/cQmHpJCXfpU)
-
+26. [ ] 03/06 Reunião para resolver erros de sign up 2ª parte [[vídeo]](https://youtu.be/cQmHpJCXfpU)
 Bruna Liberal e Kaio Enzo
 
-27. [] 03/06 Reunião para resolver erros gerais 1ª parte [[vídeo]](https://youtu.be/rCcc-vSkYSo)
-
+27. [ ] 03/06 Reunião para resolver erros gerais 1ª parte [[vídeo]](https://youtu.be/rCcc-vSkYSo)
 Bruna Liberal, Kaio Salgado, Kaua Seichi
 
-28. [] 03/06 Reunião para resolver erros gerais 2ª parte [[vídeo]](https://youtu.be/3uwi8o92Wro)
-
+28. [ ] 03/06 Reunião para resolver erros gerais 2ª parte [[vídeo]](https://youtu.be/3uwi8o92Wro)
 Bruna Liberal, Kaio Salgado, Kaua Seichi
 
-29. [] 03/06 Reunião para tirar dúvidas e corrigir alguns erros de código 1ª parte [[vídeo]](https://youtu.be/T7-6eLt_f2w)
-
+29. [ ] 03/06 Reunião para tirar dúvidas e corrigir alguns erros de código 1ª parte [[vídeo]](https://youtu.be/T7-6eLt_f2w)
 Bruna Liberal e Kaio Salgado
 
-30. [] 03/06 Reunião para tirar dúvidas e corrigir alguns erros de código 2ª parte [[vídeo]](https://youtu.be/J_4zg71HPYM)
-
+30. [ ] 03/06 Reunião para tirar dúvidas e corrigir alguns erros de código 2ª parte [[vídeo]](https://youtu.be/J_4zg71HPYM)
 Bruna Liberal e Kaio Salgado
 
-31. [] 03/06 Reunião para apagar funções inutilizadas [[vídeo]](https://youtu.be/pwBHGEdvQdI)
-
+31. [ ] 03/06 Reunião para apagar funções inutilizadas [[vídeo]](https://youtu.be/pwBHGEdvQdI)
 Bruna Liberal e Kaio Salgado
+
+32. [ ] 02/06 Colocando icone nos inputs[[vídeo]](https://youtu.be/BPi0cjvwpoI)
+Natan Almeida e Joao V
+
+33. [ ] 03/06 Daily [[vídeo]](https://youtu.be/2XXmVGlqNzA)
+Natan, Kaio, Joao, Kaua, Leonardo e  Luiza 
 
 
