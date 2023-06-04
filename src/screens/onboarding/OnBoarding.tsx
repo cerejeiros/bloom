@@ -6,7 +6,6 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
-import SVGLandingBottom from "../../../assets/source/landing_bottom.svg";
 import Button from "../../components/button";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function Landing() {
+export default function OnBoarding() {
     // TODO: For the dots.
     const [curPage] = React.useState(0);
 
@@ -75,13 +74,13 @@ export default function Landing() {
             {/* TODO: Navigation dots here. */}
             {/* TODO: Options to skip page (style) */}
             <SafeAreaView style={styles.nav_container}>
-                <SVGLandingBottom
+                {/* <SVGLandingBottom
                     width="100%"
                     height="900"
                     fill="red"
                     // preserveAspectRatio="none"
                     style={styles.svg_bottom}
-                />
+            /> */}
                 <Button
                     title="Registrar"
                     style={styles.button_signup}
