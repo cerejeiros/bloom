@@ -1,16 +1,7 @@
 import { FontAwesome, Fontisto } from "@expo/vector-icons";
-import {
-    DateTimePickerAndroid,
-    DateTimePickerEvent,
-} from "@react-native-community/datetimepicker";
-import React, {
-    Dispatch,
-    SetStateAction,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
-import { Keyboard, StyleSheet, View } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import Birth from "../../components/birth";
 import Button from "../../components/button";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
@@ -76,56 +67,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
 });
-
-function Birth({
-    text,
-    textState,
-}: {
-    text: string;
-    textState: Dispatch<SetStateAction<string>>;
-}) {
-    const [date, setDate] = useState(new Date(1598051730000));
-
-    const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-        if (selectedDate) {
-            const currentDate = selectedDate;
-            setDate(currentDate);
-            textState(date.toISOString().split("T")[0]);
-        } else {
-            console.log("Data inválida");
-        }
-    };
-
-    const openDatePicker = () => {
-        DateTimePickerAndroid.open({
-            value: date,
-            onChange,
-            mode: "date",
-            is24Hour: true,
-        });
-    };
-
-    return (
-        <InputIcon
-            style={styles.input}
-            onFocus={() => {
-                Keyboard.dismiss();
-                openDatePicker();
-            }}
-            onChangeText={textState}
-            value={text}
-            placeholder="AAAA-MM-DD"
-            keyboardType="numeric"
-            Icon={
-                <FontAwesome
-                    name="calendar"
-                    size={20}
-                    color={colors.black[400]}
-                />
-            }
-        />
-    );
-}
 
 export default function Input() {
     const [email, setEmail] = useState("");
