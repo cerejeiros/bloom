@@ -123,7 +123,7 @@ export default function Input() {
 
     const { signIn, signUp, signOut } = useContext(AuthContext);
 
-    // TODO: Move both functions (sign and signup) to one place in /src/helpers/.
+    // TODO: Move both functions (files: sign and signup) to one place in /src/helpers/.
     const checkPassword = (input: string) => {
         if (!/[0-9]/.test(input)) {
             return false;

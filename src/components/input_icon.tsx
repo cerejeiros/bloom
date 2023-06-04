@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
 export default function InputIcon(props: InputProps) {
     // NOTE: You can import more here:
-    // https://reactnative.dev/docs/textinput.html#bluronsubmit
+    // https://reactnative.dev/docs/textinput.html
     //       Always add a default value if specified.
     const {
         allowFontScaling = true,
@@ -77,6 +77,7 @@ export default function InputIcon(props: InputProps) {
         Icon,
         value,
         onChangeText,
+        onFocus,
     } = props;
 
     // Define the position of the icon based on flexDirection property of the
@@ -115,6 +116,7 @@ export default function InputIcon(props: InputProps) {
                 autoComplete={autoComplete}
                 onChangeText={onChangeText}
                 inputMode={inputMode}
+                onFocus={onFocus}
                 value={value}
             />
             {Icon && (
