@@ -1,13 +1,17 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import {
     Dimensions,
     Image,
+    Modal,
     SafeAreaView,
     StyleSheet,
     Text,
     View,
 } from "react-native";
+import Button from "../../components/button";
+import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
@@ -23,14 +27,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        borderColor: "#ffb4b8",
-        padding: 10,
-        paddingLeft: 25,
-        paddingRight: 25,
-        borderRadius: 50,
+        // marginTop: 0,
+        flex: 0,
+        color: colors.black[500],
     },
     profileHeader: {
         width,
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     profilePhoto: {
         position: "absolute",
         overflow: "visible",
-        zIndex: 999,
+        zIndex: 100,
         width: 180,
         height: 180,
         borderRadius: 100,
@@ -51,7 +50,47 @@ const styles = StyleSheet.create({
         borderColor: colors.blue[200],
         borderWidth: 5,
     },
+    editBadge: {
+        position: "absolute",
+        zIndex: 999,
+        top: 78,
+        right: 120,
+        backgroundColor: "#fff",
+        borderRadius: 45,
+    },
+    modal: {
+        top: 200,
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    modalTitle: {
+        fontSize: 32,
+    },
+    buttonView: {
+        width: width - 70,
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+    },
+    buttonTitleColor: {
+        color: "#fff",
+    },
+    saveButton: {
+        backgroundColor: colors.blue[500],
+        borderColor: colors.black[400],
+    },
 });
+
 type CardProps = {
     children: ReactNode;
 };
@@ -61,8 +100,10 @@ function Card({ children }: CardProps) {
 
 function User() {
     // const [bio, bioState] = React.useState("");
-    // const [name, nameState] = React.useState("");
+    const [name, setName] = React.useState<string | undefined>(undefined);
     const [userData, setUserData] = useState<UserData | undefined>(undefined);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [userName, setUserName] = useState<string | undefined>(undefined);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
@@ -72,13 +113,15 @@ function User() {
                 .select("*")
                 .eq("id", user?.id)
                 .limit(1)
-                .returns<UserData>();
+                .returns<UserData[]>();
 
-            if (data === null) {
+            if (data === null || !data[0]) {
                 alert("Erro ao procurar informações do perfil");
                 return;
             }
-            setUserData(data);
+
+            setUserData(data[0]);
+            setName(data[0].name);
         };
 
         fetchData();
@@ -86,6 +129,39 @@ function User() {
 
     return (
         <SafeAreaView style={styles.container}>
+            <Modal
+                visible={modalVisible}
+                animationType="slide"
+                transparent
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <View style={styles.modal}>
+                    <Text style={styles.modalTitle}>Editar dados</Text>
+                    <View>
+                        <InputIcon
+                            onChangeText={setName}
+                            value={name}
+                            placeholder="Nome"
+                            keyboardType="default"
+                            inputMode="text"
+                            style={styles.input}
+                        />
+                    </View>
+                    <View style={styles.buttonView}>
+                        <Button
+                            title="Fechar"
+                            onPress={() => setModalVisible(false)}
+                            titleStyle={styles.buttonTitleColor}
+                        />
+                        <Button
+                            title="Salvar"
+                            onPress={() => setModalVisible(false)}
+                            titleStyle={styles.buttonTitleColor}
+                            style={styles.saveButton}
+                        />
+                    </View>
+                </View>
+            </Modal>
             <View style={styles.profileHeader}>
                 <LinearGradient
                     // Background Linear Gradient
@@ -104,6 +180,13 @@ function User() {
                     <Image
                         source={require("../../../assets/cat-profile.jpg")}
                         style={styles.profilePhoto}
+                    />
+                    <MaterialCommunityIcons
+                        name="account-edit"
+                        size={36}
+                        color="black"
+                        style={styles.editBadge}
+                        onPress={() => setModalVisible(true)}
                     />
                 </LinearGradient>
             </View>
