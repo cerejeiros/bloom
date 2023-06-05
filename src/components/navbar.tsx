@@ -46,7 +46,7 @@ function NavBar() {
                 name="Hoje"
                 component={Today}
                 options={{
-                    tabBarActiveTintColor: colors.rose[400],
+                    tabBarActiveTintColor: colors.rose_400,
                     tabBarLabel: "Hoje",
                     tabBarIcon: ({ color }) => (
                         <Feather name="calendar" color={color} size={40} />
@@ -57,7 +57,7 @@ function NavBar() {
                 name="Status"
                 component={Status}
                 options={{
-                    tabBarActiveTintColor: colors.blue[400],
+                    tabBarActiveTintColor: colors.blue_400,
                     tabBarLabel: "Status",
                     tabBarIcon: ({ color }) => (
                         <Octicons name="graph" color={color} size={40} />
@@ -68,7 +68,7 @@ function NavBar() {
                 name="Home"
                 component={Home}
                 options={{
-                    tabBarActiveTintColor: colors.white[100],
+                    tabBarActiveTintColor: colors.white_100,
                     tabBarLabel: "Início",
                     tabBarIcon: ({ color }) => (
                         <Feather name="home" color={color} size={40} />
@@ -80,7 +80,7 @@ function NavBar() {
                 name="Perfil"
                 component={User}
                 options={{
-                    tabBarActiveTintColor: colors.rose[100],
+                    tabBarActiveTintColor: colors.rose_100,
                     tabBarLabel: "Perfil",
                     tabBarIcon: ({ color }) => (
                         <Feather name="user" color={color} size={40} />

@@ -6,6 +6,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 
 import React from "react";
 import { Text, View } from "react-native";
+
 export default function App() {
     const [appIsReady, setAppIsReady] = useState(false);
 
