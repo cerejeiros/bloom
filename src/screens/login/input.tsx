@@ -1,9 +1,10 @@
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Button from "../../components/button";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
+import checkPassword from "../../helpers/relevantFunctions";
 import colors from "../../pallete";
 
 const styles = StyleSheet.create({
@@ -108,7 +109,9 @@ function Password({
             secureTextEntry
             value={password}
             position="left"
-            Icon={<AntDesign name="lock" size={20} color={colors.black_400} />}
+            Icon={
+                <FontAwesome name="lock" size={20} color={colors.black_400} />
+            }
         />
     );
 }
@@ -118,21 +121,6 @@ export default function Input() {
     const [password, setPassword] = useState("");
 
     const { signIn, signUp, signOut } = useContext(AuthContext);
-
-    // TODO: Move both functions (files: sign and signup) to one place in /src/helpers/.
-    const checkPassword = (input: string) => {
-        if (!/[0-9]/.test(input)) {
-            return false;
-        }
-
-        // Verifica se a senha contém pelo menos uma letra maiúscula
-        if (!/[A-Z]/.test(input)) {
-            return false;
-        }
-
-        // Retorna true se a senha atender a ambos os critérios
-        return true;
-    };
 
     return (
         <View style={styles.container}>
