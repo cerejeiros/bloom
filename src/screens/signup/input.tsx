@@ -212,12 +212,12 @@ export default function Input() {
                 style={{
                     height: 40,
                     borderBottomWidth: 1,
-                    borderColor: colors.black[400],
+                    borderColor: colors.black_400,
                     paddingLeft: 15,
                     // paddingRight: 25,
                     borderRadius: 0,
                     minWidth: 100,
-                    color: colors.black[500],
+                    color: colors.black_500,
                     fontSize: 15,
                 }}
                 onFocus={() => {
