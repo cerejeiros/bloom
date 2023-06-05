@@ -13,7 +13,7 @@ import { AuthRoutes } from "../../routes/auth.routes";
 const styles = StyleSheet.create({
     container: {
         height: "100%",
-        backgroundColor: colors.blue[50],
+        backgroundColor: colors.blue_50,
         // justifyContent: "center",
         // alignItems: "center",
     },
@@ -25,17 +25,17 @@ const styles = StyleSheet.create({
         fill: 1,
     },
     text: {
-        color: colors.black[800],
+        color: colors.black_800,
         fontSize: 25,
         fontFamily: "Poppins-Medium",
-        backgroundColor: `${colors.blue[100]}55`,
+        backgroundColor: `${colors.blue_100}55`,
         textAlign: "center",
     },
     text_name: {
-        color: colors.rose[300],
+        color: colors.rose_300,
     },
     page_container: {
-        // backgroundColor: "green",
+        backgroundColor: "red",
         justifyContent: "center",
         flex: 1,
     },

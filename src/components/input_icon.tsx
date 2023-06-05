@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     input: {
         color: "red",
         // backgroundColor: "blue",
-        // TODO - REMOVE THIS FLEX 1. THIS CAUSE ISSUES BECAUSE FORCE THE INPUT TO FULL FILL THE VIEW SPACE. SEE (https://reactnative.dev/docs/flexbox#flex)
+        // TODO - REMOVE THIS FLEX 1.
+        //        THIS CAUSE ISSUES BECAUSE FORCE THE INPUT TO FULL FILL THE VIEW SPACE. SEE (https://reactnative.dev/docs/flexbox#flex)
         flex: 1,
     },
     container_icon: {

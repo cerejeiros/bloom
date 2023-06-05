@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     input: {
         // marginTop: 0,
         flex: 0,
-        color: colors.black[500],
+        color: colors.black_500,
     },
     profileHeader: {
         width,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         height: 180,
         borderRadius: 100,
         marginTop: 75,
-        borderColor: colors.blue[200],
+        borderColor: colors.blue_200,
         borderWidth: 5,
     },
     editBadge: {
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
         color: "#fff",
     },
     saveButton: {
-        backgroundColor: colors.blue[500],
-        borderColor: colors.black[400],
+        backgroundColor: colors.blue_500,
+        borderColor: colors.black_400,
     },
 });
 
@@ -168,11 +168,11 @@ function User() {
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     colors={[
-                        colors.rose[75],
+                        colors.rose_75,
                         "transparent",
-                        colors.blue[75],
+                        colors.blue_75,
                         "transparent",
-                        colors.rose[75],
+                        colors.rose_75,
                         "transparent",
                     ]}
                     style={styles.profileHeader}

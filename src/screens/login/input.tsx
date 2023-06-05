@@ -15,13 +15,13 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         borderBottomWidth: 1,
-        borderColor: colors.black[400],
+        borderColor: colors.black_400,
         padding: 10,
         paddingLeft: 15,
         paddingRight: 25,
         borderRadius: 0,
         minWidth: 100,
-        color: colors.black[500],
+        color: colors.black_500,
         fontSize: 15,
     },
     password: {
@@ -39,18 +39,18 @@ const styles = StyleSheet.create({
     },
     button: {
         margin: 10,
-        backgroundColor: colors.rose[300],
+        backgroundColor: colors.rose_300,
     },
     button_text: {
-        color: colors.white[50],
+        color: colors.white_50,
     },
     button_out: {
         margin: 10,
-        borderColor: colors.rose[100],
-        backgroundColor: colors.rose[50],
+        borderColor: colors.rose_100,
+        backgroundColor: colors.rose_50,
     },
     button_out_text: {
-        color: colors.rose[300],
+        color: colors.rose_300,
     },
     divider: {
         alignSelf: "center",
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         alignSelf: "flex-end",
-        color: colors.blue[600],
+        color: colors.blue_600,
         fontSize: 12.5,
         fontWeight: "bold",
     },
@@ -85,11 +85,7 @@ function Email({
             inputMode="email"
             position="left"
             Icon={
-                <FontAwesome
-                    name="user-o"
-                    size={20}
-                    color={colors.black[400]}
-                />
+                <FontAwesome name="user-o" size={20} color={colors.black_400} />
             }
         />
     );
@@ -112,7 +108,7 @@ function Password({
             secureTextEntry
             value={password}
             position="left"
-            Icon={<AntDesign name="lock" size={20} color={colors.black[400]} />}
+            Icon={<AntDesign name="lock" size={20} color={colors.black_400} />}
         />
     );
 }

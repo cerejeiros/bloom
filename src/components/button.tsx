@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 10,
         elevation: 3,
-        backgroundColor: colors.rose[300],
+        backgroundColor: colors.rose_300,
         borderWidth: 2,
-        borderColor: colors.rose[100],
+        borderColor: colors.rose_100,
     },
     text: {
         fontSize: 16,

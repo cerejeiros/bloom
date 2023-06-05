@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         gap: 5,
     },
     link: {
-        color: colors.blue[600],
+        color: colors.blue_600,
     },
     /* circulo: {
         width: 400,

@@ -5,7 +5,7 @@ import {
 } from "@react-native-community/datetimepicker";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { Keyboard } from "react-native";
-import { colors } from "react-native-elements";
+import colors from "../pallete";
 import InputIcon from "./input_icon";
 
 export default function Birth({
@@ -41,12 +41,12 @@ export default function Birth({
             style={{
                 height: 40,
                 borderBottomWidth: 1,
-                borderColor: colors.black[400],
+                borderColor: colors.black_400,
                 paddingLeft: 15,
                 // paddingRight: 25,
                 borderRadius: 0,
                 minWidth: 100,
-                color: colors.black[500],
+                color: colors.black_500,
                 fontSize: 15,
             }}
             onFocus={() => {
@@ -61,7 +61,7 @@ export default function Birth({
                 <FontAwesome
                     name="calendar"
                     size={20}
-                    color={colors.black[400]}
+                    color={colors.black_400}
                 />
             }
         />
