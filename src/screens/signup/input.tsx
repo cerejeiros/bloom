@@ -7,6 +7,7 @@ import { Keyboard, StyleSheet, View } from "react-native";
 import Button from "../../components/button";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
+import checkPassword from "../../helpers/relevantFunctions";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 
@@ -77,35 +78,10 @@ export default function Input() {
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
     const [isloading, setIsLoading] = useState(false);
-    const { signUp, signUpData } = useContext(AuthContext);
     const [date, setDate] = useState(new Date(1598051730000));
     const [show, setShow] = useState(false);
     const d = new Date();
-
-    // TODO: Move both functions (files: sign and signup) to one place in /src/helpers/.
-    const checkPassword = (input: string) => {
-        // Verifica se tem pelo menos um número e uma letra maiúscula.
-        if (!/[0-9]/.test(input)) {
-            alert(
-                "A senha deve conter pelo menos um número e uma letra maiúscula"
-            );
-            return false;
-        }
-
-        // Verifica se a senha contém pelo menos uma letra maiúscula
-        if (!/[A-Z]/.test(input)) {
-            alert("A senha deve conter  pelo menos uma letra maiúscula");
-            return false;
-        }
-
-        // Verificar se tem no minimo 6 caracteres.
-        if (input.length < 6) {
-            alert("A senha deve conter no mínimo 6 caracteres");
-            return false;
-        }
-
-        return true;
-    };
+    const { signUp, signUpData } = useContext(AuthContext);
 
     const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
         if (selectedDate) {
@@ -134,10 +110,6 @@ export default function Input() {
     };
 
     const handleSubmit = async () => {
-        if (!name) {
-            alert("O nome é obrigatório");
-            return false;
-        }
         if (!email) {
             alert("O email é obrigatório");
             return false;
@@ -168,7 +140,7 @@ export default function Input() {
 
         setIsLoading(true);
         await signUp(email, password);
-        await signUpData(name, username, birthday);
+        await signUpData(username, birthday);
         setIsLoading(false);
         return true;
     };
@@ -179,18 +151,6 @@ export default function Input() {
 
     return (
         <View style={styles.container}>
-            <InputIcon
-                styleContainer={styles.input_container}
-                style={styles.input}
-                onChangeText={setName}
-                value={name}
-                placeholder="Nome"
-                keyboardType="default"
-                inputMode="text"
-                Icon={
-                    <Fontisto name="email" size={20} color={colors.black_400} />
-                }
-            />
             <InputIcon
                 styleContainer={styles.input_container}
                 style={styles.input}
