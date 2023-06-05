@@ -5,7 +5,7 @@
 
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import { SafeAreaView, StyleSheet, Text } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import Button from "../../components/button";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
@@ -66,10 +66,10 @@ export default function OnBoarding() {
             {/* All types of optional seen pages should render inside here, we
                 can move each page by sliding the upper part of the screen */}
             <SafeAreaView style={styles.page_container}>
-                <Text style={styles.text}>
-                    Bem-vindos ao <Text style={styles.text_name}>Bloom</Text>,
-                </Text>
-                <Text style={styles.text}>seu app de rotina!</Text>
+                {/* <FlatList
+                    data={pages}
+                    renderItem={({ item }) => <Item data={item} />}
+            /> */}
             </SafeAreaView>
             {/* TODO: Navigation dots here. */}
             {/* TODO: Options to skip page (style) */}
