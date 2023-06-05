@@ -188,11 +188,7 @@ export default function Input() {
                 keyboardType="default"
                 inputMode="text"
                 Icon={
-                    <Fontisto
-                        name="email"
-                        size={20}
-                        color={colors.black[400]}
-                    />
+                    <Fontisto name="email" size={20} color={colors.black_400} />
                 }
             />
             <InputIcon
@@ -205,11 +201,7 @@ export default function Input() {
                 autoComplete="email"
                 inputMode="email"
                 Icon={
-                    <Fontisto
-                        name="email"
-                        size={20}
-                        color={colors.black_400}
-                    />
+                    <Fontisto name="email" size={20} color={colors.black_400} />
                 }
             />
             <InputIcon
@@ -252,7 +244,7 @@ export default function Input() {
                     <FontAwesome
                         name="calendar"
                         size={20}
-                        color={colors.black[400]}
+                        color={colors.black_400}
                     />
                 }
             />
