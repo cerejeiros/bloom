@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
 });
 
 export default function Input() {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
@@ -133,6 +134,10 @@ export default function Input() {
     };
 
     const handleSubmit = async () => {
+        if (!name) {
+            alert("O nome é obrigatório");
+            return false;
+        }
         if (!email) {
             alert("O email é obrigatório");
             return false;
@@ -163,7 +168,7 @@ export default function Input() {
 
         setIsLoading(true);
         await signUp(email, password);
-        await signUpData(username, birthday);
+        await signUpData(name, username, birthday);
         setIsLoading(false);
         return true;
     };
@@ -177,13 +182,28 @@ export default function Input() {
             <InputIcon
                 styleContainer={styles.input_container}
                 style={styles.input}
+                onChangeText={setName}
+                value={name}
+                placeholder="Nome"
+                keyboardType="default"
+                inputMode="text"
+                Icon={
+                    <Fontisto
+                        name="email"
+                        size={20}
+                        color={colors.black[400]}
+                    />
+                }
+            />
+            <InputIcon
+                styleContainer={styles.input_container}
+                style={styles.input}
                 onChangeText={setEmail}
                 value={email}
                 placeholder="Email"
                 keyboardType="default"
                 autoComplete="email"
                 inputMode="email"
-                // position="left"
                 Icon={
                     <Fontisto
                         name="email"
