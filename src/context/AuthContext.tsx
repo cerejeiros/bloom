@@ -7,7 +7,7 @@ export type AuthContextDataProps = {
     signIn: (email: string, password: string) => void;
     signOut: () => void;
     signUp: (email: string, password: string) => Promise<any>;
-    signUpData: (nameu: string, usern: string, birth: string) => Promise<any>;
+    signUpData: (usern: string, birth: string) => Promise<any>;
     user: User | null;
 };
 
@@ -67,14 +67,13 @@ export default function AuthContextProvider({
     );
 
     const signUpData = React.useCallback(
-        async (nameu: string, usern: string, birth: string) => {
+        async (usern: string, birth: string) => {
             const userSupabase = (await supabase.auth.getUser()).data.user?.id;
             const { data, error } = await supabase
                 .from("profiles")
                 .update({
                     username: usern,
                     dateofbirth: birth,
-                    name: nameu,
                 })
                 .eq("id", userSupabase);
 
