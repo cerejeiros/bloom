@@ -78,6 +78,7 @@ export default function InputIcon(props: InputProps) {
         placeholder,
         Icon,
         value,
+        secureTextEntry,
         onChangeText,
         onFocus,
     } = props;
@@ -120,6 +121,7 @@ export default function InputIcon(props: InputProps) {
                 inputMode={inputMode}
                 onFocus={onFocus}
                 value={value}
+                secureTextEntry={secureTextEntry}
             />
             {Icon && (
                 <Pressable
