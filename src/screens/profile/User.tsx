@@ -119,6 +119,7 @@ function User() {
                 alert("Erro ao procurar informações do perfil");
                 return;
             }
+            console.log(data[0]);
 
             setUserData(data[0]);
             setName(data[0].name);

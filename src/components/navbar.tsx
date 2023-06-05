@@ -9,13 +9,25 @@
 import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { Image } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import colors from "../pallete";
 import Home from "../screens/home/Home";
 import User from "../screens/profile/User";
 import Status from "../screens/status/Status";
 import Tasks from "../screens/task/Tasks";
 import Today from "../screens/today/Today";
+
+const styles = StyleSheet.create({
+    button: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: 58,
+        width: 58,
+        borderRadius: 58,
+        backgroundColor: "#FFC546",
+    },
+    message: {},
+});
 
 const Tab = createBottomTabNavigator();
 
@@ -71,25 +83,13 @@ function NavBar() {
                 name="Home"
                 component={Home}
                 options={{
-                    tabBarActiveTintColor: colors.white_100,
+                    tabBarActiveTintColor: colors.blue_600,
+                    tabBarInactiveTintColor: colors.white_100,
                     tabBarLabel: "",
-                    tabBarStyle: {
-                        position: "absolute",
-                        bottom: 30,
-                        left: 15,
-                        right: 15,
-                        borderRadius: 15,
-                        paddingTop: 10,
-                        elevation: 0,
-                        height: 80,
-                        borderTopColor: "transparent",
-                        paddingBottom: 0,
-                        backgroundColor: colors.blue_400,
-                    },
                     tabBarIcon: ({ color }) => (
-                        <Image
-                            source={require("../../assets/icon_100x100.png")}
-                        />
+                        <View style={styles.button}>
+                            <Feather name="home" color={color} size={40} />
+                        </View>
                     ),
                 }}
             />
