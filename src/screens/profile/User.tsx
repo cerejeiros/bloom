@@ -21,13 +21,13 @@ const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: "green",
+        backgroundColor: "green",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
     },
     input: {
-        // marginTop: 0,
+        marginTop: 0,
         flex: 0,
         color: colors.black_500,
     },
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         height: 150,
         zIndex: 1,
-        // backgroundColor: "red",
+        backgroundColor: "red",
         marginBottom: 120,
     },
     profilePhoto: {
@@ -99,7 +99,6 @@ function Card({ children }: CardProps) {
 }
 
 function User() {
-    // const [bio, bioState] = React.useState("");
     const [name, setName] = React.useState<string | undefined>(undefined);
     const [userData, setUserData] = useState<UserData | undefined>(undefined);
     const [modalVisible, setModalVisible] = useState(false);
@@ -186,7 +185,6 @@ function User() {
             </Modal>
             <View style={styles.profileHeader}>
                 <LinearGradient
-                    // Background Linear Gradient
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     colors={[

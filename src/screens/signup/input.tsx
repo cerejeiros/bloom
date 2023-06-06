@@ -16,14 +16,14 @@ const styles = StyleSheet.create({
         paddingRight: 40,
     },
     input_container: {
-        // marginBottom: 5,
+        marginBottom: 5,
     },
     input: {
         height: 40,
         borderBottomWidth: 1,
         borderColor: colors.black_400,
         paddingLeft: 15,
-        // paddingRight: 25,
+        paddingRight: 25,
         borderRadius: 0,
         minWidth: 100,
         color: colors.black_500,

@@ -9,7 +9,8 @@
 import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { __String } from "typescript";
 import colors from "../pallete";
 import Home from "../screens/home/Home";
 import User from "../screens/profile/User";
@@ -26,7 +27,6 @@ const styles = StyleSheet.create({
         borderRadius: 58,
         backgroundColor: "#FFC546",
     },
-    message: {},
 });
 
 const Tab = createBottomTabNavigator();
@@ -62,8 +62,8 @@ function NavBar() {
                 component={Today}
                 options={{
                     tabBarActiveTintColor: colors.rose_400,
-                    tabBarLabel: "",
-                    tabBarIcon: ({ color }) => (
+                    tabBarLabel: "Today",
+                    tabBarIcon: ({ color }: __String) => (
                         <Feather name="calendar" color={color} size={40} />
                     ),
                 }}
@@ -73,8 +73,8 @@ function NavBar() {
                 component={Status}
                 options={{
                     tabBarActiveTintColor: colors.blue_400,
-                    tabBarLabel: "",
-                    tabBarIcon: ({ color }) => (
+                    tabBarLabel: "Status",
+                    tabBarIcon: ({ color }: __String) => (
                         <Octicons name="graph" color={color} size={40} />
                     ),
                 }}
@@ -85,8 +85,8 @@ function NavBar() {
                 options={{
                     tabBarActiveTintColor: colors.blue_600,
                     tabBarInactiveTintColor: colors.white_100,
-                    tabBarLabel: "",
-                    tabBarIcon: ({ color }) => (
+                    tabBarLabel: "Home",
+                    tabBarIcon: ({ color }: __String) => (
                         <View style={styles.button}>
                             <Feather name="home" color={color} size={40} />
                         </View>
@@ -99,8 +99,8 @@ function NavBar() {
                 component={Tasks}
                 options={{
                     tabBarActiveTintColor: colors.white_100,
-                    tabBarLabel: "",
-                    tabBarIcon: ({ color }) => (
+                    tabBarLabel: "Tasks",
+                    tabBarIcon: ({ color }: __String) => (
                         <FontAwesome5 name="tasks" color={color} size={40} />
                     ),
                 }}
@@ -111,8 +111,8 @@ function NavBar() {
                 component={User}
                 options={{
                     tabBarActiveTintColor: colors.rose_100,
-                    tabBarLabel: "",
-                    tabBarIcon: ({ color }) => (
+                    tabBarLabel: "User",
+                    tabBarIcon: ({ color }: __String) => (
                         <Feather name="user" color={color} size={40} />
                     ),
                 }}

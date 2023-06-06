@@ -38,20 +38,19 @@ export interface InputProps extends TextInputProps {
     Icon?: React.ReactElement;
 }
 
-// Default styles for this component.
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: "green",
+        backgroundColor: "green",
         marginTop: 25,
     },
     input: {
         color: "red",
-        // backgroundColor: "blue",
+        backgroundColor: "blue",
     },
     container_icon: {
         paddingHorizontal: 5,
         paddingVertical: 10,
-        // backgroundColor: "red",
+        backgroundColor: "red",
         aspectRatio: 1,
         justifyContent: "center",
         alignItems: "center",
@@ -59,9 +58,6 @@ const styles = StyleSheet.create({
 });
 
 export default function InputIcon(props: InputProps) {
-    // NOTE: You can import more here:
-    // https://reactnative.dev/docs/textinput.html
-    //       Always add a default value if specified.
     const {
         allowFontScaling = true,
         keyboardType = "default",
@@ -80,8 +76,6 @@ export default function InputIcon(props: InputProps) {
         onFocus,
     } = props;
 
-    // Define the position of the icon based on flexDirection property of the
-    // container.
     let direction: "column" | "row" | "column-reverse" | "row-reverse";
     switch (position) {
         case "left":
