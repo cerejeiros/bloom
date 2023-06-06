@@ -134,4 +134,10 @@ Natan Almeida e Joao V
 
 Natan, Kaio, Joao, Kaua, Leonardo e  Luiza 
 
+34. [ ] 05/06 Definição da tela inicial -parte 1 [[vídeo]](https://youtu.be/prxWqSsecIY)
 
+Natan, Kaio, Joao, Kaua, Leonardo e Bruna
+
+35. [ ] 05/06 Esclarecimento de dúvidas e programação conjunta parte 2 [[vídeo]](https://youtu.be/2XXmVGlqNzA)
+
+Natan, Kaio, Joao, Kaua, Leonardo e Bruna 
