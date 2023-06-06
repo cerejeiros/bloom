@@ -10,8 +10,17 @@ npm-debug.*
 *.orig.*
 web-build/
 
+# For additional assets you're working on.
+/assets_ip/
+
 # macOS
 .DS_Store
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
+
+# For Supabase keys.
+*.env
+
+# Ignore zip files.
+*.zip

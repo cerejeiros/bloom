@@ -24,18 +24,27 @@
                 "extensions": [".ts", ".tsx"]
             }
         ],
-        "prettier/prettier": "off",
+        "global-require": "off",
+        "prettier/prettier": "warn",
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
         "import/extensions": ["off", "never"],
         "react/prop-types": 0,
         "react/require-default-props": 0,
-        "no-shadow": "warn",
+        "no-shadow": "off",
         "@typescript-eslint/no-shadow": ["error"],
         "react/no-unstable-nested-components": [
             "warn",
             { "allowAsProps": true }
+        ],
+        "react/jsx-props-no-spreading": [
+            1,
+            {
+                // "html": "ignore" | "enforce",
+                // "custom": "ignore" | "enforce",
+                // "explicitSpread": "ignore" | "enforce",
+                "exceptions": ["Image", "img", "Svg"]
+            }
         ]
     }
 }
-

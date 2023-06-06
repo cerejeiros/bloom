@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="256mm"
+   height="256mm"
+   viewBox="0 0 256 256"
+   version="1.1"
+   id="svg393"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="arts.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview395"
+     pagecolor="#e3e3e3"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="false"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="false"
+     inkscape:deskcolor="#c6c6c6"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="6.7277216"
+     inkscape:cx="50.239891"
+     inkscape:cy="48.902142"
+     inkscape:window-width="1236"
+     inkscape:window-height="954"
+     inkscape:window-x="22"
+     inkscape:window-y="35"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs390">
+    <inkscape:path-effect
+       effect="offset"
+       id="path-effect1787"
+       is_visible="true"
+       lpeversion="1.2"
+       linejoin_type="miter"
+       unit="mm"
+       offset="-0.34303322"
+       miter_limit="4"
+       attempt_force_join="false"
+       update_on_knot_move="true" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path700"
+       style="fill:#ffda83;fill-opacity:1;fill-rule:evenodd;stroke-width:0.345001"
+       d="m 11.326743,4.5538248 a 7.3129716,7.3129716 0 0 0 -7.312732,7.3127322 7.3129716,7.3129716 0 0 0 7.312732,7.313249 7.3129716,7.3129716 0 0 0 7.313249,-7.313249 7.3129716,7.3129716 0 0 0 -0.09509,-1.173055 5.1710515,5.1710515 0 0 1 -5.076176,4.202327 A 5.1710515,5.1710515 0 0 1 8.2979872,9.7250854 5.1710515,5.1710515 0 0 1 12.500315,4.6489095 7.3129716,7.3129716 0 0 0 11.326743,4.5538248 Z"
+       inkscape:export-filename="../moon.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       id="path1785"
+       style="fill:#ffd36a;fill-opacity:1;fill-rule:evenodd;stroke-width:0.345001"
+       d="M 10.917969,5.0507812 C 9.3344172,6.0318499 8.2981324,7.7702085 8.296875,9.7246094 c 1.814e-4,3.0469116 2.468473,5.5154416 5.515625,5.5156246 1.954222,-0.0013 3.692771,-1.037542 4.673828,-2.621093 -0.391899,3.47682 -3.235185,6.216932 -6.816406,6.216797 C 7.8222035,18.835811 4.7010259,15.714876 4.7011719,11.867188 4.7012891,8.2863539 7.4415416,5.4429176 10.917969,5.0507812 Z"
+       inkscape:path-effect="#path-effect1787"
+       inkscape:original-d="m 11.669652,4.5543008 a 7.3129716,7.3129716 0 0 0 -7.3127319,7.3127322 7.3129716,7.3129716 0 0 0 7.3127319,7.313249 7.3129716,7.3129716 0 0 0 7.313249,-7.313249 7.3129716,7.3129716 0 0 0 -0.09509,-1.173055 5.1710515,5.1710515 0 0 1 -5.076176,4.202327 A 5.1710515,5.1710515 0 0 1 8.6408963,9.7255614 5.1710515,5.1710515 0 0 1 12.843224,4.6493855 7.3129716,7.3129716 0 0 0 11.669652,4.5543008 Z" />
+    <text
+       xml:space="preserve"
+       style="font-size:26.4583px;font-family:'Fakt Pro';-inkscape-font-specification:'Fakt Pro';fill:#ffd36a;fill-opacity:1;fill-rule:evenodd;stroke-width:0.345001"
+       x="4.4296765"
+       y="23.508417"
+       id="text1939"><tspan
+         sodipodi:role="line"
+         id="tspan1937"
+         style="stroke-width:0.345"
+         x="4.4296765"
+         y="23.508417" /></text>
+  </g>
+</svg>
