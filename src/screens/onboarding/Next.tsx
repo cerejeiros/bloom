@@ -2,6 +2,7 @@ import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
+import colors from "../../pallete";
 
 export interface NextProps {
     percentage: number;
@@ -13,10 +14,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
+        marginVertical: "5%",
     },
     button: {
         position: "absolute",
-        backgroundColor: "blue",
+        backgroundColor: colors.black_800,
         borderRadius: 100,
         padding: 20,
     },
@@ -74,14 +76,14 @@ export default function Next({ percentage, scrollTo }: NextProps) {
             <Svg width={defaults.size} height={defaults.size}>
                 <G rotation="-90" origin={defaults.center}>
                     <Circle
-                        stroke="red"
+                        stroke={colors.blue_300}
                         cx={defaults.center}
                         cy={defaults.center}
                         r={defaults.radius}
                     />
                     <Circle
                         ref={progressRef}
-                        stroke="green"
+                        stroke={colors.rose_300}
                         cx={defaults.center}
                         cy={defaults.center}
                         r={defaults.radius}

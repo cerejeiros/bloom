@@ -13,21 +13,19 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "green",
+        // backgroundColor: "green",
     },
     image: {
         flex: 0.7,
         justifyContent: "center",
     },
     text: {
-        backgroundColor: "red",
+        //  backgroundColor: "red",
     },
     title: {
-        color: "blue",
+        fontWeight: "bold",
     },
-    message: {
-        color: "white",
-    },
+    message: {},
 });
 
 export default function Item(data: ItemData) {
@@ -38,7 +36,10 @@ export default function Item(data: ItemData) {
         <View style={[styles.container, { width }]}>
             <Image
                 source={image}
-                style={[styles.image, { width, resizeMode: "contain" }]}
+                style={[
+                    styles.image,
+                    { width: width / 2, resizeMode: "contain" },
+                ]}
             />
             <View style={styles.text}>
                 <Text style={styles.title}>{title}</Text>

@@ -8,9 +8,11 @@ import React from "react";
 import {
     Animated,
     FlatList,
+    Image,
     SafeAreaView,
     StyleSheet,
     View,
+    useWindowDimensions,
 } from "react-native";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
@@ -22,7 +24,7 @@ import pages, { ItemData } from "./pages";
 const styles = StyleSheet.create({
     container: {
         height: "100%",
-        backgroundColor: colors.blue_50,
+        backgroundColor: "#98e2ea",
     },
     svg_bottom: {
         position: "absolute",
@@ -41,20 +43,27 @@ const styles = StyleSheet.create({
     text_name: {
         color: colors.rose_300,
     },
-    page_container: {
-        backgroundColor: "red",
+    container_page: {
+        // backgroundColor: "red",
         justifyContent: "center",
         flex: 2.5,
     },
     container_paginator: {
         justifyContent: "center",
-        backgroundColor: "black",
+        // backgroundColor: "black",
         paddingHorizontal: "7.5%",
         flex: 0.25,
     },
     container_next: {
-        backgroundColor: "white",
-        flex: 0.5,
+        // backgroundColor: "white",
+    },
+    background_bottom: {
+        position: "absolute",
+        zIndex: -1,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: "50%",
     },
 });
 
@@ -79,14 +88,17 @@ export default function OnBoarding() {
             slidesRef.current?.scrollToIndex({ index: currentIndex + 1 });
         } else {
             console.log("OnBoarding: last page.");
+            navigation.navigate("signIn");
         }
     };
+
+    const { width } = useWindowDimensions();
 
     return (
         <SafeAreaView style={styles.container}>
             {/* All types of optional seen pages should render inside here, we
                 can move each page by sliding the upper part of the screen */}
-            <View style={styles.page_container}>
+            <View style={styles.container_page}>
                 <FlatList
                     data={pages}
                     renderItem={({ item }) => (
@@ -123,6 +135,10 @@ export default function OnBoarding() {
                     percentage={(currentIndex + 1) * (100 / pages.length)}
                 />
             </View>
+            <Image
+                style={[styles.background_bottom, { width }]}
+                source={require("../../../assets/onboarding-bottom.png")}
+            />
             {/* TODO: Options to skip page (style) */}
             {/* <SafeAreaView style={styles.nav_container}>
                  <Button
