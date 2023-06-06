@@ -4,10 +4,8 @@ import React, { ReactNode, useContext, useEffect, useState } from "react";
 import {
     Dimensions,
     Image,
-    KeyboardAvoidingView,
     Modal,
     SafeAreaView,
-    ScrollView,
     StyleSheet,
     Text,
     View,
@@ -105,6 +103,8 @@ function User() {
     const [name, setName] = React.useState<string | undefined>(undefined);
     const [userData, setUserData] = useState<UserData | undefined>(undefined);
     const [modalVisible, setModalVisible] = useState(false);
+    const [bio, setBio] = useState<string | undefined>(undefined);
+    const [Birth, setUserDate] = useState<string | undefined>(undefined);
     const [userName, setUserName] = useState<string | undefined>(undefined);
     const { user } = useContext(AuthContext);
 
@@ -121,82 +121,102 @@ function User() {
                 alert("Erro ao procurar informações do perfil");
                 return;
             }
+            console.log(data[0]);
 
             setUserData(data[0]);
             setName(data[0].name);
+            setUserName(data[0].userName);
+            setBio(data[0].bio);
+            setImmediate(data[0].date);
         };
 
         fetchData();
     }, [user]);
 
     return (
-        <KeyboardAvoidingView>
-            <SafeAreaView style={styles.container}>
-                <ScrollView>
-                    <Modal
-                        visible={modalVisible}
-                        animationType="slide"
-                        transparent
-                        onRequestClose={() => setModalVisible(false)}
-                    >
-                        <View style={styles.modal}>
-                            <Text style={styles.modalTitle}>Editar dados</Text>
-                            <View>
-                                <InputIcon
-                                    onChangeText={setName}
-                                    value={name}
-                                    placeholder="Nome"
-                                    keyboardType="default"
-                                    inputMode="text"
-                                    style={styles.input}
-                                />
-                            </View>
-                            <View style={styles.buttonView}>
-                                <Button
-                                    title="Fechar"
-                                    onPress={() => setModalVisible(false)}
-                                    titleStyle={styles.buttonTitleColor}
-                                />
-                                <Button
-                                    title="Salvar"
-                                    onPress={() => setModalVisible(false)}
-                                    titleStyle={styles.buttonTitleColor}
-                                    style={styles.saveButton}
-                                />
-                            </View>
-                        </View>
-                    </Modal>
-                    <View style={styles.profileHeader}>
-                        <LinearGradient
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 1 }}
-                            colors={[
-                                colors.rose_75,
-                                colors.blue_75,
-                                colors.rose_75,
-                            ]}
-                            style={styles.profileHeader}
-                        >
-                            <Image
-                                source={require("../../../assets/cat-profile.jpg")}
-                                style={styles.profilePhoto}
-                            />
-                            <MaterialCommunityIcons
-                                name="account-edit"
-                                size={36}
-                                color="black"
-                                style={styles.editBadge}
-                                onPress={() => setModalVisible(true)}
-                            />
-                        </LinearGradient>
+        <SafeAreaView style={styles.container}>
+            <Modal
+                visible={modalVisible}
+                animationType="slide"
+                transparent
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <View style={styles.modal}>
+                    <Text style={styles.modalTitle}>Editar dados</Text>
+                    <View>
+                        <InputIcon
+                            onChangeText={setName}
+                            value={name}
+                            placeholder="Nome"
+                            keyboardType="default"
+                            inputMode="text"
+                            style={styles.input}
+                        />
+                        <InputIcon
+                            onChangeText={setUserName}
+                            value={userName}
+                            placeholder="userName"
+                            keyboardType="default"
+                            inputMode="text"
+                            style={styles.input}
+                        />
+                        <InputIcon
+                            onChangeText={setBio}
+                            value={bio}
+                            placeholder="Bio"
+                            keyboardType="default"
+                            inputMode="text"
+                            style={styles.input}
+                        />
                     </View>
+                    <View style={styles.buttonView}>
+                        <Button
+                            title="Fechar"
+                            onPress={() => setModalVisible(false)}
+                            titleStyle={styles.buttonTitleColor}
+                        />
+                        <Button
+                            title="Salvar"
+                            onPress={() => setModalVisible(false)}
+                            titleStyle={styles.buttonTitleColor}
+                            style={styles.saveButton}
+                        />
+                    </View>
+                </View>
+            </Modal>
+            <View style={styles.profileHeader}>
+                <LinearGradient
+                    // Background Linear Gradient
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    colors={[
+                        colors.rose_75,
+                        "transparent",
+                        colors.blue_75,
+                        "transparent",
+                        colors.rose_75,
+                        "transparent",
+                    ]}
+                    style={styles.profileHeader}
+                >
+                    <Image
+                        source={require("../../../assets/cat-profile.jpg")}
+                        style={styles.profilePhoto}
+                    />
+                    <MaterialCommunityIcons
+                        name="account-edit"
+                        size={36}
+                        color="black"
+                        style={styles.editBadge}
+                        onPress={() => setModalVisible(true)}
+                    />
+                </LinearGradient>
+            </View>
 
-                    <Card>
-                        <Text>Usuário</Text>
-                    </Card>
-                </ScrollView>
-            </SafeAreaView>
-        </KeyboardAvoidingView>
+            <Card>
+                <Text>Usuário</Text>
+            </Card>
+        </SafeAreaView>
     );
 }
 
