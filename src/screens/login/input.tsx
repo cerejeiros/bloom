@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
         paddingRight: 40,
     },
     input: {
+        flex: 1,
         height: 40,
         borderBottomWidth: 1,
         borderColor: colors.black_400,
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     password: {
-        // marginTop: 20,
+        flex: 1,
     },
     title: {
         color: "black",
