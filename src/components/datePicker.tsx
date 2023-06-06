@@ -65,28 +65,6 @@ export default function DatePicker({
                     />
                 }
             />
-            <InputIcon
-                style={{
-                    height: 40,
-                    borderBottomWidth: 1,
-                    borderColor: colors.black_400,
-                    paddingLeft: 15,
-                    // paddingRight: 25,
-                    borderRadius: 0,
-                    minWidth: 100,
-                    color: colors.black_500,
-                    fontSize: 15,
-                }}
-                onFocus={() => {
-                    Keyboard.dismiss();
-                    openDatePicker();
-                }}
-                onChangeText={textState}
-                value={text}
-                placeholder="AAAA-MM-DD"
-                keyboardType="numeric"
-                Icon={undefined}
-            />
 
             {show && (
                 <RNDateTimePicker
