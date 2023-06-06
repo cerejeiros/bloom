@@ -1,9 +1,21 @@
 import * as Font from "expo-font";
+import * as NavigationBar from "expo-navigation-bar";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
-import { Text } from "react-native";
+import { View } from "react-native";
 import AuthContextProvider from "./src/context/AuthContext";
 import Routes from "./src/routes";
+
+NavigationBar.setVisibilityAsync("hidden");
+
+NavigationBar.addVisibilityListener(async ({ visibility }) => {
+    if (visibility === "visible") {
+        await new Promise((resolve) => {
+            setTimeout(resolve, 2500);
+        });
+        NavigationBar.setVisibilityAsync("hidden");
+    }
+});
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -14,6 +26,9 @@ export default function App() {
     useEffect(() => {
         async function prepare() {
             try {
+                // Set color for splash screen.
+                // NavigationBar.setBackgroundColorAsync("#98e2ea");
+
                 // Pre-load fonts, make any API calls you need to do here
                 await Font.loadAsync({
                     // Entypo.font,
@@ -52,17 +67,13 @@ export default function App() {
         }
     }, [appIsReady]);
 
-    if (!appIsReady)
-        return <Text>Failed to load the resources of the application</Text>;
+    if (!appIsReady) return null;
 
-    // FIXIT: Set onLayout props without blankin the screen for no reason whatsoever
-    //        React Native may have...
-    onLayoutRootView();
     return (
-        <AuthContextProvider>
-            {/* <View onLayout={onLayoutRootView}> */}
-            <Routes />
-            {/* </AuthContextProvider></View> */}
-        </AuthContextProvider>
+        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+            <AuthContextProvider>
+                <Routes />
+            </AuthContextProvider>
+        </View>
     );
 }
