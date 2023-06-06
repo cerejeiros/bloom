@@ -1,7 +1,7 @@
 import { ImageRequireSource } from "react-native";
 
 export interface ItemData {
-    id: number;
+    id: string;
     title: string;
     message: string;
     image: ImageRequireSource;
@@ -9,8 +9,20 @@ export interface ItemData {
 
 export default [
     {
-        id: 1,
+        id: "1",
         title: "Bem vindos ao Bloom,",
+        message: "seu app de rotina",
+        image: require("../../../assets/cat-profile.jpg"),
+    },
+    {
+        id: "2",
+        title: "Segunda página do carousel",
+        message: "seu app de rotina",
+        image: require("../../../assets/cat-profile.jpg"),
+    },
+    {
+        id: "3",
+        title: "Terceira página do carousel",
         message: "seu app de rotina",
         image: require("../../../assets/cat-profile.jpg"),
     },

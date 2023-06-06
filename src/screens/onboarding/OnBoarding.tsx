@@ -5,17 +5,24 @@
 
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import Button from "../../components/button";
+import {
+    Animated,
+    FlatList,
+    SafeAreaView,
+    StyleSheet,
+    View,
+} from "react-native";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
+import Item from "./Item";
+import Next from "./Next";
+import Paginator from "./Paginator";
+import pages, { ItemData } from "./pages";
 
 const styles = StyleSheet.create({
     container: {
         height: "100%",
         backgroundColor: colors.blue_50,
-        // justifyContent: "center",
-        // alignItems: "center",
     },
     svg_bottom: {
         position: "absolute",
@@ -37,51 +44,88 @@ const styles = StyleSheet.create({
     page_container: {
         backgroundColor: "red",
         justifyContent: "center",
-        flex: 1,
+        flex: 2.5,
     },
-    nav_container: {
-        // backgroundColor: "blue",
-        width: "100%",
-        justifyContent: "space-evenly",
-        paddingBottom: "5%",
+    container_paginator: {
+        justifyContent: "center",
+        backgroundColor: "black",
         paddingHorizontal: "7.5%",
-        gap: 10,
+        flex: 0.25,
     },
-    button_signup: {
-        backgroundColor: "green",
-    },
-    button_login: {
-        backgroundColor: "yellow",
+    container_next: {
+        backgroundColor: "white",
+        flex: 0.5,
     },
 });
 
 export default function OnBoarding() {
     // TODO: For the dots.
-    const [curPage] = React.useState(0);
+    const [currentIndex, setCurrentIndex] = React.useState(0);
 
     const navigation = useNavigation<NavigationProp<AuthRoutes>>();
+    const scrollX = React.useRef(new Animated.Value(0)).current;
+    const slidesRef = React.useRef<FlatList>(null);
+
+    const viewableItemsChanged = React.useRef(({ viewableItems }: any) => {
+        setCurrentIndex(viewableItems[0].index);
+    }).current;
+
+    const viewConfig = React.useRef({
+        viewAreaCoveragePercentThreshold: 50,
+    }).current;
+
+    const scrollTo = () => {
+        if (currentIndex < pages.length - 1) {
+            slidesRef.current?.scrollToIndex({ index: currentIndex + 1 });
+        } else {
+            console.log("OnBoarding: last page.");
+        }
+    };
 
     return (
         <SafeAreaView style={styles.container}>
             {/* All types of optional seen pages should render inside here, we
                 can move each page by sliding the upper part of the screen */}
-            <SafeAreaView style={styles.page_container}>
-                {/* <FlatList
+            <View style={styles.page_container}>
+                <FlatList
                     data={pages}
-                    renderItem={({ item }) => <Item data={item} />}
-            /> */}
-            </SafeAreaView>
+                    renderItem={({ item }) => (
+                        <Item
+                            id={item.id}
+                            title={item.title}
+                            message={item.message}
+                            image={item.image}
+                        />
+                    )}
+                    pagingEnabled
+                    horizontal
+                    keyExtractor={(item: ItemData) => item.id}
+                    showsHorizontalScrollIndicator={false}
+                    onScroll={Animated.event(
+                        [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                        {
+                            useNativeDriver: false,
+                        }
+                    )}
+                    scrollEventThrottle={32}
+                    onViewableItemsChanged={viewableItemsChanged}
+                    viewabilityConfig={viewConfig}
+                    ref={slidesRef}
+                />
+            </View>
             {/* TODO: Navigation dots here. */}
+            <View style={styles.container_paginator}>
+                <Paginator data={pages} scrollX={scrollX} />
+            </View>
+            <View style={styles.container_next}>
+                <Next
+                    scrollTo={scrollTo}
+                    percentage={(currentIndex + 1) * (100 / pages.length)}
+                />
+            </View>
             {/* TODO: Options to skip page (style) */}
-            <SafeAreaView style={styles.nav_container}>
-                {/* <SVGLandingBottom
-                    width="100%"
-                    height="900"
-                    fill="red"
-                    // preserveAspectRatio="none"
-                    style={styles.svg_bottom}
-            /> */}
-                <Button
+            {/* <SafeAreaView style={styles.nav_container}>
+                 <Button
                     title="Registrar"
                     style={styles.button_signup}
                     onPress={() => navigation.navigate("signUp")}
@@ -90,8 +134,8 @@ export default function OnBoarding() {
                     title="Logar"
                     style={styles.button_login}
                     onPress={() => navigation.navigate("signIn")}
-                />
-            </SafeAreaView>
+                /> 
+            </SafeAreaView> */}
         </SafeAreaView>
     );
 }
