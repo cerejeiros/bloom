@@ -138,6 +138,6 @@ Natan, Kaio, Joao, Kaua, Leonardo e  Luiza
 
 Natan, Kaio, Joao, Kaua, Leonardo e Bruna
 
-35. [ ] 05/06 Esclarecimento de dúvidas e programação conjunta parte 2 [[vídeo]](https://youtu.be/2XXmVGlqNzA)
+35. [ ] 05/06 Esclarecimento de dúvidas e programação conjunta parte 2 [[vídeo]](https://youtu.be/btNNe6DXkZU)
 
 Natan, Kaio, Joao, Kaua, Leonardo e Bruna 
