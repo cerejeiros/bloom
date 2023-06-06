@@ -1,10 +1,8 @@
 import { FontAwesome, Fontisto } from "@expo/vector-icons";
-import RNDateTimePicker, {
-    DateTimePickerEvent,
-} from "@react-native-community/datetimepicker";
 import React, { useContext, useEffect, useState } from "react";
-import { Keyboard, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Button from "../../components/button";
+import DatePicker from "../../components/datePicker";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import checkPassword from "../../helpers/relevantFunctions";
@@ -72,31 +70,12 @@ const styles = StyleSheet.create({
 });
 
 export default function Input() {
-    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
     const [isloading, setIsLoading] = useState(false);
-    const [date, setDate] = useState(new Date(1598051730000));
-    const [show, setShow] = useState(false);
-    const d = new Date();
     const { signUp, signUpData } = useContext(AuthContext);
-
-    const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-        if (selectedDate) {
-            const currentDate = selectedDate;
-            setDate(currentDate);
-            setShow(false);
-            setBirth(date.toISOString().split("T")[0]);
-        } else {
-            console.log("Data inválida");
-        }
-    };
-
-    const openDatePicker = () => {
-        setShow(true);
-    };
 
     const checkUsernameDuplicated = async () => {
         const { data, error } = await supabase
@@ -180,52 +159,7 @@ export default function Input() {
                 }
             />
 
-            <InputIcon
-                style={{
-                    height: 40,
-                    borderBottomWidth: 1,
-                    borderColor: colors.black_400,
-                    paddingLeft: 15,
-                    // paddingRight: 25,
-                    borderRadius: 0,
-                    minWidth: 100,
-                    color: colors.black_500,
-                    fontSize: 15,
-                }}
-                onFocus={() => {
-                    Keyboard.dismiss();
-                    openDatePicker();
-                }}
-                onChangeText={setBirth}
-                value={birthday}
-                placeholder="AAAA-MM-DD"
-                keyboardType="numeric"
-                Icon={
-                    <FontAwesome
-                        name="calendar"
-                        size={20}
-                        color={colors.black_400}
-                    />
-                }
-            />
-
-            {show && (
-                <RNDateTimePicker
-                    testID="dateTimePicker"
-                    value={date}
-                    mode="date"
-                    is24Hour
-                    maximumDate={
-                        new Date(
-                            d.getUTCFullYear(),
-                            d.getUTCMonth(),
-                            d.getUTCDay()
-                        )
-                    }
-                    minimumDate={new Date(1950, 1, 1)}
-                    onChange={onChange}
-                />
-            )}
+            <DatePicker text={birthday} textState={setBirth} icon />
 
             <InputIcon
                 style={styles.input}
