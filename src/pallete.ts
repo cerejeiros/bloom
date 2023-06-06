@@ -31,10 +31,10 @@ const colors = {
     white_700: "#594040",
     white_800: "#3B2B2B",
     white_900: "#1E1515",
-    // TODO: Still needs a black main pallete colour.
     black_400: "#9a9a9a",
     black_500: "#393939",
     black_800: "#121212",
+    black_true: "#ffffff",
 };
 
 export default colors;

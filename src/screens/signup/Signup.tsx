@@ -16,20 +16,16 @@ import { AuthRoutes } from "../../routes/auth.routes";
 import Input from "./input";
 import Logo from "./logo";
 
-// TODO: Make dimensions a global variable if, and only if width and height does
-//       not switch when rotating the screen.
-// const dimensions = Dimensions.get("screen");
-
 const styles = StyleSheet.create({
     container: {
         minWidth: "75%",
         flexDirection: "column",
         height: "100%",
         justifyContent: "space-around",
-        // borderWidth: 3.5,
-        // borderColor: colors.blue[200],
-        // borderRadius: 15,
-        // backgroundColor: colors.blue[50],
+        borderWidth: 3.5,
+        borderColor: colors.blue_200,
+        borderRadius: 15,
+        backgroundColor: colors.blue_50,
     },
     background: {
         position: "absolute",
@@ -69,15 +65,15 @@ const styles = StyleSheet.create({
     link: {
         color: colors.blue_600,
     },
-    /* circulo: {
+    circulo: {
         width: 400,
         height: 400,
         position: "absolute",
         top: -160,
         left: -100,
-        backgroundColor: colors.rose[300],
+        backgroundColor: colors.rose_300,
         borderRadius: 200,
-    }, */
+    },
 });
 
 function Signup() {
