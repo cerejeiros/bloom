@@ -4,6 +4,7 @@
 // At the end it will show options to either log-in or sign-up.
 
 import { NavigationProp, useNavigation } from "@react-navigation/native";
+import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
 import {
     Animated,
@@ -93,6 +94,9 @@ export default function OnBoarding() {
     };
 
     const { width } = useWindowDimensions();
+
+    Promise.resolve(NavigationBar.setBackgroundColorAsync(colors.white_50));
+    Promise.resolve(NavigationBar.setButtonStyleAsync("dark"));
 
     return (
         <SafeAreaView style={styles.container}>
