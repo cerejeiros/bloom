@@ -3,19 +3,34 @@ import RNDateTimePicker, {
     DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { Keyboard, View } from "react-native";
+import { Keyboard, StyleSheet, View } from "react-native";
 import colors from "../pallete";
 import InputIcon from "./input_icon";
 
-export default function DatePicker({
-    text,
-    textState,
-    icon,
-}: {
+export interface DatePickerProps {
     text: string;
     textState: Dispatch<SetStateAction<string>>;
     icon: boolean;
-}) {
+    flex?: number;
+}
+
+const styles = StyleSheet.create({
+    input: {
+        height: 40,
+        borderBottomWidth: 1,
+        borderColor: colors.black_400,
+        paddingLeft: 15,
+        // paddingRight: 25,
+        borderRadius: 0,
+        minWidth: 100,
+        color: colors.black_500,
+        fontSize: 15,
+    },
+});
+
+export default function DatePicker(props: DatePickerProps) {
+    const { text, textState, icon, flex = 0 } = props;
+
     const [date, setDate] = useState(new Date(1598051730000));
     const [show, setShow] = useState(false);
     const dataMax = new Date();
@@ -38,17 +53,7 @@ export default function DatePicker({
     return (
         <View>
             <InputIcon
-                style={{
-                    height: 40,
-                    borderBottomWidth: 1,
-                    borderColor: colors.black_400,
-                    paddingLeft: 15,
-                    // paddingRight: 25,
-                    borderRadius: 0,
-                    minWidth: 100,
-                    color: colors.black_500,
-                    fontSize: 15,
-                }}
+                style={[styles.input, { flex }]}
                 onFocus={() => {
                     Keyboard.dismiss();
                     openDatePicker();
