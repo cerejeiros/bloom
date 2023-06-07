@@ -27,7 +27,7 @@ export default function App() {
         async function prepare() {
             try {
                 // Set color for splash screen.
-                // NavigationBar.setBackgroundColorAsync("#98e2ea");
+                NavigationBar.setBackgroundColorAsync("#98e2ea");
 
                 // Pre-load fonts, make any API calls you need to do here
                 await Font.loadAsync({
