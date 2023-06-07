@@ -2,15 +2,10 @@
 // It will give one input for a username or an email address (the distinction
 // has to be made by a validator).
 // And another input for a password, which will be hidden by default.
+
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import {
-    Image,
-    KeyboardAvoidingView,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
 import Input from "./input";
@@ -22,10 +17,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         height: "100%",
         justifyContent: "space-around",
-        borderWidth: 3.5,
-        borderColor: colors.blue_200,
-        borderRadius: 15,
-        backgroundColor: colors.blue_50,
     },
     background: {
         position: "absolute",
@@ -85,10 +76,6 @@ function Signup() {
                 <Text style={styles.title}>Cadastre-se</Text>
                 <Text style={styles.message}> Bem-vindo ao Bloom! </Text>
             </View>
-            <Image
-                style={styles.background}
-                source={require("../../../assets/blurry-gradient-2.png")}
-            />
             <Input />
             <View style={styles.warning}>
                 <Text>Já cadastrado?</Text>
