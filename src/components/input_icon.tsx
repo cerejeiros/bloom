@@ -40,17 +40,14 @@ export interface InputProps extends TextInputProps {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "green",
         marginTop: 25,
     },
     input: {
         color: "red",
-        backgroundColor: "blue",
     },
     container_icon: {
         paddingHorizontal: 5,
         paddingVertical: 10,
-        backgroundColor: "red",
         aspectRatio: 1,
         justifyContent: "center",
         alignItems: "center",
