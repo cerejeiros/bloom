@@ -22,20 +22,11 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         height: "100%",
         justifyContent: "center",
-    },
-    background: {
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        height: "100%",
-        width: "100%",
-        zIndex: -1,
+        backgroundColor: colors.white_50,
     },
     titlecontainer: {
         marginLeft: 35,
     },
-
     title: {
         color: "#393939",
         fontSize: 35,
@@ -82,7 +73,6 @@ export default function Login() {
                     </Text>
                 </View>
                 <Input />
-
                 <View style={styles.warning}>
                     <Text>Novo no Bloom?</Text>
                     <Text
