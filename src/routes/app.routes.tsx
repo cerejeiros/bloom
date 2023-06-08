@@ -1,11 +1,14 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
-import NavBar from "../components/navbar";
+import NavBar from "../components/nav_bar";
 
-type StackRoutesParams = {
-    home: undefined;
-    details: undefined;
+export type StackRoutesParams = {
+    // Details: undefined;
+    Today: undefined;
+    Status: undefined;
+    Home: undefined;
+    Tasks: undefined;
+    Perfil: undefined;
 };
 
 // import to get suggestion of the stack routes on navigate method

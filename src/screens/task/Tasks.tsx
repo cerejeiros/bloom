@@ -18,7 +18,7 @@ export default function Tasks() {
             <Text>Tasks</Text>
             <Button
                 title="Go to details"
-                onPress={() => navigation.navigate("details")}
+                onPress={() => navigation.navigate("Details")}
             />
         </View>
     );
