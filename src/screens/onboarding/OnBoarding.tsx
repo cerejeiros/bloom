@@ -4,6 +4,7 @@
 // At the end it will show options to either log-in or sign-up.
 
 import { NavigationProp, useNavigation } from "@react-navigation/native";
+import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
 import {
     Animated,
@@ -44,18 +45,21 @@ const styles = StyleSheet.create({
         color: colors.rose_300,
     },
     container_page: {
-        // backgroundColor: "red",
         justifyContent: "center",
         flex: 2.5,
     },
+    container_bar_bottom: {
+        flexDirection: "row",
+        alignContent: "space-between",
+        marginVertical: "5%",
+    },
     container_paginator: {
         justifyContent: "center",
-        // backgroundColor: "black",
         paddingHorizontal: "7.5%",
-        flex: 0.25,
+        flex: 1,
     },
     container_next: {
-        // backgroundColor: "white",
+        marginRight: "5%",
     },
     background_bottom: {
         position: "absolute",
@@ -87,12 +91,14 @@ export default function OnBoarding() {
         if (currentIndex < pages.length - 1) {
             slidesRef.current?.scrollToIndex({ index: currentIndex + 1 });
         } else {
-            console.log("OnBoarding: last page.");
             navigation.navigate("signIn");
         }
     };
 
     const { width } = useWindowDimensions();
+
+    Promise.resolve(NavigationBar.setBackgroundColorAsync(colors.white_50));
+    Promise.resolve(NavigationBar.setButtonStyleAsync("dark"));
 
     return (
         <SafeAreaView style={styles.container}>
@@ -125,15 +131,16 @@ export default function OnBoarding() {
                     ref={slidesRef}
                 />
             </View>
-            {/* TODO: Navigation dots here. */}
-            <View style={styles.container_paginator}>
-                <Paginator data={pages} scrollX={scrollX} />
-            </View>
-            <View style={styles.container_next}>
-                <Next
-                    scrollTo={scrollTo}
-                    percentage={(currentIndex + 1) * (100 / pages.length)}
-                />
+            <View style={styles.container_bar_bottom}>
+                <View style={styles.container_paginator}>
+                    <Paginator data={pages} scrollX={scrollX} />
+                </View>
+                <View style={styles.container_next}>
+                    <Next
+                        scrollTo={scrollTo}
+                        percentage={(currentIndex + 1) * (100 / pages.length)}
+                    />
+                </View>
             </View>
             <Image
                 style={[styles.background_bottom, { width }]}
