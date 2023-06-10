@@ -141,3 +141,25 @@ Natan, Kaio, Joao, Kaua, Leonardo e Bruna
 35. [x] 05/06 Esclarecimento de dúvidas e programação conjunta parte 2 [[vídeo]](https://youtu.be/btNNe6DXkZU)
 
 Natan, Kaio, Joao, Kaua, Leonardo e Bruna 
+36. [] 02/06 Arrumando o Back-end: arrumando a data de aniversário - 1ª parte [[vídeo]](https://drive.google.com/file/d/1VRq4PG_YT3bC3gcqBMliP9rAYZ_YimGu/view?usp=sharing)
+
+Luiza Pugas, Kauã Sheichi, Leonardo Castro 
+
+37. [] 02/06 Arrumando o Back-end: arrumando a data de aniversário - 2ª parte [[vídeo]](https://drive.google.com/file/d/1Vw7gsjanoQW-QRumX7tFTbZpRkR82fSo/view?usp=sharing)
+
+Luiza Pugas, Kauã Sheichi, Leonardo Castro 
+
+38. [] 02/06 Mexendo no front - página de login - 1ª parte [[vídeo]](https://drive.google.com/file/d/1PVsteUiNwyAvegoGiXjWt53p4uCp2g0m/view?usp=drive_link)
+
+Kaio Salgado e  Leonardo Castro 
+39. [] 02/06 Mexendo no front - página de login - 2ª parte [[vídeo]](https://drive.google.com/file/d/1WyHD7p-ZxivTxqB8Y295QG8LStn0xg8p/view?usp=drive_link)
+
+Kaio Salgado e  Leonardo Castro 
+
+40. [] 02/06 Mexendo no front - página de login - 3ª parte [[vídeo]](https://drive.google.com/file/d/1YnDn0n2Hy1fd5kAJDOgC30ApNFDN9TDL/view?usp=drive_link)
+
+Kaio Salgado e  Leonardo Castro 
+
+41. [] 02/06 Estudando o front-end e mexendo 1ª parte [[vídeo]](https://drive.google.com/file/d/1YnDn0n2Hy1fd5kAJDOgC30ApNFDN9TDL/view?usp=drive_link)
+
+Kaio Salgado e  Leonardo Castro 
