@@ -16,20 +16,41 @@ const styles = StyleSheet.create({
         // backgroundColor: "green",
     },
     image: {
-        flex: 0.7,
+        flex: 2,
         justifyContent: "center",
     },
     text: {
-        //  backgroundColor: "red",
+        // flex: 1,
+        // backgroundColor: "red",
     },
     title: {
         fontWeight: "bold",
+        fontSize: 20,
     },
-    message: {},
+    message: {
+        fontSize: 24,
+    },
+    items: {
+        // backgroundColor: "blue",
+        flexDirection: "row",
+        flex: 0.5,
+        gap: 10,
+    },
+    item: {
+        backgroundColor: "white",
+        justifyContent: "center",
+        alignItems: "center",
+        aspectRatio: 1,
+    },
+    item_image: {
+        width: 50,
+        height: 50,
+        aspectRatio: 1,
+    },
 });
 
 export default function Item(data: ItemData) {
-    const { title, message, image } = data;
+    const { title, message, image, items } = data;
 
     const { width } = useWindowDimensions();
     return (
@@ -45,6 +66,20 @@ export default function Item(data: ItemData) {
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.message}>{message}</Text>
             </View>
+            {items && (
+                <View style={styles.items}>
+                    {items.map((item) => (
+                        <View style={styles.item} key={`${item.id}`}>
+                            <Text>{item.top}</Text>
+                            <Image
+                                style={styles.item_image}
+                                source={item.image}
+                            />
+                            <Text>{item.bottom}</Text>
+                        </View>
+                    ))}
+                </View>
+            )}
         </View>
     );
 }
