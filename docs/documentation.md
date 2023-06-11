@@ -162,7 +162,8 @@ Kaio Salgado e  Leonardo Castro
 
 41. [ ] 02/06 Estudando o front-end e mexendo 1ª parte [[vídeo]](https://drive.google.com/file/d/1YnDn0n2Hy1fd5kAJDOgC30ApNFDN9TDL/view?usp=drive_link)
 
-Kaio Salgado e  Leonardo Castro 
-42. [ ] 07/06 comandos git [[vídeo]] (https://youtu.be/vivdwTWX_pU)
+Kaio Salgado e  Leonardo Castro
+
+42. [ ] 07/06 comandos git [[vídeo]](https://youtu.be/vivdwTWX_pU)
 
 Joao V, Natan, Luiza
