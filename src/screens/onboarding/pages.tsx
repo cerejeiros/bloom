@@ -5,6 +5,12 @@ export interface ItemData {
     title: string;
     message: string;
     image: ImageRequireSource;
+    items?: Array<{
+        id: string;
+        top: string;
+        image: ImageRequireSource;
+        bottom: string;
+    }>;
 }
 
 export default [
@@ -12,18 +18,39 @@ export default [
         id: "1",
         title: "Bem vindos ao Bloom,",
         message: "seu app de rotina",
-        image: require("../../../assets/cat-profile.jpg"),
+        image: require("../../../assets/logo_sun.png"),
     },
     {
         id: "2",
-        title: "Segunda página do carousel",
-        message: "seu app de rotina",
-        image: require("../../../assets/cat-profile.jpg"),
+        title: "Nosso alvo",
+        message:
+            "O Bloom veio para renovar o cenário de apps de rotina, contando com:",
+        image: require("../../../assets/cat-profile.png"),
+        items: [
+            {
+                id: "1",
+                top: "Desafios",
+                image: require("../../../assets/char_pin_light.png"),
+                bottom: "diários",
+            },
+            {
+                id: "2",
+                top: "Estatisticas",
+                image: require("../../../assets/cup_3.png"),
+                bottom: "precisas",
+            },
+            {
+                id: "3",
+                top: "Recompensas",
+                image: require("../../../assets/sun_mountain.png"),
+                bottom: "diárias",
+            },
+        ],
     },
     {
         id: "3",
-        title: "Terceira página do carousel",
-        message: "seu app de rotina",
-        image: require("../../../assets/cat-profile.jpg"),
+        title: "Desfrute dessa nossa forma de florescer e progredir em sua rotina",
+        message: "Acesse o Bloom!",
+        image: require("../../../assets/cat-profile.png"),
     },
-] as Array<ItemData>;
+] satisfies Array<ItemData>;
