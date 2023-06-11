@@ -187,14 +187,7 @@ function User() {
                 <LinearGradient
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
-                    colors={[
-                        colors.rose_75,
-                        "transparent",
-                        colors.blue_75,
-                        "transparent",
-                        colors.rose_75,
-                        "transparent",
-                    ]}
+                    colors={[colors.rose_75, colors.blue_75, colors.rose_75]}
                     style={styles.profileHeader}
                 >
                     <Image
