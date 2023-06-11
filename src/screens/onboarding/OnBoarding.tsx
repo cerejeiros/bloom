@@ -25,7 +25,7 @@ import pages, { ItemData } from "./pages";
 const styles = StyleSheet.create({
     container: {
         height: "100%",
-        backgroundColor: "#98e2ea",
+        backgroundColor: "#a4c6d4",
     },
     svg_bottom: {
         position: "absolute",
@@ -69,6 +69,11 @@ const styles = StyleSheet.create({
         right: 0,
         height: "50%",
     },
+    moon: {
+        position: "absolute",
+        top: "10%",
+        left: "10%",
+    },
 });
 
 export default function OnBoarding() {
@@ -100,6 +105,38 @@ export default function OnBoarding() {
     Promise.resolve(NavigationBar.setBackgroundColorAsync(colors.white_50));
     Promise.resolve(NavigationBar.setButtonStyleAsync("dark"));
 
+    const progressAnimation = React.useRef(new Animated.Value(0)).current;
+    const moonRef = React.useRef<Image>(null);
+
+    const animation = React.useCallback(
+        (toValue: number) => {
+            return Animated.timing(progressAnimation, {
+                toValue,
+                duration: 200,
+                useNativeDriver: true,
+            }).start();
+        },
+        [progressAnimation]
+    );
+
+    React.useEffect(() => {
+        animation(currentIndex);
+    }, [animation, currentIndex]);
+
+    React.useEffect(() => {
+        progressAnimation.addListener((data) => {
+            const top = `${10 + data.value * 2}%`;
+
+            if (moonRef?.current) {
+                moonRef.current.setNativeProps({ top });
+            }
+        });
+
+        return () => {
+            progressAnimation.removeAllListeners();
+        };
+    }, [progressAnimation, currentIndex]);
+
     return (
         <SafeAreaView style={styles.container}>
             {/* All types of optional seen pages should render inside here, we
@@ -113,6 +150,7 @@ export default function OnBoarding() {
                             title={item.title}
                             message={item.message}
                             image={item.image}
+                            items={item.items}
                         />
                     )}
                     pagingEnabled
@@ -142,6 +180,11 @@ export default function OnBoarding() {
                     />
                 </View>
             </View>
+            <Image
+                ref={moonRef}
+                style={styles.moon}
+                source={require("../../../assets/moon.png")}
+            />
             <Image
                 style={[styles.background_bottom, { width }]}
                 source={require("../../../assets/onboarding-bottom.png")}
