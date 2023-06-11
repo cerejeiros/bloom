@@ -49,6 +49,21 @@ const styles = StyleSheet.create({
         textAlign: "left",
         fontSize: 10,
     },
+    containerStats: {
+        flexDirection: "row",
+        width: "90%",
+        borderRadius: 10,
+        margin: 15,
+        padding: 15,
+        backgroundColor: colors.blue_400,
+    },
+    containerTextStats: {
+        width: "50%",
+    },
+    textStats: {
+        textAlign: "left",
+        fontSize: 20,
+    },
     containerbuttons: {
         width: "100%",
         flex: 0,
@@ -57,16 +72,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     button: {
-        width: 120,
-        height: 120,
+        width: 140,
+        height: 80,
         borderRadius: 10,
         margin: 15,
         textAlign: "center",
+        justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#3939",
+        backgroundColor: colors.blue_200,
     },
     textoteste: {
         fontSize: 20,
+        textAlign: "center",
     },
 });
 
@@ -107,6 +124,26 @@ export default function Home() {
                     </Text>
                     <Text style={styles.dayPhraseAuthor}>ALMEIDA, NATAN</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={styles.containerStats}
+                    onPress={() => {
+                        navigation.navigate("Status");
+                    }}
+                >
+                    <View style={styles.containerTextStats}>
+                        <Text style={styles.textStats}>
+                            AQUI FICARÁ AS ESTATÍSTICAS DO DIA{" "}
+                        </Text>
+                    </View>
+
+                    <View style={styles.containerTextStats}>
+                        <Text style={styles.textStats}>
+                            AQUI FICARÁ AS ESTATÍSTICAS TOTAL{" "}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+
                 <View style={styles.containerbuttons}>
                     <TouchableOpacity
                         style={styles.button}
@@ -114,7 +151,7 @@ export default function Home() {
                             navigation.navigate("Tasks");
                         }}
                     >
-                        <Text style={styles.textoteste}>Hoje</Text>
+                        <Text style={styles.textoteste}>Crie um hábito</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
