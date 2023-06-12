@@ -1,7 +1,6 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
-import NavBar from "../components/navbar";
+import NavBar from "../components/nav_bar";
 
 type StackRoutesParams = {
     home: undefined;
