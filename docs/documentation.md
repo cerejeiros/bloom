@@ -169,3 +169,7 @@ Kaio Salgado e  Leonardo Castro
 42. [x] 07/06 comandos git [[vídeo]](https://youtu.be/vivdwTWX_pU)
 
 Joao V, Natan, Luiza
+
+43. [ ] 13/06 Reunião diária para revisão da sprint passada e preparação para próxima sprint* [[vídeo]](https://youtu.be/u9ctk908Jmw)
+
+Kauã, Natan, Luiza, Leonardo Castro e Bruna
