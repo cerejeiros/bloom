@@ -16,16 +16,17 @@ export interface ItemData {
 export default [
     {
         id: "1",
-        title: "Bem vindos ao Bloom,",
-        message: "seu app de rotina",
+        title: "  Bem vindos ao \n         Bloom!",
+        message: "            seu app de rotina",
         image: require("../../../assets/logo_sun.png"),
+       
     },
     {
         id: "2",
         title: "Nosso alvo",
         message:
             "O Bloom veio para renovar o cenário de apps de rotina, contando com:",
-        image: require("../../../assets/cat-profile.png"),
+            image: require("../../../assets/logo_sun.png"),
         items: [
             {
                 id: "1",
@@ -35,7 +36,7 @@ export default [
             },
             {
                 id: "2",
-                top: "Estatisticas",
+                top: "Estatísticas",
                 image: require("../../../assets/cup_3.png"),
                 bottom: "precisas",
             },
@@ -51,6 +52,6 @@ export default [
         id: "3",
         title: "Desfrute dessa nossa forma de florescer e progredir em sua rotina",
         message: "Acesse o Bloom!",
-        image: require("../../../assets/cat-profile.png"),
+        image: require("../../../assets/logo_sun.png"),
     },
 ] satisfies Array<ItemData>;

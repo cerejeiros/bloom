@@ -3,69 +3,109 @@ import {
     Image,
     StyleSheet,
     Text,
-    View,
     useWindowDimensions,
+    View,
 } from "react-native";
 import { ItemData } from "./pages";
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 2.5,
         justifyContent: "center",
         alignItems: "center",
         // backgroundColor: "green",
+        flexDirection: "column",
     },
     image: {
-        flex: 2,
+        // flex: 1,
         justifyContent: "center",
+        // backgroundColor: "yellow",
     },
     text: {
-        // flex: 1,
+        flex: 1,
         // backgroundColor: "red",
+        alignContent: "center",
+        justifyContent: "center",
     },
     title: {
-        fontWeight: "bold",
-        fontSize: 20,
+        fontWeight: "900",
+        fontSize: 45,
     },
     message: {
-        fontSize: 24,
+        fontSize: 25,
     },
     items: {
         // backgroundColor: "blue",
         flexDirection: "row",
-        flex: 0.5,
+        // flex: 0.5,
         gap: 10,
     },
+    item_first_page: {
+        //  backgroundColor: "pink"
+    },
     item: {
+        width: 110,
+        height: 50,
+        borderRadius: 10,
         backgroundColor: "white",
         justifyContent: "center",
         alignItems: "center",
         aspectRatio: 1,
     },
     item_image: {
-        width: 50,
-        height: 50,
-        aspectRatio: 1,
+        // width: 75, // imagens 2 pag
+        height: "40%",
+        aspectRatio: 2 / 2,
     },
 });
 
 export default function Item(data: ItemData) {
-    const { title, message, image, items } = data;
+    const { id, title, message, image, items } = data;
 
     const { width } = useWindowDimensions();
     return (
-        <View style={[styles.container, { width }]}>
-            <Image
-                source={image}
-                style={[
-                    styles.image,
-                    { width: width / 2, resizeMode: "contain" },
-                ]}
-            />
+        <View
+            style={[
+                styles.container,
+                { width },
+                id === "1" && styles.item_first_page,
+            ]}
+        >
+            {id === "1" ? (
+                <Image
+                    source={image}
+                    style={[
+                        styles.image,
+                        {
+                            width: width * 0.8,
+                            height: width * 0.8,
+                            resizeMode: "contain",
+                            transform: [{ translateY: 300 }],
+                        },
+                    ]}
+                />
+            ) : (
+                <Image
+                    source={image}
+                    style={[
+                        styles.image,
+                        {
+                            width: width / 2,
+                            height: width / 2,
+                            resizeMode: "contain",
+                        },
+                    ]}
+                />
+            )}
             <View style={styles.text}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.message}>{message}</Text>
+                <Text style={[styles.title, id === "1" && { marginTop: -500 }]}>
+                    {title}
+                </Text>
+                <Text style={[styles.message, id === "1" && { marginTop: 10 }]}>
+                    {message}
+                </Text>
             </View>
+
             {items && (
                 <View style={styles.items}>
                     {items.map((item) => (

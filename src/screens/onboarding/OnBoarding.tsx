@@ -12,15 +12,15 @@ import {
     Image,
     SafeAreaView,
     StyleSheet,
-    View,
     useWindowDimensions,
+    View
 } from "react-native";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
 import Item from "./Item";
 import Next from "./Next";
-import Paginator from "./Paginator";
 import pages, { ItemData } from "./pages";
+import Paginator from "./Paginator";
 
 const styles = StyleSheet.create({
     container: {
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         color: colors.black_800,
         fontSize: 25,
         fontFamily: "Poppins-Medium",
-        backgroundColor: `${colors.blue_100}55`,
+        backgroundColor: `${colors.blue_100}`,
         textAlign: "center",
     },
     text_name: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
     container_page: {
         justifyContent: "center",
-        flex: 2.5,
+        flex: 1,
     },
     container_bar_bottom: {
         flexDirection: "row",
@@ -180,11 +180,7 @@ export default function OnBoarding() {
                     />
                 </View>
             </View>
-            <Image
-                ref={moonRef}
-                style={styles.moon}
-                source={require("../../../assets/moon.png")}
-            />
+            
             <Image
                 style={[styles.background_bottom, { width }]}
                 source={require("../../../assets/onboarding-bottom.png")}
