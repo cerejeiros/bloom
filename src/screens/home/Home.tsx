@@ -1,8 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { ReactNode, useState } from "react";
+import React from "react";
 import {
     KeyboardAvoidingView,
-    Modal,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -11,6 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../../pallete";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
+import data from "./phrases.json";
 
 const styles = StyleSheet.create({
     container: {
@@ -36,7 +36,10 @@ const styles = StyleSheet.create({
     },
     containerDayPhrase: {
         width: "90%",
+        minHeight: 90,
+        maxHeight: 150,
         borderRadius: 10,
+        rowGap: 10,
         margin: 15,
         padding: 15,
         backgroundColor: "#DDDDDD",
@@ -56,6 +59,8 @@ const styles = StyleSheet.create({
         margin: 15,
         padding: 15,
         backgroundColor: colors.blue_400,
+        flexWrap: "wrap",
+        rowGap: 16,
     },
     containerTextStats: {
         width: "50%",
@@ -81,20 +86,24 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: colors.blue_200,
     },
-    textoteste: {
+    containerstatsbutton: {
+        backgroundColor: colors.blue_200,
+        width: "40%",
+        padding: 8,
+        borderRadius: 8,
+        marginLeft: "60%",
+    },
+    textbutton: {
         fontSize: 20,
         textAlign: "center",
     },
 });
 
-type CardProps = {
-    children: ReactNode;
-};
-
 export default function Home() {
-    const [modalVisible, setModalVisible] = useState(false);
-
     const navigation = useNavigation<StackNavigatorRoutesProps>();
+    const date = new Date();
+    const frase = data[date.getUTCDay()];
+
     return (
         <KeyboardAvoidingView>
             <View style={styles.header}>
@@ -102,35 +111,15 @@ export default function Home() {
             </View>
 
             <SafeAreaView style={styles.container}>
-                <Modal
-                    visible={modalVisible}
-                    animationType="slide"
-                    transparent
-                    onRequestClose={() => setModalVisible(false)}
-                >
-                    <Text>TESTEdwadwZAO</Text>
-                </Modal>
-
                 <TouchableOpacity
                     style={styles.containerDayPhrase}
                     activeOpacity={0.8}
-                    onPress={() => {
-                        setModalVisible(false);
-                    }}
                 >
-                    <Text style={styles.dayPhrase}>
-                        FRASE DO DIA GRANDE PARA TESTAR A QUEBRA DE LINHA E O
-                        TAMANHO DAS COISAS{" "}
-                    </Text>
-                    <Text style={styles.dayPhraseAuthor}>ALMEIDA, NATAN</Text>
+                    <Text style={styles.dayPhrase}>{frase.phrase}</Text>
+                    <Text style={styles.dayPhraseAuthor}>{frase.author}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                    style={styles.containerStats}
-                    onPress={() => {
-                        navigation.navigate("Status");
-                    }}
-                >
+                <View style={styles.containerStats}>
                     <View style={styles.containerTextStats}>
                         <Text style={styles.textStats}>
                             AQUI FICARÁ AS ESTATÍSTICAS DO DIA{" "}
@@ -142,7 +131,18 @@ export default function Home() {
                             AQUI FICARÁ AS ESTATÍSTICAS TOTAL{" "}
                         </Text>
                     </View>
-                </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.containerstatsbutton}>
+                        <Text
+                            style={styles.textbutton}
+                            onPress={() => {
+                                navigation.navigate("Status");
+                            }}
+                        >
+                            Ver todas as estatísticas
+                        </Text>
+                    </TouchableOpacity>
+                </View>
 
                 <View style={styles.containerbuttons}>
                     <TouchableOpacity
@@ -151,7 +151,7 @@ export default function Home() {
                             navigation.navigate("Tasks");
                         }}
                     >
-                        <Text style={styles.textoteste}>Crie um hábito</Text>
+                        <Text style={styles.textbutton}>Crie um hábito</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
@@ -159,7 +159,7 @@ export default function Home() {
                             navigation.navigate("Today");
                         }}
                     >
-                        <Text style={styles.textoteste}>
+                        <Text style={styles.textbutton}>
                             Acompanhe seus Habitos
                         </Text>
                     </TouchableOpacity>
