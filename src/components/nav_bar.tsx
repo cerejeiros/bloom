@@ -1,11 +1,3 @@
-// Navigation BAR
-// onde vai ter a logo no centro,
-// os botoes para navegar em cada pagina:
-//
-// referencias:
-// https://www.youtube.com/watch?v=gPaBicMaib4 (com iphone)
-// https://www.youtube.com/watch?v=bUesHGYxSLg&list=PLQWFhX-gwJblNXe9Fj0WomT0aWKqoDQ-h&index=3&pp=iA
-
 import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
@@ -76,7 +68,7 @@ function NavBar() {
             }
         >
             <Tab.Screen
-                name="Hoje"
+                name="Today"
                 component={Today}
                 options={{
                     tabBarActiveTintColor: colors.rose_400,

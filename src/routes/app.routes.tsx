@@ -4,9 +4,13 @@ import React from "react";
 import NavBar from "../components/nav_bar";
 import colors from "../pallete";
 
-type StackRoutesParams = {
-    home: undefined;
-    details: undefined;
+export type StackRoutesParams = {
+    // Details: undefined;
+    Today: undefined;
+    Status: undefined;
+    Home: undefined;
+    Tasks: undefined;
+    Perfil: undefined;
 };
 
 // import to get suggestion of the stack routes on navigate method
