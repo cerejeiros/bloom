@@ -2,7 +2,7 @@ import { FontAwesome, Fontisto } from "@expo/vector-icons";
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../../components/button";
-import DatePicker from "../../components/datePicker";
+import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import checkPassword from "../../helpers/relevantFunctions";
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         minWidth: 100,
         color: colors.black_500,
         fontSize: 15,
+        flex: 1,
     },
     title: {
         color: "black",
@@ -159,7 +160,7 @@ export default function Input() {
                 }
             />
 
-            <DatePicker text={birthday} textState={setBirth} icon />
+            <DatePicker flex={1} text={birthday} textState={setBirth} icon />
 
             <InputIcon
                 style={styles.input}
