@@ -160,7 +160,12 @@ export default function Input() {
                 }
             />
 
-            <DatePicker flex={1} text={birthday} textState={setBirth} icon />
+            <DatePicker
+                style={{ flex: 1 }}
+                text={birthday}
+                textState={setBirth}
+                icon
+            />
 
             <InputIcon
                 style={styles.input}
