@@ -4,10 +4,8 @@
 // And another input for a password, which will be hidden by default.
 
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-// import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
-    Image,
     KeyboardAvoidingView,
     ScrollView,
     StyleSheet,
@@ -24,25 +22,11 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         height: "100%",
         justifyContent: "center",
-        // justifyContent: "space-around",
-        // borderWidth: 3.5,
-        // borderColor: colors.blue[200],
-        // borderRadius: 15,
-        // backgroundColor: colors.blue[50],
-    },
-    background: {
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        height: "100%",
-        width: "100%",
-        zIndex: -1,
+        backgroundColor: colors.white_50,
     },
     titlecontainer: {
         marginLeft: 35,
     },
-
     title: {
         color: "#393939",
         fontSize: 35,
@@ -71,15 +55,6 @@ const styles = StyleSheet.create({
     link: {
         color: colors.blue_600,
     },
-    /* circulo: {
-        width: 400,
-        height: 400,
-        position: "absolute",
-        top: -160,
-        left: -100,
-        backgroundColor: colors.rose[300],
-        borderRadius: 200,
-    }, */
 });
 
 export default function Login() {
@@ -98,10 +73,6 @@ export default function Login() {
                     </Text>
                 </View>
                 <Input />
-                <Image
-                    style={styles.background}
-                    source={require("../../../assets/blurry-gradient-1.png")}
-                />
                 <View style={styles.warning}>
                     <Text>Novo no Bloom?</Text>
                     <Text
