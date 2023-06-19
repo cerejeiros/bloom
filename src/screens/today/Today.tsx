@@ -17,8 +17,8 @@ export default function Today() {
         <View style={styles.container}>
             <Text>Today</Text>
             <Button
-                title="Go to details"
-                onPress={() => navigation.navigate("details")}
+                title="Go to Home"
+                onPress={() => navigation.navigate("Home")}
             />
         </View>
     );

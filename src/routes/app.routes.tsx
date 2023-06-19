@@ -17,13 +17,11 @@ export type StackRoutesParams = {
 export type StackNavigatorRoutesProps =
     NativeStackNavigationProp<StackRoutesParams>;
 
-NavigationBar.setBackgroundColorAsync(colors.black_800);
-NavigationBar.setButtonStyleAsync("light");
-
 // the tab routes is called in the drawer routes
 function TabRoutes() {
     NavigationBar.setBackgroundColorAsync(colors.black_800);
     NavigationBar.setButtonStyleAsync("light");
+    NavigationBar.setVisibilityAsync("visible");
 
     return <NavBar />;
 }

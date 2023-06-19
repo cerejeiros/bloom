@@ -22,15 +22,16 @@ const styles = StyleSheet.create({
         // backgroundColor: "red",
     },
     label_style: {
-        fontSize: 15,
+        fontSize: 14,
         // marginBottom: 10,
     },
 });
 
 const enum Defaults {
-    icon_size = 30,
-    min_top_size = 10,
-    bar_height = Defaults.icon_size * 2 + Defaults.icon_size / 3,
+    icon_size = 25,
+    min_top_size = 15,
+    bar_height = Defaults.icon_size * 2 + Defaults.icon_size,
+    padding_bottom = 15,
 }
 
 const Tab = createBottomTabNavigator();
@@ -42,7 +43,6 @@ function NavBar() {
             initialRouteName="Home"
             screenOptions={{
                 headerShown: false,
-
                 tabBarStyle: {
                     position: "absolute",
                     bottom: 0,
@@ -55,7 +55,7 @@ function NavBar() {
                     maxHeight: Defaults.bar_height,
                     borderTopColor: "transparent",
                     paddingTop: Defaults.min_top_size / 2,
-                    paddingBottom: 5,
+                    paddingBottom: Defaults.padding_bottom,
                     borderTopStartRadius: 10,
                     borderTopEndRadius: 10,
                     backgroundColor: colors.black_800,
