@@ -25,7 +25,7 @@ export default [
         id: "2",
         title: "Nosso alvo",
         message:
-            "O Bloom veio para renovar o cenário de apps de rotina, contando com:",
+            " O Bloom veio para renovar o cenário de apps de rotina, contando com:",
             image: require("../../../assets/logo_sun.png"),
         items: [
             {
@@ -50,8 +50,8 @@ export default [
     },
     {
         id: "3",
-        title: "Desfrute dessa nossa forma de florescer e progredir em sua rotina",
-        message: "Acesse o Bloom!",
+        title: " Desfrute dessa nova forma de florescer e\n    progredir em sua \n           rotina \n  Acesse o Bloom!",
+        message: "",
         image: require("../../../assets/logo_sun.png"),
     },
 ] satisfies Array<ItemData>;
