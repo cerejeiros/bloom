@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
+    Image,
     KeyboardAvoidingView,
     StyleSheet,
     Text,
@@ -10,47 +11,79 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../../pallete";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
+import months from "./months.json";
 import data from "./phrases.json";
 
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 90,
+        marginTop: 190,
     },
     header: {
         justifyContent: "flex-end",
-        padding: 15,
+        padding: 50,
+        alignSelf: "center",
         width: "100%",
-        height: 110,
         position: "absolute",
-        backgroundColor: colors.rose_200,
-        borderBottomEndRadius: 20,
-        borderBottomStartRadius: 20,
-        top: 0,
+        alignContent: "center",
     },
     headerText: {
-        fontSize: 30,
-        textAlign: "left",
-        color: "#fff",
+        fontSize: 25,
+        borderRadius: 10,
+        textAlign: "center",
+        color: colors.white_500,
+        backgroundColor: colors.white_300,
+    },
+    imagecontainer: {
+        position: "absolute",
+        top: -450,
+        alignSelf: "center",
+    },
+    sun: {
+        transform: [{ rotate: "160deg" }],
+    },
+
+    cerej: {
+        position: "absolute",
+        margin: 0,
+        top: "17%",
+        right: 0,
+    },
+    date: {
+        position: "absolute",
+        marginLeft: 60,
+        top: "15%",
+        flexDirection: "column",
+    },
+    day: {
+        fontSize: 80,
+        color: colors.white_500,
+    },
+    month: {
+        fontSize: 15,
+        textTransform: "uppercase",
+        color: colors.white_500,
     },
     containerDayPhrase: {
         width: "90%",
         minHeight: 90,
         maxHeight: 150,
-        borderRadius: 10,
         rowGap: 10,
-        margin: 15,
+        margin: 25,
         padding: 15,
-        backgroundColor: "#DDDDDD",
+        backgroundColor: colors.white_300,
     },
     dayPhrase: {
+        opacity: 1,
         textAlign: "left",
         fontSize: 20,
+        color: colors.white_500,
     },
     dayPhraseAuthor: {
         textAlign: "left",
         fontSize: 10,
+        color: colors.white_100,
     },
     containerStats: {
         flexDirection: "row",
@@ -58,7 +91,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         margin: 15,
         padding: 15,
-        backgroundColor: colors.blue_400,
+        backgroundColor: colors.white_300,
         flexWrap: "wrap",
         rowGap: 16,
     },
@@ -84,17 +117,13 @@ const styles = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: colors.blue_200,
+        backgroundColor: colors.white_300,
     },
     containerstatsbutton: {
-        backgroundColor: colors.blue_200,
-        width: "40%",
         padding: 8,
-        borderRadius: 8,
-        marginLeft: "60%",
     },
     textbutton: {
-        fontSize: 20,
+        fontSize: 10,
         textAlign: "center",
     },
 });
@@ -103,11 +132,27 @@ export default function Home() {
     const navigation = useNavigation<StackNavigatorRoutesProps>();
     const date = new Date();
     const frase = data[date.getUTCDay()];
+    const day = date.getDate();
+    const month = months[date.getMonth()];
 
     return (
         <KeyboardAvoidingView>
+            <View style={styles.imagecontainer}>
+                <Image
+                    style={styles.sun}
+                    source={require("../../../assets/luasol.png")}
+                />
+            </View>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Olá, NATAN!</Text>
+            </View>
+            <Image
+                style={styles.cerej}
+                source={require("../../../assets/cereje.png")}
+            />
+            <View style={styles.date}>
+                <Text style={styles.day}>{day}</Text>
+                <Text style={styles.month}>de {month.month}</Text>
             </View>
 
             <SafeAreaView style={styles.container}>
@@ -122,13 +167,13 @@ export default function Home() {
                 <View style={styles.containerStats}>
                     <View style={styles.containerTextStats}>
                         <Text style={styles.textStats}>
-                            AQUI FICARÁ AS ESTATÍSTICAS DO DIA{" "}
+                            AQUI FICARÁ AS ESTATÍSTICAS DO DIA GRÁFICO{" "}
                         </Text>
                     </View>
 
                     <View style={styles.containerTextStats}>
                         <Text style={styles.textStats}>
-                            AQUI FICARÁ AS ESTATÍSTICAS TOTAL{" "}
+                            TAREFAS/TASKS DO DIA ORDENADA{" "}
                         </Text>
                     </View>
 
