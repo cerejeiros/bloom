@@ -1,12 +1,11 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { CheckBox, Input } from "react-native-elements";
+import colors from "../../pallete";
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
+        backgroundColor: colors.white_50,
     },
     container_repeated: {
         flexDirection: "row",
@@ -22,7 +21,7 @@ const styles = StyleSheet.create({
         // flex: 1,
     },
     container_repeated_input: {
-        backgroundColor: "red",
+        // backgroundColor: "red",
     },
     input: {
         width: "50%",
@@ -30,26 +29,13 @@ const styles = StyleSheet.create({
 });
 
 export default function InterfaceCreateTasks() {
-    const [isDaily, setDaily] = React.useState(false);
-    const [isWeekly, setWeekly] = React.useState(false);
-    const [isMonthly, setMonthly] = React.useState(false);
-
-    function disableUnique() {
-        // TODO: make this faster...
-        setDaily(false);
-        setWeekly(false);
-        setMonthly(false);
-    }
-    function setUnique(
-        func: React.Dispatch<React.SetStateAction<boolean>>,
-        value: boolean
-    ) {
-        disableUnique();
-        func(value);
-    }
+    const [isRepeated, setRepeated] = React.useState("daily");
 
     return (
-        <View>
+        <View style={styles.container}>
+            <View style={styles.container_repeated_input}>
+                <Input containerStyle={{ width: "75%" }} placeholder="Nome" />
+            </View>
             <View style={styles.container_repeated_checkbox}>
                 <CheckBox
                     center
@@ -57,8 +43,8 @@ export default function InterfaceCreateTasks() {
                     containerStyle={styles.check_box}
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
-                    checked={isDaily}
-                    onPress={() => setUnique(setDaily, !isDaily)}
+                    checked={isRepeated === "daily"}
+                    onPress={() => setRepeated("daily")}
                 />
                 <CheckBox
                     center
@@ -66,8 +52,8 @@ export default function InterfaceCreateTasks() {
                     containerStyle={styles.check_box}
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
-                    checked={isWeekly}
-                    onPress={() => setUnique(setWeekly, !isWeekly)}
+                    checked={isRepeated === "weekly"}
+                    onPress={() => setRepeated("weekly")}
                 />
                 <CheckBox
                     center
@@ -75,16 +61,12 @@ export default function InterfaceCreateTasks() {
                     containerStyle={styles.check_box}
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
-                    checked={isMonthly}
-                    onPress={() => setUnique(setMonthly, !isMonthly)}
+                    checked={isRepeated === "monthly"}
+                    onPress={() => setRepeated("monthly")}
                 />
             </View>
             <View style={styles.container_repeated_input}>
-                <Input
-                    containerStyle={styles.input}
-                    placeholder="Em horas"
-                    onEndEditing={(text) => text && disableUnique()}
-                />
+                <Input containerStyle={styles.input} placeholder="Em horas" />
             </View>
         </View>
     );
