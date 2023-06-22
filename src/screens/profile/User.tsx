@@ -11,6 +11,7 @@ import {
     View,
 } from "react-native";
 import Button from "../../components/button";
+import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import supabase from "../../helpers/supabaseClient";
@@ -105,6 +106,7 @@ function User() {
     const [bio, setBio] = useState<string | undefined>(undefined);
     const [Birth, setUserDate] = useState<string | undefined>(undefined);
     const [userName, setUserName] = useState<string | undefined>(undefined);
+    const [date, setDate] = useState<string>("");
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
@@ -124,9 +126,9 @@ function User() {
 
             setUserData(data[0]);
             setName(data[0].name);
-            setUserName(data[0].userName);
+            setUserName(data[0].username);
             setBio(data[0].bio);
-            setImmediate(data[0].date);
+            // setImmediate(data[0].dateofbirth);
         };
 
         fetchData();
@@ -162,10 +164,15 @@ function User() {
                         <InputIcon
                             onChangeText={setBio}
                             value={bio}
-                            placeholder="Bio"
+                            placeholder="Biografia"
                             keyboardType="default"
                             inputMode="text"
                             style={styles.input}
+                        />
+                        <DatePicker
+                            text={date}
+                            textState={setDate}
+                            icon={true}
                         />
                     </View>
                     <View style={styles.buttonView}>

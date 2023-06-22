@@ -9,7 +9,7 @@ import InputIcon from "./input_icon";
 
 export interface DatePickerProps {
     text: string;
-    style: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     textState: Dispatch<SetStateAction<string>>;
     icon: boolean;
 }
