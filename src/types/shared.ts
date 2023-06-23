@@ -4,6 +4,11 @@ export type UserData = {
     name?: string;
     username?: string;
     dateofbirth: string;
+    /*
+        For the gamification of tasks, habits, and routines being
+        followed.
+        We can renderise the "level" of the user with the 
+    */
     xp: number;
 };
 
