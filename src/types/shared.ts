@@ -31,9 +31,9 @@ export type Habit = {
     end: string;
 
     /*
-        The list of tasks included in this habit.
+        The list of tasks per ID included in this habit.
     */
-    tasks: Array<Task>;
+    tasks: Array<number>;
 };
 
 /*
