@@ -16,7 +16,10 @@ export type UserData = {
     A routine is a list of habits separated by day.
 */
 export type Routine = {
-    days: Array<Habit>;
+    /*
+        The list of habits per ID included in this routine.
+    */
+    habits: Array<number>;
 };
 
 /*
