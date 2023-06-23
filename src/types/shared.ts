@@ -29,6 +29,11 @@ export type Habit = {
     */
     start: string;
     end: string;
+
+    /*
+        The list of tasks included in this habit.
+    */
+    tasks: Array<Task>;
 };
 
 /*
