@@ -2,7 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
     Image,
-    KeyboardAvoidingView,
+    ScrollView,
+    StatusBar,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -18,7 +19,9 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 190,
+        marginTop: 160,
+        flex: 1,
+        paddingTop: StatusBar.currentHeight,
     },
     header: {
         justifyContent: "flex-end",
@@ -41,19 +44,20 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     sun: {
-        transform: [{ rotate: "160deg" }],
+        transform: [{ rotate: "165deg" }],
     },
 
     cerej: {
         position: "absolute",
         margin: 0,
-        top: "17%",
+        top: 120,
         right: 0,
     },
     date: {
         position: "absolute",
         marginLeft: 60,
-        top: "15%",
+        height: 90,
+        top: 120,
         flexDirection: "column",
     },
     day: {
@@ -64,6 +68,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         textTransform: "uppercase",
         color: colors.white_500,
+        alignSelf: "center",
     },
     containerDayPhrase: {
         width: "90%",
@@ -72,6 +77,8 @@ const styles = StyleSheet.create({
         rowGap: 10,
         margin: 25,
         padding: 15,
+        borderTopLeftRadius: 10,
+        borderBottomRightRadius: 10,
         backgroundColor: colors.white_300,
     },
     dayPhrase: {
@@ -136,7 +143,7 @@ export default function Home() {
     const month = months[date.getMonth()];
 
     return (
-        <KeyboardAvoidingView>
+        <ScrollView>
             <View style={styles.imagecontainer}>
                 <Image
                     style={styles.sun}
@@ -158,7 +165,7 @@ export default function Home() {
             <SafeAreaView style={styles.container}>
                 <TouchableOpacity
                     style={styles.containerDayPhrase}
-                    activeOpacity={0.8}
+                    activeOpacity={1}
                 >
                     <Text style={styles.dayPhrase}>{frase.phrase}</Text>
                     <Text style={styles.dayPhraseAuthor}>{frase.author}</Text>
@@ -166,9 +173,7 @@ export default function Home() {
 
                 <View style={styles.containerStats}>
                     <View style={styles.containerTextStats}>
-                        <Text style={styles.textStats}>
-                            AQUI FICARÁ AS ESTATÍSTICAS DO DIA GRÁFICO{" "}
-                        </Text>
+                        <Text>bjdkas</Text>
                     </View>
 
                     <View style={styles.containerTextStats}>
@@ -176,17 +181,6 @@ export default function Home() {
                             TAREFAS/TASKS DO DIA ORDENADA{" "}
                         </Text>
                     </View>
-
-                    <TouchableOpacity style={styles.containerstatsbutton}>
-                        <Text
-                            style={styles.textbutton}
-                            onPress={() => {
-                                navigation.navigate("Status");
-                            }}
-                        >
-                            Ver todas as estatísticas
-                        </Text>
-                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.containerbuttons}>
@@ -209,7 +203,107 @@ export default function Home() {
                         </Text>
                     </TouchableOpacity>
                 </View>
+                <View style={styles.containerbuttons}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Tasks");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>Crie um hábito</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Today");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>
+                            Acompanhe seus Habitos
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.containerbuttons}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Tasks");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>Crie um hábito</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Today");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>
+                            Acompanhe seus Habitos
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.containerbuttons}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Tasks");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>Crie um hábito</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Today");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>
+                            Acompanhe seus Habitos
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.containerbuttons}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Tasks");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>Crie um hábito</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Today");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>
+                            Acompanhe seus Habitos
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.containerbuttons}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Tasks");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>Crie um hábito</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate("Today");
+                        }}
+                    >
+                        <Text style={styles.textbutton}>
+                            Acompanhe seus Habitos
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </SafeAreaView>
-        </KeyboardAvoidingView>
+        </ScrollView>
     );
 }
