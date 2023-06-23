@@ -4,6 +4,7 @@ export type UserData = {
     name?: string;
     username?: string;
     dateofbirth: string;
+    xp: number;
 };
 
 /*
