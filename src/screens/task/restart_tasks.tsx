@@ -5,7 +5,11 @@ export default function restartTasks(tasks: Array<Task>) {
     const currentTime = Math.floor(new Date().getTime() / 1000);
     const daySeconds = 60 * 60 * 24;
     tasks.forEach((task) => {
-        if (task.meta_start + daySeconds >= currentTime) {
+        if (
+            (typeof task.repeated === "number" &&
+                task.meta_start + task.repeated >= currentTime) ||
+            task.meta_start + daySeconds >= currentTime
+        ) {
             task.meta_start = currentTime;
             task.done = 0;
         }
