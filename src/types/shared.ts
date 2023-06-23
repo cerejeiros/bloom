@@ -10,6 +10,18 @@ export type UserData = {
         We can renderise the "level" of the user with the 
     */
     xp: number;
+    /*
+        The list of tasks per ID included in this routine.
+    */
+    tasks: Array<number>;
+    /*
+        The list of habits per ID included in this habits.
+    */
+    habits: Array<number>;
+    /*
+        The list of routines ID included in this habits.
+    */
+    routines: Array<number>;
 };
 
 /*
