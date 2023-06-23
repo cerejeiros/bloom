@@ -77,11 +77,11 @@ export type Task = {
         Meta variables are here to calculate if a task has already
         passed enough time or not since its start time was conceived.
         
-        For example: "2023-06-19 22:00:00"
+        For example: 1344646810
         TODO: Use 
               Math.floor(new Date('2012-08-10 22:00:10').getTime() / 1000)
     */
-    meta_start?: string;
+    meta_start: number;
     /*
         To set if it can be shared?
         NOTE: Should not exist such varible when we add a 
