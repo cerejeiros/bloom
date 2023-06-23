@@ -22,6 +22,7 @@ const ExampleData: Array<Task> = [
         priority: "urgent",
         period: ["morning", "evening"],
         repeated: "daily",
+        meta_start: 1344646810,
     },
 ];
 
