@@ -170,22 +170,26 @@ Kaio Salgado e  Leonardo Castro
 
 Joao V, Natan, Luiza
 
-43. [ ] 13/06 Reunião diária para revisão da sprint passada e preparação para próxima sprint* [[vídeo]](https://youtu.be/u9ctk908Jmw)
+43. [ ] 13/06 Reunião diária para revisão da sprint passada e preparação para próxima sprint [[vídeo]](https://youtu.be/u9ctk908Jmw)
 
 Kauã, Natan, Luiza, Leonardo Castro e Bruna
 
-44. [ ] 16/06 Reunião para refatorar o código das estastícas parte 1* [[vídeo]](https://www.youtube.com/watch?v=y8zZLcvxMYg)
+44. [ ] 16/06 Reunião para refatorar o código das estastícas parte 1 [[vídeo]](https://www.youtube.com/watch?v=y8zZLcvxMYg)
 
 Kauã, Natan
 
-45. [ ] 16/06 Reunião para refatorar o código das estastícas parte 2* [[vídeo]](https://www.youtube.com/watch?v=xdF5A-35ws8)
+45. [ ] 16/06 Reunião para refatorar o código das estastícas parte 2 [[vídeo]](https://www.youtube.com/watch?v=xdF5A-35ws8)
 
 Kauã, Natan
 
-46. [ ] 16/06 Reunião para criar escolher as frases, que vão aparecer como frase do dia parte 1* [[vídeo]](https://www.youtube.com/watch?v=PAgqpoBSSjM)
+46. [ ] 16/06 Reunião para criar escolher as frases, que vão aparecer como frase do dia parte 1 [[vídeo]](https://www.youtube.com/watch?v=PAgqpoBSSjM)
 
 Kauã, Natan
 
-47. [ ] 16/06 Reunião para criar a lógica para a frase do dia variar parte 2* [[vídeo]](https://www.youtube.com/watch?v=J1lrKwSyFd0)
+47. [ ] 16/06 Reunião para criar a lógica para a frase do dia variar parte 2 [[vídeo]](https://www.youtube.com/watch?v=J1lrKwSyFd0)
 
 Kauã, Natan
+
+48. [ ] 23/06 Reunião Daily para definição da sprint [[vídeo]](https://youtu.be/_w3FF4w9ql8)
+
+Kauã, Natan, Joao V, Leonardo Castro e Kaio
