@@ -7,7 +7,7 @@ export type UserData = {
 };
 
 /*
-    A routine is a list of habits per day.
+    A routine is a list of habits separated by day.
 */
 export type Routine = {
     days: Array<Habit>;
@@ -87,12 +87,15 @@ export type Task = {
         NOTE: Should not exist such varible when we add a 
         sharing system, because when we do we should not check
         if shared is false or true, instead we should check
-        if the task has a list of users attached to it...
-        That's why it is global in database...
+        if the task has a list of users attached to that specific task...
+        That's why Tasks is global in the database.
     */
 
     /*
         Get reminders for the habit in the device from the application.
+        TODO: how such system would work?
+        TODO: see background running application with Expo.
+        TODO: see local data access through background running.
     */
     // reminders: boolean;
 };
