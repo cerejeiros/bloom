@@ -35,9 +35,8 @@ export default function DatePicker({
     icon,
     label,
 }: DatePickerProps) {
-    const [date, setDate] = useState(new Date(1598051730000));
+    const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
-    const dataMax = new Date();
 
     const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
         if (selectedDate) {
@@ -88,13 +87,7 @@ export default function DatePicker({
                     value={date}
                     mode="date"
                     is24Hour
-                    maximumDate={
-                        new Date(
-                            dataMax.getUTCFullYear(),
-                            dataMax.getUTCMonth(),
-                            dataMax.getUTCDay()
-                        )
-                    }
+                    maximumDate={new Date()}
                     minimumDate={new Date(1950, 1, 1)}
                     onChange={onChange}
                 />
