@@ -96,10 +96,10 @@ export type Task = {
         | "morning"
         | "afternoon"
         | "evening"
-        | ["morning", "afternoon"]
-        | ["morning", "evening"]
-        | ["afternoon", "evening"]
-        | [string, string];
+        | "morning-afternoon"
+        | "morning-evening"
+        | "afternoon-evening"
+        | string;
     /*
         Counts in hours to be repeated every N hours after
         started its time.
