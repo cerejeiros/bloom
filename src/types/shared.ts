@@ -55,6 +55,19 @@ export type Habit = {
         Will be used to access/update the same task in the database.
     */
     id: number;
+
+    /*
+        Which day this habit applies to?
+    */
+    day:
+        | "sunday"
+        | "monday"
+        | "tuesday"
+        | "wednesday"
+        | "thursday"
+        | "friday"
+        | "saturday";
+
     /*
         The time range where this habit is applied.
         NOTE: start and end cannot be equals.
