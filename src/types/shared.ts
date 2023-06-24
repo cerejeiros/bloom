@@ -7,21 +7,21 @@ export type UserData = {
     /*
         For the gamification of tasks, habits, and routines being
         followed.
-        We can renderise the "level" of the user with the 
+        We can renderise the "level" of the user with the xp. 
     */
     xp: number;
     /*
-        The list of tasks per ID included in this routine.
+        The list of tasks included in this routine.
     */
-    tasks: Array<number>;
+    tasks: Array<Task>;
     /*
-        The list of habits per ID included in this habits.
+        The list of habits included in this habits.
     */
-    habits: Array<number>;
+    habits: Array<Habit>;
     /*
-        The list of routines ID included in this habits.
+        The list of routines included in this habits.
     */
-    routines: Array<number>;
+    routines: Array<Routine>;
 };
 
 /*
@@ -29,15 +29,23 @@ export type UserData = {
 */
 export type Routine = {
     /*
-        The list of habits per ID included in this routine.
+        Will be used to access/update the same task in the database.
     */
-    habits: Array<number>;
+    id: number;
+    /*
+        The list of habits included in this routine.
+    */
+    habits: Array<Habit>;
 };
 
 /*
     A habit is a time-range that includes a list of tasks.
 */
 export type Habit = {
+    /*
+        Will be used to access/update the same task in the database.
+    */
+    id: number;
     /*
         The time range where this habit is applied.
         NOTE: start and end cannot be equals.
@@ -46,9 +54,9 @@ export type Habit = {
     end: string;
 
     /*
-        The list of tasks per ID included in this habit.
+        The list of tasks included in this habit.
     */
-    tasks: Array<number>;
+    tasks: Array<Task>;
 };
 
 /*
@@ -123,5 +131,5 @@ export type Task = {
         TODO: see background running application with Expo.
         TODO: see local data access through background running.
     */
-    // reminders: boolean;
+    reminders: boolean;
 };
