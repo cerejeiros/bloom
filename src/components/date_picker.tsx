@@ -12,6 +12,7 @@ export interface DatePickerProps {
     style?: StyleProp<ViewStyle>;
     textState: Dispatch<SetStateAction<string>>;
     icon: boolean;
+    label?: string;
 }
 
 const styles = StyleSheet.create({
@@ -27,9 +28,13 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function DatePicker(props: DatePickerProps) {
-    const { text, textState, style, icon } = props;
-
+export default function DatePicker({
+    text,
+    textState,
+    style,
+    icon,
+    label,
+}: DatePickerProps) {
     const [date, setDate] = useState(new Date(1598051730000));
     const [show, setShow] = useState(false);
     const dataMax = new Date();
@@ -49,6 +54,9 @@ export default function DatePicker(props: DatePickerProps) {
         setShow(true);
     };
 
+    if (!icon && !label)
+        throw Error("The DatePicker must have a Icon or a label.");
+
     return (
         <View>
             <InputIcon
@@ -61,6 +69,7 @@ export default function DatePicker(props: DatePickerProps) {
                 value={text}
                 placeholder="AAAA-MM-DD"
                 keyboardType="numeric"
+                label={icon === false && label ? label : undefined}
                 Icon={
                     (icon && (
                         <FontAwesome
