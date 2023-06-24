@@ -20,7 +20,7 @@ import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import { UserData } from "../../types/shared";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
     container: {
@@ -68,8 +68,6 @@ const styles = StyleSheet.create({
         borderRadius: 45,
     },
     modal: {
-        // top: 100,
-        // height: (height / 100) * 80,
         margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
@@ -137,7 +135,7 @@ function User() {
             setName(data[0].name);
             setUserName(data[0].username);
             setBio(data[0].bio);
-            // setImmediate(data[0].dateofbirth);
+            setDate(data[0].dateofbirth);
         };
 
         fetchData();
