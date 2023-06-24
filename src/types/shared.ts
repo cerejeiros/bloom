@@ -149,5 +149,5 @@ export type Task = {
         TODO: see background running application with Expo.
         TODO: see local data access through background running.
     */
-    reminders: boolean;
+    // reminders: boolean;
 };
