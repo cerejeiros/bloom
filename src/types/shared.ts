@@ -131,8 +131,10 @@ export type Task = {
         For example: 1344646810
         TODO: Use 
               Math.floor(new Date('2012-08-10 22:00:10').getTime() / 1000)
+        TODO: Should be calculated using a external system (one idea is to
+              have a local array of IDs of tasks with meta_start atributes.)
     */
-    meta_start: number;
+    // meta_start: number;
     /*
         To set if it can be shared?
         NOTE: Should not exist such varible when we add a 
