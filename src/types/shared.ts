@@ -11,15 +11,15 @@ export type UserData = {
     */
     xp: number;
     /*
-        The list of tasks included in this routine.
+        The list of tasks included in this user.
     */
     tasks: Array<Task>;
     /*
-        The list of habits included in this habits.
+        The list of habits included in this user.
     */
     habits: Array<Habit>;
     /*
-        The list of routines included in this habits.
+        The list of routines included in this user.
     */
     routines: Array<Routine>;
 };
