@@ -38,13 +38,7 @@ export type Routine = {
         for each day.
         NOTE: if you have a better idea, let's discuss it!
     */
-    sunday: Array<Habit>;
-    monday: Array<Habit>;
-    tuesday: Array<Habit>;
-    wednesday: Array<Habit>;
-    thursday: Array<Habit>;
-    friday: Array<Habit>;
-    saturday: Array<Habit>;
+    habits: Array<Habit>;
 };
 
 /*
