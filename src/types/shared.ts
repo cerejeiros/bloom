@@ -1,9 +1,9 @@
 export type UserData = {
-    id: number;
+    id: string;
     bio?: string;
     name?: string;
     username?: string;
-    dateofbirth: string;
+    dateofbirth?: string;
     /*
         For the gamification of tasks, habits, and routines being
         followed.
@@ -33,9 +33,18 @@ export type Routine = {
     */
     id: number;
     /*
-        The list of habits included in this routine.
+        The list of habits included in this routine separated by day.
+        In-client what we basically render is a list of days with habits
+        for each day.
+        NOTE: if you have a better idea, let's discuss it!
     */
-    habits: Array<Habit>;
+    sunday: Array<Habit>;
+    monday: Array<Habit>;
+    tuesday: Array<Habit>;
+    wednesday: Array<Habit>;
+    thursday: Array<Habit>;
+    friday: Array<Habit>;
+    saturday: Array<Habit>;
 };
 
 /*
