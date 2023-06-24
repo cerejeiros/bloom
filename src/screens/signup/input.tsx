@@ -2,7 +2,7 @@ import { FontAwesome, Fontisto } from "@expo/vector-icons";
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../../components/button";
-import DatePicker from "../../components/datePicker";
+import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import checkPassword from "../../helpers/relevantFunctions";
@@ -75,7 +75,7 @@ export default function Input() {
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
     const [isloading, setIsLoading] = useState(false);
-    const { signUp, signUpData } = useContext(AuthContext);
+    const { signUp, signUpData, fetchData } = useContext(AuthContext);
 
     const checkUsernameDuplicated = async () => {
         const { data, error } = await supabase
@@ -120,6 +120,7 @@ export default function Input() {
         setIsLoading(true);
         await signUp(email, password);
         await signUpData(username, birthday);
+        await fetchData();
         setIsLoading(false);
         return true;
     };
