@@ -57,16 +57,17 @@ export type Habit = {
     id: number;
 
     /*
-        Which day this habit applies to?
+        Which day(s) this habit applies to?
     */
-    day:
+    day: Array<
         | "sunday"
         | "monday"
         | "tuesday"
         | "wednesday"
         | "thursday"
         | "friday"
-        | "saturday";
+        | "saturday"
+    >;
 
     /*
         The time range where this habit is applied.
@@ -146,6 +147,7 @@ export type Task = {
         if the task has a list of users attached to that specific task...
         That's why Tasks is global in the database.
     */
+    shared: boolean;
 
     /*
         Get reminders for the habit in the device from the application.
