@@ -123,7 +123,7 @@ export type Task = {
         Has to be positive.
         If it is string, it will reset by a static time instead.
     */
-    repeated: "daily" | "monthly" | "yearly" | number;
+    repeated: "daily" | "weekly" | "monthly" | "yearly" | number;
     /*
         Meta variables are here to calculate if a task has already
         passed enough time or not since its start time was conceived.
