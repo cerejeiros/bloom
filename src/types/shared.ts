@@ -99,9 +99,9 @@ export type Task = {
     times: number;
     /*
         Defined by the user to have higher priority display 
-        going from the highest "urgent" to the lowest.
+        going from the highest "high" to the lowest.
     */
-    priority: "urgent" | "medium" | "low";
+    priority: "high" | "medium" | "low";
     /*
         To see if it's in current time, and give lower priority
         (perhaps even gray out) in case it already has passed.
