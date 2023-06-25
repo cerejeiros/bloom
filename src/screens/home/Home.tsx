@@ -10,6 +10,7 @@ import {
     View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { VictoryPie } from "victory-native";
 import colors from "../../pallete";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
 import months from "./months.json";
@@ -94,16 +95,12 @@ const styles = StyleSheet.create({
     },
     containerStats: {
         flexDirection: "row",
+        justifyContent: "space-between",
         width: "90%",
         borderRadius: 10,
         margin: 15,
-        padding: 15,
+        padding: 20,
         backgroundColor: colors.white_300,
-        flexWrap: "wrap",
-        rowGap: 16,
-    },
-    containerTextStats: {
-        width: "50%",
     },
     textStats: {
         textAlign: "left",
@@ -172,15 +169,30 @@ export default function Home() {
                 </TouchableOpacity>
 
                 <View style={styles.containerStats}>
-                    <View style={styles.containerTextStats}>
-                        <Text>bjdkas</Text>
-                    </View>
-
-                    <View style={styles.containerTextStats}>
-                        <Text style={styles.textStats}>
-                            TAREFAS/TASKS DO DIA ORDENADA{" "}
-                        </Text>
-                    </View>
+                    <TouchableOpacity>
+                        <VictoryPie
+                            width={150}
+                            height={150}
+                            padAngle={3}
+                            innerRadius={50}
+                            padding={0}
+                            colorScale={[
+                                colors.blue_300,
+                                colors.rose_400,
+                                colors.black_400,
+                            ]}
+                            data={[
+                                { x: " ", y: 1 },
+                                { x: " ", y: 2 },
+                                { x: " ", y: 5 },
+                            ]}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text> CONCLUÍDO </Text>
+                        <Text> PULADO </Text>
+                        <Text> NÃO FEITO </Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.containerbuttons}>
