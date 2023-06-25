@@ -193,3 +193,19 @@ Kauã, Natan
 48. [ ] 23/06 Reunião Daily para definição da sprint [[vídeo]](https://youtu.be/_w3FF4w9ql8)
 
 Kauã, Natan, Joao V, Leonardo Castro e Kaio
+
+49. [ ] 25/06 Adicionando as frases definitivas e incluindo podcast parte 1 [[vídeo]](https://www.youtube.com/watch?v=xdF5A-35ws8)
+
+Kauã
+
+50. [ ] 25/06 Adicionando as frases definitivas e incluindo podcast parte 2 [[vídeo]](https://www.youtube.com/watch?v=x1ipUwDWB-w)
+
+Kauã
+
+51. [ ] 25/06 Tentando implementar uma biblioteca de gráficos e corrigindo a frase do dia parte 1 [[vídeo]](https://www.youtube.com/watch?v=c5xr0mJAQt0)
+
+Kauã
+
+52. [ ] 25/06 Tentando implementar uma biblioteca de gráficos parte 2 [[vídeo]](https://www.youtube.com/watch?v=GFHHWab_2EQ)
+
+Kauã
