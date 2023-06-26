@@ -170,63 +170,47 @@ Kaio Salgado e  Leonardo Castro
 
 Joao V, Natan, Luiza
 
-43. [ ] 13/06 Reunião diária para revisão da sprint passada e preparação para próxima sprint [[vídeo]](https://youtu.be/u9ctk908Jmw)
+43. [x] 13/06 Reunião diária para revisão da sprint passada e preparação para próxima sprint [[vídeo]](https://youtu.be/u9ctk908Jmw)
 
 Kauã, Natan, Luiza, Leonardo Castro e Bruna
 
-44. [ ] 16/06 Reunião para refatorar o código das estastícas parte 1 [[vídeo]](https://www.youtube.com/watch?v=y8zZLcvxMYg)
+44. [x] 16/06 Reunião para refatorar o código das estastícas parte 1 [[vídeo]](https://www.youtube.com/watch?v=y8zZLcvxMYg)
 
 Kauã, Natan
 
-45. [ ] 16/06 Reunião para refatorar o código das estastícas parte 2 [[vídeo]](https://www.youtube.com/watch?v=xdF5A-35ws8)
+45. [x] 16/06 Reunião para refatorar o código das estastícas parte 2 [[vídeo]](https://www.youtube.com/watch?v=xdF5A-35ws8)
 
 Kauã, Natan
 
-46. [ ] 16/06 Reunião para criar escolher as frases, que vão aparecer como frase do dia parte 1 [[vídeo]](https://www.youtube.com/watch?v=PAgqpoBSSjM)
+46. [x] 16/06 Reunião para criar escolher as frases, que vão aparecer como frase do dia parte 1 [[vídeo]](https://www.youtube.com/watch?v=PAgqpoBSSjM)
 
 Kauã, Natan
 
-47. [ ] 16/06 Reunião para criar a lógica para a frase do dia variar parte 2 [[vídeo]](https://www.youtube.com/watch?v=J1lrKwSyFd0)
+47. [x] 16/06 Reunião para criar a lógica para a frase do dia variar parte 2 [[vídeo]](https://www.youtube.com/watch?v=J1lrKwSyFd0)
 
 Kauã, Natan
 
-48. [ ] 23/06 Reunião Daily para definição da sprint [[vídeo]](https://youtu.be/_w3FF4w9ql8)
+48. [x] 23/06 Reunião Daily para definição da sprint [[vídeo]](https://youtu.be/_w3FF4w9ql8)
 
 Kauã, Natan, Joao V, Leonardo Castro e Kaio
 
-49. [ ] 25/06 Adicionando as frases definitivas e incluindo podcast parte 1 [[vídeo]](https://www.youtube.com/watch?v=xdF5A-35ws8)
-
-Kauã
-
-50. [ ] 25/06 Adicionando as frases definitivas e incluindo podcast parte 2 [[vídeo]](https://www.youtube.com/watch?v=x1ipUwDWB-w)
-
-Kauã
-
-51. [ ] 25/06 Tentando implementar uma biblioteca de gráficos e corrigindo a frase do dia parte 1 [[vídeo]](https://www.youtube.com/watch?v=c5xr0mJAQt0)
-
-Kauã
-
-52. [ ] 25/06 Tentando implementar uma biblioteca de gráficos parte 2 [[vídeo]](https://www.youtube.com/watch?v=GFHHWab_2EQ)
-
-Kauã
-
-53. [ ] 10/06 implementando  na onboarding [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+49. [ ] 10/06 implementando  na onboarding [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
 
 Bruna Liberal, Joao farias
 
-54. [ ] 11/06 mexendo na onboarding parte 1 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+50. [ ] 11/06 mexendo na onboarding parte 1 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
 
 Bruna Liberal, Joao farias
 
-55. [ ] 11/06 mexendo na onboarding parte 2 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+51. [ ] 11/06 mexendo na onboarding parte 2 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
 
 Bruna Liberal, Joao farias
 
-56. [ ] 15/06 detahes da onboarding parte 1 [[vídeo]](https://www.youtube.com/watch?v=0eNZ4nnl5aY)
+52. [x] 15/06 detahes da onboarding parte 1 [[vídeo]](https://www.youtube.com/watch?v=0eNZ4nnl5aY)
 
 Bruna Liberal, Luiza Pugas
 
-57. [ ] 15/06 detahes da onboarding parte 2 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+53. [ ] 15/06 detahes da onboarding parte 2 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
 
 Bruna Liberal, Luiza Pugas
 
