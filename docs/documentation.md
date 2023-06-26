@@ -209,3 +209,25 @@ Kauã
 52. [ ] 25/06 Tentando implementar uma biblioteca de gráficos parte 2 [[vídeo]](https://www.youtube.com/watch?v=GFHHWab_2EQ)
 
 Kauã
+
+53. [ ] 10/06 implementando  na onboarding [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+
+Bruna Liberal, Joao farias
+
+54. [ ] 11/06 mexendo na onboarding parte 1 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+
+Bruna Liberal, Joao farias
+
+55. [ ] 11/06 mexendo na onboarding parte 2 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+
+Bruna Liberal, Joao farias
+
+56. [ ] 15/06 detahes da onboarding parte 1 [[vídeo]](https://www.youtube.com/watch?v=0eNZ4nnl5aY)
+
+Bruna Liberal, Luiza Pugas
+
+57. [ ] 15/06 detahes da onboarding parte 2 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+
+Bruna Liberal, Luiza Pugas
+
+
