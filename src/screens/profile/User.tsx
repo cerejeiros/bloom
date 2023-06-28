@@ -1,5 +1,4 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import {
     Dimensions,
@@ -25,8 +24,7 @@ const { width } = Dimensions.get("window");
 const styles = StyleSheet.create({
     container: {
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        
     },
     input: {
         marginTop: 0,
@@ -46,25 +44,25 @@ const styles = StyleSheet.create({
         alignItems: "center",
         height: 150,
         zIndex: 1,
-        marginBottom: 120,
+        marginBottom: 30,
     },
     profilePhoto: {
         position: "absolute",
         overflow: "visible",
         zIndex: 100,
-        width: 180,
-        height: 180,
+        width: 120,
+        height: 120,
         borderRadius: 100,
         marginTop: 75,
-        borderColor: colors.blue_200,
-        borderWidth: 5,
+        borderColor: colors.rose_400,
+        borderWidth: 2,
     },
     editBadge: {
         position: "absolute",
         zIndex: 999,
         top: 78,
         right: 120,
-        backgroundColor: "#fff",
+        backgroundColor: colors.white_50,
         borderRadius: 45,
     },
     modal: {
@@ -99,6 +97,22 @@ const styles = StyleSheet.create({
     saveButton: {
         backgroundColor: colors.blue_500,
         borderColor: colors.black_400,
+    },
+    showDataContainer: {
+        padding: 20,
+    },
+    User: {
+        alignSelf: "center",
+    },
+    Bio: {
+        marginTop: 10,
+        minHeight: 80,
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: colors.rose_400,
+    },
+    BioText: {
+        color: colors.white_50,
     },
 });
 
@@ -224,32 +238,28 @@ function User() {
                     </View>
                 </Modal>
                 <View style={styles.profileHeader}>
-                    <LinearGradient
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
-                        colors={[
-                            colors.rose_75,
-                            colors.blue_75,
-                            colors.rose_75,
-                        ]}
-                        style={styles.profileHeader}
-                    />
+                    <Image source={require("../../../assets/waveheader.png")} />
                     <Image
                         source={require("../../../assets/cat-profile.jpg")}
                         style={styles.profilePhoto}
                     />
                     <MaterialCommunityIcons
                         name="account-edit"
-                        size={36}
+                        size={30}
                         color="black"
                         style={styles.editBadge}
                         onPress={() => setModalVisible(true)}
                     />
                 </View>
 
-                <Card>
-                    <Text>Usuário</Text>
-                </Card>
+                <View style={styles.showDataContainer}>
+                    <View style={styles.User}>
+                        <Text>{userName}</Text>
+                    </View>
+                    <View style={styles.Bio}>
+                        <Text style={styles.BioText}>{bio}</Text>
+                    </View>
+                </View>
                 <Portal>
                     <Snackbar visible={visible} onDismiss={onDismissSnackBar}>
                         Salvo com sucesso!
