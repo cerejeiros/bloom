@@ -2,7 +2,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import {
     Dimensions,
-    Image,
     KeyboardAvoidingView,
     Modal,
     SafeAreaView,
@@ -10,21 +9,21 @@ import {
     Text,
     View,
 } from "react-native";
-import { Portal, Snackbar } from "react-native-paper";
-import Button from "../../components/button";
+import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import { UserData } from "../../types/shared";
+import UserAvatar from "./UserAvatar";
+import UserStatsCard, { UserStatsCardProps } from "./UserStatsCard";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
     container: {
         display: "flex",
-        
     },
     input: {
         marginTop: 0,
@@ -44,18 +43,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         height: 150,
         zIndex: 1,
-        marginBottom: 30,
     },
     profilePhoto: {
         position: "absolute",
         overflow: "visible",
         zIndex: 100,
-        width: 120,
-        height: 120,
-        borderRadius: 100,
+        width: 180,
+        height: 180,
         marginTop: 75,
-        borderColor: colors.rose_400,
-        borderWidth: 2,
     },
     editBadge: {
         position: "absolute",
@@ -66,8 +61,10 @@ const styles = StyleSheet.create({
         borderRadius: 45,
     },
     modal: {
-        margin: 20,
-        backgroundColor: "white",
+        height: height - 70,
+        marginHorizontal: 10,
+        marginVertical: 20,
+        backgroundColor: "#fff",
         borderRadius: 20,
         paddingHorizontal: 35,
         paddingVertical: 30,
@@ -90,6 +87,7 @@ const styles = StyleSheet.create({
         width: width - 70,
         flexDirection: "row",
         justifyContent: "space-evenly",
+        marginTop: 30,
     },
     buttonTitleColor: {
         color: "#fff",
@@ -98,21 +96,11 @@ const styles = StyleSheet.create({
         backgroundColor: colors.blue_500,
         borderColor: colors.black_400,
     },
-    showDataContainer: {
-        padding: 20,
-    },
-    User: {
-        alignSelf: "center",
-    },
-    Bio: {
-        marginTop: 10,
-        minHeight: 80,
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: colors.rose_400,
-    },
-    BioText: {
-        color: colors.white_50,
+    statsView: {
+        backgroundColor: "#F0F0F0",
+        width,
+        height,
+        paddingTop: 140,
     },
 });
 
@@ -124,44 +112,76 @@ function Card({ children }: CardProps) {
 }
 
 function User() {
-    const [name, setName] = React.useState<string | undefined>(undefined);
+    const [name, setName] = React.useState<string | null>(null);
     const [userData, setUserData] = useState<UserData | undefined>(undefined);
     const [modalVisible, setModalVisible] = useState(false);
-    const [bio, setBio] = useState<string | undefined>(undefined);
-    const [userName, setUserName] = useState<string | undefined>(undefined);
+    const [bio, setBio] = useState<string | null>(null);
+    const [userName, setUserName] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
+    const [image, setImage] = useState<string | null>(null);
     const { user } = useContext(AuthContext);
+
+    const mockStatistics: UserStatsCardProps[] = [
+        {
+            iconPrincipal: "Trophy",
+            textPrimary: "3",
+            iconPrimary: "",
+            subTextPrimary: "position",
+            textSecondary: userData?.xp.toString() ?? "0",
+            iconSecondary: "",
+            subTextSecondary: "xp",
+            textPrincipal: "ranking",
+        },
+        {
+            iconPrincipal: "check",
+            textPrimary: "3",
+            iconPrimary: "",
+            subTextPrimary: "done",
+            textSecondary: "5",
+            iconSecondary: "",
+            subTextSecondary: "streak",
+            textPrincipal: "tasks",
+        },
+    ];
 
     useEffect(() => {
         const fetchData = async () => {
-            const { data } = await supabase
-                .from("profiles")
-                .select("*")
-                .eq("id", user?.id)
-                .limit(1)
-                .returns<UserData[]>();
+            if (user && user.id) {
+                const { data } = await supabase
+                    .from("profiles")
+                    .select("*")
+                    .eq("id", user.id)
+                    .single();
 
-            if (data === null || !data[0]) {
+                if (data) {
+                    setUserData(data);
+                    setName(data?.name);
+                    setUserName(data.username);
+                    setBio(data.bio);
+                    setDate(data.dateofbirth ?? "");
+                    setImage(data.photo);
+                    return;
+                }
+
                 alert("Erro ao procurar informações do perfil");
-                return;
             }
-            setUserData(data[0]);
-            setName(data[0].name);
-            setUserName(data[0].username);
-            setBio(data[0].bio);
-            setDate(data[0].dateofbirth);
         };
 
         fetchData();
     }, [user]);
 
     const [visible, setVisible] = React.useState(false);
-    const onDismissSnackBar = () => setVisible(false);
 
     const saveUser = async () => {
         const { error } = await supabase
             .from("profiles")
-            .update({ bio, name, dateofbirth: date, username: userName })
+            .update({
+                bio,
+                name,
+                dateofbirth: date,
+                username: userName,
+                photo: image,
+            })
             .eq("id", userData?.id);
 
         if (error) {
@@ -185,9 +205,14 @@ function User() {
                     <View style={styles.modal}>
                         <Text style={styles.modalTitle}>Editar perfil</Text>
                         <View>
+                            <UserAvatar
+                                image={image}
+                                setImage={setImage}
+                                openPickerOnPress
+                            />
                             <InputIcon
                                 onChangeText={setName}
-                                value={name}
+                                value={name ?? undefined}
                                 placeholder="Nome"
                                 keyboardType="default"
                                 inputMode="text"
@@ -196,7 +221,7 @@ function User() {
                             />
                             <InputIcon
                                 onChangeText={setUserName}
-                                value={userName}
+                                value={userName ?? undefined}
                                 placeholder="userName"
                                 keyboardType="default"
                                 inputMode="text"
@@ -205,7 +230,7 @@ function User() {
                             />
                             <InputIcon
                                 onChangeText={setBio}
-                                value={bio}
+                                value={bio ?? undefined}
                                 placeholder="Biografia"
                                 keyboardType="default"
                                 inputMode="text"
@@ -222,27 +247,44 @@ function User() {
                         </View>
                         <View style={styles.buttonView}>
                             <Button
-                                title="Fechar"
+                                mode="contained"
+                                buttonColor={colors.rose_500}
                                 onPress={() => setModalVisible(false)}
-                                titleStyle={styles.buttonTitleColor}
-                            />
+                            >
+                                Fechar
+                            </Button>
+
                             <Button
-                                title="Salvar"
                                 onPress={() => {
                                     saveUser();
                                 }}
-                                titleStyle={styles.buttonTitleColor}
-                                style={styles.saveButton}
-                            />
+                                mode="contained"
+                                buttonColor="green"
+                            >
+                                Salvar
+                            </Button>
                         </View>
                     </View>
                 </Modal>
                 <View style={styles.profileHeader}>
-                    <Image source={require("../../../assets/waveheader.png")} />
-                    <Image
-                        source={require("../../../assets/cat-profile.jpg")}
-                        style={styles.profilePhoto}
-                    />
+                    {/* TODO - FIX LINEAR GRADIENT */}
+                    {/* <LinearGradient
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        colors={[
+                            colors.rose_75,
+                            colors.blue_75,
+                            colors.rose_75,
+                        ]}
+                        style={styles.profileHeader}
+                    /> */}
+                    <View style={styles.profilePhoto}>
+                        <UserAvatar
+                            image={image}
+                            setImage={setImage}
+                            openPickerOnPress={false}
+                        />
+                    </View>
                     <MaterialCommunityIcons
                         name="account-edit"
                         size={30}
@@ -251,20 +293,22 @@ function User() {
                         onPress={() => setModalVisible(true)}
                     />
                 </View>
-
-                <View style={styles.showDataContainer}>
-                    <View style={styles.User}>
-                        <Text>{userName}</Text>
-                    </View>
-                    <View style={styles.Bio}>
-                        <Text style={styles.BioText}>{bio}</Text>
-                    </View>
+                <View style={styles.statsView}>
+                    <UserStatsCard info={mockStatistics} />
+                    <Button
+                        icon="exit-to-app"
+                        mode="contained"
+                        style={{ marginTop: 200, marginHorizontal: 70 }}
+                        buttonColor={colors.rose_400}
+                        onPress={() => supabase.auth.signOut()}
+                    >
+                        Sair
+                    </Button>
                 </View>
-                <Portal>
-                    <Snackbar visible={visible} onDismiss={onDismissSnackBar}>
-                        Salvo com sucesso!
-                    </Snackbar>
-                </Portal>
+
+                <Card>
+                    <Text>Usuário</Text>
+                </Card>
             </SafeAreaView>
         </KeyboardAvoidingView>
     );
