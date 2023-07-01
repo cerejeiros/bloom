@@ -58,9 +58,9 @@ export default function UserStatsCard({
                     <Text style={{ fontWeight: "bold" }}>Estatísticas</Text> nos
                     últimos 7 dias
                 </Text>
-                {info.map((p, index) => {
+                {info.map((p) => {
                     return (
-                        <View style={styles.statsRow} key={index}>
+                        <View style={styles.statsRow} key={p.textPrincipal}>
                             <View style={{ width: 50 }}>
                                 <AntDesign
                                     name={p.iconPrincipal}
