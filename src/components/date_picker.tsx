@@ -3,15 +3,15 @@ import RNDateTimePicker, {
     DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { Keyboard, StyleSheet, View } from "react-native";
+import { Keyboard, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import colors from "../pallete";
 import InputIcon from "./input_icon";
 
 export interface DatePickerProps {
     text: string;
+    style: StyleProp<ViewStyle>;
     textState: Dispatch<SetStateAction<string>>;
     icon: boolean;
-    flex?: number;
 }
 
 const styles = StyleSheet.create({
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 export default function DatePicker(props: DatePickerProps) {
-    const { text, textState, icon, flex = 0 } = props;
+    const { text, textState, style, icon } = props;
 
     const [date, setDate] = useState(new Date(1598051730000));
     const [show, setShow] = useState(false);
@@ -52,7 +52,7 @@ export default function DatePicker(props: DatePickerProps) {
     return (
         <View>
             <InputIcon
-                style={[styles.input, { flex }]}
+                style={[styles.input, style]}
                 onFocus={() => {
                     Keyboard.dismiss();
                     openDatePicker();
@@ -62,11 +62,14 @@ export default function DatePicker(props: DatePickerProps) {
                 placeholder="AAAA-MM-DD"
                 keyboardType="numeric"
                 Icon={
-                    <FontAwesome
-                        name="calendar"
-                        size={20}
-                        color={colors.black_400}
-                    />
+                    (icon && (
+                        <FontAwesome
+                            name="calendar"
+                            size={20}
+                            color={colors.black_400}
+                        />
+                    )) ||
+                    undefined
                 }
             />
 
