@@ -19,14 +19,13 @@ export default [
         title: "  Bem vindos ao \n         Bloom!",
         message: "            seu app de rotina",
         image: require("../../../assets/logo_sun.png"),
-       
     },
     {
         id: "2",
         title: "Nosso alvo",
         message:
             " O Bloom veio para renovar o cenário de apps de rotina, contando com:",
-            image: require("../../../assets/logo_sun.png"),
+        image: require("../../../assets/logo_sun.png"),
         items: [
             {
                 id: "1",

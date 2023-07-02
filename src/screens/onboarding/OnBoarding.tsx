@@ -12,15 +12,15 @@ import {
     Image,
     SafeAreaView,
     StyleSheet,
+    View,
     useWindowDimensions,
-    View
 } from "react-native";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
 import Item from "./Item";
 import Next from "./Next";
-import pages, { ItemData } from "./pages";
 import Paginator from "./Paginator";
+import pages, { ItemData } from "./pages";
 
 const styles = StyleSheet.create({
     container: {
@@ -180,7 +180,7 @@ export default function OnBoarding() {
                     />
                 </View>
             </View>
-            
+
             <Image
                 style={[styles.background_bottom, { width }]}
                 source={require("../../../assets/onboarding-bottom.png")}

@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     useWindowDimensions,
-    View
+    View,
 } from "react-native";
 import colors from "../../pallete";
 import { ItemData } from "./pages";
@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
     item_first_page: {
         //  backgroundColor: "pink"
     },
-    item_second_page:{
-        position: 'absolute',
-    top: 200,
-    transform: [{ translateX: -40 }]
+    item_second_page: {
+        position: "absolute",
+        top: 200,
+        transform: [{ translateX: -40 }],
     },
-    item_third_page:{
-        position: 'absolute',
+    item_third_page: {
+        position: "absolute",
         top: 80,
         transform: [{ translateX: -160 }],
         fontSize: 35,
@@ -109,22 +109,25 @@ export default function Item(data: ItemData) {
                         },
                     ]}
                 />
-                
             )}
             <View style={styles.text}>
-                <Text style={[
-                    styles.title, 
-                    id === "1" && { marginTop: -500 },
-                    id === "2" && { marginTop: -140},
-                    id === "3" && styles.item_third_page,
-                ]}>
+                <Text
+                    style={[
+                        styles.title,
+                        id === "1" && { marginTop: -500 },
+                        id === "2" && { marginTop: -140 },
+                        id === "3" && styles.item_third_page,
+                    ]}
+                >
                     {title}
                 </Text>
-                <Text style={[
-                    styles.message,
-                    id === "1" && { marginTop: 10 },
-                    id === "2" && styles.item_second_page,
-                ]}>
+                <Text
+                    style={[
+                        styles.message,
+                        id === "1" && { marginTop: 10 },
+                        id === "2" && styles.item_second_page,
+                    ]}
+                >
                     {message}
                 </Text>
             </View>
