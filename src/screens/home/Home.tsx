@@ -1,7 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     Image,
+    Linking,
     ScrollView,
     StatusBar,
     StyleSheet,
@@ -11,10 +12,13 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { VictoryPie } from "victory-native";
+import { AuthContext } from "../../context/AuthContext";
+import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
-import months from "./months.json";
-import data from "./phrases.json";
+import months from "../../shared/months";
+import { Habits } from "../../types/shared";
+import info from "./phrases";
 
 const styles = StyleSheet.create({
     container: {
@@ -74,8 +78,8 @@ const styles = StyleSheet.create({
     containerDayPhrase: {
         width: "90%",
         minHeight: 90,
-        maxHeight: 150,
-        rowGap: 10,
+        maxHeight: 180,
+        rowGap: 5,
         margin: 25,
         padding: 15,
         borderTopLeftRadius: 10,
@@ -90,8 +94,12 @@ const styles = StyleSheet.create({
     },
     dayPhraseAuthor: {
         textAlign: "left",
-        fontSize: 10,
+        fontSize: 12,
         color: colors.white_100,
+    },
+    dayPhraseLink: {
+        fontSize: 18,
+        color: colors.white_600,
     },
     containerStats: {
         flexDirection: "row",
@@ -123,6 +131,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: colors.white_300,
     },
+    containerStatsDescription: {
+        alignContent: "center",
+        justifyContent: "space-evenly",
+        width: "40%",
+        flexDirection: "row",
+        rowGap: 10,
+        flexWrap: "wrap",
+    },
     containerstatsbutton: {
         padding: 8,
     },
@@ -130,12 +146,65 @@ const styles = StyleSheet.create({
         fontSize: 10,
         textAlign: "center",
     },
+    blueCircle: {
+        width: 20,
+        backgroundColor: colors.blue_300,
+        borderRadius: 100,
+    },
+    redCircle: {
+        width: 20,
+        backgroundColor: colors.rose_400,
+        borderRadius: 100,
+    },
 });
 
 export default function Home() {
+    const [userName, setUserName] = useState<string | null>(null);
+    const [habit, setHabit] = useState<Habits[] | null>(null);
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (user && user.id) {
+                const { data } = await supabase
+                    .from("profiles")
+                    .select("*")
+                    .eq("id", user.id)
+                    .single();
+
+                if (data) {
+                    setUserName(data.username);
+                    return;
+                }
+
+                alert("Erro ao procurar informações do perfil");
+            }
+        };
+
+        const getHabit = async () => {
+            if (user && user.id) {
+                const { data } = await supabase
+                    .from("habits")
+                    .select("completed")
+                    .eq("profile_id", user.id)
+                    .returns<Habits[]>();
+
+                if (data) {
+                    setHabit(data);
+                    return;
+                }
+
+                alert("Erro ao procurar informações dos Hábitos");
+            }
+        };
+
+        getHabit();
+        fetchData();
+    }, [user]);
+
     const navigation = useNavigation<StackNavigatorRoutesProps>();
     const date = new Date();
-    const frase = data[date.getUTCDay()];
+    const frase = info[date.getUTCDay()];
     const day = date.getDate();
     const month = months[date.getMonth()];
 
@@ -148,7 +217,7 @@ export default function Home() {
                 />
             </View>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Olá, NATAN!</Text>
+                <Text style={styles.headerText}>Olá, {userName}</Text>
             </View>
             <Image
                 style={styles.cerej}
@@ -166,135 +235,64 @@ export default function Home() {
                 >
                     <Text style={styles.dayPhrase}>{frase.phrase}</Text>
                     <Text style={styles.dayPhraseAuthor}>{frase.author}</Text>
+                    <Text
+                        style={styles.dayPhraseLink}
+                        onPress={() => Linking.openURL(frase.podcast)}
+                    >
+                        Clique aqui para ver o podcast recomendado de hoje
+                    </Text>
                 </TouchableOpacity>
 
-                <View style={styles.containerStats}>
-                    <TouchableOpacity>
-                        <VictoryPie
-                            width={150}
-                            height={150}
-                            padAngle={3}
-                            innerRadius={50}
-                            padding={0}
-                            colorScale={[
-                                colors.blue_300,
-                                colors.rose_400,
-                                colors.black_400,
-                            ]}
-                            data={[
-                                { x: " ", y: 1 },
-                                { x: " ", y: 2 },
-                                { x: " ", y: 5 },
-                            ]}
-                        />
+                <TouchableOpacity
+                    style={styles.containerStats}
+                    onPress={() => navigation.navigate("Status")}
+                >
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("Status")}
+                    >
+                        {habit ? (
+                            <VictoryPie
+                                width={150}
+                                height={150}
+                                padAngle={3}
+                                innerRadius={50}
+                                padding={0}
+                                colorScale={[colors.blue_300, colors.rose_400]}
+                                data={[
+                                    {
+                                        x: " ",
+                                        y: habit.reduce(
+                                            (accumulator, currentValue) =>
+                                                currentValue.completed
+                                                    ? accumulator + 1
+                                                    : accumulator,
+                                            0
+                                        ),
+                                    },
+                                    {
+                                        x: " ",
+                                        y: habit.reduce(
+                                            (accumulator, currentValue) =>
+                                                !currentValue.completed
+                                                    ? accumulator + 1
+                                                    : accumulator,
+                                            0
+                                        ),
+                                    },
+                                ]}
+                            />
+                        ) : (
+                            <Text> CARREGANDO </Text>
+                        )}
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text> CONCLUÍDO </Text>
-                        <Text> PULADO </Text>
-                        <Text> NÃO FEITO </Text>
-                    </TouchableOpacity>
-                </View>
+                    <View style={styles.containerStatsDescription}>
+                        <Text> Concluído </Text>
+                        <View style={styles.blueCircle} />
+                        <Text> Em progresso </Text>
+                        <View style={styles.redCircle} />
+                    </View>
+                </TouchableOpacity>
 
-                <View style={styles.containerbuttons}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Tasks");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>Crie um hábito</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Today");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>
-                            Acompanhe seus Habitos
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.containerbuttons}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Tasks");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>Crie um hábito</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Today");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>
-                            Acompanhe seus Habitos
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.containerbuttons}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Tasks");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>Crie um hábito</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Today");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>
-                            Acompanhe seus Habitos
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.containerbuttons}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Tasks");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>Crie um hábito</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Today");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>
-                            Acompanhe seus Habitos
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.containerbuttons}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Tasks");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>Crie um hábito</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Today");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>
-                            Acompanhe seus Habitos
-                        </Text>
-                    </TouchableOpacity>
-                </View>
                 <View style={styles.containerbuttons}>
                     <TouchableOpacity
                         style={styles.button}
