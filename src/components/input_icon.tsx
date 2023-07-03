@@ -25,6 +25,7 @@ import {
     Pressable,
     StyleProp,
     StyleSheet,
+    Text,
     TextInput,
     TextInputProps,
     View,
@@ -36,11 +37,13 @@ export interface InputProps extends TextInputProps {
     styleContainer?: StyleProp<ViewStyle>;
     position?: "left" | "right";
     Icon?: React.ReactElement;
+    label?: string;
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 25,
+        // marginTop: 25,
+        flexDirection: "column",
     },
     input: {
         color: "red",
@@ -51,6 +54,9 @@ const styles = StyleSheet.create({
         aspectRatio: 1,
         justifyContent: "center",
         alignItems: "center",
+    },
+    labelInput: {
+        color: "#808080",
     },
 });
 
@@ -71,6 +77,7 @@ export default function InputIcon(props: InputProps) {
         secureTextEntry,
         onChangeText,
         onFocus,
+        label,
     } = props;
 
     let direction: "column" | "row" | "column-reverse" | "row-reverse";
@@ -89,36 +96,42 @@ export default function InputIcon(props: InputProps) {
 
     const inputRef = useRef<TextInput>(null);
 
+    if (Icon && label)
+        throw Error("A InoputIcon can't have a label and a icon.");
+
     return (
-        <View
-            style={[
-                styles.container,
-                styleContainer,
-                Icon ? { flexDirection: direction } : null,
-            ]}
-        >
-            <TextInput
-                ref={inputRef}
-                allowFontScaling={allowFontScaling}
-                style={[styles.input, style]}
-                autoCapitalize={autoCapitalize}
-                placeholder={placeholder}
-                keyboardType={keyboardType}
-                autoComplete={autoComplete}
-                onChangeText={onChangeText}
-                inputMode={inputMode}
-                onFocus={onFocus}
-                value={value}
-                secureTextEntry={secureTextEntry}
-            />
-            {Icon && (
-                <Pressable
-                    style={[styles.container_icon, styleIconContainer]}
-                    onPress={() => inputRef.current?.focus()}
-                >
-                    {Icon}
-                </Pressable>
-            )}
+        <View style={{ flexDirection: "column", marginVertical: 15 }}>
+            {Icon ? undefined : <Text style={styles.labelInput}>{label}</Text>}
+            <View
+                style={[
+                    styles.container,
+                    styleContainer,
+                    Icon ? { flexDirection: direction } : null,
+                ]}
+            >
+                <TextInput
+                    ref={inputRef}
+                    allowFontScaling={allowFontScaling}
+                    style={[styles.input, style]}
+                    autoCapitalize={autoCapitalize}
+                    placeholder={placeholder}
+                    keyboardType={keyboardType}
+                    autoComplete={autoComplete}
+                    onChangeText={onChangeText}
+                    inputMode={inputMode}
+                    onFocus={onFocus}
+                    value={value}
+                    secureTextEntry={secureTextEntry}
+                />
+                {Icon && (
+                    <Pressable
+                        style={[styles.container_icon, styleIconContainer]}
+                        onPress={() => inputRef.current?.focus()}
+                    >
+                        {Icon}
+                    </Pressable>
+                )}
+            </View>
         </View>
     );
 }

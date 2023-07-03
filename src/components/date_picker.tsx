@@ -9,9 +9,10 @@ import InputIcon from "./input_icon";
 
 export interface DatePickerProps {
     text: string;
-    style: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     textState: Dispatch<SetStateAction<string>>;
     icon: boolean;
+    label?: string;
 }
 
 const styles = StyleSheet.create({
@@ -27,12 +28,15 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function DatePicker(props: DatePickerProps) {
-    const { text, textState, style, icon } = props;
-
-    const [date, setDate] = useState(new Date(1598051730000));
+export default function DatePicker({
+    text,
+    textState,
+    style,
+    icon,
+    label,
+}: DatePickerProps) {
+    const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
-    const dataMax = new Date();
 
     const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
         if (selectedDate) {
@@ -49,6 +53,9 @@ export default function DatePicker(props: DatePickerProps) {
         setShow(true);
     };
 
+    if (!icon && !label)
+        throw Error("The DatePicker must have a Icon or a label.");
+
     return (
         <View>
             <InputIcon
@@ -61,6 +68,7 @@ export default function DatePicker(props: DatePickerProps) {
                 value={text}
                 placeholder="AAAA-MM-DD"
                 keyboardType="numeric"
+                label={icon === false && label ? label : undefined}
                 Icon={
                     (icon && (
                         <FontAwesome
@@ -79,13 +87,7 @@ export default function DatePicker(props: DatePickerProps) {
                     value={date}
                     mode="date"
                     is24Hour
-                    maximumDate={
-                        new Date(
-                            dataMax.getUTCFullYear(),
-                            dataMax.getUTCMonth(),
-                            dataMax.getUTCDay()
-                        )
-                    }
+                    maximumDate={new Date()}
                     minimumDate={new Date(1950, 1, 1)}
                     onChange={onChange}
                 />

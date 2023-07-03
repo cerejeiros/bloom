@@ -1,8 +1,9 @@
+import { SUPABASE_KEY, SUPABASE_URL } from "@env";
 import "react-native-url-polyfill/auto";
-import { SUPABASE_URL, SUPABASE_KEY } from "@env";
 
 import { createClient } from "@supabase/supabase-js";
 import * as SecureStore from "expo-secure-store";
+import { Database } from "../types/database";
 
 const ExpoSecureStoreAdapter = {
     getItem: (key: string) => {
@@ -19,7 +20,7 @@ const ExpoSecureStoreAdapter = {
 if (!SUPABASE_URL || !SUPABASE_KEY)
     throw new Error("Supabase enviroment variables could not be find!");
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
+const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_KEY, {
     auth: {
         storage: ExpoSecureStoreAdapter,
         autoRefreshToken: true,

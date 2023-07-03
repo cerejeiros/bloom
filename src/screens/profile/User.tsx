@@ -1,43 +1,48 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import {
     Dimensions,
-    Image,
+    KeyboardAvoidingView,
     Modal,
     SafeAreaView,
     StyleSheet,
     Text,
     View,
 } from "react-native";
-import Button from "../../components/button";
+import { Button } from "react-native-paper";
+import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import { UserData } from "../../types/shared";
+import UserAvatar from "./UserAvatar";
+import UserStatsCard, { UserStatsCardProps } from "./UserStatsCard";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "green",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
     },
     input: {
         marginTop: 0,
         flex: 0,
         color: colors.black_500,
+        height: 40,
+        borderBottomWidth: 1,
+        borderColor: colors.black_400,
+        paddingLeft: 15,
+        paddingRight: 25,
+        borderRadius: 0,
+        minWidth: 280,
+        fontSize: 15,
     },
     profileHeader: {
         width,
         alignItems: "center",
         height: 150,
         zIndex: 1,
-        backgroundColor: "red",
-        marginBottom: 120,
     },
     profilePhoto: {
         position: "absolute",
@@ -45,25 +50,24 @@ const styles = StyleSheet.create({
         zIndex: 100,
         width: 180,
         height: 180,
-        borderRadius: 100,
         marginTop: 75,
-        borderColor: colors.blue_200,
-        borderWidth: 5,
     },
     editBadge: {
         position: "absolute",
         zIndex: 999,
         top: 78,
         right: 120,
-        backgroundColor: "#fff",
+        backgroundColor: colors.white_50,
         borderRadius: 45,
     },
     modal: {
-        top: 200,
-        margin: 20,
-        backgroundColor: "white",
+        height: height - 70,
+        marginHorizontal: 10,
+        marginVertical: 20,
+        backgroundColor: "#fff",
         borderRadius: 20,
-        padding: 35,
+        paddingHorizontal: 35,
+        paddingVertical: 30,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -76,11 +80,14 @@ const styles = StyleSheet.create({
     },
     modalTitle: {
         fontSize: 32,
+        marginBottom: 15,
+        fontWeight: "bold",
     },
     buttonView: {
         width: width - 70,
         flexDirection: "row",
         justifyContent: "space-evenly",
+        marginTop: 30,
     },
     buttonTitleColor: {
         color: "#fff",
@@ -88,6 +95,12 @@ const styles = StyleSheet.create({
     saveButton: {
         backgroundColor: colors.blue_500,
         borderColor: colors.black_400,
+    },
+    statsView: {
+        backgroundColor: "#F0F0F0",
+        width,
+        height,
+        paddingTop: 140,
     },
 });
 
@@ -99,115 +112,205 @@ function Card({ children }: CardProps) {
 }
 
 function User() {
-    const [name, setName] = React.useState<string | undefined>(undefined);
+    const [name, setName] = React.useState<string | null>(null);
     const [userData, setUserData] = useState<UserData | undefined>(undefined);
     const [modalVisible, setModalVisible] = useState(false);
-    const [bio, setBio] = useState<string | undefined>(undefined);
-    const [Birth, setUserDate] = useState<string | undefined>(undefined);
-    const [userName, setUserName] = useState<string | undefined>(undefined);
+    const [bio, setBio] = useState<string | null>(null);
+    const [userName, setUserName] = useState<string | null>(null);
+    const [date, setDate] = useState<string>("");
+    const [image, setImage] = useState<string | null>(null);
     const { user } = useContext(AuthContext);
+
+    const mockStatistics: UserStatsCardProps[] = [
+        {
+            iconPrincipal: "Trophy",
+            textPrimary: "3",
+            iconPrimary: "",
+            subTextPrimary: "position",
+            textSecondary: userData?.xp.toString() ?? "0",
+            iconSecondary: "",
+            subTextSecondary: "xp",
+            textPrincipal: "ranking",
+        },
+        {
+            iconPrincipal: "check",
+            textPrimary: "3",
+            iconPrimary: "",
+            subTextPrimary: "done",
+            textSecondary: "5",
+            iconSecondary: "",
+            subTextSecondary: "streak",
+            textPrincipal: "tasks",
+        },
+    ];
 
     useEffect(() => {
         const fetchData = async () => {
-            const { data } = await supabase
-                .from("profiles")
-                .select("*")
-                .eq("id", user?.id)
-                .limit(1)
-                .returns<UserData[]>();
+            if (user && user.id) {
+                const { data } = await supabase
+                    .from("profiles")
+                    .select("*")
+                    .eq("id", user.id)
+                    .single();
 
-            if (data === null || !data[0]) {
+                if (data) {
+                    setUserData(data);
+                    setName(data?.name);
+                    setUserName(data.username);
+                    setBio(data.bio);
+                    setDate(data.dateofbirth ?? "");
+                    setImage(data.photo);
+                    return;
+                }
+
                 alert("Erro ao procurar informações do perfil");
-                return;
             }
-            console.log(data[0]);
-
-            setUserData(data[0]);
-            setName(data[0].name);
-            setUserName(data[0].userName);
-            setBio(data[0].bio);
-            setImmediate(data[0].date);
         };
 
         fetchData();
     }, [user]);
 
+    const [visible, setVisible] = React.useState(false);
+
+    const saveUser = async () => {
+        const { error } = await supabase
+            .from("profiles")
+            .update({
+                bio,
+                name,
+                dateofbirth: date,
+                username: userName,
+                photo: image,
+            })
+            .eq("id", userData?.id);
+
+        if (error) {
+            alert("Não foi possível salvar as informações do perfil");
+            return;
+        }
+
+        setModalVisible(false);
+        setVisible(true);
+    };
+
     return (
-        <SafeAreaView style={styles.container}>
-            <Modal
-                visible={modalVisible}
-                animationType="slide"
-                transparent
-                onRequestClose={() => setModalVisible(false)}
-            >
-                <View style={styles.modal}>
-                    <Text style={styles.modalTitle}>Editar dados</Text>
-                    <View>
-                        <InputIcon
-                            onChangeText={setName}
-                            value={name}
-                            placeholder="Nome"
-                            keyboardType="default"
-                            inputMode="text"
-                            style={styles.input}
-                        />
-                        <InputIcon
-                            onChangeText={setUserName}
-                            value={userName}
-                            placeholder="userName"
-                            keyboardType="default"
-                            inputMode="text"
-                            style={styles.input}
-                        />
-                        <InputIcon
-                            onChangeText={setBio}
-                            value={bio}
-                            placeholder="Bio"
-                            keyboardType="default"
-                            inputMode="text"
-                            style={styles.input}
-                        />
-                    </View>
-                    <View style={styles.buttonView}>
-                        <Button
-                            title="Fechar"
-                            onPress={() => setModalVisible(false)}
-                            titleStyle={styles.buttonTitleColor}
-                        />
-                        <Button
-                            title="Salvar"
-                            onPress={() => setModalVisible(false)}
-                            titleStyle={styles.buttonTitleColor}
-                            style={styles.saveButton}
-                        />
-                    </View>
-                </View>
-            </Modal>
-            <View style={styles.profileHeader}>
-                <LinearGradient
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    colors={[colors.rose_75, colors.blue_75, colors.rose_75]}
-                    style={styles.profileHeader}
+        <KeyboardAvoidingView>
+            <SafeAreaView style={styles.container}>
+                <Modal
+                    visible={modalVisible}
+                    animationType="slide"
+                    transparent
+                    onRequestClose={() => setModalVisible(false)}
                 >
-                    <Image
-                        source={require("../../../assets/cat-profile.jpg")}
-                        style={styles.profilePhoto}
-                    />
+                    <View style={styles.modal}>
+                        <Text style={styles.modalTitle}>Editar perfil</Text>
+                        <View>
+                            <UserAvatar
+                                image={image}
+                                setImage={setImage}
+                                openPickerOnPress
+                            />
+                            <InputIcon
+                                onChangeText={setName}
+                                value={name ?? undefined}
+                                placeholder="Nome"
+                                keyboardType="default"
+                                inputMode="text"
+                                style={styles.input}
+                                label="Nome"
+                            />
+                            <InputIcon
+                                onChangeText={setUserName}
+                                value={userName ?? undefined}
+                                placeholder="userName"
+                                keyboardType="default"
+                                inputMode="text"
+                                style={styles.input}
+                                label="Username"
+                            />
+                            <InputIcon
+                                onChangeText={setBio}
+                                value={bio ?? undefined}
+                                placeholder="Biografia"
+                                keyboardType="default"
+                                inputMode="text"
+                                style={styles.input}
+                                label="Biografia"
+                            />
+                            <DatePicker
+                                icon={false}
+                                text={date}
+                                textState={setDate}
+                                style={styles.input}
+                                label="Data de nascimento"
+                            />
+                        </View>
+                        <View style={styles.buttonView}>
+                            <Button
+                                mode="contained"
+                                buttonColor={colors.rose_500}
+                                onPress={() => setModalVisible(false)}
+                            >
+                                Fechar
+                            </Button>
+
+                            <Button
+                                onPress={() => {
+                                    saveUser();
+                                }}
+                                mode="contained"
+                                buttonColor="green"
+                            >
+                                Salvar
+                            </Button>
+                        </View>
+                    </View>
+                </Modal>
+                <View style={styles.profileHeader}>
+                    {/* TODO - FIX LINEAR GRADIENT */}
+                    {/* <LinearGradient
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        colors={[
+                            colors.rose_75,
+                            colors.blue_75,
+                            colors.rose_75,
+                        ]}
+                        style={styles.profileHeader}
+                    /> */}
+                    <View style={styles.profilePhoto}>
+                        <UserAvatar
+                            image={image}
+                            setImage={setImage}
+                            openPickerOnPress={false}
+                        />
+                    </View>
                     <MaterialCommunityIcons
                         name="account-edit"
-                        size={36}
+                        size={30}
                         color="black"
                         style={styles.editBadge}
                         onPress={() => setModalVisible(true)}
                     />
-                </LinearGradient>
-            </View>
+                </View>
+                <View style={styles.statsView}>
+                    <UserStatsCard info={mockStatistics} />
+                    <Button
+                        icon="exit-to-app"
+                        mode="contained"
+                        style={{ marginTop: 200, marginHorizontal: 70 }}
+                        buttonColor={colors.rose_400}
+                        onPress={() => supabase.auth.signOut()}
+                    >
+                        Sair
+                    </Button>
+                </View>
 
-            <Card>
-                <Text>Usuário</Text>
-            </Card>
-        </SafeAreaView>
+                <Card>
+                    <Text>Usuário</Text>
+                </Card>
+            </SafeAreaView>
+        </KeyboardAvoidingView>
     );
 }
 

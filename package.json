@@ -52,6 +52,8 @@
         "typescript": "^4.9.4",
         "victory": "^36.6.11",
         "victory-native": "^36.6.11"
+        "expo-navigation-bar": "~2.1.1",
+        "expo-image-picker": "~14.1.1"
     },
     "devDependencies": {
         "@babel/core": "^7.20.0",
