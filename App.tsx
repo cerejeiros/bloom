@@ -3,6 +3,7 @@ import * as NavigationBar from "expo-navigation-bar";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
+import { PaperProvider } from "react-native-paper";
 import AuthContextProvider from "./src/context/AuthContext";
 import Routes from "./src/routes";
 
@@ -71,9 +72,11 @@ export default function App() {
 
     return (
         <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-            <AuthContextProvider>
-                <Routes />
-            </AuthContextProvider>
+            <PaperProvider>
+                <AuthContextProvider>
+                    <Routes />
+                </AuthContextProvider>
+            </PaperProvider>
         </View>
     );
 }

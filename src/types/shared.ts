@@ -4,6 +4,8 @@ export type UserData = {
     name?: string;
     username?: string;
     dateofbirth?: string;
+    gender?: string;
+    photo?: string;
     /*
         For the gamification of tasks, habits, and routines being
         followed.
