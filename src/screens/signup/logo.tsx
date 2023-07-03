@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
         marginTop: 40,
         marginBottom: 0,
         alignItems: "center",
-        backgroundColor: "red",
         alignSelf: "center",
     },
     icon: {

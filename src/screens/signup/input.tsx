@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         minWidth: 100,
         color: colors.black_500,
         fontSize: 15,
+        flex: 1,
     },
     title: {
         color: "black",
@@ -159,7 +160,7 @@ export default function Input() {
                 }
             />
 
-            <DatePicker text={birthday} textState={setBirth} icon />
+            <DatePicker flex={1} text={birthday} textState={setBirth} icon />
 
             <InputIcon
                 style={styles.input}

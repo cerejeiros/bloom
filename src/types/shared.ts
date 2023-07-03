@@ -8,3 +8,7 @@ export type UserData = {
     username: string | null;
     xp: number;
 };
+
+export type Habits = {
+    completed: boolean;
+};
