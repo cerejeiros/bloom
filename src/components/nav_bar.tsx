@@ -54,7 +54,7 @@ function NavBar() {
                 },
             }}
             sceneContainerStyle={{
-                backgroundColor: colors.white_200,
+                backgroundColor: colors.rose_100,
             }}
         >
             <Tab.Screen

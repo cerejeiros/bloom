@@ -2,7 +2,7 @@ import { FontAwesome, Fontisto } from "@expo/vector-icons";
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../../components/button";
-import DatePicker from "../../components/datePicker";
+import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import checkPassword from "../../helpers/relevantFunctions";

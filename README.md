@@ -4,7 +4,7 @@
 - Abra o terminal do seu computador na pasta raíz do projeto, recomendo abrir pelo vscode com o atalho `Ctrl + J`
 - Baixe e instale o expo cli com o comando no terminal `npx expo install -- -g`
 - Na pasta raíz do projeto rode o comando no terminal `npm install`
-- Baixa no servidor do discord um arquivo chamado `env`, ele possuirá as chaves de acesso ao banco de dados do Supabase. Salve-o na pasta raiz do projeto como .env e atualize sempre antes de fazer alterações com `git pull origin feat/perfil-usuario`
+- Baixa no servidor do discord um arquivo chamado `env`, ele possuirá as chaves de acesso ao banco de dados do Supabase. Salve-o na pasta raiz do projeto como .env e atualize sempre antes de fazer alterações com `git pull origin`
 - Para iniciar o projeto rode o comando no terminal `npx expo start`
 - Você pode escolher como rodar o projeto, em seu celular pessoal (recomendado) ou em um simulador
     -   No celular pessoal, baixe o aplicativo expo go e conecte o computador e o celular na mesma rede, então, aponte o leitor de QR code do aplicativo para o QR Code que aparecerá no terminal. Você pode rodar o projeto localmente via cabo USB, para isso, habilite as configurações de desenvolvedor no seu aparelho e ative a depuração USB, caso opte por essa abordagem você pode iniciar o projeto com o comando `expo start --localhost --android`.
