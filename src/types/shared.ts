@@ -155,3 +155,7 @@ export type Task = {
     */
     // reminders: boolean;
 };
+
+export type Habits = {
+    completed: boolean;
+};

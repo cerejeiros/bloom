@@ -1,16 +1,7 @@
-// Navigation BAR
-// onde vai ter a logo no centro,
-// os botoes para navegar em cada pagina:
-//
-// referencias:
-// https://www.youtube.com/watch?v=gPaBicMaib4 (com iphone)
-// https://www.youtube.com/watch?v=bUesHGYxSLg&list=PLQWFhX-gwJblNXe9Fj0WomT0aWKqoDQ-h&index=3&pp=iA
-
 import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { __String } from "typescript";
 import colors from "../pallete";
 import Home from "../screens/home/Home";
 import User from "../screens/profile/User";
@@ -22,9 +13,9 @@ const styles = StyleSheet.create({
     button: {
         alignItems: "center",
         justifyContent: "center",
-        height: 58,
-        width: 58,
-        borderRadius: 58,
+        height: 45,
+        width: 45,
+        borderRadius: 45,
         backgroundColor: "#FFC546",
     },
 });
@@ -47,7 +38,7 @@ function NavBar() {
                     borderRadius: 15,
                     paddingTop: 10,
                     elevation: 0,
-                    height: 80,
+                    height: 60,
                     borderTopColor: "transparent",
                     paddingBottom: 0,
                     backgroundColor: "#393939",
@@ -58,13 +49,13 @@ function NavBar() {
             }}
         >
             <Tab.Screen
-                name="Hoje"
+                name="Today"
                 component={Today}
                 options={{
                     tabBarActiveTintColor: colors.rose_400,
-                    tabBarLabel: "Today",
-                    tabBarIcon: ({ color }: __String) => (
-                        <Feather name="calendar" color={color} size={40} />
+                    tabBarLabel: "",
+                    tabBarIcon: ({ color }) => (
+                        <Feather name="calendar" color={color} size={30} />
                     ),
                 }}
             />
@@ -73,9 +64,9 @@ function NavBar() {
                 component={Status}
                 options={{
                     tabBarActiveTintColor: colors.blue_400,
-                    tabBarLabel: "Status",
-                    tabBarIcon: ({ color }: __String) => (
-                        <Octicons name="graph" color={color} size={40} />
+                    tabBarLabel: "",
+                    tabBarIcon: ({ color }) => (
+                        <Octicons name="graph" color={color} size={30} />
                     ),
                 }}
             />
@@ -85,10 +76,10 @@ function NavBar() {
                 options={{
                     tabBarActiveTintColor: colors.blue_600,
                     tabBarInactiveTintColor: colors.white_100,
-                    tabBarLabel: "Home",
-                    tabBarIcon: ({ color }: __String) => (
+                    tabBarLabel: "",
+                    tabBarIcon: ({ color }) => (
                         <View style={styles.button}>
-                            <Feather name="home" color={color} size={40} />
+                            <Feather name="home" color={color} size={30} />
                         </View>
                     ),
                 }}
@@ -99,9 +90,9 @@ function NavBar() {
                 component={Tasks}
                 options={{
                     tabBarActiveTintColor: colors.white_100,
-                    tabBarLabel: "Tasks",
-                    tabBarIcon: ({ color }: __String) => (
-                        <FontAwesome5 name="tasks" color={color} size={40} />
+                    tabBarLabel: "",
+                    tabBarIcon: ({ color }) => (
+                        <FontAwesome5 name="tasks" color={color} size={30} />
                     ),
                 }}
             />
@@ -111,9 +102,9 @@ function NavBar() {
                 component={User}
                 options={{
                     tabBarActiveTintColor: colors.rose_100,
-                    tabBarLabel: "User",
-                    tabBarIcon: ({ color }: __String) => (
-                        <Feather name="user" color={color} size={40} />
+                    tabBarLabel: "",
+                    tabBarIcon: ({ color }) => (
+                        <Feather name="user" color={color} size={30} />
                     ),
                 }}
             />
