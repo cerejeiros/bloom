@@ -214,4 +214,23 @@ Bruna Liberal, Luiza Pugas
 
 Bruna Liberal, Luiza Pugas
 
+54. [ ] 02/07 Finalizando a tela inicial do aplicativo parte 1 [[vídeo]](https://www.youtube.com/watch?v=mn2wRDdy8Rg)
+
+Kauã Seichi, Natan Almeida
+
+55. [ ] 02/07 Finalizando a tela inicial do aplicativo parte 2 [[vídeo]](https://www.youtube.com/watch?v=Tyk7Qk9_bsc)
+
+Kauã Seichi, Natan Almeida
+
+56. [ ] 04/07 Reunião para Planning da semana [[vídeo]](https://youtu.be/Rb6oa-3xxAM)
+
+Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
+
+57. [ ] 04/07 Testando coisas no supabase parte 1 [[vídeo]](https://www.youtube.com/watch?v=DJB6nOfst6s)
+
+Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
+
+58. [ ] 04/07 Testando coisas no supabase parte 2 [[vídeo]](https://www.youtube.com/watch?v=h-qM8aDINZI)
+
+Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
