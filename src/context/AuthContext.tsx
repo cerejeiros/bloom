@@ -25,17 +25,59 @@ export const AuthContext = createContext<AuthContextDataProps>(
     {} as AuthContextDataProps
 );
 
-type HabitTask = {
+// Data received from the database.
+type UnparsedProfile = {
+    id: string;
+    name: string | null;
+    photo: string | null;
+    username: string | null;
+    xp: number;
+    bio: string | null;
+    dateofbirth: string;
+    gender: string | null;
+    habits: Array<{
+        id: number;
+        name: [string] | [string, string];
+        period: [string, string];
+        days: Array<
+            | "sunday"
+            | "monday"
+            | "tuesday"
+            | "wednesday"
+            | "thursday"
+            | "friday"
+            | "saturday"
+        >;
+        completed: number;
+        profiles_tasks: Array<{
+            task_id: {
+                id: number;
+            };
+        }>;
+    }>;
+    routines: Array<{
+        id: number;
+        completed: number;
+        name: [string] | [string, string];
+        habits: Array<{
+            id: number;
+        }>;
+    }>;
+};
+
+// Data received from the database.
+type UnparsedTask = {
     completed: number;
     done: number;
     id: number;
+    habit_id?: number;
     priority: "high" | "medium" | "low";
     task_id: {
         created_at: string;
         created_by: string;
         id: number;
-        name: string;
-        period: string;
+        name: [string] | [string, string];
+        period: [string, string];
         repeated: string;
         shared: boolean;
         times: number;
@@ -48,8 +90,9 @@ export default function AuthContextProvider({
     const [user, setUser] = React.useState<User | null>(null);
     const [userData, setUserData] = React.useState<UserData | null>(null);
 
-    async function fetchTasks(id: string | undefined) {
-        const { data } = await supabase
+    // Takes tasks from the `profile_tasks` table and parse to useful data.
+    async function fetchTasks(id: string | undefined): Promise<Task[]> {
+        const { data: unparsedData } = await supabase
             .from("profiles_tasks")
             .select(
                 `
@@ -57,15 +100,16 @@ export default function AuthContextProvider({
             id,
             completed,
             done,
-            priority
+            priority,
+            habit_id
         `
             )
             .eq("profile_id(id)", id)
-            .returns<HabitTask[]>();
+            .returns<UnparsedTask[]>();
 
-        if (!data) throw Error("AuthContext: could not fetch tasks.");
+        if (!unparsedData) throw Error("AuthContext: could not fetch tasks.");
 
-        const serialisedData: Task[] = data.map((item: HabitTask) => {
+        const data: Task[] = unparsedData.map((item: UnparsedTask) => {
             // Parse to integer iff *repeated* is a number.
             const repeated =
                 (item.task_id.repeated as never) >>> 0 ===
@@ -87,21 +131,57 @@ export default function AuthContextProvider({
             } satisfies Task;
         });
 
-        return serialisedData;
+        return data;
     }
 
     const fetchData = React.useCallback(
         async (id: string | undefined) => {
-            const { data } = await supabase
+            const { data: unparsedData } = await supabase
                 .from("profiles")
-                .select("*")
+                .select(
+                    `
+                    *,
+                    habits(id,name,completed,days,period,profiles_tasks(task_id(id))),
+                    routines(id,name,completed,habits(id))
+                    `
+                )
                 .eq("id", id)
-                .single<UserData>();
+                .single<UnparsedProfile>();
 
-            if (!data)
+            if (!unparsedData)
                 throw Error("AuthContext: could not fetch data profile.");
 
-            data.tasks = await fetchTasks(id);
+            const data: UserData = {
+                id: unparsedData.id,
+                bio: unparsedData.bio,
+                name: unparsedData.name,
+                username: unparsedData.username,
+                dateofbirth: unparsedData.dateofbirth,
+                gender: unparsedData.gender,
+                photo: unparsedData.photo,
+                xp: unparsedData.xp,
+                tasks: await fetchTasks(id),
+                habits: unparsedData.habits.map((item) => {
+                    return {
+                        id: item.id,
+                        name: item.name,
+                        days: item.days,
+                        period: item.period,
+                        completed: item.completed,
+                        tasks: item.profiles_tasks.map(
+                            (task) => task.task_id.id
+                        ),
+                    };
+                }),
+                routines: unparsedData.routines.map((item) => {
+                    return {
+                        id: item.id,
+                        name: item.name,
+                        completed: item.completed,
+                        habits: item.habits.map((habit) => habit.id),
+                    };
+                }),
+            };
 
             setUserData(data);
         },
