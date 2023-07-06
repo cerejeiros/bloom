@@ -29,7 +29,11 @@ const ExampleData: Array<Task> = [
 export default function Tasks() {
     return (
         <View style={styles.container}>
-            <InterfaceCreateTasks />
+            <Text>Tasks</Text>
+            <Button
+                title="Go to details"
+                onPress={() => navigation.navigate("Details")}
+            />
         </View>
     );
 }

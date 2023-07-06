@@ -1,69 +1,114 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
-    KeyboardAvoidingView,
+    Image,
+    Linking,
+    ScrollView,
+    StatusBar,
     StyleSheet,
     Text,
     TouchableOpacity,
     View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { VictoryPie } from "victory-native";
+import { AuthContext } from "../../context/AuthContext";
+import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
-import data from "./phrases.json";
+import months from "../../shared/months";
+import { Habits } from "../../types/shared";
+import info from "./phrases";
 
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 90,
+        marginTop: 160,
+        flex: 1,
+        paddingTop: StatusBar.currentHeight,
     },
     header: {
         justifyContent: "flex-end",
-        padding: 15,
+        padding: 50,
+        alignSelf: "center",
         width: "100%",
-        height: 110,
         position: "absolute",
-        backgroundColor: colors.rose_200,
-        borderBottomEndRadius: 20,
-        borderBottomStartRadius: 20,
-        top: 0,
+        alignContent: "center",
     },
     headerText: {
-        fontSize: 30,
-        textAlign: "left",
-        color: "#fff",
+        fontSize: 25,
+        borderRadius: 10,
+        textAlign: "center",
+        color: colors.white_500,
+        backgroundColor: colors.white_300,
+    },
+    imagecontainer: {
+        position: "absolute",
+        top: -450,
+        alignSelf: "center",
+    },
+    sun: {
+        transform: [{ rotate: "165deg" }],
+    },
+
+    cerej: {
+        position: "absolute",
+        margin: 0,
+        top: 120,
+        right: 0,
+    },
+    date: {
+        position: "absolute",
+        marginLeft: 60,
+        height: 90,
+        top: 120,
+        flexDirection: "column",
+    },
+    day: {
+        fontSize: 80,
+        color: colors.white_500,
+    },
+    month: {
+        fontSize: 15,
+        textTransform: "uppercase",
+        color: colors.white_500,
+        alignSelf: "center",
     },
     containerDayPhrase: {
         width: "90%",
         minHeight: 90,
-        maxHeight: 150,
-        borderRadius: 10,
-        rowGap: 10,
-        margin: 15,
+        maxHeight: 180,
+        rowGap: 5,
+        margin: 25,
         padding: 15,
-        backgroundColor: "#DDDDDD",
+        borderTopLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        backgroundColor: colors.white_300,
     },
     dayPhrase: {
+        opacity: 1,
         textAlign: "left",
         fontSize: 20,
+        color: colors.white_500,
     },
     dayPhraseAuthor: {
         textAlign: "left",
-        fontSize: 10,
+        fontSize: 12,
+        color: colors.white_100,
+    },
+    dayPhraseLink: {
+        fontSize: 18,
+        color: colors.white_600,
     },
     containerStats: {
         flexDirection: "row",
+        justifyContent: "space-between",
         width: "90%",
         borderRadius: 10,
         margin: 15,
-        padding: 15,
-        backgroundColor: colors.blue_400,
-        flexWrap: "wrap",
-        rowGap: 16,
-    },
-    containerTextStats: {
-        width: "50%",
+        padding: 20,
+        backgroundColor: colors.white_300,
     },
     textStats: {
         textAlign: "left",
@@ -84,65 +129,169 @@ const styles = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: colors.blue_200,
+        backgroundColor: colors.white_300,
+    },
+    containerStatsDescription: {
+        alignContent: "center",
+        justifyContent: "space-evenly",
+        width: "40%",
+        flexDirection: "row",
+        rowGap: 10,
+        flexWrap: "wrap",
     },
     containerstatsbutton: {
-        backgroundColor: colors.blue_200,
-        width: "40%",
         padding: 8,
-        borderRadius: 8,
-        marginLeft: "60%",
     },
     textbutton: {
-        fontSize: 20,
+        fontSize: 10,
         textAlign: "center",
+    },
+    blueCircle: {
+        width: 20,
+        backgroundColor: colors.blue_300,
+        borderRadius: 100,
+    },
+    redCircle: {
+        width: 20,
+        backgroundColor: colors.rose_400,
+        borderRadius: 100,
     },
 });
 
 export default function Home() {
+    const [userName, setUserName] = useState<string | null>(null);
+    const [habit, setHabit] = useState<Habits[] | null>(null);
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (user && user.id) {
+                const { data } = await supabase
+                    .from("profiles")
+                    .select("*")
+                    .eq("id", user.id)
+                    .single();
+
+                if (data) {
+                    setUserName(data.username);
+                    return;
+                }
+
+                alert("Erro ao procurar informações do perfil");
+            }
+        };
+
+        const getHabit = async () => {
+            if (user && user.id) {
+                const { data } = await supabase
+                    .from("habits")
+                    .select("completed")
+                    .eq("profile_id", user.id)
+                    .returns<Habits[]>();
+
+                if (data) {
+                    setHabit(data);
+                    return;
+                }
+
+                alert("Erro ao procurar informações dos Hábitos");
+            }
+        };
+
+        getHabit();
+        fetchData();
+    }, [user]);
+
     const navigation = useNavigation<StackNavigatorRoutesProps>();
     const date = new Date();
-    const frase = data[date.getUTCDay()];
+    const frase = info[date.getUTCDay()];
+    const day = date.getDate();
+    const month = months[date.getMonth()];
 
     return (
-        <KeyboardAvoidingView>
+        <ScrollView>
+            <View style={styles.imagecontainer}>
+                <Image
+                    style={styles.sun}
+                    source={require("../../../assets/luasol.png")}
+                />
+            </View>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Olá, NATAN!</Text>
+                <Text style={styles.headerText}>Olá, {userName}</Text>
+            </View>
+            <Image
+                style={styles.cerej}
+                source={require("../../../assets/cereje.png")}
+            />
+            <View style={styles.date}>
+                <Text style={styles.day}>{day}</Text>
+                <Text style={styles.month}>de {month.month}</Text>
             </View>
 
             <SafeAreaView style={styles.container}>
                 <TouchableOpacity
                     style={styles.containerDayPhrase}
-                    activeOpacity={0.8}
+                    activeOpacity={1}
                 >
                     <Text style={styles.dayPhrase}>{frase.phrase}</Text>
                     <Text style={styles.dayPhraseAuthor}>{frase.author}</Text>
+                    <Text
+                        style={styles.dayPhraseLink}
+                        onPress={() => Linking.openURL(frase.podcast)}
+                    >
+                        Clique aqui para ver o podcast recomendado de hoje
+                    </Text>
                 </TouchableOpacity>
 
-                <View style={styles.containerStats}>
-                    <View style={styles.containerTextStats}>
-                        <Text style={styles.textStats}>
-                            AQUI FICARÁ AS ESTATÍSTICAS DO DIA{" "}
-                        </Text>
-                    </View>
-
-                    <View style={styles.containerTextStats}>
-                        <Text style={styles.textStats}>
-                            AQUI FICARÁ AS ESTATÍSTICAS TOTAL{" "}
-                        </Text>
-                    </View>
-
-                    <TouchableOpacity style={styles.containerstatsbutton}>
-                        <Text
-                            style={styles.textbutton}
-                            onPress={() => {
-                                navigation.navigate("Status");
-                            }}
-                        >
-                            Ver todas as estatísticas
-                        </Text>
+                <TouchableOpacity
+                    style={styles.containerStats}
+                    onPress={() => navigation.navigate("Status")}
+                >
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("Status")}
+                    >
+                        {habit ? (
+                            <VictoryPie
+                                width={150}
+                                height={150}
+                                padAngle={3}
+                                innerRadius={50}
+                                padding={0}
+                                colorScale={[colors.blue_300, colors.rose_400]}
+                                data={[
+                                    {
+                                        x: " ",
+                                        y: habit.reduce(
+                                            (accumulator, currentValue) =>
+                                                currentValue.completed
+                                                    ? accumulator + 1
+                                                    : accumulator,
+                                            0
+                                        ),
+                                    },
+                                    {
+                                        x: " ",
+                                        y: habit.reduce(
+                                            (accumulator, currentValue) =>
+                                                !currentValue.completed
+                                                    ? accumulator + 1
+                                                    : accumulator,
+                                            0
+                                        ),
+                                    },
+                                ]}
+                            />
+                        ) : (
+                            <Text> CARREGANDO </Text>
+                        )}
                     </TouchableOpacity>
-                </View>
+                    <View style={styles.containerStatsDescription}>
+                        <Text> Concluído </Text>
+                        <View style={styles.blueCircle} />
+                        <Text> Em progresso </Text>
+                        <View style={styles.redCircle} />
+                    </View>
+                </TouchableOpacity>
 
                 <View style={styles.containerbuttons}>
                     <TouchableOpacity
@@ -165,6 +314,6 @@ export default function Home() {
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
-        </KeyboardAvoidingView>
+        </ScrollView>
     );
 }

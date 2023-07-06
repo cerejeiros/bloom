@@ -180,7 +180,7 @@ export default function OnBoarding() {
                     />
                 </View>
             </View>
-            
+
             <Image
                 style={[styles.background_bottom, { width }]}
                 source={require("../../../assets/onboarding-bottom.png")}

@@ -13,17 +13,10 @@ const styles = StyleSheet.create({
     button: {
         alignItems: "center",
         justifyContent: "center",
-        // height: 58,
-        // width: 58,
-        borderRadius: 58,
-        // backgroundColor: colors.yellow_300,
-    },
-    icon_style: {
-        // backgroundColor: "red",
-    },
-    label_style: {
-        fontSize: 14,
-        // marginBottom: 10,
+        height: 45,
+        width: 45,
+        borderRadius: 45,
+        backgroundColor: "#FFC546",
     },
 });
 
@@ -51,8 +44,7 @@ function NavBar() {
                     // borderRadius: 15,
                     // paddingTop: 10,
                     elevation: 0,
-                    minHeight: Defaults.bar_height,
-                    maxHeight: Defaults.bar_height,
+                    height: 60,
                     borderTopColor: "transparent",
                     paddingTop: Defaults.min_top_size / 2,
                     paddingBottom: Defaults.padding_bottom,
@@ -61,24 +53,18 @@ function NavBar() {
                     backgroundColor: colors.black_800,
                 },
             }}
-            sceneContainerStyle={
-                {
-                    // backgroundColor: colors.white_200,
-                }
-            }
+            sceneContainerStyle={{
+                backgroundColor: colors.rose_100,
+            }}
         >
             <Tab.Screen
                 name="Today"
                 component={Today}
                 options={{
                     tabBarActiveTintColor: colors.rose_400,
-                    tabBarLabel: "Today",
+                    tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
-                        <Feather
-                            name="calendar"
-                            color={color}
-                            size={Defaults.icon_size}
-                        />
+                        <Feather name="calendar" color={color} size={30} />
                     ),
                 }}
             />
@@ -87,15 +73,9 @@ function NavBar() {
                 component={Status}
                 options={{
                     tabBarActiveTintColor: colors.blue_400,
-                    tabBarLabel: "Status",
-                    tabBarLabelStyle: styles.label_style,
+                    tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
-                        <Octicons
-                            style={styles.icon_style}
-                            name="graph"
-                            color={color}
-                            size={Defaults.icon_size}
-                        />
+                        <Octicons name="graph" color={color} size={30} />
                     ),
                 }}
             />
@@ -105,14 +85,10 @@ function NavBar() {
                 options={{
                     tabBarActiveTintColor: colors.blue_600,
                     tabBarInactiveTintColor: colors.white_100,
-                    tabBarLabel: "Home",
+                    tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
                         <View style={styles.button}>
-                            <Feather
-                                name="home"
-                                color={colors.yellow_300}
-                                size={Defaults.icon_size}
-                            />
+                            <Feather name="home" color={color} size={30} />
                         </View>
                     ),
                 }}
@@ -123,13 +99,9 @@ function NavBar() {
                 component={Tasks}
                 options={{
                     tabBarActiveTintColor: colors.white_100,
-                    tabBarLabel: "Tasks",
+                    tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
-                        <FontAwesome5
-                            name="tasks"
-                            color={color}
-                            size={Defaults.icon_size}
-                        />
+                        <FontAwesome5 name="tasks" color={color} size={30} />
                     ),
                 }}
             />
@@ -139,13 +111,9 @@ function NavBar() {
                 component={User}
                 options={{
                     tabBarActiveTintColor: colors.rose_100,
-                    tabBarLabel: "User",
+                    tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
-                        <Feather
-                            name="user"
-                            color={color}
-                            size={Defaults.icon_size}
-                        />
+                        <Feather name="user" color={color} size={30} />
                     ),
                 }}
             />
