@@ -85,7 +85,9 @@ export default function Input() {
             .eq("username", username)
             .returns<{ username: string }[] | null>();
 
-        console.error(error);
+        if (error)
+            throw Error(`signUp: checkUsernameDuplicated -> ${error.message}`);
+
         return data && data?.length > 0;
     };
 
