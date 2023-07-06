@@ -48,7 +48,7 @@ export type Routine = {
     completed: number;
 
     /*
-        A list of habits per id 
+        A list of habits per id.
     */
     habits: Array<number>;
 };
@@ -91,7 +91,7 @@ export type Habit = {
         If any string then follow the format: "HH:MM-HH:MM"
         where the first *HH:MM* cannot be equal to the second.
     */
-    period: [HabitPeriod, HabitPeriod];
+    period: [HabitPeriod] | [HabitPeriod, HabitPeriod];
 
     /*
         How many times this habit was particularly completed.
@@ -174,8 +174,8 @@ export type Task = {
     /*
         Get reminders for the habit in the device from the application.
         The system works by notifying the user 
+        NOTE: the system of cache needs to be implemented first.
         TODO: how such system would work?
-
         TODO: see background running application with Expo.
         TODO: see local data access through background running.
     */
