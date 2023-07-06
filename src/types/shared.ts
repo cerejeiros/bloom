@@ -1,11 +1,11 @@
 export type UserData = {
     id: string;
-    bio?: string;
-    name?: string;
-    username?: string;
-    dateofbirth?: string;
-    gender?: string;
-    photo?: string;
+    bio: string | null;
+    name: string | null;
+    username: string | null;
+    dateofbirth: string | null;
+    gender: string | null;
+    photo: string | null;
     /*
         For the gamification of tasks, habits, and routines being
         followed.
@@ -27,7 +27,7 @@ export type UserData = {
 };
 
 /*
-    A routine is a list of habits separated by day.
+    A routine is a list of seven habits separated by day.
 */
 export type Routine = {
     /*
@@ -35,17 +35,28 @@ export type Routine = {
     */
     id: number;
     /*
-        The list of habits included in this routine separated by day.
-        In-client what we basically render is a list of days with habits
-        for each day.
-        NOTE: if you have a better idea, let's discuss it!
+        Short description of what the task is.
+        Iff one element: "title"
+        Iff two elements: "title", "description"
+        Disregard other occasions.
     */
-    habits: Array<Habit>;
+    name: [string] | [string, string];
+
+    /*
+        How many times this habit was particularly completed.
+    */
+    completed: number;
+
+    /*
+        A list of habits per id 
+    */
+    habits: Array<number>;
 };
 
 /*
     A habit is a time-range that includes a list of tasks.
 */
+type HabitPeriod = "morning" | "afternoon" | "evening" | string;
 export type Habit = {
     /*
         Will be used to access/update the same task in the database.
@@ -53,9 +64,19 @@ export type Habit = {
     id: number;
 
     /*
-        Which day(s) this habit applies to?
+        Short description of what the task is.
+        Iff one element: "title"
+        Iff two elements: "title", "description"
+        Disregard other occasions.
     */
-    day: Array<
+    name: [string] | [string, string];
+
+    /*
+        Which day(s) this habit applies to?
+        Note: Obviously it should not have more than seven elements;
+              At minimum it should have one element.
+    */
+    days: Array<
         | "sunday"
         | "monday"
         | "tuesday"
@@ -67,15 +88,20 @@ export type Habit = {
 
     /*
         The time range where this habit is applied.
-        NOTE: start and end cannot be equals.
+        If any string then follow the format: "HH:MM-HH:MM"
+        where the first *HH:MM* cannot be equal to the second.
     */
-    start: string;
-    end: string;
+    period: [HabitPeriod, HabitPeriod];
 
     /*
-        The list of tasks included in this habit.
+        How many times this habit was particularly completed.
     */
-    tasks: Array<Task>;
+    completed: number;
+
+    /*
+        The list of tasks per id included in this habit.
+    */
+    tasks: Array<number>;
 };
 
 /*
@@ -87,9 +113,13 @@ export type Task = {
     */
     id: number;
     /*
-        Guards the message of the task, for example "Drink Water".
+        Short description of what the task is.
+        Iff one element: "title"
+        Iff two elements: "title", "description"
+        Disregard other occasions.
     */
-    name: string;
+    name: [string] | [string, string];
+
     /* 
         Can be used to differentiate the status of the task.
         For example, if there 5 'times' a task must be made:
@@ -99,26 +129,19 @@ export type Task = {
     */
     done: number;
     times: number;
+    completed: number;
     /*
         Defined by the user to have higher priority display 
         going from the highest "high" to the lowest.
     */
     priority: "high" | "medium" | "low";
     /*
-        To see if it's in current time, and give lower priority
-        (perhaps even gray out) in case it already has passed.
-        If it's a pair of strings not included:
-            its elements is a time "hour:minute" formatted such as:
-            ["20:00", "22:00"]
+        In case it already has passed perhaps even gray out.
+        Formatted as such: *hours:minutes* for the elements
+        in the pair, the first representing the start
+        and the second the end.
     */
-    period:
-        | "morning"
-        | "afternoon"
-        | "evening"
-        | "morning-afternoon"
-        | "morning-evening"
-        | "afternoon-evening"
-        | string;
+    period: [string, string];
     /*
         Counts in hours to be repeated every N hours after
         started its time.
@@ -146,16 +169,15 @@ export type Task = {
         That's why Tasks is global in the database.
     */
     shared: boolean;
+    shared_id: number;
 
     /*
         Get reminders for the habit in the device from the application.
+        The system works by notifying the user 
         TODO: how such system would work?
+
         TODO: see background running application with Expo.
         TODO: see local data access through background running.
     */
     // reminders: boolean;
-};
-
-export type Habits = {
-    completed: boolean;
 };
