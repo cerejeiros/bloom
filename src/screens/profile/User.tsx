@@ -15,7 +15,6 @@ import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
-import { UserData } from "../../types/shared";
 import UserAvatar from "./UserAvatar";
 import UserStatsCard, { UserStatsCardProps } from "./UserStatsCard";
 
@@ -113,13 +112,13 @@ function Card({ children }: CardProps) {
 
 function User() {
     const [name, setName] = React.useState<string | null>(null);
-    const [userData, setUserData] = useState<UserData | undefined>(undefined);
+    // const [oldUserData, setUserData] = useState<UserData | undefined>(undefined);
     const [modalVisible, setModalVisible] = useState(false);
     const [bio, setBio] = useState<string | null>(null);
     const [userName, setUserName] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
-    const { user } = useContext(AuthContext);
+    const { user, userData } = useContext(AuthContext);
 
     const mockStatistics: UserStatsCardProps[] = [
         {
@@ -145,30 +144,17 @@ function User() {
     ];
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (user && user.id) {
-                const { data } = await supabase
-                    .from("profiles")
-                    .select("*")
-                    .eq("id", user.id)
-                    .single();
+        if (userData) {
+            setName(userData?.name);
+            setUserName(userData.username);
+            setBio(userData.bio);
+            setDate(userData.dateofbirth ?? "");
+            setImage(userData.photo);
+            return;
+        }
 
-                if (data) {
-                    setUserData(data);
-                    setName(data?.name);
-                    setUserName(data.username);
-                    setBio(data.bio);
-                    setDate(data.dateofbirth ?? "");
-                    setImage(data.photo);
-                    return;
-                }
-
-                alert("Erro ao procurar informações do perfil");
-            }
-        };
-
-        fetchData();
-    }, [user]);
+        throw Error("Erro ao procurar informações do perfil");
+    }, [userData]);
 
     const [visible, setVisible] = React.useState(false);
 
