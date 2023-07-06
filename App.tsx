@@ -9,15 +9,6 @@ import Routes from "./src/routes";
 
 NavigationBar.setVisibilityAsync("hidden");
 
-// NavigationBar.addVisibilityListener(async ({ visibility }) => {
-//     if (visibility === "visible") {
-//         await new Promise((resolve) => {
-//             setTimeout(resolve, 2500);
-//         });
-//         NavigationBar.setVisibilityAsync("hidden");
-//     }
-// });
-
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
