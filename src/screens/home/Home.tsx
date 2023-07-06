@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         textAlign: "center",
         color: colors.white_500,
-        backgroundColor: colors.white_300,
+        backgroundColor: colors.white_100,
     },
     imagecontainer: {
         position: "absolute",
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderTopLeftRadius: 10,
         borderBottomRightRadius: 10,
-        backgroundColor: colors.white_300,
+        backgroundColor: colors.white_100,
     },
     dayPhrase: {
         opacity: 1,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         margin: 15,
         padding: 20,
-        backgroundColor: colors.white_300,
+        backgroundColor: colors.white_100,
     },
     textStats: {
         textAlign: "left",
