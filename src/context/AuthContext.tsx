@@ -220,41 +220,39 @@ export default function AuthContextProvider({
             usern: string,
             birth: string
         ) => {
-            {
-                const { data, error } = await supabase.auth.signUp({
-                    email,
-                    password,
-                });
+            const { data, error: errorUser } = await supabase.auth.signUp({
+                email,
+                password,
+            });
 
-                if (error || !data?.user)
-                    throw Error(
-                        `AuthContext.signUp: Could not login -> ${error}`
-                    );
+            if (errorUser || !data?.user)
+                throw Error(
+                    `AuthContext.signUp: Could not login -> ${errorUser}`
+                );
 
-                setUser(data.user);
-            }
+            setUser(data.user);
 
-            if (!user) throw Error("AuthContext.signup: User was not set.");
+            if (!data.user)
+                throw Error("AuthContext.signup: User was not set.");
 
-            {
-                const { data, error } = await supabase
-                    .from("profiles")
-                    .update({
-                        username: usern,
-                        dateofbirth: birth,
-                    })
-                    .eq("id", user.id);
+            const { error } = await supabase
+                .from("profiles")
+                .update({
+                    username: usern,
+                    dateofbirth: birth,
+                })
+                .eq("id", data.user.id);
 
-                if (error || !data)
-                    throw Error(
-                        `AuthContext.signUp: Could not update data -> ${error}`
-                    );
-            }
-            fetchData(user.id);
+            if (error)
+                throw Error(
+                    `AuthContext.signUp: Could not update data -> ${error}`
+                );
+
+            fetchData(data.user.id);
 
             return Promise.resolve();
         },
-        [user, fetchData]
+        [fetchData]
     );
 
     const signOut = async () => {
