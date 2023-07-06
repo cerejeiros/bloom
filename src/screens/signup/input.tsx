@@ -76,7 +76,7 @@ export default function Input() {
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
     const [isloading, setIsLoading] = useState(false);
-    const { signUp, signUpData, fetchData } = useContext(AuthContext);
+    const { signUp } = useContext(AuthContext);
 
     const checkUsernameDuplicated = async () => {
         const { data, error } = await supabase
@@ -119,9 +119,7 @@ export default function Input() {
         }
 
         setIsLoading(true);
-        await signUp(email, password);
-        await signUpData(username, birthday);
-        await fetchData();
+        await signUp(email, password, username, birthday);
         setIsLoading(false);
         return true;
     };
@@ -161,7 +159,12 @@ export default function Input() {
                 }
             />
 
-            <DatePicker flex={1} text={birthday} textState={setBirth} icon />
+            <DatePicker
+                style={{ flex: 1 }}
+                text={birthday}
+                textState={setBirth}
+                icon
+            />
 
             <InputIcon
                 style={styles.input}
