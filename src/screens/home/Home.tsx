@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         marginTop: 160,
         flex: 1,
         paddingTop: StatusBar.currentHeight,
+        paddingBottom: StatusBar.currentHeight && StatusBar.currentHeight * 2.5,
     },
     header: {
         justifyContent: "flex-end",
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: colors.white_300,
+        backgroundColor: colors.white_100,
     },
     containerStatsDescription: {
         alignContent: "center",
