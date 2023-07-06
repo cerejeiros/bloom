@@ -1,5 +1,5 @@
 import { FontAwesome, Fontisto } from "@expo/vector-icons";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../../components/button";
 import DatePicker from "../../components/date_picker";
@@ -126,9 +126,11 @@ export default function Input() {
         return true;
     };
 
-    useEffect(() => {
+    // TODO: Here we can make a transition screen when sign-up is successful and
+    //       we enter the home screen of the application.
+    /* useEffect(() => {
         console.log(isloading);
-    }, [isloading]);
+    }, [isloading]); */
 
     return (
         <View style={styles.container}>
