@@ -1,7 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Task } from "../../types/shared";
-import InterfaceCreateTasks from "./interface_tasks";
+import { StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
@@ -11,29 +9,10 @@ const styles = StyleSheet.create({
     },
 });
 
-// const ExampleDataRoutine: Array<Habit> = [{}];
-
-const ExampleData: Array<Task> = [
-    {
-        id: 1,
-        name: "Drink water",
-        done: 0,
-        times: 5,
-        priority: "urgent",
-        period: ["morning", "evening"],
-        repeated: "daily",
-        meta_start: 1344646810,
-    },
-];
-
 export default function Tasks() {
     return (
         <View style={styles.container}>
             <Text>Tasks</Text>
-            <Button
-                title="Go to details"
-                onPress={() => navigation.navigate("Details")}
-            />
         </View>
     );
 }
