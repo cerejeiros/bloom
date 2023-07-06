@@ -36,6 +36,7 @@ const colors = {
     black_800: "#121212",
     black_true: "#ffffff",
     yellow_300: "#FFC546",
+    green_300: "#77b255",
 };
 
 export default colors;
