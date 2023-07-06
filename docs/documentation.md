@@ -234,3 +234,10 @@ Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias,
 
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
+59. [ ]  06/07 Reunião para revisão de código parte 1 [[vídeo]](https://www.youtube.com/watch?v=486wTtFujH8)
+
+Kauã Seichi, Natan Almeida, João Farias
+
+60. [ ]  06/07 Reunião para revisão de código parte 2 [[vídeo]](https://www.youtube.com/watch?v=F110ZRnJGuQ)
+
+Kauã Seichi, Natan Almeida, João Farias
