@@ -38,6 +38,10 @@
             "warn",
             { "allowAsProps": true }
         ],
+        // Disabled because window.alerrt() is a valid function to be used
+        // in a React Native application since it triggers native mobile
+        // hot notification.
+        "no-alert": "off",
         "react/jsx-props-no-spreading": [
             1,
             {
