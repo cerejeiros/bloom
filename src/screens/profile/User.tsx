@@ -15,7 +15,6 @@ import InputIcon from "../../components/input_icon";
 import { AuthContext } from "../../context/AuthContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
-import { UserData } from "../../types/shared";
 import UserAvatar from "./UserAvatar";
 import UserStatsCard, { UserStatsCardProps } from "./UserStatsCard";
 
@@ -113,13 +112,12 @@ function Card({ children }: CardProps) {
 
 function User() {
     const [name, setName] = React.useState<string | null>(null);
-    const [userData, setUserData] = useState<UserData | undefined>(undefined);
     const [modalVisible, setModalVisible] = useState(false);
     const [bio, setBio] = useState<string | null>(null);
     const [userName, setUserName] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
-    const { user } = useContext(AuthContext);
+    const { user, userData, setUserData } = useContext(AuthContext);
 
     const mockStatistics: UserStatsCardProps[] = [
         {
@@ -145,48 +143,54 @@ function User() {
     ];
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (user && user.id) {
-                const { data } = await supabase
-                    .from("profiles")
-                    .select("*")
-                    .eq("id", user.id)
-                    .single();
+        if (!userData)
+            throw Error("User : useEffect() => Could not set userData on UI.");
 
-                if (data) {
-                    setUserData(data);
-                    setName(data?.name);
-                    setUserName(data.username);
-                    setBio(data.bio);
-                    setDate(data.dateofbirth ?? "");
-                    setImage(data.photo);
-                    return;
-                }
-
-                alert("Erro ao procurar informações do perfil");
-            }
-        };
-
-        fetchData();
-    }, [user]);
+        setName(userData?.name);
+        setUserName(userData.username);
+        setBio(userData.bio);
+        setDate(userData.dateofbirth ?? "");
+        setImage(userData.photo);
+    }, [userData]);
 
     const [visible, setVisible] = React.useState(false);
 
     const saveUser = async () => {
-        const { error } = await supabase
-            .from("profiles")
-            .update({
-                bio,
-                name,
-                dateofbirth: date,
-                username: userName,
-                photo: image,
-            })
-            .eq("id", userData?.id);
+        if (!userData)
+            throw Error("User : saveUser() => Could not load userData.");
 
-        if (error) {
-            alert("Não foi possível salvar as informações do perfil");
-            return;
+        // Update database with client profile data.
+        {
+            const { error } = await supabase
+                .from("profiles")
+                .update({
+                    bio,
+                    name,
+                    dateofbirth: date,
+                    username: userName,
+                    photo: image,
+                })
+                .eq("id", userData.id);
+
+            if (error) {
+                window.alert(
+                    "Não foi possível salvar as informações do perfil"
+                );
+                throw Error(
+                    "User : saveUser() => Could not update profile data."
+                );
+            }
+        }
+
+        // Update client data (context) profile data.
+        {
+            const data = userData;
+            data.bio = bio;
+            data.name = name;
+            data.dateofbirth = date;
+            data.username = userName;
+            data.photo = image;
+            setUserData(data);
         }
 
         setModalVisible(false);

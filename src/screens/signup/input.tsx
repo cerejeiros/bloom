@@ -1,5 +1,5 @@
 import { FontAwesome, Fontisto } from "@expo/vector-icons";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../../components/button";
 import DatePicker from "../../components/date_picker";
@@ -76,7 +76,7 @@ export default function Input() {
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
     const [isloading, setIsLoading] = useState(false);
-    const { signUp, signUpData } = useContext(AuthContext);
+    const { signUp } = useContext(AuthContext);
 
     const checkUsernameDuplicated = async () => {
         const { data, error } = await supabase
@@ -85,7 +85,9 @@ export default function Input() {
             .eq("username", username)
             .returns<{ username: string }[] | null>();
 
-        console.error(error);
+        if (error)
+            throw Error(`signUp: checkUsernameDuplicated -> ${error.message}`);
+
         return data && data?.length > 0;
     };
 
@@ -119,15 +121,16 @@ export default function Input() {
         }
 
         setIsLoading(true);
-        await signUp(email, password);
-        await signUpData(username, birthday);
+        await signUp(email, password, username, birthday);
         setIsLoading(false);
         return true;
     };
 
-    useEffect(() => {
+    // TODO: Here we can make a transition screen when sign-up is successful and
+    //       we enter the home screen of the application.
+    /* useEffect(() => {
         console.log(isloading);
-    }, [isloading]);
+    }, [isloading]); */
 
     return (
         <View style={styles.container}>
@@ -160,7 +163,12 @@ export default function Input() {
                 }
             />
 
-            <DatePicker flex={1} text={birthday} textState={setBirth} icon />
+            <DatePicker
+                style={{ flex: 1 }}
+                text={birthday}
+                textState={setBirth}
+                icon
+            />
 
             <InputIcon
                 style={styles.input}

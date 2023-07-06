@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import {
     Image,
     Linking,
@@ -13,11 +13,9 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { VictoryPie } from "victory-native";
 import { AuthContext } from "../../context/AuthContext";
-import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
 import months from "../../shared/months";
-import { Habits } from "../../types/shared";
 import info from "./phrases";
 
 const styles = StyleSheet.create({
@@ -160,52 +158,7 @@ const styles = StyleSheet.create({
 });
 
 export default function Home() {
-    const [userName, setUserName] = useState<string | null>(null);
-    const [habit, setHabit] = useState<Habits[] | null>(null);
-    const { user } = useContext(AuthContext);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            if (user && user.id) {
-                const { data } = await supabase
-                    .from("profiles")
-                    .select("*")
-                    .eq("id", user.id)
-                    .single();
-
-                if (!data) {
-                    window.alert("Erro ao procurar informações do perfil");
-                    throw Error(
-                        "Home : fetchData() -> could not find profile information."
-                    );
-                }
-
-                setUserName(data.username);
-            }
-        };
-
-        const getHabit = async () => {
-            if (user && user.id) {
-                const { data } = await supabase
-                    .from("habits")
-                    .select("completed")
-                    .eq("profile_id", user.id)
-                    .returns<Habits[]>();
-
-                if (!data) {
-                    window.alert("Erro ao procurar informações dos Hábitos");
-                    throw Error(
-                        "Home : getHabit() -> Could not find habits information."
-                    );
-                }
-
-                setHabit(data);
-            }
-        };
-
-        getHabit();
-        fetchData();
-    }, [user]);
+    const { userData } = useContext(AuthContext);
 
     const navigation = useNavigation<StackNavigatorRoutesProps>();
     const date = new Date();
@@ -222,7 +175,7 @@ export default function Home() {
                 />
             </View>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Olá, {userName}</Text>
+                <Text style={styles.headerText}>Olá, {userData?.username}</Text>
             </View>
             <Image
                 style={styles.cerej}
@@ -255,7 +208,7 @@ export default function Home() {
                     <TouchableOpacity
                         onPress={() => navigation.navigate("Status")}
                     >
-                        {habit ? (
+                        {userData?.habits ? (
                             <VictoryPie
                                 width={150}
                                 height={150}
@@ -266,7 +219,7 @@ export default function Home() {
                                 data={[
                                     {
                                         x: " ",
-                                        y: habit.reduce(
+                                        y: userData?.habits.reduce(
                                             (accumulator, currentValue) =>
                                                 currentValue.completed
                                                     ? accumulator + 1
@@ -276,7 +229,7 @@ export default function Home() {
                                     },
                                     {
                                         x: " ",
-                                        y: habit.reduce(
+                                        y: userData?.habits.reduce(
                                             (accumulator, currentValue) =>
                                                 !currentValue.completed
                                                     ? accumulator + 1

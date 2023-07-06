@@ -130,9 +130,9 @@ export default function Input() {
             <Text style={styles.link}>Esqueceu sua senha?</Text>
             <Button
                 style={styles.button}
-                onPress={() => {
+                onPress={async () => {
                     if (email && checkPassword(password)) {
-                        signIn(email, password);
+                        await signIn(email, password);
                     } else {
                         console.error(
                             "Por favor preencha os campos que não estão preenchidos"
