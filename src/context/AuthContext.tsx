@@ -15,6 +15,7 @@ export type AuthContextDataProps = {
     ) => Promise<void>;
     user: User | null;
     userData: UserData | null;
+    setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
 };
 
 type AuthContextProviderProps = {
@@ -270,8 +271,9 @@ export default function AuthContextProvider({
             user,
             signOut,
             userData,
+            setUserData,
         }),
-        [signUp, signIn, user, userData]
+        [signUp, signIn, user, userData, setUserData]
     );
 
     return (
