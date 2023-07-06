@@ -171,7 +171,6 @@ export default function Home() {
                     .select("*")
                     .eq("id", user.id)
                     .single();
-
                 if (data) {
                     setUserName(data.username);
                     return;
