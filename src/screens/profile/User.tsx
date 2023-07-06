@@ -112,7 +112,6 @@ function Card({ children }: CardProps) {
 
 function User() {
     const [name, setName] = React.useState<string | null>(null);
-    // const [oldUserData, setUserData] = useState<UserData | undefined>(undefined);
     const [modalVisible, setModalVisible] = useState(false);
     const [bio, setBio] = useState<string | null>(null);
     const [userName, setUserName] = useState<string | null>(null);
