@@ -118,7 +118,7 @@ function User() {
     const [userName, setUserName] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
-    const { user, userData } = useContext(AuthContext);
+    const { user, userData, setUserData } = useContext(AuthContext);
 
     const mockStatistics: UserStatsCardProps[] = [
         {
@@ -144,35 +144,54 @@ function User() {
     ];
 
     useEffect(() => {
-        if (userData) {
-            setName(userData?.name);
-            setUserName(userData.username);
-            setBio(userData.bio);
-            setDate(userData.dateofbirth ?? "");
-            setImage(userData.photo);
-            return;
-        }
+        if (!userData)
+            throw Error("User : useEffect() => Could not set userData on UI.");
 
-        throw Error("Erro ao procurar informações do perfil");
+        setName(userData?.name);
+        setUserName(userData.username);
+        setBio(userData.bio);
+        setDate(userData.dateofbirth ?? "");
+        setImage(userData.photo);
     }, [userData]);
 
     const [visible, setVisible] = React.useState(false);
 
     const saveUser = async () => {
-        const { error } = await supabase
-            .from("profiles")
-            .update({
-                bio,
-                name,
-                dateofbirth: date,
-                username: userName,
-                photo: image,
-            })
-            .eq("id", userData?.id);
+        if (!userData)
+            throw Error("User : saveUser() => Could not load userData.");
 
-        if (error) {
-            alert("Não foi possível salvar as informações do perfil");
-            return;
+        // Update database with client profile data.
+        {
+            const { error } = await supabase
+                .from("profiles")
+                .update({
+                    bio,
+                    name,
+                    dateofbirth: date,
+                    username: userName,
+                    photo: image,
+                })
+                .eq("id", userData.id);
+
+            if (error) {
+                window.alert(
+                    "Não foi possível salvar as informações do perfil"
+                );
+                throw Error(
+                    "User : saveUser() => Could not update profile data."
+                );
+            }
+        }
+
+        // Update client data (context) profile data.
+        {
+            const data = userData;
+            data.bio = bio;
+            data.name = name;
+            data.dateofbirth = date;
+            data.username = userName;
+            data.photo = image;
+            setUserData(data);
         }
 
         setModalVisible(false);
