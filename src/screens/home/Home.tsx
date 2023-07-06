@@ -173,12 +173,14 @@ export default function Home() {
                     .eq("id", user.id)
                     .single();
 
-                if (data) {
-                    setUserName(data.username);
-                    return;
+                if (!data) {
+                    window.alert("Erro ao procurar informações do perfil");
+                    throw Error(
+                        "Home : fetchData() -> could not find profile information."
+                    );
                 }
 
-                alert("Erro ao procurar informações do perfil");
+                setUserName(data.username);
             }
         };
 
@@ -190,12 +192,14 @@ export default function Home() {
                     .eq("profile_id", user.id)
                     .returns<Habits[]>();
 
-                if (data) {
-                    setHabit(data);
-                    return;
+                if (!data) {
+                    window.alert("Erro ao procurar informações dos Hábitos");
+                    throw Error(
+                        "Home : getHabit() -> Could not find habits information."
+                    );
                 }
 
-                alert("Erro ao procurar informações dos Hábitos");
+                setHabit(data);
             }
         };
 
