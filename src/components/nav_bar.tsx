@@ -10,13 +10,21 @@ import Tasks from "../screens/task/Tasks";
 import Today from "../screens/today/Today";
 
 const styles = StyleSheet.create({
-    button: {
+    button_active: {
         alignItems: "center",
         justifyContent: "center",
         height: 45,
         width: 45,
         borderRadius: 45,
-        backgroundColor: "#FFC546",
+        backgroundColor: colors.yellow_300,
+    },
+    button_inactive: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: 45,
+        width: 45,
+        borderRadius: 45,
+        // backgroundColor: "#ff00ff",
     },
 });
 
@@ -39,23 +47,16 @@ function NavBar() {
                 tabBarStyle: {
                     position: "absolute",
                     bottom: 0,
-                    // left: 15,
-                    // right: 15,
-                    // borderRadius: 15,
-                    // paddingTop: 10,
                     elevation: 0,
-                    height: 60,
+                    height: Defaults.icon_size * 2.5,
                     borderTopColor: "transparent",
-                    paddingTop: Defaults.min_top_size / 2,
-                    paddingBottom: Defaults.padding_bottom,
+                    paddingTop: Defaults.min_top_size,
                     borderTopStartRadius: 10,
                     borderTopEndRadius: 10,
                     backgroundColor: colors.black_800,
                 },
             }}
-            sceneContainerStyle={{
-                backgroundColor: colors.rose_100,
-            }}
+            sceneContainerStyle={{}}
         >
             <Tab.Screen
                 name="Today"
@@ -64,7 +65,11 @@ function NavBar() {
                     tabBarActiveTintColor: colors.rose_400,
                     tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
-                        <Feather name="calendar" color={color} size={30} />
+                        <Feather
+                            name="calendar"
+                            color={color}
+                            size={Defaults.icon_size}
+                        />
                     ),
                 }}
             />
@@ -75,7 +80,11 @@ function NavBar() {
                     tabBarActiveTintColor: colors.blue_400,
                     tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
-                        <Octicons name="graph" color={color} size={30} />
+                        <Octicons
+                            name="graph"
+                            color={color}
+                            size={Defaults.icon_size}
+                        />
                     ),
                 }}
             />
@@ -83,12 +92,22 @@ function NavBar() {
                 name="Home"
                 component={Home}
                 options={{
-                    tabBarActiveTintColor: colors.blue_600,
-                    tabBarInactiveTintColor: colors.white_100,
+                    tabBarActiveTintColor: colors.black_800,
+                    tabBarInactiveTintColor: colors.black_400,
                     tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
-                        <View style={styles.button}>
-                            <Feather name="home" color={color} size={30} />
+                        <View
+                            style={
+                                (color === colors.black_800 &&
+                                    styles.button_active) ||
+                                styles.button_inactive
+                            }
+                        >
+                            <Feather
+                                name="home"
+                                color={color}
+                                size={Defaults.icon_size}
+                            />
                         </View>
                     ),
                 }}
@@ -98,10 +117,15 @@ function NavBar() {
                 name="Tasks"
                 component={Tasks}
                 options={{
-                    tabBarActiveTintColor: colors.white_100,
+                    tabBarActiveTintColor: colors.blue_400,
+                    tabBarInactiveTintColor: colors.black_400,
                     tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
-                        <FontAwesome5 name="tasks" color={color} size={30} />
+                        <FontAwesome5
+                            name="tasks"
+                            color={color}
+                            size={Defaults.icon_size}
+                        />
                     ),
                 }}
             />
@@ -113,7 +137,11 @@ function NavBar() {
                     tabBarActiveTintColor: colors.rose_100,
                     tabBarLabel: "",
                     tabBarIcon: ({ color }) => (
-                        <Feather name="user" color={color} size={30} />
+                        <Feather
+                            name="user"
+                            color={color}
+                            size={Defaults.icon_size}
+                        />
                     ),
                 }}
             />
