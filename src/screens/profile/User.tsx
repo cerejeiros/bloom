@@ -9,6 +9,7 @@ import {
     Text,
     View,
 } from "react-native";
+import { Image } from "react-native-elements";
 import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
@@ -271,17 +272,10 @@ function User() {
                     </View>
                 </Modal>
                 <View style={styles.profileHeader}>
-                    {/* TODO - FIX LINEAR GRADIENT */}
-                    {/* <LinearGradient
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
-                        colors={[
-                            colors.rose_75,
-                            colors.blue_75,
-                            colors.rose_75,
-                        ]}
+                    <Image
+                        source={require("../../../assets/waveheader.png")}
                         style={styles.profileHeader}
-                    /> */}
+                    />
                     <View style={styles.profilePhoto}>
                         <UserAvatar
                             image={image}
