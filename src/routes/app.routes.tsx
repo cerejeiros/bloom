@@ -21,7 +21,6 @@ export type StackNavigatorRoutesProps =
 function TabRoutes() {
     NavigationBar.setBackgroundColorAsync(colors.black_800);
     NavigationBar.setButtonStyleAsync("light");
-    NavigationBar.setVisibilityAsync("visible");
 
     return <NavBar />;
 }
