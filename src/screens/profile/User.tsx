@@ -117,7 +117,7 @@ function User() {
     const [userName, setUserName] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
-    const { user, userData, setUserData } = useContext(AuthContext);
+    const { userData, setUserData, signOut } = useContext(GlobalContext);
 
     const mockStatistics: UserStatsCardProps[] = [
         {
@@ -304,7 +304,7 @@ function User() {
                         mode="contained"
                         style={{ marginTop: 200, marginHorizontal: 70 }}
                         buttonColor={colors.rose_400}
-                        onPress={() => supabase.auth.signOut()}
+                        onPress={() => signOut()}
                     >
                         Sair
                     </Button>
