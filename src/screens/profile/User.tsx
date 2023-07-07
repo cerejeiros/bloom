@@ -1,9 +1,10 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import * as NavigationBar from "expo-navigation-bar";
+import React, { useContext, useEffect, useState } from "react";
 import {
-    Dimensions,
     KeyboardAvoidingView,
     Modal,
+    Pressable,
     SafeAreaView,
     StyleSheet,
     Text,
@@ -26,7 +27,9 @@ const enum Defaults {
 
 const styles = StyleSheet.create({
     container: {
-        display: "flex",
+        rowGap: 50,
+        height: "100%",
+        backgroundColor: "#ffccd1",
     },
     input: {
         marginTop: 0,
@@ -42,34 +45,34 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     profileHeader: {
-        width,
         alignItems: "center",
-        height: 150,
-        zIndex: 1,
+        justifyContent: "flex-end",
+    },
+    profile_background: {
+        position: "absolute",
+        left: 0,
+        top: 0,
+        width: "100%",
+        height: "80%",
     },
     profilePhoto: {
-        position: "absolute",
         overflow: "visible",
-        zIndex: 100,
-        width: 180,
-        height: 180,
-        marginTop: 75,
     },
     editBadge: {
         position: "absolute",
-        zIndex: 999,
-        top: 78,
-        right: 120,
+        top: 0,
+        right: 0,
         backgroundColor: colors.white_50,
         borderRadius: Defaults.editBadgeSize,
         width: Defaults.editBadgeSize,
         height: Defaults.editBadgeSize,
+        justifyContent: "center",
+        alignItems: "center",
     },
     modal: {
-        height: height - 70,
         marginHorizontal: 10,
         marginVertical: 20,
-        // backgroundColor: colors.white_50,
+        backgroundColor: colors.white_50,
         borderRadius: 20,
         paddingHorizontal: 35,
         paddingVertical: 30,
@@ -89,7 +92,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     buttonView: {
-        width: width - 70,
         flexDirection: "row",
         justifyContent: "space-evenly",
         marginTop: 30,
@@ -102,10 +104,8 @@ const styles = StyleSheet.create({
         borderColor: colors.black_400,
     },
     statsView: {
-        backgroundColor: "#ffccd1",
-        width,
-        height,
-        paddingTop: 140,
+        alignItems: "center",
+        rowGap: 25,
     },
     button_leave: {
         marginHorizontal: 70,
@@ -212,6 +212,8 @@ function User() {
         setVisible(true);
     };
 
+    const { width, height } = React.useContext(GlobalContext);
+
     return (
         <KeyboardAvoidingView>
             <SafeAreaView style={styles.container}>
@@ -233,7 +235,7 @@ function User() {
                     }}
                     onRequestClose={() => setModalVisible(false)}
                 >
-                    <View style={styles.modal}>
+                    <View style={[styles.modal, { height: height - 70 }]}>
                         <Text style={styles.modalTitle}>Editar perfil</Text>
                         <View>
                             <UserAvatar
@@ -276,7 +278,9 @@ function User() {
                                 label="Data de nascimento"
                             />
                         </View>
-                        <View style={styles.buttonView}>
+                        <View
+                            style={[styles.buttonView, { width: width - 70 }]}
+                        >
                             <Button
                                 mode="contained"
                                 buttonColor={colors.rose_500}
@@ -297,25 +301,36 @@ function User() {
                         </View>
                     </View>
                 </Modal>
-                <View style={styles.profileHeader}>
-                    <Image
-                        source={require("../../../assets/waveheader.png")}
-                        style={styles.profileHeader}
-                    />
+                <View
+                    style={[
+                        styles.profileHeader,
+                        { width, height: height * 0.3 },
+                    ]}
+                >
+                    <View style={styles.profile_background}>
+                        <Image
+                            source={require("../../../assets/waveheader.png")}
+                            style={{ width: "100%", height: "100%" }}
+                        />
+                    </View>
+
                     <View style={styles.profilePhoto}>
                         <UserAvatar
                             image={image}
                             setImage={setImage}
                             openPickerOnPress={false}
                         />
-                    </View>
-                    <MaterialCommunityIcons
-                        name="account-edit"
+                        <Pressable
+                            style={styles.editBadge}
+                            onPress={() => setModalVisible(true)}
+                        >
+                            <MaterialCommunityIcons
+                                name="account-edit"
                                 size={Defaults.editBadgeIconSize}
-                        color="black"
-                        style={styles.editBadge}
-                        onPress={() => setModalVisible(true)}
-                    />
+                                color="black"
+                            />
+                        </Pressable>
+                    </View>
                 </View>
                 <View style={styles.statsView}>
                     <UserStatsCard info={mockStatistics} />

@@ -2,7 +2,7 @@ import * as Font from "expo-font";
 import * as NavigationBar from "expo-navigation-bar";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 import { PaperProvider } from "react-native-paper";
 import GlobalContextProvider from "./src/context/GlobalContext";
 import Routes from "./src/routes";
@@ -71,6 +71,11 @@ export default function App() {
 
     return (
         <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+            <StatusBar
+                translucent
+                backgroundColor="transparent"
+                barStyle="dark-content"
+            />
             <PaperProvider>
                 <GlobalContextProvider>
                     <Routes />
