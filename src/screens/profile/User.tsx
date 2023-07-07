@@ -19,7 +19,10 @@ import colors from "../../pallete";
 import UserAvatar from "./UserAvatar";
 import UserStatsCard, { UserStatsCardProps } from "./UserStatsCard";
 
-const { width, height } = Dimensions.get("window");
+const enum Defaults {
+    editBadgeSize = 50,
+    editBadgeIconSize = (Defaults.editBadgeSize * 3) / 5,
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -58,7 +61,9 @@ const styles = StyleSheet.create({
         top: 78,
         right: 120,
         backgroundColor: colors.white_50,
-        borderRadius: 45,
+        borderRadius: Defaults.editBadgeSize,
+        width: Defaults.editBadgeSize,
+        height: Defaults.editBadgeSize,
     },
     modal: {
         height: height - 70,
@@ -159,11 +164,15 @@ function User() {
         setImage(userData.photo);
     }, [userData]);
 
+    // TODO: we can use this to show loading components in the app while
+    //       the supabase fetch is going on.
     const [visible, setVisible] = React.useState(false);
 
     const saveUser = async () => {
         if (!userData)
             throw Error("User : saveUser() => Could not load userData.");
+
+        setVisible(false);
 
         // Update database with client profile data.
         {
@@ -301,7 +310,7 @@ function User() {
                     </View>
                     <MaterialCommunityIcons
                         name="account-edit"
-                        size={30}
+                                size={Defaults.editBadgeIconSize}
                         color="black"
                         style={styles.editBadge}
                         onPress={() => setModalVisible(true)}
