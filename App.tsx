@@ -19,7 +19,7 @@ NavigationBar.addVisibilityListener(async ({ visibility }) => {
         await new Promise((resolve) => {
             setTimeout(resolve, Defaults.WaitTillHide);
         });
-        NavigationBar.setVisibilityAsync("hidden");
+        await NavigationBar.setVisibilityAsync("hidden");
     }
 });
 
@@ -33,7 +33,7 @@ export default function App() {
         async function prepare() {
             try {
                 // Set color for splash screen.
-                NavigationBar.setBackgroundColorAsync("#98e2ea");
+                await NavigationBar.setBackgroundColorAsync("#98e2ea");
 
                 // Pre-load fonts, make any API calls you need to do here
                 await Font.loadAsync({
