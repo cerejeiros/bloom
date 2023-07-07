@@ -1,21 +1,42 @@
 import { User } from "@supabase/supabase-js";
 import React, { createContext, ReactNode } from "react";
-import { ToastAndroid } from "react-native";
+import { ToastAndroid, useWindowDimensions } from "react-native";
 import supabase from "../helpers/supabaseClient";
 import { Task, UserData } from "../types/shared";
 
+/*
+    TODO: Change prefix *Auth* of the variable to something more general since
+          we now have width and height in here.
+*/
 export type AuthContextDataProps = {
-    signIn: (email: string, password: string) => Promise<void>;
+    // Sign out of the application.
     signOut: () => void;
+    // Sign in the application and stores user variable;
+    signIn: (email: string, password: string) => Promise<void>;
+    // Sign up and updates profile in the supabase application and stores user
+    // variable.
     signUp: (
         email: string,
         password: string,
         usern: string,
         birth: string
     ) => Promise<void>;
+
+    // Stores user data of the authentication from the database.
     user: User | null;
+    // Stores user data of the profile from the database.
     userData: UserData | null;
+    // Set user data of the database.
     setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
+
+    /*
+        TODO: Perhaps we should an React.useEffect() for when the screen
+              rotates, so that width and height can be updated.
+    */
+    // Width of the screen.
+    width: number;
+    // Height of the screen.
+    height: number;
 };
 
 type AuthContextProviderProps = {
@@ -91,7 +112,9 @@ export default function AuthContextProvider({
     const [user, setUser] = React.useState<User | null>(null);
     const [userData, setUserData] = React.useState<UserData | null>(null);
 
-    // Takes tasks from the `profile_tasks` table and parse to useful data.
+    /*
+        Fetch tasks from the `profile_tasks` table and parse to useful data.
+    */
     async function fetchTasks(id: string | undefined): Promise<Task[]> {
         const { data: unparsedData } = await supabase
             .from("profiles_tasks")
@@ -135,6 +158,11 @@ export default function AuthContextProvider({
         return data;
     }
 
+    /*
+        To fetch data means trying to access the profiles table in the database
+        by selecting with its user ID, then parsing all the content to make it
+        usable by this client.
+    */
     const fetchData = React.useCallback(
         async (id: string | undefined) => {
             const { data: unparsedData } = await supabase
@@ -189,6 +217,11 @@ export default function AuthContextProvider({
         [setUserData]
     );
 
+    /*
+        Sign-in means trying to accessing a row in the table of users in the
+        database; iff successful then request data of the user in the profile 
+        table.
+    */
     const signIn = React.useCallback(
         async (email: string, password: string) => {
             const { data, error } = await supabase.auth.signInWithPassword({
@@ -197,22 +230,27 @@ export default function AuthContextProvider({
             });
 
             if (error || !data.user) {
-                // TODO - Use toast library for both IOS and Android
+                // TODO: Use toast library for both IOS and Android
                 // Note this only show a Toast in android since IOS don't provide a built-in toast API.
                 ToastAndroid.show(
                     error?.message ?? "Houve um erro no login!",
                     ToastAndroid.LONG
                 );
-            } else {
-                await setUser(data.user);
-                await fetchData(data.user.id);
+                throw Error("AuthContext: signIn() -> Could not log-in!");
             }
+
+            await setUser(data.user);
+            await fetchData(data.user.id);
 
             return Promise.resolve();
         },
         [fetchData]
     );
 
+    /*
+        Sign-up means creating a new row in the database for this user in
+        the authentication table; then the same in the profiles table.
+    */
     const signUp = React.useCallback(
         async (
             email: string,
@@ -230,7 +268,7 @@ export default function AuthContextProvider({
                     `AuthContext.signUp: Could not login -> ${errorUser}`
                 );
 
-            setUser(data.user);
+            await setUser(data.user);
 
             if (!data.user)
                 throw Error("AuthContext.signup: User was not set.");
@@ -248,21 +286,36 @@ export default function AuthContextProvider({
                     `AuthContext.signUp: Could not update data -> ${error}`
                 );
 
-            fetchData(data.user.id);
+            await fetchData(data.user.id);
 
             return Promise.resolve();
         },
         [fetchData]
     );
 
+    /*
+        Sign out means closing the current session in the database
+        and removing user information.
+    */
     const signOut = async () => {
         const { error } = await supabase.auth.signOut();
 
         if (error) throw Error("AuthContext.signOut: Could not log out.");
-        else setUser(null);
+
+        setUser(null);
+        setUserData(null);
     };
 
-    const memoizedFunctions = React.useMemo(
+    /*
+        Get the screen dimensions using the preferred API by React Native.
+        https://reactnative.dev/docs/dimensions
+    */
+    const { width, height } = useWindowDimensions();
+
+    /*
+        To only recompute when one of the dependencies change.
+    */
+    const memoized = React.useMemo(
         () => ({
             signUp,
             signIn,
@@ -270,13 +323,13 @@ export default function AuthContextProvider({
             signOut,
             userData,
             setUserData,
+            width,
+            height,
         }),
-        [signUp, signIn, user, userData, setUserData]
+        [signUp, signIn, user, userData, setUserData, width, height]
     );
 
     return (
-        <AuthContext.Provider value={memoizedFunctions}>
-            {children}
-        </AuthContext.Provider>
+        <AuthContext.Provider value={memoized}>{children}</AuthContext.Provider>
     );
 }
