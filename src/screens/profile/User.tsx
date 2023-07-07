@@ -107,12 +107,14 @@ const styles = StyleSheet.create({
     },
 });
 
+/*
+    TODO: Discover what it does?
 type CardProps = {
     children: ReactNode;
 };
 function Card({ children }: CardProps) {
     return <View>{children}</View>;
-}
+} */
 
 function User() {
     const [name, setName] = React.useState<string | null>(null);
@@ -317,10 +319,11 @@ function User() {
                         Sair
                     </Button>
                 </View>
-
+                {/*
+                    TODO: discover what this was meant to be.
                 <Card>
                     <Text>Usuário</Text>
-                </Card>
+                </Card> */}
             </SafeAreaView>
         </KeyboardAvoidingView>
     );
