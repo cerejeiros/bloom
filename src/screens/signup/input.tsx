@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import Button from "../../components/button";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
-import { AuthContext } from "../../context/AuthContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import checkPassword from "../../helpers/relevantFunctions";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
@@ -76,7 +76,7 @@ export default function Input() {
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
     const [isloading, setIsLoading] = useState(false);
-    const { signUp } = useContext(AuthContext);
+    const { signUp } = useContext(GlobalContext);
 
     const checkUsernameDuplicated = async () => {
         const { data, error } = await supabase

@@ -12,7 +12,7 @@ import {
 import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
-import { AuthContext } from "../../context/AuthContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import UserAvatar from "./UserAvatar";
