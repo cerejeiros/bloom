@@ -133,6 +133,7 @@ export type Task = {
     /*
         Defined by the user to have higher priority display 
         going from the highest "high" to the lowest.
+        Gamification: Tasks with higher priority can give more xp.
     */
     priority: "high" | "medium" | "low";
     /*
@@ -140,6 +141,7 @@ export type Task = {
         Formatted as such: *hours:minutes* for the elements
         in the pair, the first representing the start
         and the second the end.
+        Gamification: Tasks being completed in the period range can give more xp.
     */
     period: [string, string];
     /*
