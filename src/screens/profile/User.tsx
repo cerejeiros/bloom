@@ -218,6 +218,7 @@ function User() {
                 <Modal
                     visible={modalVisible}
                     animationType="slide"
+                    statusBarTranslucent
                     transparent
                     onShow={() => {
                         /* TODO: Need to hide the native navigation bar.
