@@ -90,6 +90,7 @@ export type Habit = {
         The time range where this habit is applied.
         If any string then follow the format: "HH:MM-HH:MM"
         where the first *HH:MM* cannot be equal to the second.
+        Gamification: being completed in the period range can give more xp.
     */
     period: [HabitPeriod] | [HabitPeriod, HabitPeriod];
 
@@ -131,8 +132,21 @@ export type Task = {
     times: number;
     completed: number;
     /*
+        Streak of a task being completed.
+        In pseudo-code terms, when reseting the task with its "repeated"
+        property, add one to this *streak* property if it is completed, else
+        reset to zero.
+        This means that the streak can only be updated after its "repeated"
+        period has finished; So if it is daily, it will only increase one after
+        a day has passed and the task was completed.
+        Gamification: it can be a multiplier when completing a task (plus 
+            adding more xp).
+    */
+    streak: number;
+    /*
         Defined by the user to have higher priority display 
         going from the highest "high" to the lowest.
+        Gamification: Tasks with higher priority can give more xp.
     */
     priority: "high" | "medium" | "low";
     /*
@@ -140,6 +154,7 @@ export type Task = {
         Formatted as such: *hours:minutes* for the elements
         in the pair, the first representing the start
         and the second the end.
+        Gamification: being completed in the period range can give more xp.
     */
     period: [string, string];
     /*
