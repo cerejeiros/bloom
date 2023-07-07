@@ -53,10 +53,12 @@ function NavBar() {
                     paddingTop: Defaults.min_top_size,
                     borderTopStartRadius: 10,
                     borderTopEndRadius: 10,
-                    backgroundColor: colors.black_800,
+                    backgroundColor: colors.black_true,
                 },
             }}
-            sceneContainerStyle={{}}
+            sceneContainerStyle={{
+                backgroundColor: colors.white_100,
+            }}
         >
             <Tab.Screen
                 name="Today"

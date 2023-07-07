@@ -23,7 +23,7 @@ const colors = {
     blue_900: "#0B2428",
     white_50: "#ffffff",
     white_100: "#EAE1E1",
-    white_200: "#D4C4C4",
+    white_200: "#D9CDCD",
     white_300: "#BFA6A6",
     white_400: "#A98989",
     white_500: "#946B6B",
@@ -34,7 +34,7 @@ const colors = {
     black_400: "#9a9a9a",
     black_500: "#393939",
     black_800: "#121212",
-    black_true: "#ffffff",
+    black_true: "#000000",
     yellow_300: "#FFC546",
     green_300: "#77b255",
 };
