@@ -301,8 +301,8 @@ export default function GlobalContextProvider({
 
         if (error) throw Error("GlobalContext.signOut: Could not log out.");
 
-        setUser(null);
-        setUserData(null);
+        await setUser(null);
+        await setUserData(null);
     };
 
     /*
