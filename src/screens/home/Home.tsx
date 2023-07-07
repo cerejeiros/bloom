@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { VictoryPie } from "victory-native";
-import { AuthContext } from "../../context/AuthContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import colors from "../../pallete";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
 import months from "../../shared/months";
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
 });
 
 export default function Home() {
-    const { userData } = useContext(AuthContext);
+    const { userData } = useContext(GlobalContext);
 
     const navigation = useNavigation<StackNavigatorRoutesProps>();
     const date = new Date();

@@ -13,7 +13,7 @@ import { Image } from "react-native-elements";
 import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
-import { AuthContext } from "../../context/AuthContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import UserAvatar from "./UserAvatar";
@@ -121,7 +121,7 @@ function User() {
     const [userName, setUserName] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
-    const { user, userData, setUserData } = useContext(AuthContext);
+    const { userData, setUserData, signOut } = useContext(GlobalContext);
 
     const mockStatistics: UserStatsCardProps[] = [
         {
@@ -301,7 +301,7 @@ function User() {
                         mode="contained"
                         style={styles.button_leave}
                         buttonColor={colors.rose_400}
-                        onPress={() => supabase.auth.signOut()}
+                        onPress={() => signOut()}
                     >
                         Sair
                     </Button>

@@ -5,10 +5,9 @@ import supabase from "../helpers/supabaseClient";
 import { Task, UserData } from "../types/shared";
 
 /*
-    TODO: Change prefix *Auth* of the variable to something more general since
-          we now have width and height in here.
+    Global variables to be used by the client for any kind of mechanism.
 */
-export type AuthContextDataProps = {
+export type GlobalContextDataProps = {
     // Sign out of the application.
     signOut: () => void;
     // Sign in the application and stores user variable;
@@ -39,12 +38,12 @@ export type AuthContextDataProps = {
     height: number;
 };
 
-type AuthContextProviderProps = {
+type GlobalContextProviderProps = {
     children: ReactNode;
 };
 
-export const AuthContext = createContext<AuthContextDataProps>(
-    {} as AuthContextDataProps
+export const GlobalContext = createContext<GlobalContextDataProps>(
+    {} as GlobalContextDataProps
 );
 
 // Data received from the database.
@@ -106,9 +105,9 @@ type UnparsedTask = {
     };
 };
 
-export default function AuthContextProvider({
+export default function GlobalContextProvider({
     children,
-}: AuthContextProviderProps) {
+}: GlobalContextProviderProps) {
     const [user, setUser] = React.useState<User | null>(null);
     const [userData, setUserData] = React.useState<UserData | null>(null);
 
@@ -131,7 +130,7 @@ export default function AuthContextProvider({
             .eq("profile_id(id)", id)
             .returns<UnparsedTask[]>();
 
-        if (!unparsedData) throw Error("AuthContext: could not fetch tasks.");
+        if (!unparsedData) throw Error("GlobalContext: could not fetch tasks.");
 
         const data: Task[] = unparsedData.map((item: UnparsedTask) => {
             // Parse to integer iff *repeated* is a number.
@@ -178,7 +177,7 @@ export default function AuthContextProvider({
                 .single<UnparsedProfile>();
 
             if (!unparsedData)
-                throw Error("AuthContext: could not fetch data profile.");
+                throw Error("GlobalContext: could not fetch data profile.");
 
             const data: UserData = {
                 id: unparsedData.id,
@@ -236,7 +235,7 @@ export default function AuthContextProvider({
                     error?.message ?? "Houve um erro no login!",
                     ToastAndroid.LONG
                 );
-                throw Error("AuthContext: signIn() -> Could not log-in!");
+                throw Error("GlobalContext: signIn() -> Could not log-in!");
             }
 
             await setUser(data.user);
@@ -265,13 +264,13 @@ export default function AuthContextProvider({
 
             if (errorUser || !data?.user)
                 throw Error(
-                    `AuthContext.signUp: Could not login -> ${errorUser}`
+                    `GlobalContext.signUp: Could not login -> ${errorUser}`
                 );
 
             await setUser(data.user);
 
             if (!data.user)
-                throw Error("AuthContext.signup: User was not set.");
+                throw Error("GlobalContext.signup: User was not set.");
 
             const { error } = await supabase
                 .from("profiles")
@@ -283,7 +282,7 @@ export default function AuthContextProvider({
 
             if (error)
                 throw Error(
-                    `AuthContext.signUp: Could not update data -> ${error}`
+                    `GlobalContext.signUp: Could not update data -> ${error}`
                 );
 
             await fetchData(data.user.id);
@@ -300,10 +299,10 @@ export default function AuthContextProvider({
     const signOut = async () => {
         const { error } = await supabase.auth.signOut();
 
-        if (error) throw Error("AuthContext.signOut: Could not log out.");
+        if (error) throw Error("GlobalContext.signOut: Could not log out.");
 
-        setUser(null);
-        setUserData(null);
+        await setUser(null);
+        await setUserData(null);
     };
 
     /*
@@ -330,6 +329,8 @@ export default function AuthContextProvider({
     );
 
     return (
-        <AuthContext.Provider value={memoized}>{children}</AuthContext.Provider>
+        <GlobalContext.Provider value={memoized}>
+            {children}
+        </GlobalContext.Provider>
     );
 }

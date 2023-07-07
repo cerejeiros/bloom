@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
-import { AuthContext } from "../../context/AuthContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
 
 const styles = StyleSheet.create({
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 
 export default function Status() {
-    const { user, userData } = React.useContext(AuthContext);
+    const { user, userData } = React.useContext(GlobalContext);
 
     console.log("user:", user);
     console.log("user data:", userData);

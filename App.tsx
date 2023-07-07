@@ -4,7 +4,7 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { PaperProvider } from "react-native-paper";
-import AuthContextProvider from "./src/context/AuthContext";
+import GlobalContextProvider from "./src/context/GlobalContext";
 import Routes from "./src/routes";
 
 NavigationBar.setVisibilityAsync("hidden");
@@ -72,9 +72,9 @@ export default function App() {
     return (
         <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
             <PaperProvider>
-                <AuthContextProvider>
+                <GlobalContextProvider>
                     <Routes />
-                </AuthContextProvider>
+                </GlobalContextProvider>
             </PaperProvider>
         </View>
     );
