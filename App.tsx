@@ -9,6 +9,20 @@ import Routes from "./src/routes";
 
 NavigationBar.setVisibilityAsync("hidden");
 
+enum Defaults {
+    WaitTillHide = 2500,
+}
+
+// Will hide the native navigation bar after some time.
+NavigationBar.addVisibilityListener(async ({ visibility }) => {
+    if (visibility === "visible") {
+        await new Promise((resolve) => {
+            setTimeout(resolve, Defaults.WaitTillHide);
+        });
+        NavigationBar.setVisibilityAsync("hidden");
+    }
+});
+
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
@@ -23,19 +37,13 @@ export default function App() {
 
                 // Pre-load fonts, make any API calls you need to do here
                 await Font.loadAsync({
-                    // Entypo.font,
                     "Comfortaa-Regular": require("./assets/fonts/Comfortaa/Comfortaa-Regular.ttf"),
                     "Poppins-Black": require("./assets/fonts/Poppins/Poppins-Black.ttf"),
                     "Poppins-Medium": require("./assets/fonts/Poppins/Poppins-Medium.ttf"),
                     "Poppins-Regular": require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
                 });
-                // Artificially delay for two seconds to simulate a slow loading
-                // experience. Please remove this if you copy and paste the code!
-                // eslint-disable-next-line no-promise-executor-return
-                // await new Promise((resolve) => setTimeout(resolve, 2000));
             } catch (e) {
-                // return <Text>Fonts did not load.</Text>;
-                console.warn(e);
+                throw Error("App.tsx: Fonts did not load.");
             } finally {
                 // Tell the application to render
                 setAppIsReady(true);

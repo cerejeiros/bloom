@@ -34,7 +34,7 @@ const colors = {
     black_400: "#9a9a9a",
     black_500: "#393939",
     black_800: "#121212",
-    black_true: "#000000",
+    black_900: "#000000",
     yellow_300: "#FFC546",
     green_300: "#77b255",
 };

@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 20,
         alignItems: "flex-start",
-        padding: 10,
+        paddingHorizontal: "10%",
+        paddingVertical: "5%",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

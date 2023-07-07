@@ -64,12 +64,12 @@ const styles = StyleSheet.create({
         height: height - 70,
         marginHorizontal: 10,
         marginVertical: 20,
-        backgroundColor: "#fff",
+        // backgroundColor: colors.white_50,
         borderRadius: 20,
         paddingHorizontal: 35,
         paddingVertical: 30,
         alignItems: "center",
-        shadowColor: "#000",
+        shadowColor: colors.black_900,
         shadowOffset: {
             width: 0,
             height: 2,
@@ -97,10 +97,13 @@ const styles = StyleSheet.create({
         borderColor: colors.black_400,
     },
     statsView: {
-        backgroundColor: "#F0F0F0",
+        backgroundColor: "#ffccd1",
         width,
         height,
         paddingTop: 140,
+    },
+    button_leave: {
+        marginHorizontal: 70,
     },
 });
 
@@ -296,7 +299,7 @@ function User() {
                     <Button
                         icon="exit-to-app"
                         mode="contained"
-                        style={{ marginTop: 200, marginHorizontal: 70 }}
+                        style={styles.button_leave}
                         buttonColor={colors.rose_400}
                         onPress={() => supabase.auth.signOut()}
                     >

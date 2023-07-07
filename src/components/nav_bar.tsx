@@ -1,5 +1,6 @@
 import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import colors from "../pallete";
@@ -24,7 +25,6 @@ const styles = StyleSheet.create({
         height: 45,
         width: 45,
         borderRadius: 45,
-        // backgroundColor: "#ff00ff",
     },
 });
 
@@ -38,6 +38,8 @@ const enum Defaults {
 const Tab = createBottomTabNavigator();
 
 function NavBar() {
+    NavigationBar.setBackgroundColorAsync(colors.black_900);
+
     return (
         <Tab.Navigator
             backBehavior="none"
@@ -53,7 +55,7 @@ function NavBar() {
                     paddingTop: Defaults.min_top_size,
                     borderTopStartRadius: 10,
                     borderTopEndRadius: 10,
-                    backgroundColor: colors.black_true,
+                    backgroundColor: colors.black_900,
                 },
             }}
             sceneContainerStyle={{
