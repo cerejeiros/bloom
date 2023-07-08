@@ -318,16 +318,17 @@ export default function GlobalContextProvider({
         To only recompute when one of the dependencies change.
     */
     const memoized = React.useMemo(
-        () => ({
-            signUp,
-            signIn,
-            user,
-            signOut,
-            userData,
-            setUserData,
-            width,
-            height,
-        }),
+        () =>
+            ({
+                signUp,
+                signIn,
+                user,
+                signOut,
+                userData,
+                setUserData,
+                width,
+                height,
+            } satisfies GlobalContextDataProps),
         [signUp, signIn, user, userData, setUserData, width, height]
     );
 
