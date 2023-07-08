@@ -1,7 +1,7 @@
 import { FontAwesome, Fontisto } from "@expo/vector-icons";
 import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import Button from "../../components/button";
+import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
 import { GlobalContext } from "../../context/GlobalContext";
@@ -44,9 +44,7 @@ const styles = StyleSheet.create({
         margin: 10,
         backgroundColor: colors.rose_300,
     },
-    button_text: {
-        color: colors.white_50,
-    },
+    button_text: { color: colors.white_50 },
     button_out: {
         margin: 10,
         borderColor: colors.rose_100,
@@ -126,9 +124,6 @@ export default function CadastroInput() {
         return true;
     };
 
-    // TODO: Here we can make a transition screen when sign-up is successful and
-    //       we enter the home screen of the application.
-
     return (
         <View style={styles.container}>
             <InputIcon
@@ -185,9 +180,11 @@ export default function CadastroInput() {
                 style={styles.button}
                 onPress={handleSubmit}
                 disabled={isloading}
-                title="Cadastrar"
-                titleStyle={styles.button_text}
-            />
+                loading={isloading}
+                textColor={styles.button_text.color}
+            >
+                Cadastrar
+            </Button>
         </View>
     );
 }
