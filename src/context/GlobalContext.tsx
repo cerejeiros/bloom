@@ -93,6 +93,7 @@ type UnparsedTask = {
     id: number;
     habit_id?: number;
     priority: "high" | "medium" | "low";
+    streak: number;
     task_id: {
         created_at: string;
         created_by: string;
@@ -124,6 +125,7 @@ export default function GlobalContextProvider({
             completed,
             done,
             priority,
+            streak,
             habit_id
         `
             )
@@ -151,6 +153,7 @@ export default function GlobalContextProvider({
                 priority: item.priority,
                 period: item.task_id.period,
                 repeated: repeated as never,
+                streak: item.streak,
             } satisfies Task;
         });
 
