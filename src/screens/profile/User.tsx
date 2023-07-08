@@ -108,7 +108,9 @@ const styles = StyleSheet.create({
         rowGap: 25,
     },
     button_leave: {
-        marginHorizontal: 70,
+        alignSelf: "flex-end",
+        verticalAlign: "bottom",
+        marginRight: "5%",
     },
 });
 
@@ -334,16 +336,16 @@ function User() {
                 </View>
                 <View style={styles.statsView}>
                     <UserStatsCard info={mockStatistics} />
-                    <Button
-                        icon="exit-to-app"
-                        mode="contained"
-                        style={styles.button_leave}
-                        buttonColor={colors.rose_400}
-                        onPress={() => signOut()}
-                    >
-                        Sair
-                    </Button>
                 </View>
+                <Button
+                    icon="exit-to-app"
+                    mode="contained"
+                    style={[styles.button_leave, { width: width * 0.4 }]}
+                    buttonColor={colors.rose_400}
+                    onPress={signOut}
+                >
+                    Sair
+                </Button>
                 {/*
                     TODO: discover what this was meant to be.
                 <Card>
