@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         minWidth: 280,
         fontSize: 15,
+        fontFamily: "Poppins-Regular",
     },
     profileHeader: {
         alignItems: "center",
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     modalTitle: {
         fontSize: 32,
         marginBottom: 15,
-        fontWeight: "bold",
+        fontFamily: "Poppins-Regular",
     },
     buttonView: {
         flexDirection: "row",
@@ -110,6 +111,9 @@ const styles = StyleSheet.create({
         alignSelf: "flex-end",
         verticalAlign: "bottom",
         marginRight: "5%",
+    },
+    font: {
+        fontFamily: "Poppins-Bold",
     },
 });
 

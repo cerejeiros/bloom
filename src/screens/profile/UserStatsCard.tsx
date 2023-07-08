@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     cardTitle: {
         marginBottom: 10,
         textAlign: "center",
+        fontFamily: "Poppins-Regular",
     },
     statsRow: {
         justifyContent: "space-around",
@@ -39,8 +40,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     statsSecondaryText: {
-        fontSize: 12,
-        fontWeight: "400",
+        fontSize: 11,
+        fontFamily: "Poppins-Regular",
     },
 });
 

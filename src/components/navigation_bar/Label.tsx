@@ -8,7 +8,7 @@ const enum Defaults {
 
 const styles = StyleSheet.create({
     label: {
-        fontFamily: "Comfortaa-Bold",
+        fontFamily: "Poppins-Medium",
         fontSize: 11.5,
     },
 });
