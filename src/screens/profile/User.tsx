@@ -1,5 +1,4 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import * as NavigationBar from "expo-navigation-bar";
 import React, { useContext, useEffect, useState } from "react";
 import {
     KeyboardAvoidingView,
@@ -224,17 +223,19 @@ function User() {
                     animationType="slide"
                     statusBarTranslucent
                     transparent
+                    /*
                     onShow={() => {
-                        /* TODO: Need to hide the native navigation bar.
+                         TODO: Need to hide the native navigation bar.
                                  It may be impossible because model is intended
                                  to have the native navigation bar shown.
                                  However for questions of normalization of the
                                  style presented in the application we should
                                  hide it.
                                  https://github.com/thebylito/react-native-navigation-bar-color/issues/30
-                        */
+                        
                         NavigationBar.setVisibilityAsync("hidden");
                     }}
+                    */
                     onRequestClose={() => setModalVisible(false)}
                 >
                     <View style={[styles.modal, { height: height - 70 }]}>
