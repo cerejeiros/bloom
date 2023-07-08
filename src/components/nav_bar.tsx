@@ -2,7 +2,7 @@ import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Animated, Easing, StyleSheet, Text, View } from "react-native";
 import colors from "../pallete";
 import Home from "../screens/home/Home";
 import User from "../screens/profile/User";
@@ -11,10 +11,10 @@ import Tasks from "../screens/task/Tasks";
 import Today from "../screens/today/Today";
 
 const enum Defaults {
-    icon_size = 25,
+    icon_size = 22,
     min_top_size = 15,
     bar_radius = 10,
-    bar_height = Defaults.icon_size * 2.8,
+    bar_height = 25 * 2.8,
     padding_bottom = 15,
     label_bottom = 10,
     icon_circle = 45,
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         height: Defaults.icon_circle / 1.25,
-        width: Defaults.icon_circle * 1.25,
         borderRadius: Defaults.icon_circle / 2,
         marginBottom: Defaults.icon_size / 2,
     },
@@ -48,7 +47,57 @@ const styles = StyleSheet.create({
 
 const Tab = createBottomTabNavigator();
 
-function NavBar() {
+function TabButton(color: string, focused: boolean, size: number) {
+    const positionAnim = React.useRef(new Animated.Value(0)).current;
+
+    const width = positionAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: [Defaults.icon_size, Defaults.icon_size * 1.25],
+        extrapolate: "clamp",
+    });
+
+    React.useEffect(() => {
+        console.log("Focused changed", focused);
+        if (focused)
+            Animated.timing(positionAnim, {
+                toValue: 1,
+                duration: 1000,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            });
+        else
+            Animated.timing(positionAnim, {
+                toValue: 0,
+                duration: 1000,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            });
+    }, [focused, positionAnim]);
+
+    return (
+        <Animated.View
+            style={
+                (focused && [
+                    styles.button_active,
+                    {
+                        width,
+                        // TODO: perhaps HEX conversion from animated number.
+                        backgroundColor: `${colors.blue_900}ff`,
+                    },
+                ]) ||
+                styles.button_inactive
+            }
+        >
+            <FontAwesome5
+                name="tasks"
+                color={color}
+                size={Defaults.icon_size}
+            />
+        </Animated.View>
+    );
+}
+
+export default function NavBar() {
     NavigationBar.setBackgroundColorAsync(colors.black_900);
 
     return (
@@ -172,23 +221,9 @@ function NavBar() {
                 component={Tasks}
                 options={{
                     tabBarActiveTintColor: colors.blue_400,
-                    tabBarIcon: ({ color }) => (
-                        <View
-                            style={
-                                (color === colors.blue_400 && [
-                                    styles.button_active,
-                                    { backgroundColor: colors.blue_900 },
-                                ]) ||
-                                styles.button_inactive
-                            }
-                        >
-                            <FontAwesome5
-                                name="tasks"
-                                color={color}
-                                size={Defaults.icon_size}
-                            />
-                        </View>
-                    ),
+                    tabBarIcon: ({ color, focused, size }) =>
+                        TabButton(color, focused, size),
+                    // tabBarIcon: {(props) => TabButton(props)},
                 }}
             />
 
@@ -221,5 +256,3 @@ function NavBar() {
         </Tab.Navigator>
     );
 }
-
-export default NavBar;
