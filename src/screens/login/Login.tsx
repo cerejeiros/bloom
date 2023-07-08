@@ -62,7 +62,10 @@ export default function Login() {
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
-            <ScrollView contentContainerStyle={[styles.container, { flex: 1 }]}>
+            <ScrollView
+                contentContainerStyle={[styles.container, { flex: 1 }]}
+                keyboardShouldPersistTaps="always"
+            >
                 {/* TODO: Logo tem que ser flexível para quando o teclado, ela
                           ficar escondida ou removida da tela. */}
                 {/* <Logo /> */}
