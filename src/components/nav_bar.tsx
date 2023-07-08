@@ -2,7 +2,7 @@ import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
-import { Animated, Easing, StyleSheet, Text, View } from "react-native";
+import { Animated, Easing, StyleSheet } from "react-native";
 import colors from "../pallete";
 import Home from "../screens/home/Home";
 import User from "../screens/profile/User";
@@ -16,95 +16,145 @@ const enum Defaults {
     bar_radius = 10,
     bar_height = 25 * 2.8,
     padding_bottom = 15,
-    label_bottom = 10,
+    label_bottom = 5,
     icon_circle = 45,
 }
 
 const styles = StyleSheet.create({
-    button_active: {
+    button: {
         alignItems: "center",
         justifyContent: "center",
-        height: Defaults.icon_circle / 1.25,
-        borderRadius: Defaults.icon_circle / 2,
-        marginBottom: Defaults.icon_size / 2,
-    },
-    button_inactive: {
-        alignItems: "center",
-        justifyContent: "center",
-        height: 45,
-        width: 45,
-        borderRadius: 45,
+        height: Defaults.icon_circle,
+        width: Defaults.icon_circle,
     },
     label: {
         fontWeight: "bold",
         fontSize: 11.5,
-        marginBottom: Defaults.label_bottom,
     },
-    label_active: {
-        marginBottom: Defaults.label_bottom * 1.125,
+    icon_background: {
+        width: Defaults.icon_size * 2.5,
+        height: Defaults.icon_circle / 1.25,
+        borderRadius: Defaults.icon_circle / 2.5,
+        position: "absolute",
     },
 });
 
 const Tab = createBottomTabNavigator();
 
-function TabButton(color: string, focused: boolean, size: number) {
-    const positionAnim = React.useRef(new Animated.Value(0)).current;
+/*
+    A replacement for *tabBarLabelProps* for our use case (animated).
+*/
+type LabelProps = {
+    focused: boolean;
+    color: string;
+    value: Animated.Value;
+    name: string;
+};
 
-    const width = positionAnim.interpolate({
+function Label({ focused, color, value, name }: LabelProps) {
+    const translateY = value.interpolate({
         inputRange: [0, 1],
-        outputRange: [Defaults.icon_size, Defaults.icon_size * 1.25],
+        outputRange: [Defaults.label_bottom * 2, -Defaults.label_bottom * 1.5],
         extrapolate: "clamp",
     });
 
-    React.useEffect(() => {
-        console.log("Focused changed", focused);
-        if (focused)
-            Animated.timing(positionAnim, {
-                toValue: 1,
-                duration: 1000,
-                easing: Easing.linear,
-                useNativeDriver: true,
-            });
-        else
-            Animated.timing(positionAnim, {
-                toValue: 0,
-                duration: 1000,
-                easing: Easing.linear,
-                useNativeDriver: true,
-            });
-    }, [focused, positionAnim]);
+    return (
+        <Animated.Text
+            style={[
+                styles.label,
+                {
+                    opacity: value,
+                    transform: [{ translateY }],
+                    color: (focused && color) || colors.black_400,
+                },
+            ]}
+        >
+            {name}
+        </Animated.Text>
+    );
+}
+
+/*
+    A replacement for *tabBarIconProps* for our use case (animated).
+*/
+type IconProps = {
+    value: Animated.Value;
+    backgroundColor: string;
+    children: React.ReactNode;
+};
+
+function Icon({ value, backgroundColor, children }: IconProps) {
+    const scaleX = value.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 1.25],
+        extrapolate: "extend",
+    });
+
+    const translateY = value.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, -10],
+        extrapolate: "clamp",
+    });
 
     return (
-        <Animated.View
-            style={
-                (focused && [
-                    styles.button_active,
+        <Animated.View style={[styles.button, { transform: [{ translateY }] }]}>
+            <Animated.View
+                style={[
+                    styles.icon_background,
                     {
-                        width,
-                        // TODO: perhaps HEX conversion from animated number.
-                        backgroundColor: `${colors.blue_900}ff`,
+                        transform: [{ scaleX }],
+                        opacity: value,
+                        backgroundColor,
                     },
-                ]) ||
-                styles.button_inactive
-            }
-        >
-            <FontAwesome5
-                name="tasks"
-                color={color}
-                size={Defaults.icon_size}
+                ]}
             />
+            {children}
         </Animated.View>
     );
+}
+
+/*
+    To add events to listen to animations values.
+*/
+function listenAnimated(value: Animated.Value) {
+    return {
+        // When going to the screen (focus).
+        focus: () => {
+            Animated.timing(value, {
+                toValue: 1,
+                duration: 125,
+                easing: Easing.ease,
+                useNativeDriver: true,
+            }).start();
+        },
+        // When leaving the screen (blur).
+        blur: () => {
+            Animated.timing(value, {
+                toValue: 0,
+                duration: 125,
+                easing: Easing.ease,
+                useNativeDriver: true,
+            }).start();
+        },
+    };
 }
 
 export default function NavBar() {
     NavigationBar.setBackgroundColorAsync(colors.black_900);
 
+    const animatedValues = {
+        today: new Animated.Value(0),
+        status: new Animated.Value(0),
+        home: new Animated.Value(0),
+        tasks: new Animated.Value(0),
+        perfil: new Animated.Value(0),
+    };
+
     return (
         <Tab.Navigator
             backBehavior="none"
             initialRouteName="Home"
-            screenOptions={({ route }) => ({
+            screenOptions={() => ({
                 headerShown: false,
                 tabBarStyle: {
                     position: "absolute",
@@ -117,23 +167,6 @@ export default function NavBar() {
                     backgroundColor: colors.black_900,
                 },
                 tabBarInactiveTintColor: colors.black_400,
-                tabBarLabel: ({ focused, color }) => {
-                    return (
-                        // TODO: animate the name with opacity fadign in!
-                        <Text
-                            style={[
-                                styles.label,
-                                focused && styles.label_active,
-                                {
-                                    color:
-                                        (focused && color) || colors.black_400,
-                                },
-                            ]}
-                        >
-                            {route.name}
-                        </Text>
-                    );
-                },
             })}
             sceneContainerStyle={{
                 backgroundColor: colors.white_100,
@@ -142,76 +175,87 @@ export default function NavBar() {
             <Tab.Screen
                 name="Today"
                 component={Today}
+                listeners={listenAnimated(animatedValues.today)}
                 options={{
                     tabBarActiveTintColor: colors.rose_400,
+                    tabBarLabel: ({ color, focused }) => (
+                        <Label
+                            color={color}
+                            focused={focused}
+                            value={animatedValues.today}
+                            name="Hoje"
+                        />
+                    ),
                     tabBarIcon: ({ color }) => (
-                        <View
-                            style={
-                                (color === colors.rose_400 && [
-                                    styles.button_active,
-                                    { backgroundColor: colors.rose_900 },
-                                ]) ||
-                                styles.button_inactive
-                            }
+                        <Icon
+                            value={animatedValues.today}
+                            backgroundColor={colors.rose_900}
                         >
                             <Feather
                                 name="calendar"
                                 color={color}
                                 size={Defaults.icon_size}
                             />
-                        </View>
+                        </Icon>
                     ),
                 }}
             />
             <Tab.Screen
                 name="Status"
                 component={Status}
+                listeners={listenAnimated(animatedValues.status)}
                 options={{
                     tabBarActiveTintColor: colors.blue_400,
+                    tabBarLabel: ({ color, focused }) => (
+                        <Label
+                            color={color}
+                            focused={focused}
+                            value={animatedValues.status}
+                            name="Status"
+                        />
+                    ),
                     tabBarIcon: ({ color }) => (
-                        <View
-                            style={
-                                (color === colors.blue_400 && [
-                                    styles.button_active,
-                                    { backgroundColor: colors.blue_900 },
-                                ]) ||
-                                styles.button_inactive
-                            }
+                        <Icon
+                            value={animatedValues.status}
+                            backgroundColor={colors.blue_900}
                         >
                             <Octicons
                                 name="graph"
                                 color={color}
                                 size={Defaults.icon_size}
                             />
-                        </View>
+                        </Icon>
                     ),
                 }}
             />
             <Tab.Screen
                 name="Home"
                 component={Home}
+                listeners={listenAnimated(animatedValues.home)}
                 options={{
-                    tabBarActiveTintColor: colors.yellow_300,
-                    tabBarIcon: ({ color }) => (
-                        <View
-                            style={
-                                (color === colors.yellow_300 && [
-                                    styles.button_active,
-                                    { backgroundColor: color },
-                                ]) ||
-                                styles.button_inactive
-                            }
+                    tabBarActiveTintColor: colors.black_900,
+                    tabBarLabel: ({ focused }) => (
+                        <Label
+                            color={colors.yellow_300}
+                            focused={focused}
+                            value={animatedValues.home}
+                            name="Home"
+                        />
+                    ),
+                    tabBarIcon: ({ focused }) => (
+                        <Icon
+                            value={animatedValues.home}
+                            backgroundColor={colors.yellow_300}
                         >
                             <Feather
                                 name="home"
                                 color={
-                                    (color === colors.yellow_300 &&
-                                        colors.black_900) ||
+                                    (focused && colors.black_900) ||
                                     colors.black_400
                                 }
                                 size={Defaults.icon_size}
                             />
-                        </View>
+                        </Icon>
                     ),
                 }}
             />
@@ -219,37 +263,57 @@ export default function NavBar() {
             <Tab.Screen
                 name="Tasks"
                 component={Tasks}
+                listeners={listenAnimated(animatedValues.tasks)}
                 options={{
                     tabBarActiveTintColor: colors.blue_400,
-                    tabBarIcon: ({ color, focused, size }) =>
-                        TabButton(color, focused, size),
-                    // tabBarIcon: {(props) => TabButton(props)},
+                    tabBarLabel: ({ color, focused }) => (
+                        <Label
+                            color={color}
+                            focused={focused}
+                            value={animatedValues.tasks}
+                            name="Tarefas"
+                        />
+                    ),
+                    tabBarIcon: ({ color }) => (
+                        <Icon
+                            value={animatedValues.tasks}
+                            backgroundColor={colors.blue_900}
+                        >
+                            <FontAwesome5
+                                name="tasks"
+                                color={color}
+                                size={Defaults.icon_size}
+                            />
+                        </Icon>
+                    ),
                 }}
             />
 
             <Tab.Screen
                 name="Perfil"
                 component={User}
+                listeners={listenAnimated(animatedValues.perfil)}
                 options={{
                     tabBarActiveTintColor: colors.rose_100,
-                    tabBarLabel: "Perfil",
-                    tabBarLabelStyle: styles.label,
+                    tabBarLabel: ({ color, focused }) => (
+                        <Label
+                            color={color}
+                            focused={focused}
+                            value={animatedValues.perfil}
+                            name="Perfil"
+                        />
+                    ),
                     tabBarIcon: ({ color }) => (
-                        <View
-                            style={
-                                (color === colors.rose_100 && [
-                                    styles.button_active,
-                                    { backgroundColor: colors.white_800 },
-                                ]) ||
-                                styles.button_inactive
-                            }
+                        <Icon
+                            value={animatedValues.perfil}
+                            backgroundColor={colors.white_900}
                         >
                             <Feather
                                 name="user"
                                 color={color}
                                 size={Defaults.icon_size}
                             />
-                        </View>
+                        </Icon>
                     ),
                 }}
             />

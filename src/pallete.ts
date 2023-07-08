@@ -20,7 +20,7 @@ const colors = {
     blue_600: "#2D909F",
     blue_700: "#226C77",
     blue_800: "#164850",
-    blue_900: "#0B2428",
+    blue_900: "#081221",
     white_50: "#ffffff",
     white_100: "#EAE1E1",
     white_200: "#D9CDCD",
