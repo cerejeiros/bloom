@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     },
     labelInput: {
         color: "#808080",
+        fontFamily: "Poppins-Regular",
     },
 });
 
