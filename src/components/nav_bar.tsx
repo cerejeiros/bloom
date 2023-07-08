@@ -2,116 +2,25 @@ import { Feather, FontAwesome5, Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
-import { Animated, Easing, StyleSheet } from "react-native";
+import { Animated, Easing } from "react-native";
 import colors from "../pallete";
 import Home from "../screens/home/Home";
 import User from "../screens/profile/User";
 import Status from "../screens/status/Status";
 import Tasks from "../screens/task/Tasks";
 import Today from "../screens/today/Today";
+import Icon from "./navigation_bar/Icon";
+import Label from "./navigation_bar/Label";
 
-const enum Defaults {
+export const enum Defaults {
     icon_size = 22,
     min_top_size = 15,
     bar_radius = 10,
     bar_height = 25 * 2.8,
     padding_bottom = 15,
-    label_bottom = 5,
     icon_circle = 45,
 }
-
-const styles = StyleSheet.create({
-    button: {
-        alignItems: "center",
-        justifyContent: "center",
-        height: Defaults.icon_circle,
-        width: Defaults.icon_circle,
-    },
-    label: {
-        fontWeight: "bold",
-        fontSize: 11.5,
-    },
-    icon_background: {
-        width: Defaults.icon_size * 2.5,
-        height: Defaults.icon_circle / 1.25,
-        borderRadius: Defaults.icon_circle / 2.5,
-        position: "absolute",
-    },
-});
-
 const Tab = createBottomTabNavigator();
-
-/*
-    A replacement for *tabBarLabelProps* for our use case (animated).
-*/
-type LabelProps = {
-    focused: boolean;
-    color: string;
-    value: Animated.Value;
-    name: string;
-};
-
-function Label({ focused, color, value, name }: LabelProps) {
-    const translateY = value.interpolate({
-        inputRange: [0, 1],
-        outputRange: [Defaults.label_bottom * 2, -Defaults.label_bottom * 1.5],
-        extrapolate: "clamp",
-    });
-
-    return (
-        <Animated.Text
-            style={[
-                styles.label,
-                {
-                    opacity: value,
-                    transform: [{ translateY }],
-                    color: (focused && color) || colors.black_400,
-                },
-            ]}
-        >
-            {name}
-        </Animated.Text>
-    );
-}
-
-/*
-    A replacement for *tabBarIconProps* for our use case (animated).
-*/
-type IconProps = {
-    value: Animated.Value;
-    backgroundColor: string;
-    children: React.ReactNode;
-};
-
-function Icon({ value, backgroundColor, children }: IconProps) {
-    const scaleX = value.interpolate({
-        inputRange: [0, 1],
-        outputRange: [1, 1.25],
-        extrapolate: "extend",
-    });
-
-    const translateY = value.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, -10],
-        extrapolate: "clamp",
-    });
-
-    return (
-        <Animated.View style={[styles.button, { transform: [{ translateY }] }]}>
-            <Animated.View
-                style={[
-                    styles.icon_background,
-                    {
-                        transform: [{ scaleX }],
-                        opacity: value,
-                        backgroundColor,
-                    },
-                ]}
-            />
-            {children}
-        </Animated.View>
-    );
-}
 
 /*
     To add events to listen to animations values.
