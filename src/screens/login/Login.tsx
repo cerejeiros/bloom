@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
-import Input from "./input";
+import LoginInput from "./input";
 
 const styles = StyleSheet.create({
     container: {
@@ -68,11 +68,10 @@ export default function Login() {
                 {/* <Logo /> */}
                 <View style={styles.titlecontainer}>
                     <Text style={styles.message}>
-                        {" "}
-                        Bem-vindo de volta! Entre com seus dados:{" "}
+                        Bem-vindo de volta! Entre com seus dados:
                     </Text>
                 </View>
-                <Input />
+                <LoginInput />
                 <View style={styles.warning}>
                     <Text>Novo no Bloom?</Text>
                     <Text

@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     },
 });
 
-function Email({
+function EmailInput({
     text,
     textState,
 }: {
@@ -93,7 +93,7 @@ function Email({
     );
 }
 
-function Password({
+function PasswordInput({
     password,
     setPassword,
 }: {
@@ -117,7 +117,7 @@ function Password({
     );
 }
 
-export default function Input() {
+export default function LoginInput() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -125,8 +125,8 @@ export default function Input() {
 
     return (
         <View style={styles.container}>
-            <Email text={email} textState={setEmail} />
-            <Password password={password} setPassword={setPassword} />
+            <EmailInput text={email} textState={setEmail} />
+            <PasswordInput password={password} setPassword={setPassword} />
             <Text style={styles.link}>Esqueceu sua senha?</Text>
             <Button
                 style={styles.button}
@@ -142,13 +142,6 @@ export default function Input() {
                 title="Entrar"
                 titleStyle={styles.button_text}
             />
-            {/* <Text style={styles.divider}>ou</Text>
-            <Button
-                style={styles.button_out}
-                onPress={() => console.log("Just enter without account")}
-                title="Entrar como convidado"
-                titleStyle={styles.button_out_text}
-            /> */}
         </View>
     );
 }
