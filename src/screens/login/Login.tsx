@@ -5,13 +5,8 @@
 
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import {
-    KeyboardAvoidingView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
+import BaseScrollView from "../../components/baseScrollView";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
 import LoginInput from "./input";
@@ -62,9 +57,10 @@ export default function Login() {
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
-            <ScrollView
-                contentContainerStyle={[styles.container, { flex: 1 }]}
-                keyboardShouldPersistTaps="always"
+            <BaseScrollView
+                props={{
+                    contentContainerStyle: [styles.container, { flex: 1 }],
+                }}
             >
                 {/* TODO: Logo tem que ser flexível para quando o teclado, ela
                           ficar escondida ou removida da tela. */}
@@ -86,7 +82,7 @@ export default function Login() {
                         Registre-se
                     </Text>
                 </View>
-            </ScrollView>
+            </BaseScrollView>
         </KeyboardAvoidingView>
     );
 }
