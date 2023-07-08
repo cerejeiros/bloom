@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Button from "../../components/button";
 import InputIcon from "../../components/input_icon";
-import { AuthContext } from "../../context/AuthContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import checkPassword from "../../helpers/relevantFunctions";
 import colors from "../../pallete";
 
@@ -121,7 +121,7 @@ export default function Input() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { signIn, signUp, signOut } = useContext(AuthContext);
+    const { signIn, signUp, signOut } = useContext(GlobalContext);
 
     return (
         <View style={styles.container}>
@@ -130,9 +130,9 @@ export default function Input() {
             <Text style={styles.link}>Esqueceu sua senha?</Text>
             <Button
                 style={styles.button}
-                onPress={() => {
+                onPress={async () => {
                     if (email && checkPassword(password)) {
-                        signIn(email, password);
+                        await signIn(email, password);
                     } else {
                         console.error(
                             "Por favor preencha os campos que não estão preenchidos"

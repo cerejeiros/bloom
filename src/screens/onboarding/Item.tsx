@@ -11,20 +11,15 @@ import { ItemData } from "./pages";
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 2.5,
         justifyContent: "center",
         alignItems: "center",
-        // backgroundColor: "green",
         flexDirection: "column",
     },
     image: {
-        // flex: 1,
         justifyContent: "center",
-        // backgroundColor: "yellow",
     },
     text: {
         flex: 1,
-        // backgroundColor: "red",
         alignContent: "center",
         justifyContent: "center",
     },
@@ -36,14 +31,10 @@ const styles = StyleSheet.create({
         fontSize: 25,
     },
     items: {
-        // backgroundColor: "blue",
         flexDirection: "row",
-        // flex: 0.5,
         gap: 10,
     },
-    item_first_page: {
-        //  backgroundColor: "pink"
-    },
+    item_first_page: {},
     item_second_page: {
         position: "absolute",
         top: 200,
@@ -66,7 +57,6 @@ const styles = StyleSheet.create({
         top: -100,
     },
     item_image: {
-        // width: 75, // imagens 2 pag
         height: "40%",
         aspectRatio: 2 / 2,
     },
