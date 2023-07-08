@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function Input() {
+export default function CadastroInput() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");

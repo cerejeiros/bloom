@@ -9,7 +9,7 @@ import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import BaseScrollView from "../../components/baseScrollView";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
-import Input from "./input";
+import CadastroInput from "./input";
 import Logo from "./logo";
 
 const styles = StyleSheet.create({
@@ -60,7 +60,7 @@ function Signup() {
                     <Text style={styles.title}>Cadastre-se</Text>
                     <Text style={styles.message}> Bem-vindo ao Bloom! </Text>
                 </View>
-                <Input />
+                <CadastroInput />
                 <View style={styles.warning}>
                     <Text>Já cadastrado?</Text>
                     <Text
