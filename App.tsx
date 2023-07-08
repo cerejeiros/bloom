@@ -37,6 +37,7 @@ export default function App() {
 
                 // Pre-load fonts, make any API calls you need to do here
                 await Font.loadAsync({
+                    "Comfortaa-Bold": require("./assets/fonts/Comfortaa/Comfortaa-Bold.ttf"),
                     "Comfortaa-Regular": require("./assets/fonts/Comfortaa/Comfortaa-Regular.ttf"),
                     "Poppins-Black": require("./assets/fonts/Poppins/Poppins-Black.ttf"),
                     "Poppins-Medium": require("./assets/fonts/Poppins/Poppins-Medium.ttf"),
