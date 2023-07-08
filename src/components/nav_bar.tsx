@@ -12,7 +12,7 @@ import Today from "../screens/today/Today";
 import Icon from "./navigation_bar/Icon";
 import Label from "./navigation_bar/Label";
 
-export const enum Defaults {
+const enum Defaults {
     icon_size = 22,
     min_top_size = 15,
     bar_radius = 10,

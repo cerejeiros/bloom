@@ -1,6 +1,10 @@
 import React from "react";
 import { Animated, StyleSheet } from "react-native";
-import { Defaults } from "../nav_bar";
+
+const enum Defaults {
+    icon_size = 22,
+    icon_circle = 45,
+}
 
 /*
     A replacement for *tabBarIconProps* for our use case (animated).
