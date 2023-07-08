@@ -21,7 +21,7 @@ export type GlobalContextDataProps = {
         birth: string
     ) => Promise<void>;
     // Set the current user logged
-    setUser: (user: User) => any;
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
 
     // Stores user data of the authentication from the database.
     user: User | null;

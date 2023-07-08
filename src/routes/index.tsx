@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import supabase from "../helpers/supabaseClient";
 import { AppRoutes } from "./app.routes";
@@ -8,7 +8,8 @@ import { AuthRoutes } from "./auth.routes";
 export default function Routes() {
     const { user, setUser } = useContext(GlobalContext);
 
-    useState(() => {
+    // Recupera a sessão do usuário quando o app é recarregado ou aberto novamente.
+    useEffect(() => {
         const refreshSession = async () => {
             const { data } = await supabase.auth.getSession();
             if (data && data.session) {
@@ -16,7 +17,7 @@ export default function Routes() {
             }
         };
         refreshSession();
-    }, []);
+    }, [setUser]);
 
     return (
         <NavigationContainer>
