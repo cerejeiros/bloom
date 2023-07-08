@@ -6,7 +6,7 @@ import { AppRoutes } from "./app.routes";
 import { AuthRoutes } from "./auth.routes";
 
 export default function Routes() {
-    const { user, setUser } = useContext(GlobalContext);
+    const { user, setUser, fetchData } = useContext(GlobalContext);
 
     // Recupera a sessão do usuário quando o app é recarregado ou aberto novamente.
     useEffect(() => {
@@ -14,10 +14,11 @@ export default function Routes() {
             const { data } = await supabase.auth.getSession();
             if (data && data.session) {
                 setUser(data.session.user);
+                fetchData(data.session.user.id);
             }
         };
         refreshSession();
-    }, [setUser]);
+    }, [setUser, fetchData]);
 
     return (
         <NavigationContainer>
