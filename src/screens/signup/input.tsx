@@ -128,9 +128,6 @@ export default function Input() {
 
     // TODO: Here we can make a transition screen when sign-up is successful and
     //       we enter the home screen of the application.
-    /* useEffect(() => {
-        console.log(isloading);
-    }, [isloading]); */
 
     return (
         <View style={styles.container}>
