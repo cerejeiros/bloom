@@ -20,6 +20,8 @@ export type GlobalContextDataProps = {
         usern: string,
         birth: string
     ) => Promise<void>;
+    // Set the current user logged
+    setUser: (user: User) => any;
 
     // Stores user data of the authentication from the database.
     user: User | null;
@@ -328,8 +330,9 @@ export default function GlobalContextProvider({
                 setUserData,
                 width,
                 height,
+                setUser,
             } satisfies GlobalContextDataProps),
-        [signUp, signIn, user, userData, setUserData, width, height]
+        [signUp, signIn, user, userData, setUser, setUserData, width, height]
     );
 
     return (
