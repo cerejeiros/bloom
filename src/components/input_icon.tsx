@@ -78,6 +78,7 @@ export default function InputIcon(props: InputProps) {
         onChangeText,
         onFocus,
         label,
+        onEndEditing,
     } = props;
 
     let direction: "column" | "row" | "column-reverse" | "row-reverse";
@@ -121,6 +122,7 @@ export default function InputIcon(props: InputProps) {
                     inputMode={inputMode}
                     onFocus={onFocus}
                     value={value}
+                    onEndEditing={onEndEditing}
                     secureTextEntry={secureTextEntry}
                 />
                 {Icon && (
