@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
 export default function Status() {
     const { user, userData } = React.useContext(GlobalContext);
 
-    console.log("user:", user);
-    console.log("user data:", userData);
+    // console.log("user:", user);
+    // console.log("user data:", userData);
 
     const navigation = useNavigation<StackNavigatorRoutesProps>();
     return (

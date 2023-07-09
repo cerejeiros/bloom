@@ -1,10 +1,12 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useContext, useEffect, useState } from "react";
 import {
+    Animated,
+    Easing,
+    GestureResponderEvent,
     KeyboardAvoidingView,
-    Modal,
     Pressable,
-    SafeAreaView,
+    ScrollView,
     StyleSheet,
     Text,
     View,
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
         rowGap: 50,
         height: "100%",
         backgroundColor: "#ffccd1",
+        alignItems: "center",
     },
     input: {
         marginTop: 0,
@@ -43,6 +46,8 @@ const styles = StyleSheet.create({
         minWidth: 280,
         fontSize: 15,
         fontFamily: "Poppins-Regular",
+        marginBottom: 15,
+        // backgroundColor: "red",
     },
     profileHeader: {
         alignItems: "center",
@@ -70,9 +75,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     modal: {
-        marginHorizontal: 10,
-        marginVertical: 20,
+        position: "absolute",
         backgroundColor: colors.white_50,
+        top: 35,
         borderRadius: 20,
         paddingHorizontal: 35,
         paddingVertical: 30,
@@ -85,16 +90,18 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
+        zIndex: 100,
     },
     modalTitle: {
         fontSize: 32,
         marginBottom: 15,
         fontFamily: "Poppins-Regular",
+        textAlign: "center",
     },
     buttonView: {
         flexDirection: "row",
         justifyContent: "space-evenly",
-        marginTop: 30,
+        columnGap: 25,
     },
     buttonTitleColor: {
         color: "#fff",
@@ -107,6 +114,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         rowGap: 25,
     },
+    button: {
+        paddingVertical: 5,
+        paddingHorizontal: 20,
+        borderRadius: 20,
+    },
     button_leave: {
         alignSelf: "flex-end",
         verticalAlign: "bottom",
@@ -115,7 +127,33 @@ const styles = StyleSheet.create({
     font: {
         fontFamily: "Poppins-Bold",
     },
+    block_view: {
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        top: 0,
+        left: 0,
+    },
 });
+
+type ButtonProps = {
+    backgroundColor: string;
+    text: string;
+    onPress: ((event: GestureResponderEvent) => void) | null | undefined;
+};
+
+function OurButton({ backgroundColor, text, onPress }: ButtonProps) {
+    return (
+        <Pressable
+            style={[styles.button, { backgroundColor }]}
+            onPress={onPress}
+        >
+            <Text style={[styles.font, { color: colors.white_50 }]}>
+                {text}
+            </Text>
+        </Pressable>
+    );
+}
 
 /*
     TODO: Discover what it does?
@@ -126,15 +164,41 @@ function Card({ children }: CardProps) {
     return <View>{children}</View>;
 } */
 
+function BlockView() {
+    return <View style={styles.block_view} pointerEvents="none" />;
+}
+
 function User() {
     const [name, setName] = React.useState<string | null>(null);
-    const [modalVisible, setModalVisible] = useState(false);
     const [bio, setBio] = useState<string | null>(null);
     const [userName, setUserName] = useState<string | null>(null);
-    const [date, setDate] = useState<string>("");
+    const [date, setDate] = useState<string | undefined>("");
     const [image, setImage] = useState<string | null>(null);
-    const [imageNew, setImageNew] = useState<string | null>(null);
     const { userData, setUserData, signOut } = useContext(GlobalContext);
+    const { width, height } = React.useContext(GlobalContext);
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const modalPosition = React.useMemo(
+        () => new Animated.Value(height),
+        [height]
+    );
+    React.useEffect(() => {
+        if (modalVisible) {
+            Animated.timing(modalPosition, {
+                toValue: 0,
+                duration: 150,
+                easing: Easing.ease,
+                useNativeDriver: true,
+            }).start();
+        } else {
+            Animated.timing(modalPosition, {
+                toValue: height,
+                duration: 150,
+                easing: Easing.ease,
+                useNativeDriver: true,
+            }).start();
+        }
+    }, [modalPosition, modalVisible, height]);
 
     const mockStatistics: UserStatsCardProps[] = [
         {
@@ -168,11 +232,12 @@ function User() {
         setBio(userData.bio);
         setDate(userData.dateofbirth ?? "");
         setImage(userData.photo);
-        setImageNew(userData.photo);
     }, [userData]);
 
-    // TODO: we can use this to show loading components in the app while
-    //       the supabase fetch is going on.
+    /*
+        TODO: we can use this to show loading components in the app while
+        the supabase fetch is going on.
+    */
     const [visible, setVisible] = React.useState(false);
 
     const saveUser = async () => {
@@ -220,24 +285,28 @@ function User() {
     };
 
     return (
-        <KeyboardAvoidingView>
-            <SafeAreaView style={styles.container}>
-                {modalVisible && <BlockView />}
-                <Animated.View
-                    style={[
-                        styles.modal,
-                        {
-                            transform: [{ translateY: modalPosition }],
-                            height: height - 50,
-                            width: width - 25,
-                        },
-                    ]}
+        <View style={styles.container}>
+            {modalVisible && <BlockView />}
+            <Animated.View
+                style={[
+                    styles.modal,
+                    {
+                        transform: [{ translateY: modalPosition }],
+                        height: height - 50,
+                        width: width - 25,
+                    },
+                ]}
+            >
+                <KeyboardAvoidingView
+                    behavior="padding"
+                    keyboardVerticalOffset={112.5}
                 >
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <Text style={styles.modalTitle}>Editar perfil</Text>
                         <View>
                             <UserAvatar
-                            image={imageNew}
-                            setImage={setImageNew}
+                                image={image}
+                                setImage={setImage}
                                 openPickerOnPress
                             />
                             <InputIcon
@@ -274,14 +343,9 @@ function User() {
                                 style={styles.input}
                                 label="Data de nascimento"
                             />
-                        </View>
-                        <View
-                            style={[styles.buttonView, { width: width - 70 }]}
-                        >
-                            <Button
-                                mode="contained"
-                                buttonColor={colors.rose_500}
-                                onPress={() => {
+                            <View style={styles.buttonView}>
+                                <OurButton
+                                    onPress={() => {
                                         /*
                                         FIXIT: userData existence inference
                                                should already be 100% sure that
@@ -296,72 +360,67 @@ function User() {
                                             setName(userData.name);
                                             setUserName(userData.username);
                                         }
-                                    setModalVisible(false);
-                                }}
-                            >
-                                Fechar
-                            </Button>
-
-                            <Button
-                                onPress={saveUser}
-                                mode="contained"
-                                buttonColor="green"
-                            >
-                                Salvar
-                            </Button>
+                                        setModalVisible(false);
+                                    }}
+                                    backgroundColor={colors.rose_400}
+                                    text="Fechar"
+                                />
+                                <OurButton
+                                    onPress={saveUser}
+                                    backgroundColor="green"
+                                    text="Salvar"
+                                />
+                            </View>
                         </View>
-                    </View>
-                </Modal>
-                <View
-                    style={[
-                        styles.profileHeader,
-                        { width, height: height * 0.3 },
-                    ]}
-                >
-                    <View style={styles.profile_background}>
-                        <Image
-                            source={require("../../../assets/waveheader.png")}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                    </View>
+                    </ScrollView>
+                </KeyboardAvoidingView>
+            </Animated.View>
+            <View
+                style={[styles.profileHeader, { width, height: height * 0.3 }]}
+            >
+                <View style={styles.profile_background}>
+                    <Image
+                        source={require("../../../assets/waveheader.png")}
+                        style={{ width: "100%", height: "100%" }}
+                    />
+                </View>
 
-                    <View style={styles.profilePhoto}>
-                        <UserAvatar
-                            image={image}
-                            setImage={setImage}
-                            openPickerOnPress={false}
+                <View style={styles.profilePhoto}>
+                    <UserAvatar
+                        image={image}
+                        setImage={setImage}
+                        openPickerOnPress={false}
+                    />
+                    <Pressable
+                        style={styles.editBadge}
+                        onPress={() => setModalVisible(true)}
+                    >
+                        <MaterialCommunityIcons
+                            name="account-edit"
+                            size={Defaults.editBadgeIconSize}
+                            color="black"
                         />
-                        <Pressable
-                            style={styles.editBadge}
-                            onPress={() => setModalVisible(true)}
-                        >
-                            <MaterialCommunityIcons
-                                name="account-edit"
-                                size={Defaults.editBadgeIconSize}
-                                color="black"
-                            />
-                        </Pressable>
-                    </View>
+                    </Pressable>
                 </View>
-                <View style={styles.statsView}>
-                    <UserStatsCard info={mockStatistics} />
-                </View>
-                <Button
-                    icon="exit-to-app"
-                    mode="contained"
-                    style={[styles.button_leave, { width: width * 0.4 }]}
-                    buttonColor={colors.rose_400}
-                    onPress={signOut}
-                >
-                    <Text style={styles.font}>Sair</Text>
-                </Button>
-                {/*
+            </View>
+            <View style={styles.statsView}>
+                <UserStatsCard info={mockStatistics} />
+            </View>
+            <Button
+                icon="exit-to-app"
+                mode="contained"
+                style={[styles.button_leave, { width: width * 0.4 }]}
+                buttonColor={colors.rose_400}
+                onPress={signOut}
+            >
+                <Text style={styles.font}>Sair</Text>
+            </Button>
+            {/*
                     TODO: discover what this was meant to be.
                 <Card>
                     <Text>Usuário</Text>
                 </Card> */}
-            </SafeAreaView>
-        </KeyboardAvoidingView>
+        </View>
     );
 }
 
