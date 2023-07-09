@@ -54,7 +54,7 @@ export default function NavBar() {
     const animatedValues = {
         today: new Animated.Value(0),
         status: new Animated.Value(0),
-        home: new Animated.Value(0),
+        home: new Animated.Value(1),
         tasks: new Animated.Value(0),
         perfil: new Animated.Value(0),
     };
