@@ -304,13 +304,15 @@ export default function GlobalContextProvider({
         and removing user information.
     */
     const signOut = async () => {
+        // Take user out of App route immediately.
+        setUser(null);
+        setUserData(null);
+
+        // Log out remotely.
         const { error } = await supabase.auth.signOut();
 
         if (error)
             throw Error("GlobalContext.signOut: Could not log out.", error);
-
-        await setUser(null);
-        await setUserData(null);
     };
 
     /*
