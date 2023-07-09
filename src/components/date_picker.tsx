@@ -2,15 +2,15 @@ import { FontAwesome } from "@expo/vector-icons";
 import RNDateTimePicker, {
     DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import { Keyboard, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import colors from "../pallete";
 import InputIcon from "./input_icon";
 
 export interface DatePickerProps {
-    text: string;
+    text?: string;
     style?: StyleProp<ViewStyle>;
-    textState: Dispatch<SetStateAction<string>>;
+    textState: React.Dispatch<SetStateAction<string | undefined>>;
     icon: boolean;
     label?: string;
 }

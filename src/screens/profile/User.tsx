@@ -340,7 +340,7 @@ function User() {
                     buttonColor={colors.rose_400}
                     onPress={signOut}
                 >
-                    Sair
+                    <Text style={styles.font}>Sair</Text>
                 </Button>
                 {/*
                     TODO: discover what this was meant to be.

@@ -3,9 +3,9 @@ export type UserData = {
     bio: string | null;
     name: string | null;
     username: string | null;
-    dateofbirth: string | null;
     gender: string | null;
     photo: string | null;
+    dateofbirth?: string;
     /*
         For the gamification of tasks, habits, and routines being
         followed.
