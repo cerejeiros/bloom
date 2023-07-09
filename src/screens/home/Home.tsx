@@ -183,7 +183,7 @@ export default function Home() {
             />
             <View style={styles.date}>
                 <Text style={styles.day}>{day}</Text>
-                <Text style={styles.month}>de {month.month}</Text>
+                        <Text style={styles.month}>de {month}</Text>
             </View>
 
             <SafeAreaView style={styles.container}>
