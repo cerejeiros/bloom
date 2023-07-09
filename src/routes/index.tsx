@@ -17,7 +17,7 @@ export default function Routes() {
             setLoading(true);
             const { data } = await supabase.auth.getSession();
             if (data && data.session) {
-                await setUser(data.session.user);
+                setUser(data.session.user);
                 await fetchData(data.session.user.id);
             }
             setLoading(false);
