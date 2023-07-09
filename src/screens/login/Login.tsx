@@ -5,16 +5,11 @@
 
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import {
-    KeyboardAvoidingView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
+import BaseScrollView from "../../components/baseScrollView";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
-import Input from "./input";
+import LoginInput from "./input";
 
 const styles = StyleSheet.create({
     container: {
@@ -62,17 +57,20 @@ export default function Login() {
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
-            <ScrollView contentContainerStyle={[styles.container, { flex: 1 }]}>
+            <BaseScrollView
+                props={{
+                    contentContainerStyle: [styles.container, { flex: 1 }],
+                }}
+            >
                 {/* TODO: Logo tem que ser flexível para quando o teclado, ela
                           ficar escondida ou removida da tela. */}
                 {/* <Logo /> */}
                 <View style={styles.titlecontainer}>
                     <Text style={styles.message}>
-                        {" "}
-                        Bem-vindo de volta! Entre com seus dados:{" "}
+                        Bem-vindo de volta! Entre com seus dados:
                     </Text>
                 </View>
-                <Input />
+                <LoginInput />
                 <View style={styles.warning}>
                     <Text>Novo no Bloom?</Text>
                     <Text
@@ -84,7 +82,7 @@ export default function Login() {
                         Registre-se
                     </Text>
                 </View>
-            </ScrollView>
+            </BaseScrollView>
         </KeyboardAvoidingView>
     );
 }

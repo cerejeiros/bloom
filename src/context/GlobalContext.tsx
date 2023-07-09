@@ -20,7 +20,11 @@ export type GlobalContextDataProps = {
         usern: string,
         birth: string
     ) => Promise<void>;
+    // Fetch the data from user by id
+    fetchData: (id: string | undefined) => Promise<void>;
 
+    // Set the current user logged
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
     // Stores user data of the authentication from the database.
     user: User | null;
     // Stores user data of the profile from the database.
@@ -329,8 +333,20 @@ export default function GlobalContextProvider({
                 setUserData,
                 width,
                 height,
+                setUser,
+                fetchData,
             } satisfies GlobalContextDataProps),
-        [signUp, signIn, user, userData, setUserData, width, height]
+        [
+            signUp,
+            signIn,
+            user,
+            userData,
+            setUser,
+            setUserData,
+            width,
+            height,
+            fetchData,
+        ]
     );
 
     return (

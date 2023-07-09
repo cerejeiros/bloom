@@ -6,9 +6,10 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
+import BaseScrollView from "../../components/baseScrollView";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
-import Input from "./input";
+import CadastroInput from "./input";
 import Logo from "./logo";
 
 const styles = StyleSheet.create({
@@ -53,23 +54,25 @@ function Signup() {
     const navigation = useNavigation<NavigationProp<AuthRoutes>>();
     return (
         <KeyboardAvoidingView style={styles.container}>
-            <Logo />
-            <View style={styles.titlecontainer}>
-                <Text style={styles.title}>Cadastre-se</Text>
-                <Text style={styles.message}> Bem-vindo ao Bloom! </Text>
-            </View>
-            <Input />
-            <View style={styles.warning}>
-                <Text>Já cadastrado?</Text>
-                <Text
-                    onPress={() => {
-                        navigation.navigate("signIn");
-                    }}
-                    style={styles.link}
-                >
-                    Logue-se
-                </Text>
-            </View>
+            <BaseScrollView>
+                <Logo />
+                <View style={styles.titlecontainer}>
+                    <Text style={styles.title}>Cadastre-se</Text>
+                    <Text style={styles.message}> Bem-vindo ao Bloom! </Text>
+                </View>
+                <CadastroInput />
+                <View style={styles.warning}>
+                    <Text>Já cadastrado?</Text>
+                    <Text
+                        onPress={() => {
+                            navigation.navigate("signIn");
+                        }}
+                        style={styles.link}
+                    >
+                        Logue-se
+                    </Text>
+                </View>
+            </BaseScrollView>
         </KeyboardAvoidingView>
     );
 }
