@@ -190,7 +190,7 @@ function User() {
                     name,
                     dateofbirth: date,
                     username: userName,
-                    photo: imageNew,
+                    photo: image,
                 })
                 .eq("id", userData.id);
 
@@ -211,7 +211,7 @@ function User() {
             data.name = name;
             data.dateofbirth = date;
             data.username = userName;
-            data.photo = imageNew;
+            data.photo = image;
             setUserData(data);
         }
 
@@ -282,7 +282,20 @@ function User() {
                                 mode="contained"
                                 buttonColor={colors.rose_500}
                                 onPress={() => {
-                                    setImageNew(image);
+                                        /*
+                                        FIXIT: userData existence inference
+                                               should already be 100% sure that
+                                               exists in this whole screen.
+                                               Since it is only rendered when
+                                               it does exist.
+                                    */
+                                        if (userData) {
+                                            setImage(userData.photo);
+                                            setBio(userData.bio);
+                                            setDate(userData.dateofbirth);
+                                            setName(userData.name);
+                                            setUserName(userData.username);
+                                        }
                                     setModalVisible(false);
                                 }}
                             >
