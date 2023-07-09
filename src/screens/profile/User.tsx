@@ -133,6 +133,7 @@ function User() {
     const [userName, setUserName] = useState<string | null>(null);
     const [date, setDate] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
+    const [imageNew, setImageNew] = useState<string | null>(null);
     const { userData, setUserData, signOut } = useContext(GlobalContext);
 
     const mockStatistics: UserStatsCardProps[] = [
@@ -167,6 +168,7 @@ function User() {
         setBio(userData.bio);
         setDate(userData.dateofbirth ?? "");
         setImage(userData.photo);
+        setImageNew(userData.photo);
     }, [userData]);
 
     // TODO: we can use this to show loading components in the app while
@@ -188,7 +190,7 @@ function User() {
                     name,
                     dateofbirth: date,
                     username: userName,
-                    photo: image,
+                    photo: imageNew,
                 })
                 .eq("id", userData.id);
 
@@ -209,7 +211,7 @@ function User() {
             data.name = name;
             data.dateofbirth = date;
             data.username = userName;
-            data.photo = image;
+            data.photo = imageNew;
             setUserData(data);
         }
 
@@ -217,37 +219,25 @@ function User() {
         setVisible(true);
     };
 
-    const { width, height } = React.useContext(GlobalContext);
-
     return (
         <KeyboardAvoidingView>
             <SafeAreaView style={styles.container}>
-                <Modal
-                    visible={modalVisible}
-                    animationType="slide"
-                    statusBarTranslucent
-                    transparent
-                    /*
-                    onShow={() => {
-                         TODO: Need to hide the native navigation bar.
-                                 It may be impossible because model is intended
-                                 to have the native navigation bar shown.
-                                 However for questions of normalization of the
-                                 style presented in the application we should
-                                 hide it.
-                                 https://github.com/thebylito/react-native-navigation-bar-color/issues/30
-                        
-                        NavigationBar.setVisibilityAsync("hidden");
-                    }}
-                    */
-                    onRequestClose={() => setModalVisible(false)}
+                {modalVisible && <BlockView />}
+                <Animated.View
+                    style={[
+                        styles.modal,
+                        {
+                            transform: [{ translateY: modalPosition }],
+                            height: height - 50,
+                            width: width - 25,
+                        },
+                    ]}
                 >
-                    <View style={[styles.modal, { height: height - 70 }]}>
                         <Text style={styles.modalTitle}>Editar perfil</Text>
                         <View>
                             <UserAvatar
-                                image={image}
-                                setImage={setImage}
+                            image={imageNew}
+                            setImage={setImageNew}
                                 openPickerOnPress
                             />
                             <InputIcon
@@ -291,15 +281,16 @@ function User() {
                             <Button
                                 mode="contained"
                                 buttonColor={colors.rose_500}
-                                onPress={() => setModalVisible(false)}
+                                onPress={() => {
+                                    setImageNew(image);
+                                    setModalVisible(false);
+                                }}
                             >
                                 Fechar
                             </Button>
 
                             <Button
-                                onPress={() => {
-                                    saveUser();
-                                }}
+                                onPress={saveUser}
                                 mode="contained"
                                 buttonColor="green"
                             >
