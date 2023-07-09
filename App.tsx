@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { StatusBar, View } from "react-native";
 import { PaperProvider } from "react-native-paper";
 import GlobalContextProvider from "./src/context/GlobalContext";
+import colors from "./src/pallete";
 import Routes from "./src/routes";
 
 NavigationBar.setVisibilityAsync("hidden");
@@ -72,7 +73,10 @@ export default function App() {
     if (!appIsReady) return null;
 
     return (
-        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+        <View
+            style={{ flex: 1, backgroundColor: colors.blue_300 }}
+            onLayout={onLayoutRootView}
+        >
             <StatusBar
                 translucent
                 backgroundColor="transparent"
