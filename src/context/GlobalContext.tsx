@@ -302,7 +302,8 @@ export default function GlobalContextProvider({
     const signOut = async () => {
         const { error } = await supabase.auth.signOut();
 
-        if (error) throw Error("GlobalContext.signOut: Could not log out.");
+        if (error)
+            throw Error("GlobalContext.signOut: Could not log out.", error);
 
         await setUser(null);
         await setUserData(null);
