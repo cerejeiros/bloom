@@ -5,10 +5,10 @@ import { AppRoutes } from "./app.routes";
 import { AuthRoutes } from "./auth.routes";
 
 export default function Routes() {
-    const { user } = useContext(GlobalContext);
+    const { user, userData } = useContext(GlobalContext);
     return (
         <NavigationContainer>
-            {user ? <AppRoutes /> : <AuthRoutes />}
+            {user && userData ? <AppRoutes /> : <AuthRoutes />}
         </NavigationContainer>
     );
 }

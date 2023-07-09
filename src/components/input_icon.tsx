@@ -100,7 +100,7 @@ export default function InputIcon(props: InputProps) {
         throw Error("A InoputIcon can't have a label and a icon.");
 
     return (
-        <View style={{ flexDirection: "column", marginVertical: 15 }}>
+        <View style={{ flexDirection: "column" }}>
             {Icon ? undefined : <Text style={styles.labelInput}>{label}</Text>}
             <View
                 style={[
