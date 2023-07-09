@@ -95,7 +95,7 @@ type UnparsedTask = {
     completed: number;
     done: number;
     id: number;
-    habit_id?: number;
+    habit_id: number | null;
     priority: "high" | "medium" | "low";
     streak: number;
     task_id: {
