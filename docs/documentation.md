@@ -194,15 +194,15 @@ Kauã, Natan
 
 Kauã, Natan, Joao V, Leonardo Castro e Kaio
 
-49. [ ] 10/06 implementando  na onboarding [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+49. [ ] 10/06 implementando  na onboarding [[vídeo]](https://drive.google.com/file/d/1iHMZFjHQwQlLUdrc5MFLFM_o_ea7VxT1/view?usp=drive_link)
 
 Bruna Liberal, Joao farias
 
-50. [ ] 11/06 mexendo na onboarding parte 1 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+50. [ ] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 1 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
 
 Bruna Liberal, Joao farias
 
-51. [ ] 11/06 mexendo na onboarding parte 2 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+51. [ ] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 2 [[vídeo]](https://drive.google.com/file/d/1bz-b5vqf0U7TgBn4Wln5Jb-1HFH3QzN/view?usp=drive_link)
 
 Bruna Liberal, Joao farias
 
@@ -210,7 +210,7 @@ Bruna Liberal, Joao farias
 
 Bruna Liberal, Luiza Pugas
 
-53. [ ] 15/06 detahes da onboarding parte 2 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+53. [ ] 15/06 detahes da onboarding parte 2 [[vídeo]](https://drive.google.com/file/d/1Dpzw09_xg5NH2ymbvMCPoGP9ItMDmwAv/view?usp=drive_link)
 
 Bruna Liberal, Luiza Pugas
 
