@@ -214,30 +214,30 @@ Bruna Liberal, Luiza Pugas
 
 Bruna Liberal, Luiza Pugas
 
-54. [ ] 02/07 Finalizando a tela inicial do aplicativo parte 1 [[vídeo]](https://www.youtube.com/watch?v=mn2wRDdy8Rg)
+54. [x] 02/07 Finalizando a tela inicial do aplicativo parte 1 [[vídeo]](https://www.youtube.com/watch?v=mn2wRDdy8Rg)
 
 Kauã Seichi, Natan Almeida
 
-55. [ ] 02/07 Finalizando a tela inicial do aplicativo parte 2 [[vídeo]](https://www.youtube.com/watch?v=Tyk7Qk9_bsc)
+55. [x] 02/07 Finalizando a tela inicial do aplicativo parte 2 [[vídeo]](https://www.youtube.com/watch?v=Tyk7Qk9_bsc)
 
 Kauã Seichi, Natan Almeida
 
-56. [ ] 04/07 Reunião para Planning da semana [[vídeo]](https://youtu.be/Rb6oa-3xxAM)
+56. [x] 04/07 Reunião para Planning da semana [[vídeo]](https://youtu.be/Rb6oa-3xxAM)
 
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
-57. [ ] 04/07 Testando coisas no supabase parte 1 [[vídeo]](https://www.youtube.com/watch?v=DJB6nOfst6s)
+57. [x] 04/07 Testando coisas no supabase parte 1 [[vídeo]](https://www.youtube.com/watch?v=DJB6nOfst6s)
 
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
-58. [ ] 04/07 Testando coisas no supabase parte 2 [[vídeo]](https://www.youtube.com/watch?v=h-qM8aDINZI)
+58. [x] 04/07 Testando coisas no supabase parte 2 [[vídeo]](https://www.youtube.com/watch?v=h-qM8aDINZI)
 
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
-59. [ ]  06/07 Reunião para revisão de código parte 1 [[vídeo]](https://www.youtube.com/watch?v=486wTtFujH8)
+59. [x]  06/07 Reunião para revisão de código parte 1 [[vídeo]](https://www.youtube.com/watch?v=486wTtFujH8)
 
 Kauã Seichi, Natan Almeida, João Farias
 
-60. [ ]  06/07 Reunião para revisão de código parte 2 [[vídeo]](https://www.youtube.com/watch?v=F110ZRnJGuQ)
+60. [x]  06/07 Reunião para revisão de código parte 2 [[vídeo]](https://www.youtube.com/watch?v=F110ZRnJGuQ)
 
 Kauã Seichi, Natan Almeida, João Farias
