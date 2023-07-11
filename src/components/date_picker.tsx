@@ -3,7 +3,7 @@ import RNDateTimePicker, {
     DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { Keyboard, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { Keyboard, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import colors from "../pallete";
 import InputIcon from "./input_icon";
 
@@ -17,12 +17,7 @@ export interface DatePickerProps {
 
 const styles = StyleSheet.create({
     input: {
-        height: 40,
-        borderBottomWidth: 1,
-        borderColor: colors.black_400,
         paddingLeft: 15,
-        borderRadius: 0,
-        minWidth: 100,
         color: colors.black_500,
         fontSize: 15,
     },
@@ -59,9 +54,9 @@ export default function DatePicker({
         throw Error("The DatePicker must have a Icon or a label.");
 
     return (
-        <View>
+        <>
             <InputIcon
-                style={[styles.input, style]}
+                style={style}
                 onFocus={() => {
                     Keyboard.dismiss();
                     openDatePicker();
@@ -94,6 +89,6 @@ export default function DatePicker({
                     onChange={onChange}
                 />
             )}
-        </View>
+        </>
     );
 }

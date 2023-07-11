@@ -1,6 +1,6 @@
 import { User } from "@supabase/supabase-js";
 import React, { createContext, ReactNode } from "react";
-import { ToastAndroid, useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "react-native";
 import supabase from "../helpers/supabaseClient";
 import { Task, UserData } from "../types/shared";
 
@@ -238,11 +238,11 @@ export default function GlobalContextProvider({
             if (error || !data.user) {
                 // TODO: Use toast library for both IOS and Android
                 // Note this only show a Toast in android since IOS don't provide a built-in toast API.
-                ToastAndroid.show(
-                    error?.message ?? "Houve um erro no login!",
-                    ToastAndroid.LONG
-                );
-                throw Error("GlobalContext: signIn() -> Could not log-in!");
+                // ToastAndroid.show(
+                //     error?.message ?? "Houve um erro no login!",
+                //     ToastAndroid.LONG
+                // );
+                throw Error("Informacões de login Incorretas");
             }
 
             await setUser(data.user);

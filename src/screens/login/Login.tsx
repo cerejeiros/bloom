@@ -23,9 +23,10 @@ import Logo from "./logo";
 const styles = StyleSheet.create({
     container: {
         minWidth: "75%",
+        marginVertical: "25%",
         flexDirection: "column",
         height: "100%",
-        justifyContent: "center",
+        justifyContent: "space-around",
     },
     titlecontainer: {
         marginLeft: 35,
@@ -65,38 +66,36 @@ export default function Login() {
     const { height, width } = React.useContext(GlobalContext);
     const statusBarHeight = StatusBar.currentHeight ?? 0;
     return (
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+        <View>
             <BackgroundGradient
-                style={{ height: height + statusBarHeight, width }}
+                style={{ height: height + statusBarHeight * 2, width }}
             />
-            <BaseScrollView
-                props={{
-                    contentContainerStyle: [styles.container, { flex: 1 }],
-                }}
-            >
-                {/* TODO: Logo tem que ser flexível para quando o teclado, ela
+            <KeyboardAvoidingView style={styles.container}>
+                <BaseScrollView>
+                    {/* TODO: Logo tem que ser flexível para quando o teclado, ela
                           ficar escondida ou removida da tela. */}
-                {/* <Logo /> */}
-                <Logo />
-                <View style={styles.titlecontainer}>
-                    <Text style={styles.title}>Login </Text>
-                    <Text style={styles.message}>
-                        Bem-vindo de volta! Entre com seus dados:
-                    </Text>
-                </View>
-                <LoginInput />
-                <View style={styles.warning}>
-                    <Text>Novo no Bloom?</Text>
-                    <Text
-                        onPress={() => {
-                            navigation.navigate("signUp");
-                        }}
-                        style={styles.link}
-                    >
-                        Registre-se
-                    </Text>
-                </View>
-            </BaseScrollView>
-        </KeyboardAvoidingView>
+                    {/* <Logo /> */}
+                    <Logo />
+                    <View style={styles.titlecontainer}>
+                        <Text style={styles.title}>Login </Text>
+                        <Text style={styles.message}>
+                            Bem-vindo de volta! Entre com seus dados:
+                        </Text>
+                    </View>
+                    <LoginInput />
+                    <View style={styles.warning}>
+                        <Text>Novo no Bloom?</Text>
+                        <Text
+                            onPress={() => {
+                                navigation.navigate("signUp");
+                            }}
+                            style={styles.link}
+                        >
+                            Registre-se
+                        </Text>
+                    </View>
+                </BaseScrollView>
+            </KeyboardAvoidingView>
+        </View>
     );
 }
