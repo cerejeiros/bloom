@@ -46,9 +46,21 @@ type GlobalContextProviderProps = {
     children: ReactNode;
 };
 
-export const GlobalContext = createContext<GlobalContextDataProps>(
-    {} as GlobalContextDataProps
+export const GlobalContext = React.createContext<
+    GlobalContextDataProps | undefined
+>(undefined);
+
+/*
+    Use this function instead React.useContext() in your components.
+*/
+export const useGlobalContext = () => {
+    const context = React.useContext(GlobalContext);
+    if (context === undefined)
+        throw new Error(
+            "GlobalContext: useGlobalContext should be used within a AuthContextProvider"
 );
+    return context;
+};
 
 // Data received from the database.
 type UnparsedProfile = {
