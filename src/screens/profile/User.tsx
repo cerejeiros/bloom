@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Animated,
     Easing,
@@ -15,7 +15,7 @@ import { Image } from "react-native-elements";
 import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
-import { GlobalContext } from "../../context/GlobalContext";
+import { useGlobalContext } from "../../context/GlobalContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import UserAvatar from "./UserAvatar";
@@ -164,18 +164,14 @@ function Card({ children }: CardProps) {
     return <View>{children}</View>;
 } */
 
-function BlockView() {
-    return <View style={styles.block_view} pointerEvents="none" />;
-}
-
 function User() {
     const [name, setName] = React.useState<string | null>(null);
     const [bio, setBio] = useState<string | null>(null);
     const [userName, setUserName] = useState<string | null>(null);
     const [date, setDate] = useState<string | undefined>("");
     const [image, setImage] = useState<string | null>(null);
-    const { userData, setUserData, signOut } = useContext(GlobalContext);
-    const { width, height } = React.useContext(GlobalContext);
+    const { width, height, userData, setUserData, signOut } =
+        useGlobalContext();
 
     const [modalVisible, setModalVisible] = useState(false);
     const modalPosition = React.useMemo(
@@ -240,12 +236,11 @@ function User() {
     */
     const [visible, setVisible] = React.useState(false);
 
-    const saveUser = async () => {
+    async function saveUser() {
         if (!userData)
             throw Error("User : saveUser() => Could not load userData.");
 
-        setVisible(false);
-
+        setVisible(true);
         // Update database with client profile data.
         {
             const { error } = await supabase
@@ -277,16 +272,15 @@ function User() {
             data.dateofbirth = date;
             data.username = userName;
             data.photo = image;
-            setUserData(data);
+            await setUserData(data);
         }
 
         setModalVisible(false);
-        setVisible(true);
-    };
+        setVisible(false);
+    }
 
     return (
         <View style={styles.container}>
-            {modalVisible && <BlockView />}
             <Animated.View
                 style={[
                     styles.modal,
@@ -366,7 +360,7 @@ function User() {
                                     text="Fechar"
                                 />
                                 <OurButton
-                                    onPress={saveUser}
+                                    onPress={() => saveUser()}
                                     backgroundColor="green"
                                     text="Salvar"
                                 />
