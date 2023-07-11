@@ -347,8 +347,10 @@ export default function GlobalContextProvider({
                 setUserData,
                 width,
                 height,
-                setUser,
-                fetchData,
+                /*
+                    Get current date and time.
+                */
+                date: new window.Date(),
             } satisfies GlobalContextDataProps),
         [
             signUp,
