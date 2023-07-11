@@ -1,5 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "@supabase/supabase-js";
-import React, { createContext, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { ToastAndroid, useWindowDimensions } from "react-native";
 import supabase from "../helpers/supabaseClient";
 import { Task, UserData } from "../types/shared";
@@ -23,23 +24,25 @@ export type GlobalContextDataProps = {
     // Fetch the data from user by id
     fetchData: (id: string | undefined) => Promise<void>;
 
-    // Set the current user logged
-    setUser: React.Dispatch<React.SetStateAction<User | null>>;
     // Stores user data of the authentication from the database.
     user: User | null;
+    // Set the current user logged
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
     // Stores user data of the profile from the database.
     userData: UserData | null;
     // Set user data of the database.
     setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
 
     /*
-        TODO: Perhaps we should an React.useEffect() for when the screen
-              rotates, so that width and height can be updated.
+        TODO: Naïve idea of using React.useEffect() so that when the screen
+              rotates, the width and height can be updated.
     */
     // Width of the screen.
     width: number;
     // Height of the screen.
     height: number;
+    // Current date and time.
+    date: Date;
 };
 
 type GlobalContextProviderProps = {
@@ -58,7 +61,7 @@ export const useGlobalContext = () => {
     if (context === undefined)
         throw new Error(
             "GlobalContext: useGlobalContext should be used within a AuthContextProvider"
-);
+        );
     return context;
 };
 
@@ -230,6 +233,14 @@ export default function GlobalContextProvider({
                 }),
             };
 
+            try {
+                await AsyncStorage.setItem("user-data", JSON.stringify(data));
+            } catch (e) {
+                throw Error(
+                    `GlobalContext: fetchData() -> Could not set user data information. ${e}`
+                );
+            }
+
             setUserData(data);
         },
         [setUserData]
@@ -255,6 +266,14 @@ export default function GlobalContextProvider({
                     ToastAndroid.LONG
                 );
                 throw Error("GlobalContext: signIn() -> Could not log-in!");
+            }
+
+            try {
+                await AsyncStorage.setItem("user", JSON.stringify(data.user));
+            } catch (e) {
+                throw Error(
+                    `GlobalContext: AsyncStorage -> Could not set user information. ${e}`
+                );
             }
 
             await setUser(data.user);
@@ -343,8 +362,10 @@ export default function GlobalContextProvider({
                 signIn,
                 user,
                 signOut,
+                setUser,
                 userData,
                 setUserData,
+                fetchData,
                 width,
                 height,
                 /*
@@ -356,12 +377,12 @@ export default function GlobalContextProvider({
             signUp,
             signIn,
             user,
-            userData,
             setUser,
+            userData,
             setUserData,
+            fetchData,
             width,
             height,
-            fetchData,
         ]
     );
 
