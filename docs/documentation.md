@@ -262,4 +262,22 @@ Natan, Joao V
     
 Natan, Joao V
 
+66. [ ] 11/07 Escolha do design do Slide para apresentação parte 1 [[vídeo]](https://www.youtube.com/watch?v=R9kUa9KtWZQ)
+ 
+Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
+67. [ ] 11/07 Escolha do design do Slide para apresentação parte 2 [[vídeo]](https://www.youtube.com/watch?v=74T6gTwrwfA)
+
+Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
+
+68. [ ] 11/07 Criação do Roteiro de apresentação [[vídeo]](https://www.youtube.com/watch?v=xUeQau4jvHE)
+
+Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
+
+69. [ ] 11/07 Corrigindo bugs encontrados, arrumando a criação do gráfico, arrumando o gradiente de fundo parte 1 [[vídeo]](https://www.youtube.com/watch?v=H1OWZbOw0Z0)
+
+Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
+
+70. [ ] 11/07 Corrigindo bugs encontrados, arrumando a criação do gráfico, arrumando o gradiente de fundo parte 2 [[vídeo]](https://www.youtube.com/watch?v=yAyU8XDt8e8)
+
+Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
