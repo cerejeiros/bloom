@@ -249,3 +249,11 @@ Natan, Joao V, Kaio, Luiza, Leonardo
 62. [ ] 07/07 parte 2 streak no supabase [[vídeo]](https://youtu.be/kHs1br0UTcU)
     
 Natan, Joao V, Kaio, Luiza, Leonardo
+
+63. [ ] 06/07 problema prettier parte 1 [[vídeo]](https://youtu.be/3vheq7FqhvU)
+    
+Natan, Joao V
+
+64. [ ] 06/07 problema prettier parte 2 [[vídeo]](https://youtu.be/MnA2B1WnzTU)
+    
+Natan, Joao V
