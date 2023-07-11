@@ -241,3 +241,11 @@ Kauã Seichi, Natan Almeida, João Farias
 60. [x]  06/07 Reunião para revisão de código parte 2 [[vídeo]](https://www.youtube.com/watch?v=F110ZRnJGuQ)
 
 Kauã Seichi, Natan Almeida, João Farias
+
+61. [ ] 07/07 parte 1 streak no supabase [[vídeo]](https://youtu.be/MvZ_ra4rZe0)
+    
+Natan, Joao V, Kaio, Luiza, Leonardo
+
+62. [ ] 07/07 parte 2 streak no supabase [[vídeo]](https://youtu.be/kHs1br0UTcU)
+    
+Natan, Joao V, Kaio, Luiza, Leonardo
