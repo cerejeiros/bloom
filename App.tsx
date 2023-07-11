@@ -3,7 +3,6 @@ import * as NavigationBar from "expo-navigation-bar";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
 import { StatusBar, View } from "react-native";
-import { PaperProvider } from "react-native-paper";
 import GlobalContextProvider from "./src/context/GlobalContext";
 import colors from "./src/pallete";
 import Routes from "./src/routes";
@@ -82,11 +81,9 @@ export default function App() {
                 backgroundColor="transparent"
                 barStyle="dark-content"
             />
-            <PaperProvider>
-                <GlobalContextProvider>
-                    <Routes />
-                </GlobalContextProvider>
-            </PaperProvider>
+            <GlobalContextProvider>
+                <Routes />
+            </GlobalContextProvider>
         </View>
     );
 }
