@@ -39,13 +39,15 @@ export default function DatePicker({
     const [show, setShow] = useState(false);
 
     const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+        if (event.type === "dismissed") {
+            setShow(false);
+            return;
+        }
         if (selectedDate) {
             const currentDate = selectedDate;
             setDate(currentDate);
             setShow(false);
-            textState(date.toISOString().split("T")[0]);
-        } else {
-            alert("Data inválida");
+            textState(currentDate.toISOString().split("T")[0]);
         }
     };
 

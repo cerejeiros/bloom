@@ -5,11 +5,20 @@
 
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
+import {
+    KeyboardAvoidingView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
+import BackgroundGradient from "../../components/background_gradient";
 import BaseScrollView from "../../components/baseScrollView";
+import { GlobalContext } from "../../context/GlobalContext";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
 import LoginInput from "./input";
+import Logo from "./logo";
 
 const styles = StyleSheet.create({
     container: {
@@ -17,7 +26,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         height: "100%",
         justifyContent: "center",
-        backgroundColor: colors.white_50,
     },
     titlecontainer: {
         marginLeft: 35,
@@ -28,7 +36,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     message: {
-        marginTop: 100,
+        marginTop: 12,
         marginBottom: "10%",
     },
     button: {
@@ -54,9 +62,13 @@ const styles = StyleSheet.create({
 
 export default function Login() {
     const navigation = useNavigation<NavigationProp<AuthRoutes>>();
-
+    const { height, width } = React.useContext(GlobalContext);
+    const statusBarHeight = StatusBar.currentHeight ?? 0;
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+            <BackgroundGradient
+                style={{ height: height + statusBarHeight, width }}
+            />
             <BaseScrollView
                 props={{
                     contentContainerStyle: [styles.container, { flex: 1 }],
@@ -65,7 +77,9 @@ export default function Login() {
                 {/* TODO: Logo tem que ser flexível para quando o teclado, ela
                           ficar escondida ou removida da tela. */}
                 {/* <Logo /> */}
+                <Logo />
                 <View style={styles.titlecontainer}>
+                    <Text style={styles.title}>Login </Text>
                     <Text style={styles.message}>
                         Bem-vindo de volta! Entre com seus dados:
                     </Text>
