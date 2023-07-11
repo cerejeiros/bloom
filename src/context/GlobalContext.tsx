@@ -107,7 +107,7 @@ type UnparsedProfile = {
 
 // Data received from the database.
 type UnparsedTask = {
-    completed: number;
+    completed: boolean;
     done: number;
     id: number;
     habit_id: number | null;

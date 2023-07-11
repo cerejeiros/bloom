@@ -219,7 +219,7 @@ export default function Home() {
                                 data={[
                                     {
                                         x: " ",
-                                        y: userData?.habits.reduce(
+                                        y: userData?.tasks.reduce(
                                             (accumulator, currentValue) =>
                                                 currentValue.completed
                                                     ? accumulator + 1
@@ -229,7 +229,7 @@ export default function Home() {
                                     },
                                     {
                                         x: " ",
-                                        y: userData?.habits.reduce(
+                                        y: userData?.tasks.reduce(
                                             (accumulator, currentValue) =>
                                                 !currentValue.completed
                                                     ? accumulator + 1
