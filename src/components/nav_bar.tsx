@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
 import { Animated, Easing } from "react-native";
+import { GlobalContext } from "../context/GlobalContext";
+import palleteGet from "../helpers/pallete";
 import colors from "../pallete";
 import Home from "../screens/home/Home";
 import User from "../screens/profile/User";
@@ -47,7 +49,6 @@ function listenAnimated(value: Animated.Value) {
         },
     };
 }
-
 export default function NavBar() {
     NavigationBar.setBackgroundColorAsync(colors.black_900);
 
@@ -59,12 +60,16 @@ export default function NavBar() {
         perfil: new Animated.Value(0),
     };
 
+    const { date } = React.useContext(GlobalContext);
+    const pallete = palleteGet(date);
+
     return (
         <Tab.Navigator
             backBehavior="none"
             initialRouteName="Home"
             screenOptions={() => ({
                 headerShown: false,
+                lazy: true,
                 tabBarStyle: {
                     position: "absolute",
                     bottom: 0,
@@ -145,7 +150,7 @@ export default function NavBar() {
                     tabBarActiveTintColor: colors.black_900,
                     tabBarLabel: ({ focused }) => (
                         <Label
-                            color={colors.yellow_300}
+                            color={pallete.accent}
                             focused={focused}
                             value={animatedValues.home}
                             name="Home"
@@ -154,7 +159,7 @@ export default function NavBar() {
                     tabBarIcon: ({ focused }) => (
                         <Icon
                             value={animatedValues.home}
-                            backgroundColor={colors.yellow_300}
+                            backgroundColor={pallete.accent}
                         >
                             <Feather
                                 name="home"
