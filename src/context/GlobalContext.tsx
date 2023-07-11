@@ -342,6 +342,10 @@ export default function GlobalContextProvider({
         // Log out remotely.
         const { error } = await supabase.auth.signOut();
 
+        // Clear local cache.
+        await AsyncStorage.setItem("user", "");
+        await AsyncStorage.setItem("user-data", "");
+
         if (error)
             throw Error("GlobalContext.signOut: Could not log out.", error);
     };
