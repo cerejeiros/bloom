@@ -257,3 +257,9 @@ Natan, Joao V
 64. [ ] 06/07 problema prettier parte 2 [[vídeo]](https://youtu.be/MnA2B1WnzTU)
     
 Natan, Joao V
+
+65. [ ] 06/07 mexendo no aplicativo [[vídeo]](https://youtu.be/KS90MY_G7KQ)
+    
+Natan, Joao V
+
+
