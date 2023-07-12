@@ -281,3 +281,11 @@ Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias,
 70. [ ] 11/07 Corrigindo bugs encontrados, arrumando a criação do gráfico, arrumando o gradiente de fundo parte 2 [[vídeo]](https://www.youtube.com/watch?v=yAyU8XDt8e8)
 
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
+
+71. [ ] 11/07 Parte 1 fix tela login [[vídeo]](https://youtu.be/9AWnU22xpqY)
+
+Kauã Seichi, Natan Almeida, Joao V
+
+72. [ ] 11/07 Parte 2 fix tela login [[vídeo]](https://youtu.be/UgvvucWSOkw)
+
+Kauã Seichi, Natan Almeida, Joao V
