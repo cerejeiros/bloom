@@ -194,15 +194,15 @@ Kauã, Natan
 
 Kauã, Natan, Joao V, Leonardo Castro e Kaio
 
-49. [ ] 10/06 implementando  na onboarding [[vídeo]](https://drive.google.com/file/d/1iHMZFjHQwQlLUdrc5MFLFM_o_ea7VxT1/view?usp=drive_link)
+49. [x] 10/06 implementando  na onboarding [[vídeo]](https://drive.google.com/file/d/1iHMZFjHQwQlLUdrc5MFLFM_o_ea7VxT1/view?usp=drive_link)
 
 Bruna Liberal, Joao farias
 
-50. [ ] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 1 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)
+50. [ ] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 1 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)**
 
 Bruna Liberal, Joao farias
 
-51. [ ] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 2 [[vídeo]](https://drive.google.com/file/d/1bz-b5vqf0U7TgBn4Wln5Jb-1HFH3QzN/view?usp=drive_link)
+51. [ ] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 2 [[vídeo]](https://drive.google.com/file/d/1bz-b5vqf0U7TgBn4Wln5Jb-1HFH3QzN/view?usp=drive_link)**
 
 Bruna Liberal, Joao farias
 
@@ -210,7 +210,7 @@ Bruna Liberal, Joao farias
 
 Bruna Liberal, Luiza Pugas
 
-53. [ ] 15/06 detahes da onboarding parte 2 [[vídeo]](https://drive.google.com/file/d/1Dpzw09_xg5NH2ymbvMCPoGP9ItMDmwAv/view?usp=drive_link)
+53. [x] 15/06 detahes da onboarding parte 2 [[vídeo]](https://drive.google.com/file/d/1Dpzw09_xg5NH2ymbvMCPoGP9ItMDmwAv/view?usp=drive_link)
 
 Bruna Liberal, Luiza Pugas
 
@@ -242,50 +242,50 @@ Kauã Seichi, Natan Almeida, João Farias
 
 Kauã Seichi, Natan Almeida, João Farias
 
-61. [ ] 07/07 parte 1 streak no supabase [[vídeo]](https://youtu.be/MvZ_ra4rZe0)
+61. [x] 07/07 parte 1 streak no supabase [[vídeo]](https://youtu.be/MvZ_ra4rZe0)
     
 Natan, Joao V, Kaio, Luiza, Leonardo
 
-62. [ ] 07/07 parte 2 streak no supabase [[vídeo]](https://youtu.be/kHs1br0UTcU)
+62. [x] 07/07 parte 2 streak no supabase [[vídeo]](https://youtu.be/kHs1br0UTcU)
     
 Natan, Joao V, Kaio, Luiza, Leonardo
 
-63. [ ] 06/07 problema prettier parte 1 [[vídeo]](https://youtu.be/3vheq7FqhvU)
+63. [x] 06/07 problema prettier parte 1 [[vídeo]](https://youtu.be/3vheq7FqhvU)
     
 Natan, Joao V
 
-64. [ ] 06/07 problema prettier parte 2 [[vídeo]](https://youtu.be/MnA2B1WnzTU)
+64. [x] 06/07 problema prettier parte 2 [[vídeo]](https://youtu.be/MnA2B1WnzTU)
     
 Natan, Joao V
 
-65. [ ] 06/07 mexendo no aplicativo [[vídeo]](https://youtu.be/KS90MY_G7KQ)
+65. [x] 06/07 mexendo no aplicativo [[vídeo]](https://youtu.be/KS90MY_G7KQ)
     
 Natan, Joao V
 
-66. [ ] 11/07 Escolha do design do Slide para apresentação parte 1 [[vídeo]](https://www.youtube.com/watch?v=R9kUa9KtWZQ)
+66. [x] 11/07 Escolha do design do Slide para apresentação parte 1 [[vídeo]](https://www.youtube.com/watch?v=R9kUa9KtWZQ)
  
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
-67. [ ] 11/07 Escolha do design do Slide para apresentação parte 2 [[vídeo]](https://www.youtube.com/watch?v=74T6gTwrwfA)
+67. [x] 11/07 Escolha do design do Slide para apresentação parte 2 [[vídeo]](https://www.youtube.com/watch?v=74T6gTwrwfA)
 
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
-68. [ ] 11/07 Criação do Roteiro de apresentação [[vídeo]](https://www.youtube.com/watch?v=xUeQau4jvHE)
+68. [x] 11/07 Criação do Roteiro de apresentação [[vídeo]](https://www.youtube.com/watch?v=xUeQau4jvHE)
 
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
-69. [ ] 11/07 Corrigindo bugs encontrados, arrumando a criação do gráfico, arrumando o gradiente de fundo parte 1 [[vídeo]](https://www.youtube.com/watch?v=H1OWZbOw0Z0)
+69. [x] 11/07 Corrigindo bugs encontrados, arrumando a criação do gráfico, arrumando o gradiente de fundo parte 1 [[vídeo]](https://www.youtube.com/watch?v=H1OWZbOw0Z0)
 
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
-70. [ ] 11/07 Corrigindo bugs encontrados, arrumando a criação do gráfico, arrumando o gradiente de fundo parte 2 [[vídeo]](https://www.youtube.com/watch?v=yAyU8XDt8e8)
+70. [x] 11/07 Corrigindo bugs encontrados, arrumando a criação do gráfico, arrumando o gradiente de fundo parte 2 [[vídeo]](https://www.youtube.com/watch?v=yAyU8XDt8e8)
 
 Kauã Seichi, Natan Almeida, Kaio Enzo, Luiza Pugas, Bruna Liberal,João Farias, Leonardo Castro
 
-71. [ ] 11/07 Parte 1 fix tela login [[vídeo]](https://youtu.be/9AWnU22xpqY)
+71. [x] 11/07 Parte 1 fix tela login [[vídeo]](https://youtu.be/9AWnU22xpqY)
 
 Kauã Seichi, Natan Almeida, Joao V
 
-72. [ ] 11/07 Parte 2 fix tela login [[vídeo]](https://youtu.be/UgvvucWSOkw)
+72. [x] 11/07 Parte 2 fix tela login [[vídeo]](https://youtu.be/UgvvucWSOkw)
 
 Kauã Seichi, Natan Almeida, Joao V
