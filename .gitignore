@@ -11,6 +11,9 @@ npm-debug.*
 web-build/
 .env
 
+# For additional assets you're working on.
+/assets_ip/
+
 # macOS
 .DS_Store
 
@@ -19,3 +22,6 @@ web-build/
 
 # Secret enviroment variables.
 /.env
+
+# Ignore zip files.
+*.zip
