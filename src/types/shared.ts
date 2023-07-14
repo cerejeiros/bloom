@@ -5,7 +5,7 @@ export type UserData = {
     username: string | null;
     gender: string | null;
     photo: string | null;
-    dateofbirth?: string;
+    dateofbirth: string | null;
     /*
         For the gamification of tasks, habits, and routines being
         followed.
@@ -20,6 +20,7 @@ export type UserData = {
         The list of habits included in this user.
     */
     habits: Array<Habit>;
+
     /*
         The list of routines included in this user.
     */
