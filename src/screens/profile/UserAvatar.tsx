@@ -36,7 +36,7 @@ export default function UserAvatar({
                     source={
                         image
                             ? { uri: `data:image/jpeg;base64,${image}` }
-                            : require("../../../assets/cat-profile.jpg")
+                            : require("../../../assets/cat-profile.png")
                     }
                     style={styles.imageAvatar}
                 />
