@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     Animated,
     Easing,
@@ -10,6 +10,7 @@ import {
     StyleSheet,
     Text,
     View,
+    useWindowDimensions,
 } from "react-native";
 import { Image } from "react-native-elements";
 import { Button } from "react-native-paper";
@@ -165,19 +166,44 @@ function Card({ children }: CardProps) {
 } */
 
 function User() {
-    const [name, setName] = React.useState<string | null>(null);
-    const [bio, setBio] = useState<string | null>(null);
-    const [userName, setUserName] = useState<string | null>(null);
-    const [date, setDate] = useState<string | undefined>("");
-    const [image, setImage] = useState<string | null>(null);
-    const { width, height, userData, setUserData, signOut } =
-        useGlobalContext();
+    const {
+        user,
+        signOut,
+        setUser,
+        bio,
+        setBio,
+        name,
+        setName,
+        username,
+        setUsername,
+        gender,
+        setGender,
+        photo,
+        setPhoto,
+        date,
+        setDate,
+        xp,
+        setXp,
+        tasks,
+        setTasks,
+        habits,
+        setHabits,
+        routines,
+        setRoutines,
+    } = useGlobalContext();
 
+    const [nameNew, setNameNew] = React.useState<string | null>(name);
+    const [bioNew, setBioNew] = useState<string | null>(bio);
+    const [usernameNew, setUsernameNew] = useState<string | null>(username);
+    const [dateNew, setDateNew] = useState<string | null>(date);
+    const [photoNew, setPhotoNew] = useState<string | null>(photo);
+    const { width, height } = useWindowDimensions();
     const [modalVisible, setModalVisible] = useState(false);
     const modalPosition = React.useMemo(
         () => new Animated.Value(height),
         [height]
     );
+
     React.useEffect(() => {
         if (modalVisible) {
             Animated.timing(modalPosition, {
@@ -202,7 +228,7 @@ function User() {
             textPrimary: "3",
             iconPrimary: "",
             subTextPrimary: "position",
-            textSecondary: userData?.xp.toString() ?? "0",
+            textSecondary: xp?.toString() ?? "0",
             iconSecondary: "",
             subTextSecondary: "xp",
             textPrincipal: "ranking",
@@ -219,17 +245,6 @@ function User() {
         },
     ];
 
-    useEffect(() => {
-        if (!userData)
-            throw Error("User : useEffect() => Could not set userData on UI.");
-
-        setName(userData?.name);
-        setUserName(userData.username);
-        setBio(userData.bio);
-        setDate(userData.dateofbirth ?? "");
-        setImage(userData.photo);
-    }, [userData]);
-
     /*
         TODO: we can use this to show loading components in the app while
         the supabase fetch is going on.
@@ -237,43 +252,32 @@ function User() {
     const [visible, setVisible] = React.useState(false);
 
     async function saveUser() {
-        if (!userData)
-            throw Error("User : saveUser() => Could not load userData.");
-
         setVisible(true);
         // Update database with client profile data.
         {
             const { error } = await supabase
                 .from("profiles")
                 .update({
-                    bio,
-                    name,
-                    dateofbirth: date,
-                    username: userName,
-                    photo: image,
+                    bio: bioNew,
+                    name: nameNew,
+                    dateofbirth: dateNew,
+                    username: usernameNew,
+                    photo: photoNew,
                 })
-                .eq("id", userData.id);
+                .eq("id", user?.id);
 
-            if (error) {
-                window.alert(
-                    "Não foi possível salvar as informações do perfil"
-                );
+            if (error)
                 throw Error(
                     "User : saveUser() => Could not update profile data."
                 );
-            }
         }
 
         // Update client data (context) profile data.
-        {
-            const data = userData;
-            data.bio = bio;
-            data.name = name;
-            data.dateofbirth = date;
-            data.username = userName;
-            data.photo = image;
-            await setUserData(data);
-        }
+        setBio(bioNew);
+        setName(nameNew);
+        setDate(dateNew);
+        setUsername(usernameNew);
+        setPhoto(photoNew);
 
         setModalVisible(false);
         setVisible(false);
@@ -299,13 +303,13 @@ function User() {
                         <Text style={styles.modalTitle}>Editar perfil</Text>
                         <View>
                             <UserAvatar
-                                image={image}
-                                setImage={setImage}
+                                image={photoNew}
+                                setImage={setPhotoNew}
                                 openPickerOnPress
                             />
                             <InputIcon
-                                onChangeText={setName}
-                                value={name ?? undefined}
+                                onChangeText={setNameNew}
+                                value={nameNew ?? undefined}
                                 placeholder="Nome"
                                 keyboardType="default"
                                 inputMode="text"
@@ -313,8 +317,8 @@ function User() {
                                 label="Nome"
                             />
                             <InputIcon
-                                onChangeText={setUserName}
-                                value={userName ?? undefined}
+                                onChangeText={setUsernameNew}
+                                value={usernameNew ?? undefined}
                                 placeholder="userName"
                                 keyboardType="default"
                                 inputMode="text"
@@ -322,8 +326,8 @@ function User() {
                                 label="Username"
                             />
                             <InputIcon
-                                onChangeText={setBio}
-                                value={bio ?? undefined}
+                                onChangeText={setBioNew}
+                                value={bioNew ?? undefined}
                                 placeholder="Biografia"
                                 keyboardType="default"
                                 inputMode="text"
@@ -332,35 +336,28 @@ function User() {
                             />
                             <DatePicker
                                 icon={false}
-                                text={date}
-                                textState={setDate}
+                                text={dateNew}
+                                textState={setDateNew}
                                 style={styles.input}
                                 label="Data de nascimento"
                             />
                             <View style={styles.buttonView}>
                                 <OurButton
                                     onPress={() => {
-                                        /*
-                                        FIXIT: userData existence inference
-                                               should already be 100% sure that
-                                               exists in this whole screen.
-                                               Since it is only rendered when
-                                               it does exist.
-                                    */
-                                        if (userData) {
-                                            setImage(userData.photo);
-                                            setBio(userData.bio);
-                                            setDate(userData.dateofbirth);
-                                            setName(userData.name);
-                                            setUserName(userData.username);
-                                        }
+                                        setPhotoNew(photo);
+                                        setBioNew(bio);
+                                        setDateNew(date);
+                                        setNameNew(name);
+                                        setUsernameNew(username);
                                         setModalVisible(false);
                                     }}
                                     backgroundColor={colors.rose_400}
                                     text="Fechar"
                                 />
                                 <OurButton
-                                    onPress={() => saveUser()}
+                                    onPress={() =>
+                                        saveUser().catch((e) => window.alert(e))
+                                    }
                                     backgroundColor="green"
                                     text="Salvar"
                                 />
@@ -381,8 +378,8 @@ function User() {
 
                 <View style={styles.profilePhoto}>
                     <UserAvatar
-                        image={image}
-                        setImage={setImage}
+                        image={photoNew}
+                        setImage={setPhotoNew}
                         openPickerOnPress={false}
                     />
                     <Pressable

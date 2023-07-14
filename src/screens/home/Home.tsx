@@ -153,19 +153,17 @@ const styles = StyleSheet.create({
 });
 
 export default function Home() {
-    const { userData, setUserData, date } = useGlobalContext();
+    const { photo, name, tasks } = useGlobalContext();
 
     const navigation = useNavigation<StackNavigatorRoutesProps>();
+    const date = new window.Date();
     const frase = info[date.getUTCDay()];
     const day = date.getDate();
     const month = months[date.getMonth()];
 
     const pallete = palleteGet(date);
 
-    React.useEffect(
-        () => console.log("1. changes to userData.tasks", userData?.tasks),
-        [userData]
-    );
+    React.useEffect(() => console.log("1. changes to name", name), [name]);
 
     return (
         <ScrollView>
@@ -188,9 +186,9 @@ export default function Home() {
                     <View style={{ padding: 12.5 }}>
                         <Image
                             source={
-                                userData?.photo
+                                photo
                                     ? {
-                                          uri: `data:image/jpeg;base64,${userData?.photo}`,
+                                          uri: `data:image/jpeg;base64,${photo}`,
                                       }
                                     : require("../../../assets/cat-profile.jpg")
                             }
@@ -206,7 +204,7 @@ export default function Home() {
                             Bem-vindo,
                         </Text>
                         <Text style={[styles.font_bold, { fontSize: 18 }]}>
-                            {userData?.name ?? userData?.username}
+                            {name}
                         </Text>
                     </View>
                 </View>
@@ -263,7 +261,7 @@ export default function Home() {
                     <TouchableOpacity
                         onPress={() => navigation.navigate("Status")}
                     >
-                        {userData?.tasks ? (
+                        {tasks ? (
                             <VictoryPie
                                 width={150}
                                 height={150}
@@ -274,7 +272,7 @@ export default function Home() {
                                 data={[
                                     {
                                         x: " ",
-                                        y: userData?.tasks.reduce(
+                                        y: tasks.reduce(
                                             (accumulator, currentValue) =>
                                                 currentValue.completed
                                                     ? accumulator + 1
@@ -284,7 +282,7 @@ export default function Home() {
                                     },
                                     {
                                         x: " ",
-                                        y: userData?.tasks.reduce(
+                                        y: tasks.reduce(
                                             (accumulator, currentValue) =>
                                                 !currentValue.completed
                                                     ? accumulator + 1
@@ -322,7 +320,7 @@ export default function Home() {
                         }}
                     >
                         <Text style={styles.textbutton}>
-                            Acompanhe seus Habitos
+                            Acompanhe suas tarefas
                         </Text>
                     </TouchableOpacity>
                 </View>

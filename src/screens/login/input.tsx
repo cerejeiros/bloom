@@ -1,9 +1,9 @@
 import { FontAwesome } from "@expo/vector-icons";
-import React, { Dispatch, SetStateAction, useContext, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Button from "../../components/button";
 import InputIcon from "../../components/input_icon";
-import { GlobalContext } from "../../context/GlobalContext";
+import { useGlobalContext } from "../../context/GlobalContext";
 import checkPassword from "../../helpers/relevantFunctions";
 import colors from "../../pallete";
 
@@ -121,7 +121,7 @@ export default function LoginInput() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { signIn, signUp, signOut } = useContext(GlobalContext);
+    const { signIn } = useGlobalContext();
 
     return (
         <View style={styles.container}>
@@ -130,9 +130,12 @@ export default function LoginInput() {
             <Text style={styles.link}>Esqueceu sua senha?</Text>
             <Button
                 style={styles.button}
-                onPress={async () => {
+                onPress={() => {
                     if (email && checkPassword(password)) {
-                        await signIn(email, password);
+                        // window.alert("This is here.");
+                        // TODO: Use toast library for both IOS and Android
+                        // Note this only show a Toast in android since IOS don't provide a built-in toast API.
+                        signIn(email, password).catch((e) => window.alert(e));
                     } else {
                         console.error(
                             "Por favor preencha os campos que não estão preenchidos"

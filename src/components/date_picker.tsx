@@ -8,9 +8,9 @@ import colors from "../pallete";
 import InputIcon from "./input_icon";
 
 export interface DatePickerProps {
-    text?: string;
+    text: string | null;
     style?: StyleProp<ViewStyle>;
-    textState: React.Dispatch<SetStateAction<string | undefined>>;
+    textState: React.Dispatch<SetStateAction<string | null>>;
     icon: boolean;
     label?: string;
 }
@@ -65,7 +65,7 @@ export default function DatePicker({
                     openDatePicker();
                 }}
                 onChangeText={textState}
-                value={text}
+                value={text ?? ""}
                 placeholder="AAAA-MM-DD"
                 keyboardType="numeric"
                 label={icon === false && label ? label : undefined}

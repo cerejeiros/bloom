@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
 import { Animated, Easing } from "react-native";
-import { GlobalContext } from "../context/GlobalContext";
 import palleteGet from "../helpers/pallete";
 import colors from "../pallete";
 import Home from "../screens/home/Home";
@@ -60,8 +59,7 @@ export default function NavBar() {
         perfil: new Animated.Value(0),
     };
 
-    const { date } = React.useContext(GlobalContext);
-    const pallete = palleteGet(date);
+    const pallete = palleteGet(new window.Date());
 
     return (
         <Tab.Navigator

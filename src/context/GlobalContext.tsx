@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "@supabase/supabase-js";
 import React, { ReactNode } from "react";
-import { ToastAndroid, useWindowDimensions } from "react-native";
 import supabase from "../helpers/supabaseClient";
 import { Habit, Routine, Task, UserData } from "../types/shared";
 
@@ -321,6 +320,8 @@ export default function GlobalContextProvider({
             userData.tasks = fetchedTasks;
         }
 
+        console.log("user", userData);
+
         try {
             await AsyncStorage.setItem("user-data", JSON.stringify(userData));
         } catch (e) {
@@ -342,22 +343,15 @@ export default function GlobalContextProvider({
                 password,
             });
 
-            if (error || !data.user) {
-                // TODO: Use toast library for both IOS and Android
-                // Note this only show a Toast in android since IOS don't provide a built-in toast API.
-                ToastAndroid.show(
-                    error?.message ?? "Houve um erro no login!",
-                    ToastAndroid.LONG
-                );
+            if (error || !data.user)
                 throw Error("GlobalContext: signIn() -> Could not log-in!");
-            }
 
             setUser(data.user);
             try {
                 await AsyncStorage.setItem("user", JSON.stringify(data.user));
             } catch (e) {
                 throw Error(
-                    `GlobalContext: AsyncStorage -> Could not set user information. ${e}`
+                    `Glob1alContext: AsyncStorage -> Could not set user information. ${e}`
                 );
             }
 
@@ -402,9 +396,9 @@ export default function GlobalContextProvider({
                     `GlobalContext.signUp: Could not update data -> ${error}`
                 );
 
-            await fetchData(data.user.id);
+            await saveData(data.user.id);
         },
-        []
+        [saveData]
     );
 
     /*
@@ -434,12 +428,6 @@ export default function GlobalContextProvider({
         if (error)
             throw Error("GlobalContext.signOut: Could not log out.", error);
     };
-
-    /*
-        Get the screen dimensions using the preferred API by React Native.
-        https://reactnative.dev/docs/dimensions
-    */
-    const { width, height } = useWindowDimensions();
 
     /*
         To only recompute when one of the dependencies change.

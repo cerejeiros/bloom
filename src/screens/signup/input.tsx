@@ -1,10 +1,10 @@
 import { FontAwesome, Fontisto } from "@expo/vector-icons";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
-import { GlobalContext } from "../../context/GlobalContext";
+import { useGlobalContext } from "../../context/GlobalContext";
 import checkPassword from "../../helpers/relevantFunctions";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
@@ -74,7 +74,7 @@ export default function CadastroInput() {
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState("");
     const [isloading, setIsLoading] = useState(false);
-    const { signUp } = useContext(GlobalContext);
+    const { signUp } = useGlobalContext();
 
     const checkUsernameDuplicated = async () => {
         const { data, error } = await supabase

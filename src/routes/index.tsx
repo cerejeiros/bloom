@@ -4,11 +4,35 @@ import React from "react";
 import Loading from "../components/Loading";
 import { useGlobalContext } from "../context/GlobalContext";
 import supabase from "../helpers/supabaseClient";
+import { UserData } from "../types/shared";
 import { AppRoutes } from "./app.routes";
 import { AuthRoutes } from "./auth.routes";
 
 export default function Routes() {
-    const { user, userData, setUser, setUserData } = useGlobalContext();
+    const {
+        user,
+        setUser,
+        bio,
+        setBio,
+        name,
+        setName,
+        username,
+        setUsername,
+        gender,
+        setGender,
+        photo,
+        setPhoto,
+        date,
+        setDate,
+        xp,
+        setXp,
+        tasks,
+        setTasks,
+        habits,
+        setHabits,
+        routines,
+        setRoutines,
+    } = useGlobalContext();
     const [loading, setLoading] = React.useState(true);
 
     // Recupera a sessão do usuário quando o app é recarregado ou aberto novamente.
@@ -18,19 +42,40 @@ export default function Routes() {
             try {
                 const value = await AsyncStorage.getItem("user");
                 if (value !== null) {
-                    await setUser(JSON.parse(value));
                     const valueData = await AsyncStorage.getItem("user-data");
-                    if (valueData !== null)
-                        await setUserData(JSON.parse(valueData));
+                    if (valueData !== null) {
+                        const userData: UserData = JSON.parse(valueData);
+                        setBio(userData.bio);
+                        setName(userData.name);
+                        setUsername(userData.username);
+                        setGender(userData.gender);
+                        setPhoto(userData.photo);
+                        setDate(userData.dateofbirth);
+                        setXp(userData.xp);
+                        setHabits(userData.habits);
+                        setRoutines(userData.routines);
+                        setTasks(userData.tasks);
+                    }
+                    setUser(JSON.parse(value));
                 } else {
                     const { data } = await supabase.auth.getSession();
                     if (data && data.session) {
-                        await setUser(data.session.user);
                         const valueData = await AsyncStorage.getItem(
                             "user-data"
                         );
-                        if (valueData !== null)
-                            await setUserData(JSON.parse(valueData));
+                        if (valueData !== null) {
+                            const userData: UserData = JSON.parse(valueData);
+                            setBio(userData.bio);
+                            setName(userData.name);
+                            setUsername(userData.username);
+                            setGender(userData.gender);
+                            setPhoto(userData.photo);
+                            setDate(userData.dateofbirth);
+                            setXp(userData.xp);
+                            setHabits(userData.habits);
+                            setRoutines(userData.routines);
+                        }
+                        setUser(data.session.user);
                     }
                 }
             } catch (e) {
@@ -40,14 +85,22 @@ export default function Routes() {
             }
             setLoading(false);
         })();
-    }, [setUser, setUserData]);
+    }, [
+        setUser,
+        setBio,
+        setName,
+        setUsername,
+        setGender,
+        setPhoto,
+        setDate,
+        setXp,
+        setHabits,
+        setRoutines,
+        setTasks,
+    ]);
     return (
         <NavigationContainer>
-            {user && userData ? (
-                <AppRoutes />
-            ) : (
-                (loading && <Loading />) || <AuthRoutes />
-            )}
+            {user ? <AppRoutes /> : (loading && <Loading />) || <AuthRoutes />}
         </NavigationContainer>
     );
 }
