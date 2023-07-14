@@ -1,6 +1,6 @@
 {
     "expo": {
-        "name": "cerejeiros",
+        "name": "Bloom",
         "owner": "cerejeiros",
         "plugins": [
             [
@@ -10,7 +10,7 @@
                 }
             ]
         ],
-        "slug": "cerejeiros",
+        "slug": "bloom",
         "version": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
@@ -26,7 +26,7 @@
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png",
+                "foregroundImage": "./assets/icon.png",
                 "backgroundColor": "#ffffff"
             },
             "permissions": ["android.permission.RECORD_AUDIO"],
