@@ -198,11 +198,11 @@ Kauã, Natan, Joao V, Leonardo Castro e Kaio
 
 Bruna Liberal, Joao farias
 
-50. [ ] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 1 [[vídeo]](https://drive.google.com/drive/folders/1WUH_HKjrRolpq8PQYaerOoQe_rYocuUN)**
+50. [x] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 1 [[vídeo]](https://drive.google.com/file/d/1Dpzw09_xg5NH2ymbvMCPoGP9ItMDmwAv/view?usp=sharing)
 
 Bruna Liberal, Joao farias
 
-51. [ ] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 2 [[vídeo]](https://drive.google.com/file/d/1bz-b5vqf0U7TgBn4Wln5Jb-1HFH3QzN/view?usp=drive_link)**
+51. [x] 11/06 Fazendo arts para a Onboarding e atualizado componentes Parte 2 [[vídeo]](https://drive.google.com/file/d/1bz-b5vqf0U7TgBn4Wln5Jb-1HFH3QzNt/view?usp=sharing)
 
 Bruna Liberal, Joao farias
 
