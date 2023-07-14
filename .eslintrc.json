@@ -33,11 +33,16 @@
         "no-bitwise": 0,
         "react/require-default-props": 0,
         "no-shadow": "off",
+        "no-param-reassign": "off",
         "@typescript-eslint/no-shadow": ["error"],
         "react/no-unstable-nested-components": [
             "warn",
             { "allowAsProps": true }
         ],
+        // Disabled because window.alerrt() is a valid function to be used
+        // in a React Native application since it triggers native mobile
+        // hot notification.
+        "no-alert": "off",
         "react/jsx-props-no-spreading": [
             1,
             {

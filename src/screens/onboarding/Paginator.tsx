@@ -10,8 +10,6 @@ export interface Items {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        // height: 64,
-        // backgroundColor: "white",
         justifyContent: "center",
         alignItems: "center",
     },

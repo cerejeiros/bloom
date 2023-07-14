@@ -1,14 +1,15 @@
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import colors from "../../pallete";
 
 const styles = StyleSheet.create({
     cardContainer: {
-        marginHorizontal: 30,
-        backgroundColor: "#fff",
+        paddingVertical: "5%",
+        backgroundColor: colors.white_50,
         borderRadius: 20,
-        alignItems: "flex-start",
-        padding: 10,
+        alignItems: "center",
+        justifyContent: "center",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -18,7 +19,11 @@ const styles = StyleSheet.create({
         shadowRadius: 6.68,
         elevation: 11,
     },
-    cardTitle: { marginBottom: 10 },
+    cardTitle: {
+        marginBottom: 10,
+        textAlign: "center",
+        fontFamily: "Poppins-Regular",
+    },
     statsRow: {
         justifyContent: "space-around",
         flexDirection: "row",
@@ -26,13 +31,16 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         width: 300,
     },
+    stats_info: {
+        alignItems: "center",
+    },
     statsPrimaryText: {
         fontSize: 16,
         fontWeight: "bold",
     },
     statsSecondaryText: {
-        fontSize: 12,
-        fontWeight: "400",
+        fontSize: 11,
+        fontFamily: "Poppins-Regular",
     },
 });
 
@@ -51,8 +59,10 @@ export default function UserStatsCard({
 }: {
     info: UserStatsCardProps[];
 }) {
+    const { width } = useWindowDimensions();
+
     return (
-        <View style={styles.cardContainer}>
+        <View style={[styles.cardContainer, { width: width * 0.9 }]}>
             <View>
                 <Text style={styles.cardTitle}>
                     <Text style={{ fontWeight: "bold" }}>Estatísticas</Text> nos
@@ -61,7 +71,7 @@ export default function UserStatsCard({
                 {info.map((p) => {
                     return (
                         <View style={styles.statsRow} key={p.textPrincipal}>
-                            <View style={{ width: 50 }}>
+                            <View style={[styles.stats_info, { width: 50 }]}>
                                 <AntDesign
                                     name={p.iconPrincipal}
                                     size={24}
@@ -71,7 +81,7 @@ export default function UserStatsCard({
                                     {p.textPrincipal}
                                 </Text>
                             </View>
-                            <View style={{ width: 50 }}>
+                            <View style={[styles.stats_info, { width: 50 }]}>
                                 <Text style={styles.statsPrimaryText}>
                                     {p.textPrimary}
                                 </Text>
@@ -79,7 +89,7 @@ export default function UserStatsCard({
                                     {p.subTextPrimary}
                                 </Text>
                             </View>
-                            <View style={{ width: 50 }}>
+                            <View style={[styles.stats_info, { width: 50 }]}>
                                 <Text style={styles.statsPrimaryText}>
                                     {p.textSecondary}
                                 </Text>

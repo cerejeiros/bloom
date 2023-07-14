@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
     Dimensions,
     FlatList,
@@ -10,7 +10,7 @@ import {
     View,
 } from "react-native";
 import { Avatar, Button } from "react-native-paper";
-import { GlobalContext } from "../../context/GlobalContext";
+import { useGlobalContext } from "../../context/GlobalContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import { UserData } from "../../types/shared";
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 20,
         paddingHorizontal: 10,
-        // paddingVertical: 30,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -65,7 +64,7 @@ export type Friends = {
 };
 
 export default function Status() {
-    const { user, setUserData, signOut } = useContext(GlobalContext);
+    const { user } = useGlobalContext();
     const [visible, setVisible] = React.useState(false);
 
     const showModal = () => {

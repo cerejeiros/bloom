@@ -1,8 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext } from "react";
+import React from "react";
 import {
     Image,
-    Linking,
     ScrollView,
     StatusBar,
     StyleSheet,
@@ -10,44 +9,44 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { VictoryPie } from "victory-native";
-import { GlobalContext } from "../../context/GlobalContext";
+import { useGlobalContext } from "../../context/GlobalContext";
+import palleteGet from "../../helpers/pallete";
 import colors from "../../pallete";
 import { StackNavigatorRoutesProps } from "../../routes/app.routes";
 import months from "../../shared/months";
 import info from "./phrases";
 
+const statusHeight = StatusBar.currentHeight ?? 0;
+
 const styles = StyleSheet.create({
+    font: {
+        fontFamily: "Poppins-Regular",
+    },
+    font_bold: {
+        fontFamily: "Poppins-Bold",
+    },
     container: {
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 160,
+        backgroundColor: colors.white_50,
         flex: 1,
-        paddingTop: StatusBar.currentHeight,
-    },
-    header: {
-        justifyContent: "flex-end",
-        padding: 50,
-        alignSelf: "center",
-        width: "100%",
-        position: "absolute",
-        alignContent: "center",
+        paddingTop: statusHeight * 1.25,
+        paddingBottom: statusHeight * 2.5,
     },
     headerText: {
-        fontSize: 25,
+        paddingHorizontal: 50,
         borderRadius: 10,
         textAlign: "center",
         color: colors.white_500,
-        backgroundColor: colors.white_300,
     },
     imagecontainer: {
-        position: "absolute",
-        top: -450,
+        width: 100,
+        height: 100,
         alignSelf: "center",
     },
     sun: {
-        transform: [{ rotate: "165deg" }],
+        transform: [{ rotate: "100deg" }],
     },
 
     cerej: {
@@ -57,56 +56,72 @@ const styles = StyleSheet.create({
         right: 0,
     },
     date: {
-        position: "absolute",
-        marginLeft: 60,
-        height: 90,
-        top: 120,
         flexDirection: "column",
     },
-    day: {
-        fontSize: 80,
-        color: colors.white_500,
-    },
-    month: {
-        fontSize: 15,
-        textTransform: "uppercase",
-        color: colors.white_500,
-        alignSelf: "center",
-    },
+
     containerDayPhrase: {
         width: "90%",
-        minHeight: 90,
-        maxHeight: 180,
-        rowGap: 5,
-        margin: 25,
         padding: 15,
-        borderTopLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        backgroundColor: colors.white_300,
+        rowGap: 5,
+        backgroundColor: colors.rose_100,
+        borderRadius: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.36,
+        shadowRadius: 6.68,
+        elevation: 11,
     },
     dayPhrase: {
         opacity: 1,
-        textAlign: "left",
+        textAlign: "center",
         fontSize: 20,
-        color: colors.white_500,
     },
     dayPhraseAuthor: {
         textAlign: "left",
-        fontSize: 12,
-        color: colors.white_100,
+        fontSize: 15,
     },
     dayPhraseLink: {
         fontSize: 18,
-        color: colors.white_600,
+    },
+    containerRecommendation: {
+        width: "90%",
+        flexDirection: "row",
+        padding: 15,
+        columnGap: 5,
+        backgroundColor: colors.rose_100,
+        borderRadius: 20,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.36,
+        shadowRadius: 6.68,
+        elevation: 11,
     },
     containerStats: {
+        width: "90%",
         flexDirection: "row",
         justifyContent: "space-between",
-        width: "90%",
-        borderRadius: 10,
-        margin: 15,
-        padding: 20,
-        backgroundColor: colors.white_300,
+        padding: 15,
+        columnGap: 5,
+        backgroundColor: colors.rose_100,
+        borderRadius: 20,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.36,
+        shadowRadius: 6.68,
+        elevation: 11,
     },
     textStats: {
         textAlign: "left",
@@ -127,7 +142,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: colors.white_300,
+        backgroundColor: colors.white_100,
     },
     containerStatsDescription: {
         alignContent: "center",
@@ -146,60 +161,250 @@ const styles = StyleSheet.create({
     },
     blueCircle: {
         width: 20,
+
+        height: 20,
         backgroundColor: colors.blue_300,
         borderRadius: 100,
     },
     redCircle: {
         width: 20,
-        backgroundColor: colors.rose_400,
-        borderRadius: 100,
+        height: 20,
+        backgroundColor: colors.rose_500,
+        opacity: 0.5,
+        borderRadius: 10,
     },
 });
 
-export default function Home() {
-    const { userData } = useContext(GlobalContext);
+export function Photo() {
+    const { photo } = useGlobalContext();
 
+    return (
+        <Image
+            source={
+                photo
+                    ? {
+                          uri: `data:image/jpeg;base64,${photo}`,
+                      }
+                    : require("../../../assets/cat-profile.jpg")
+            }
+            style={{
+                width: 75,
+                height: 75,
+                borderRadius: 75 / 2,
+            }}
+        />
+    );
+}
+
+export function Name() {
+    const { name } = useGlobalContext();
+
+    return <Text style={[styles.font_bold, { fontSize: 18 }]}>{name}</Text>;
+}
+
+export function TasksStats() {
+    const { tasks } = useGlobalContext();
+    if (tasks)
+        <VictoryPie
+            width={150}
+            height={150}
+            padAngle={0}
+            innerRadius={50}
+            padding={0}
+            colorScale={[colors.blue_300, colors.rose_500]}
+            data={[
+                {
+                    x: " ",
+                    y: tasks.reduce(
+                        (accumulator, currentValue) =>
+                            currentValue.completed
+                                ? accumulator + 1
+                                : accumulator,
+                        0
+                    ),
+                },
+                {
+                    x: " ",
+                    y: tasks.reduce(
+                        (accumulator, currentValue) =>
+                            !currentValue.completed
+                                ? accumulator + 1
+                                : accumulator,
+                        0
+                    ),
+                },
+            ]}
+        />;
+
+    return <Text style={styles.font}> Crie um hábito </Text>;
+}
+
+export default function Home() {
     const navigation = useNavigation<StackNavigatorRoutesProps>();
-    const date = new Date();
+    const date = new window.Date();
     const frase = info[date.getUTCDay()];
     const day = date.getDate();
     const month = months[date.getMonth()];
 
+    const pallete = palleteGet(date);
+
+    // React.useEffect(() => console.log("1. changes to name", name), [name]);
+
     return (
         <ScrollView>
-            <View style={styles.imagecontainer}>
-                <Image
-                    style={styles.sun}
-                    source={require("../../../assets/luasol.png")}
-                />
-            </View>
-            <View style={styles.header}>
-                <Text style={styles.headerText}>Olá, {userData?.username}</Text>
-            </View>
-            <Image
-                style={styles.cerej}
-                source={require("../../../assets/cereje.png")}
-            />
-            <View style={styles.date}>
-                <Text style={styles.day}>{day}</Text>
-                <Text style={styles.month}>de {month.month}</Text>
-            </View>
-
-            <SafeAreaView style={styles.container}>
-                <TouchableOpacity
-                    style={styles.containerDayPhrase}
-                    activeOpacity={1}
+            <View style={styles.container}>
+                <View
+                    style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        padding: 10,
+                        columnGap: 5,
+                        backgroundColor: colors.rose_200,
+                        borderRadius: 20,
+                        alignItems: "center",
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 5,
+                        },
+                        shadowOpacity: 0.36,
+                        shadowRadius: 6.68,
+                        elevation: 11,
+                    }}
                 >
-                    <Text style={styles.dayPhrase}>{frase.phrase}</Text>
-                    <Text style={styles.dayPhraseAuthor}>{frase.author}</Text>
-                    <Text
-                        style={styles.dayPhraseLink}
-                        onPress={() => Linking.openURL(frase.podcast)}
-                    >
-                        Clique aqui para ver o podcast recomendado de hoje
-                    </Text>
-                </TouchableOpacity>
+                    <View style={{ padding: 12.5 }}>
+                        <Photo />
+                    </View>
+                    <View style={{ flexDirection: "column" }}>
+                        <Text style={[styles.font, { fontSize: 16 }]}>
+                            Bem-vindo,
+                        </Text>
+                        <Name />
+                    </View>
+                </View>
 
+                <View
+                    style={{
+                        flexDirection: "column",
+                        rowGap: 10,
+                    }}
+                >
+                    <Text
+                        style={[
+                            styles.font,
+                            {
+                                color: pallete.secondary,
+                                marginTop: 50,
+                                fontSize: 15,
+                            },
+                        ]}
+                    >
+                        Frase do Dia
+                    </Text>
+                    <TouchableOpacity
+                        style={styles.containerDayPhrase}
+                        activeOpacity={1}
+                    >
+                        <View
+                            style={[
+                                styles.date,
+                                {
+                                    alignSelf: "flex-start",
+                                    flexDirection: "row",
+                                    marginBottom: 8,
+                                },
+                            ]}
+                        >
+                            <Text
+                                style={[
+                                    styles.font_bold,
+                                    { color: pallete.secondary },
+                                ]}
+                            >
+                                {day}
+                            </Text>
+                            <Text
+                                style={[
+                                    styles.font,
+                                    { color: pallete.secondary },
+                                ]}
+                            >
+                                {" "}
+                                {month}
+                            </Text>
+                        </View>
+
+                        <Text style={[styles.dayPhrase, styles.font]}>
+                            {' " '}
+                            {frase.phrase}
+                            {' " '}
+                        </Text>
+                        <Text
+                            style={[styles.dayPhraseAuthor, styles.font_bold]}
+                        >
+                            {frase.author}
+                        </Text>
+                    </TouchableOpacity>
+                    <Text
+                        style={[
+                            styles.font,
+                            {
+                                color: pallete.secondary,
+                                marginTop: 20,
+                                fontSize: 15,
+                            },
+                        ]}
+                    >
+                        Recomendação do Dia
+                    </Text>
+                    <TouchableOpacity
+                        style={styles.containerRecommendation}
+                        activeOpacity={1}
+                    >
+                        <Image
+                            source={require("../../../assets/podcastLogo.jpeg")}
+                            style={{
+                                width: 60,
+                                height: 60,
+                                borderRadius: 20,
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 5,
+                                },
+                                shadowOpacity: 1,
+                                shadowRadius: 6.68,
+                            }}
+                        />
+                        <View style={{ flexDirection: "column" }}>
+                            <Text
+                                style={[styles.dayPhraseLink, styles.font_bold]}
+                                // onPress={() => Linking.openURL(frase.podcast)}
+                            >
+                                {" "}
+                                Acenda sua Luz
+                            </Text>
+                            <Text style={[styles.dayPhraseLink, styles.font]}>
+                                {" "}
+                                CAROL RACHE
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <Text
+                    style={[
+                        styles.font,
+                        {
+                            color: pallete.secondary,
+                            marginTop: 20,
+                            alignSelf: "flex-start",
+                            marginStart: 25,
+                            fontSize: 15,
+                        },
+                    ]}
+                >
+                    Confira seu Progresso
+                </Text>
                 <TouchableOpacity
                     style={styles.containerStats}
                     onPress={() => navigation.navigate("Status")}
@@ -207,70 +412,16 @@ export default function Home() {
                     <TouchableOpacity
                         onPress={() => navigation.navigate("Status")}
                     >
-                        {userData?.habits ? (
-                            <VictoryPie
-                                width={150}
-                                height={150}
-                                padAngle={3}
-                                innerRadius={50}
-                                padding={0}
-                                colorScale={[colors.blue_300, colors.rose_400]}
-                                data={[
-                                    {
-                                        x: " ",
-                                        y: userData?.tasks.reduce(
-                                            (accumulator, currentValue) =>
-                                                currentValue.completed
-                                                    ? accumulator + 1
-                                                    : accumulator,
-                                            0
-                                        ),
-                                    },
-                                    {
-                                        x: " ",
-                                        y: userData?.tasks.reduce(
-                                            (accumulator, currentValue) =>
-                                                !currentValue.completed
-                                                    ? accumulator + 1
-                                                    : accumulator,
-                                            0
-                                        ),
-                                    },
-                                ]}
-                            />
-                        ) : (
-                            <Text> CARREGANDO </Text>
-                        )}
+                        <TasksStats />
                     </TouchableOpacity>
                     <View style={styles.containerStatsDescription}>
-                        <Text> Concluído </Text>
+                        <Text style={styles.font_bold}> Concluído </Text>
                         <View style={styles.blueCircle} />
-                        <Text> Em progresso </Text>
+                        <Text style={styles.font_bold}> Em progresso </Text>
                         <View style={styles.redCircle} />
                     </View>
                 </TouchableOpacity>
-
-                <View style={styles.containerbuttons}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Tasks");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>Crie um hábito</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate("Today");
-                        }}
-                    >
-                        <Text style={styles.textbutton}>
-                            Acompanhe seus Habitos
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </SafeAreaView>
+            </View>
         </ScrollView>
     );
 }

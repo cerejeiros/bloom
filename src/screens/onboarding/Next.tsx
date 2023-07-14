@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginVertical: "5%",
+        
     },
     button: {
         position: "absolute",

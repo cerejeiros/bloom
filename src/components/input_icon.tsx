@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     },
     labelInput: {
         color: "#808080",
+        fontFamily: "Poppins-Regular",
     },
 });
 
@@ -76,6 +77,7 @@ export default function InputIcon(props: InputProps) {
         onChangeText,
         onFocus,
         label,
+        onEndEditing,
         styleViewContainer,
     } = props;
 
@@ -99,15 +101,7 @@ export default function InputIcon(props: InputProps) {
         throw Error("A InputIcon can't have a label and a icon.");
 
     return (
-        <View
-            style={[
-                styleViewContainer,
-                {
-                    flexDirection: "column",
-                    // marginVertical: 15,
-                },
-            ]}
-        >
+        <View style={[styleViewContainer, { flexDirection: "column" }]}>
             {Icon ? undefined : <Text style={styles.labelInput}>{label}</Text>}
             <View
                 style={[
@@ -128,6 +122,7 @@ export default function InputIcon(props: InputProps) {
                     inputMode={inputMode}
                     onFocus={onFocus}
                     value={value}
+                    onEndEditing={onEndEditing}
                     secureTextEntry={secureTextEntry}
                 />
                 {Icon && (

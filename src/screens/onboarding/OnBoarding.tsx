@@ -12,15 +12,15 @@ import {
     Image,
     SafeAreaView,
     StyleSheet,
-    View,
     useWindowDimensions,
+    View
 } from "react-native";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
 import Item from "./Item";
 import Next from "./Next";
-import Paginator from "./Paginator";
 import pages, { ItemData } from "./pages";
+import Paginator from "./Paginator";
 
 const styles = StyleSheet.create({
     container: {

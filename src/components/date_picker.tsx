@@ -2,26 +2,18 @@ import { FontAwesome } from "@expo/vector-icons";
 import RNDateTimePicker, {
     DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { Keyboard, StyleProp, StyleSheet, ViewStyle } from "react-native";
+import React, { SetStateAction, useState } from "react";
+import { Keyboard, StyleProp, ViewStyle } from "react-native";
 import colors from "../pallete";
 import InputIcon from "./input_icon";
 
 export interface DatePickerProps {
-    text: string;
+    text: string | null;
     style?: StyleProp<ViewStyle>;
-    textState: Dispatch<SetStateAction<string>>;
+    textState: React.Dispatch<SetStateAction<string | null>>;
     icon: boolean;
     label?: string;
 }
-
-const styles = StyleSheet.create({
-    input: {
-        paddingLeft: 15,
-        color: colors.black_500,
-        fontSize: 15,
-    },
-});
 
 export default function DatePicker({
     text,
@@ -62,7 +54,7 @@ export default function DatePicker({
                     openDatePicker();
                 }}
                 onChangeText={textState}
-                value={text}
+                value={text ?? ""}
                 placeholder="AAAA-MM-DD"
                 keyboardType="numeric"
                 label={icon === false && label ? label : undefined}

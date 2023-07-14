@@ -1,20 +1,26 @@
 import * as Font from "expo-font";
 import * as NavigationBar from "expo-navigation-bar";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useCallback, useEffect, useState } from "react";
-import { View } from "react-native";
-import { PaperProvider } from "react-native-paper";
+import React from "react";
+import { StatusBar, View } from "react-native";
+import Loading from "./src/components/Loading";
 import GlobalContextProvider from "./src/context/GlobalContext";
+import colors from "./src/pallete";
 import Routes from "./src/routes";
 
 NavigationBar.setVisibilityAsync("hidden");
 
+enum Defaults {
+    WaitTillHide = 2500,
+}
+
+// Will hide the native navigation bar after some time.
 NavigationBar.addVisibilityListener(async ({ visibility }) => {
     if (visibility === "visible") {
         await new Promise((resolve) => {
-            setTimeout(resolve, 2500);
+            setTimeout(resolve, Defaults.WaitTillHide);
         });
-        NavigationBar.setVisibilityAsync("hidden");
+        await NavigationBar.setVisibilityAsync("hidden");
     }
 });
 
@@ -22,42 +28,36 @@ NavigationBar.addVisibilityListener(async ({ visibility }) => {
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-    const [appIsReady, setAppIsReady] = useState(false);
+    const [appIsReady, setAppIsReady] = React.useState(false);
 
-    useEffect(() => {
-        async function prepare() {
+    React.useEffect(() => {
+        (async () => {
             try {
                 // Set color for splash screen.
-                NavigationBar.setBackgroundColorAsync("#98e2ea");
+                await NavigationBar.setBackgroundColorAsync("#98e2ea");
 
                 // Pre-load fonts, make any API calls you need to do here
                 await Font.loadAsync({
-                    // Entypo.font,
-                    "Comfortaa-Regular": require("./assets/fonts/Comfortaa/Comfortaa-Regular.ttf"),
+                    Comfortaa: require("./assets/fonts/Comfortaa/Comfortaa-Regular.ttf"),
+                    "Comfortaa-Bold": require("./assets/fonts/Comfortaa/Comfortaa-Bold.ttf"),
                     "Poppins-Black": require("./assets/fonts/Poppins/Poppins-Black.ttf"),
                     "Poppins-Medium": require("./assets/fonts/Poppins/Poppins-Medium.ttf"),
+                    "Poppins-Bold": require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
                     "Poppins-Regular": require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
                 });
-                // Artificially delay for two seconds to simulate a slow loading
-                // experience. Please remove this if you copy and paste the code!
-                // eslint-disable-next-line no-promise-executor-return
-                // await new Promise((resolve) => setTimeout(resolve, 2000));
             } catch (e) {
-                // return <Text>Fonts did not load.</Text>;
-                console.warn(e);
+                throw Error("App.tsx: Fonts did not load.");
             } finally {
                 // Tell the application to render
                 setAppIsReady(true);
             }
-        }
-
-        prepare();
+        })();
     }, []);
 
     // TODO: Can use to get the correct size of the root view later on
     //       with the onLayout props:
     //       Reference: https://stackoverflow.com/a/66870056
-    const onLayoutRootView = useCallback(async () => {
+    const onLayoutRootView = React.useCallback(async () => {
         if (appIsReady) {
             // This tells the splash screen to hide immediately! If we call this after
             // `setAppIsReady`, then we may see a blank screen while the app is
@@ -68,15 +68,21 @@ export default function App() {
         }
     }, [appIsReady]);
 
-    if (!appIsReady) return null;
+    if (!appIsReady) return <Loading />;
 
     return (
-        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-            <PaperProvider>
-                <GlobalContextProvider>
-                    <Routes />
-                </GlobalContextProvider>
-            </PaperProvider>
+        <View
+            style={{ flex: 1, backgroundColor: colors.blue_300 }}
+            onLayout={onLayoutRootView}
+        >
+            <StatusBar
+                translucent
+                backgroundColor="transparent"
+                barStyle="dark-content"
+            />
+            <GlobalContextProvider>
+                <Routes />
+            </GlobalContextProvider>
         </View>
     );
 }

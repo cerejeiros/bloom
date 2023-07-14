@@ -7,14 +7,14 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
     KeyboardAvoidingView,
+    ScrollView,
     StatusBar,
     StyleSheet,
     Text,
     View,
+    useWindowDimensions,
 } from "react-native";
 import BackgroundGradient from "../../components/background_gradient";
-import BaseScrollView from "../../components/baseScrollView";
-import { GlobalContext } from "../../context/GlobalContext";
 import colors from "../../pallete";
 import { AuthRoutes } from "../../routes/auth.routes";
 import CadastroInput from "./input";
@@ -22,11 +22,12 @@ import Logo from "./logo";
 
 const styles = StyleSheet.create({
     container: {
-        minWidth: "75%",
-        flexDirection: "column",
-        marginVertical: "25%",
-        height: "100%",
-        justifyContent: "space-around",
+        // backgroundColor: "red",
+        // minWidth: "75%",
+        // flexDirection: "column",
+        paddingTop: "25%",
+        // height: "100%",
+        // justifyContent: "space-around",
     },
     titlecontainer: {
         marginLeft: 35,
@@ -60,16 +61,21 @@ const styles = StyleSheet.create({
 
 function Signup() {
     const navigation = useNavigation<NavigationProp<AuthRoutes>>();
-    const { height, width } = React.useContext(GlobalContext);
+    const { height, width } = useWindowDimensions();
     const statusBarHeight = StatusBar.currentHeight ?? 0;
-    console.log(statusBarHeight);
+
     return (
         <View>
             <BackgroundGradient
-                style={{ height: height + statusBarHeight * 2, width }}
+                style={{ height: height + statusBarHeight * 3, width }}
             />
-            <KeyboardAvoidingView style={styles.container}>
-                <BaseScrollView>
+
+            <KeyboardAvoidingView
+                // behavior="padding"
+                style={styles.container}
+                // keyboardVerticalOffset={112.5}
+            >
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <Logo />
                     <View style={styles.titlecontainer}>
                         <Text style={styles.title}>Cadastre-se</Text>
@@ -90,7 +96,7 @@ function Signup() {
                             Logue-se
                         </Text>
                     </View>
-                </BaseScrollView>
+                </ScrollView>
             </KeyboardAvoidingView>
         </View>
     );
