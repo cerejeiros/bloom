@@ -9,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+.env
 
 # For additional assets you're working on.
 /assets_ip/
@@ -19,8 +20,8 @@ web-build/
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
 
-# For Supabase keys.
-*.env
+# Secret enviroment variables.
+/.env
 
 # Ignore zip files.
 *.zip
