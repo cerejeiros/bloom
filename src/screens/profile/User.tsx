@@ -169,27 +169,17 @@ function User() {
     const {
         user,
         signOut,
-        setUser,
         bio,
         setBio,
         name,
         setName,
         username,
         setUsername,
-        gender,
-        setGender,
         photo,
         setPhoto,
         date,
         setDate,
         xp,
-        setXp,
-        tasks,
-        setTasks,
-        habits,
-        setHabits,
-        routines,
-        setRoutines,
     } = useGlobalContext();
 
     const [nameNew, setNameNew] = React.useState<string | null>(name);

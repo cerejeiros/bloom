@@ -5,7 +5,6 @@ import NavBar from "../components/nav_bar";
 import colors from "../pallete";
 
 export type StackRoutesParams = {
-    // Details: undefined;
     Today: undefined;
     Status: undefined;
     Home: undefined;

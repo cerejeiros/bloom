@@ -1,8 +1,9 @@
 import * as Font from "expo-font";
 import * as NavigationBar from "expo-navigation-bar";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { StatusBar, View } from "react-native";
+import Loading from "./src/components/Loading";
 import GlobalContextProvider from "./src/context/GlobalContext";
 import colors from "./src/pallete";
 import Routes from "./src/routes";
@@ -27,10 +28,10 @@ NavigationBar.addVisibilityListener(async ({ visibility }) => {
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-    const [appIsReady, setAppIsReady] = useState(false);
+    const [appIsReady, setAppIsReady] = React.useState(false);
 
-    useEffect(() => {
-        async function prepare() {
+    React.useEffect(() => {
+        (async () => {
             try {
                 // Set color for splash screen.
                 await NavigationBar.setBackgroundColorAsync("#98e2ea");
@@ -50,15 +51,13 @@ export default function App() {
                 // Tell the application to render
                 setAppIsReady(true);
             }
-        }
-
-        prepare();
+        })();
     }, []);
 
     // TODO: Can use to get the correct size of the root view later on
     //       with the onLayout props:
     //       Reference: https://stackoverflow.com/a/66870056
-    const onLayoutRootView = useCallback(async () => {
+    const onLayoutRootView = React.useCallback(async () => {
         if (appIsReady) {
             // This tells the splash screen to hide immediately! If we call this after
             // `setAppIsReady`, then we may see a blank screen while the app is
@@ -69,7 +68,7 @@ export default function App() {
         }
     }, [appIsReady]);
 
-    if (!appIsReady) return null;
+    if (!appIsReady) return <Loading />;
 
     return (
         <View

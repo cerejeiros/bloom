@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     },
     button: {
         margin: 10,
+        borderRadius: 25,
         backgroundColor: colors.rose_300,
     },
     button_text: {

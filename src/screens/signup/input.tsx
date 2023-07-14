@@ -1,6 +1,6 @@
 import { FontAwesome, Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
@@ -46,7 +46,11 @@ const styles = StyleSheet.create({
     },
     button: {
         margin: 10,
+        paddingVertical: 5,
+        borderRadius: 25,
         backgroundColor: colors.rose_300,
+        borderWidth: 2,
+        borderColor: colors.rose_100,
     },
     button_text: { color: colors.white_50 },
     button_out: {
@@ -76,7 +80,7 @@ export default function CadastroInput() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
-    const [birthday, setBirth] = useState("");
+    const [birthday, setBirth] = useState<string | null>("");
     const [isloading, setIsLoading] = useState(false);
     const { signUp } = useGlobalContext();
 
@@ -199,7 +203,7 @@ export default function CadastroInput() {
                 loading={isloading}
                 textColor={styles.button_text.color}
             >
-                Cadastrar
+                <Text style={{ fontFamily: "Poppins-Bold" }}>Cadastrar</Text>
             </Button>
         </View>
     );

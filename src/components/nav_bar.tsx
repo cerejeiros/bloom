@@ -50,17 +50,17 @@ function listenAnimated(value: Animated.Value) {
 }
 export default function NavBar() {
     NavigationBar.setBackgroundColorAsync(colors.black_900);
+    const [fistLoad, setfirstLoad] = React.useState(false);
 
     const animatedValues = {
         today: new Animated.Value(0),
         status: new Animated.Value(0),
-        home: new Animated.Value(1),
+        home: new Animated.Value(0),
         tasks: new Animated.Value(0),
         perfil: new Animated.Value(0),
     };
 
     const pallete = palleteGet(new window.Date());
-
     return (
         <Tab.Navigator
             backBehavior="none"
@@ -146,14 +146,25 @@ export default function NavBar() {
                 listeners={listenAnimated(animatedValues.home)}
                 options={{
                     tabBarActiveTintColor: colors.black_900,
-                    tabBarLabel: ({ focused }) => (
-                        <Label
-                            color={pallete.accent}
-                            focused={focused}
-                            value={animatedValues.home}
-                            name="Home"
-                        />
-                    ),
+                    tabBarLabel: ({ color, focused }) => {
+                        if (color === colors.black_900) {
+                            Animated.timing(animatedValues.home, {
+                                toValue: 1,
+                                duration: 125,
+                                easing: Easing.ease,
+                                useNativeDriver: true,
+                            }).start();
+                        }
+
+                        return (
+                            <Label
+                                color={pallete.accent}
+                                focused={focused}
+                                value={animatedValues.home}
+                                name="Home"
+                            />
+                        );
+                    },
                     tabBarIcon: ({ focused }) => (
                         <Icon
                             value={animatedValues.home}

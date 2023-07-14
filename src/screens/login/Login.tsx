@@ -22,8 +22,9 @@ import Logo from "./logo";
 
 const styles = StyleSheet.create({
     container: {
-        minWidth: "75%",
-        marginVertical: "25%",
+        // minWidth: "75%",
+        // marginVertical: "25%",
+        paddingTop: "25%",
         flexDirection: "column",
         height: "100%",
         justifyContent: "space-around",
@@ -68,13 +69,13 @@ export default function Login() {
     return (
         <View>
             <BackgroundGradient
-                style={{ height: height + statusBarHeight * 2, width }}
+                style={{ height: height + statusBarHeight * 3, width }}
             />
-            <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+            <KeyboardAvoidingView
+                style={styles.container}
+                keyboardVerticalOffset={150}
+            >
                 <BaseScrollView>
-                    {/* TODO: Logo tem que ser flexível para quando o teclado, ela
-                          ficar escondida ou removida da tela. */}
-                    {/* <Logo /> */}
                     <Logo />
                     <View style={styles.titlecontainer}>
                         <Text style={styles.title}>Login </Text>

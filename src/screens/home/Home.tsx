@@ -152,9 +152,71 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function Home() {
-    const { photo, name, tasks } = useGlobalContext();
+export function Photo() {
+    const { photo } = useGlobalContext();
 
+    return (
+        <Image
+            source={
+                photo
+                    ? {
+                          uri: `data:image/jpeg;base64,${photo}`,
+                      }
+                    : require("../../../assets/cat-profile.jpg")
+            }
+            style={{
+                width: 75,
+                height: 75,
+                borderRadius: 75 / 2,
+            }}
+        />
+    );
+}
+
+export function Name() {
+    const { name } = useGlobalContext();
+
+    return <Text style={[styles.font_bold, { fontSize: 18 }]}>{name}</Text>;
+}
+
+export function TasksStats() {
+    const { tasks } = useGlobalContext();
+    if (tasks)
+        <VictoryPie
+            width={150}
+            height={150}
+            padAngle={0}
+            innerRadius={50}
+            padding={0}
+            colorScale={[colors.blue_300, colors.rose_400]}
+            data={[
+                {
+                    x: " ",
+                    y: tasks.reduce(
+                        (accumulator, currentValue) =>
+                            currentValue.completed
+                                ? accumulator + 1
+                                : accumulator,
+                        0
+                    ),
+                },
+                {
+                    x: " ",
+                    y: tasks.reduce(
+                        (accumulator, currentValue) =>
+                            !currentValue.completed
+                                ? accumulator + 1
+                                : accumulator,
+                        0
+                    ),
+                },
+            ]}
+        />;
+
+    return <Text> CARREGANDO </Text>;
+}
+
+export default function Home() {
     const navigation = useNavigation<StackNavigatorRoutesProps>();
     const date = new window.Date();
     const frase = info[date.getUTCDay()];
@@ -163,7 +225,7 @@ export default function Home() {
 
     const pallete = palleteGet(date);
 
-    React.useEffect(() => console.log("1. changes to name", name), [name]);
+    // React.useEffect(() => console.log("1. changes to name", name), [name]);
 
     return (
         <ScrollView>
@@ -174,38 +236,20 @@ export default function Home() {
 
             <View style={styles.container}>
                 <View
-                    style={[
-                        // styles.headerText,
-                        {
-                            alignItems: "center",
-                            flexDirection: "row",
-                            backgroundColor: pallete.secondary,
-                        },
-                    ]}
+                    style={{
+                        alignItems: "center",
+                        flexDirection: "row",
+                        backgroundColor: pallete.secondary,
+                    }}
                 >
                     <View style={{ padding: 12.5 }}>
-                        <Image
-                            source={
-                                photo
-                                    ? {
-                                          uri: `data:image/jpeg;base64,${photo}`,
-                                      }
-                                    : require("../../../assets/cat-profile.jpg")
-                            }
-                            style={{
-                                width: 75,
-                                height: 75,
-                                borderRadius: 75 / 2,
-                            }}
-                        />
+                        <Photo />
                     </View>
                     <View style={{ flexDirection: "column" }}>
                         <Text style={[styles.font, { fontSize: 16 }]}>
                             Bem-vindo,
                         </Text>
-                        <Text style={[styles.font_bold, { fontSize: 18 }]}>
-                            {name}
-                        </Text>
+                        <Name />
                     </View>
                 </View>
                 <View
@@ -261,40 +305,7 @@ export default function Home() {
                     <TouchableOpacity
                         onPress={() => navigation.navigate("Status")}
                     >
-                        {tasks ? (
-                            <VictoryPie
-                                width={150}
-                                height={150}
-                                padAngle={0}
-                                innerRadius={50}
-                                padding={0}
-                                colorScale={[colors.blue_300, colors.rose_400]}
-                                data={[
-                                    {
-                                        x: " ",
-                                        y: tasks.reduce(
-                                            (accumulator, currentValue) =>
-                                                currentValue.completed
-                                                    ? accumulator + 1
-                                                    : accumulator,
-                                            0
-                                        ),
-                                    },
-                                    {
-                                        x: " ",
-                                        y: tasks.reduce(
-                                            (accumulator, currentValue) =>
-                                                !currentValue.completed
-                                                    ? accumulator + 1
-                                                    : accumulator,
-                                            0
-                                        ),
-                                    },
-                                ]}
-                            />
-                        ) : (
-                            <Text> CARREGANDO </Text>
-                        )}
+                        <TasksStats />
                     </TouchableOpacity>
                     <View style={styles.containerStatsDescription}>
                         <Text> Concluído </Text>
