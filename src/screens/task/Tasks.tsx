@@ -80,45 +80,40 @@ export default function Tasks() {
     const addTask = React.useCallback(async () => {
         if (!user) throw Error("User not found...");
 
-        const taskId = Math.random() * (100000 - 100) + 100;
+        const { data, error } = await supabase
+            .from("tasks")
+            .insert({
+                period,
+                name,
+                times,
+                repeated: repeated as string,
+                shared,
+                created_by: user.id,
+            })
+            .select()
+            .single();
 
-        {
-            const { error } = await supabase.from("tasks").insert([
-                {
-                    period,
-                    name,
-                    times,
-                    repeated: repeated as string,
-                    shared,
-                    created_by: user.id,
-                    created_at: new window.Date().toLocaleString(),
-                    id: window.parseInt(user.id),
-                    task_id: taskId,
-                },
-            ]);
+        if (error) throw Error(`Could not add task ${error}`);
 
-            if (error) throw Error(`Could not add task ${error}`);
-        }
-        {
-            const { error } = await supabase.from("profiles_tasks").insert([
-                {
-                    task_id: taskId,
-                    profile_id: user.id,
-                    done: taskId,
-                    created_at: new window.Date().toLocaleString(),
-                    priority,
-                    streak: 0,
-                    completed: false,
-                },
-            ]);
+        const { data: dataRelation, error: errorNew } = await supabase
+            .from("profiles_tasks")
+            .insert({
+                task_id: data.id,
+                profile_id: user.id,
+                done: 0,
 
-            if (error)
-                throw Error("Task could not be added in profiles_tasks.");
-        }
+                priority,
+                streak: 0,
+                completed: false,
+            })
+            .select()
+            .single();
+
+        if (errorNew) throw Error("Task could not be added in profiles_tasks.");
 
         const newTasks = tasks;
         newTasks?.push({
-            id: taskId,
+            id: dataRelation.id,
             name,
             done: 0,
             times,
@@ -128,7 +123,7 @@ export default function Tasks() {
             period,
             repeated,
             shared,
-            shared_id: taskId,
+            shared_id: data.id,
         });
         setTasks(newTasks);
     }, [
