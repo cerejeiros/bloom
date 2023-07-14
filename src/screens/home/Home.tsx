@@ -185,7 +185,7 @@ export function Photo() {
                     ? {
                           uri: `data:image/jpeg;base64,${photo}`,
                       }
-                    : require("../../../assets/cat-profile.jpg")
+                    : require("../../../assets/cat-profile.png")
             }
             style={{
                 width: 75,
