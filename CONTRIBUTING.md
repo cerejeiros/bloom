@@ -2,9 +2,9 @@
 
 Independente de sua área, o projeto abraange muitas escopos no desenvolvimento de Software.
 
-Agradaçemos o interesse pela contribuição
+Agradaçemos o interesse pela contribuição.
 
-Estão listados a seguir os principais:
+Estão listados a seguir os principais tópicos:
 
 - Áreas:
   - [Design](#design-imagens-vetorizadas)
@@ -12,10 +12,12 @@ Estão listados a seguir os principais:
   - [Banco de Dados](#banco-de-dados-supabase)
 - [Editores de Texto](#editores-de-texto)
 - [Criação do Pull Request](#criação-de-pull-request)
+- [Materiais](https://github.com/cerejeiros/mobile/discussions/6)
+- [Aplicativos competidores](https://github.com/cerejeiros/mobile/discussions/8)
 
 ## Design (Imagens Vetorizadas)
 
-Utilizamos tanto o Figma, quanto o Inkscape para a criação de SVGs (imagens vetorizadas) para podermos exportar.
+Utilizamos tanto o Figma, quanto o Inkscape para a criação de SVGs (imagens vetorizadas) para podermos exportar em alta qualidade.
 
 Na pasta [/assets/source/](/assets/source/) há os arquivos fonte de imagens, você pode editá-los, mantendo sempre o espirito do aplicativo.
 

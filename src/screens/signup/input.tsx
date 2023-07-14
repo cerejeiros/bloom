@@ -19,16 +19,20 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     input: {
-        height: 40,
-        borderBottomWidth: 1,
-        borderColor: colors.black_400,
+        // backgroundColor: "red",
         paddingLeft: 15,
         paddingRight: 25,
         borderRadius: 0,
-        minWidth: 100,
         color: colors.black_500,
         fontSize: 15,
         flex: 1,
+    },
+    input_border: {
+        marginBottom: 20,
+        marginTop: 10,
+        paddingBottom: 7.5,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.black_400,
     },
     title: {
         color: "black",
@@ -126,56 +130,68 @@ export default function CadastroInput() {
 
     return (
         <View style={styles.container}>
-            <InputIcon
-                styleContainer={styles.input_container}
-                style={styles.input}
-                onChangeText={setEmail}
-                value={email}
-                placeholder="Email"
-                keyboardType="default"
-                autoComplete="email"
-                inputMode="email"
-                Icon={
-                    <Fontisto name="email" size={20} color={colors.black_400} />
-                }
-            />
-            <InputIcon
-                styleContainer={styles.input_container}
-                style={styles.input}
-                onChangeText={setUsername}
-                value={username}
-                placeholder="Usuário"
-                keyboardType="default"
-                Icon={
-                    <FontAwesome
-                        name="user-o"
-                        size={20}
-                        color={colors.black_400}
-                    />
-                }
-            />
+            <View style={styles.input_border}>
+                <InputIcon
+                    styleContainer={styles.input_container}
+                    style={styles.input}
+                    onChangeText={setEmail}
+                    value={email}
+                    placeholder="Email"
+                    keyboardType="default"
+                    autoComplete="email"
+                    inputMode="email"
+                    Icon={
+                        <Fontisto
+                            name="email"
+                            size={20}
+                            color={colors.black_400}
+                        />
+                    }
+                />
+            </View>
+            <View style={styles.input_border}>
+                <InputIcon
+                    styleContainer={styles.input_container}
+                    style={styles.input}
+                    onChangeText={setUsername}
+                    value={username}
+                    placeholder="Usuário"
+                    keyboardType="default"
+                    Icon={
+                        <FontAwesome
+                            name="user-o"
+                            size={20}
+                            color={colors.black_400}
+                        />
+                    }
+                />
+            </View>
 
-            <DatePicker
-                style={{ flex: 1 }}
-                text={birthday}
-                textState={setBirth}
-                icon
-            />
+            <View style={styles.input_border}>
+                <DatePicker
+                    style={[styles.input, { flex: 1 }]}
+                    text={birthday}
+                    textState={setBirth}
+                    icon
+                />
+            </View>
 
-            <InputIcon
-                style={styles.input}
-                onChangeText={setPassword}
-                placeholder="Senha"
-                secureTextEntry
-                value={password}
-                Icon={
-                    <FontAwesome
-                        name="lock"
-                        size={20}
-                        color={colors.black_400}
-                    />
-                }
-            />
+            <View style={styles.input_border}>
+                <InputIcon
+                    style={styles.input}
+                    onChangeText={setPassword}
+                    placeholder="Senha"
+                    secureTextEntry
+                    value={password}
+                    Icon={
+                        <FontAwesome
+                            name="lock"
+                            size={20}
+                            color={colors.black_400}
+                        />
+                    }
+                />
+            </View>
             <Button
                 style={styles.button}
                 onPress={handleSubmit}
