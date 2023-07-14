@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     container: {
         minWidth: "75%",
         flexDirection: "column",
-        marginVertical:"25%",
+        marginVertical: "25%",
         height: "100%",
         justifyContent: "space-around",
     },
@@ -66,7 +66,7 @@ function Signup() {
     return (
         <View>
             <BackgroundGradient
-                style={{ height: height + (statusBarHeight*2), width }}
+                style={{ height: height + statusBarHeight * 2, width }}
             />
             <KeyboardAvoidingView style={styles.container}>
                 <BaseScrollView>
