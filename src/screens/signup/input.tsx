@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         paddingBottom: 7.5,
         borderBottomWidth: 1,
-        borderBottomColor: colors.black_400,
     },
     title: {
         color: "black",
@@ -82,6 +81,10 @@ export default function CadastroInput() {
     const [username, setUsername] = useState("");
     const [birthday, setBirth] = useState<string | null>("");
     const [isloading, setIsLoading] = useState(false);
+    const [isWrongPassword, setisWrongPassword] = React.useState(false);
+    const [isWrongUsername, setisWrongUsername] = React.useState(false);
+    const [isWrongBirthday, setisWrongBirthday] = React.useState(false);
+    const [isWrongEmail, setisWrongEmail] = React.useState(false);
     const { signUp } = useGlobalContext();
 
     const checkUsernameDuplicated = async () => {
@@ -98,43 +101,62 @@ export default function CadastroInput() {
     };
 
     const handleSubmit = async () => {
+        let notWorked = false;
         if (!email) {
             alert("O email é obrigatório");
-            return false;
-        }
+            setisWrongEmail(true);
+            notWorked = true;
+        } else setisWrongEmail(false);
 
         if (!username) {
             alert("O username é obrigatório");
-            return false;
+            setisWrongUsername(true);
+            notWorked = true;
         }
+        setisWrongUsername(false);
 
         const usernameIsDuplicated = await checkUsernameDuplicated();
         if (usernameIsDuplicated) {
-            alert(`O username ${username} já existe`);
-            return false;
-        }
+            window.alert(`O username ${username} já existe`);
+            setisWrongUsername(true);
+            notWorked = true;
+        } else setisWrongUsername(false);
 
-        if (!birthday) {
-            alert(`A data é obrigatória`);
-            return false;
-        }
-
-        if (!checkPassword(password)) return false;
+        if (!checkPassword(password)) {
+            setisWrongPassword(true);
+            notWorked = true;
+        } else setisWrongPassword(false);
 
         if (!password) {
-            alert("A senha é obrigatória");
-            return false;
-        }
+            window.alert("A senha é obrigatória");
+            setisWrongPassword(true);
+            notWorked = true;
+        } else setisWrongPassword(false);
+
+        if (!birthday || birthday === null) {
+            window.alert(`A data é obrigatória`);
+            setisWrongBirthday(true);
+            notWorked = true;
+        } else setisWrongBirthday(false);
+
+        if (notWorked) return false;
 
         setIsLoading(true);
-        await signUp(email, password, username, birthday);
+        await signUp(email, password, username, birthday!);
         setIsLoading(false);
         return true;
     };
 
     return (
         <View style={styles.container}>
-            <View style={styles.input_border}>
+            <View
+                style={[
+                    styles.input_border,
+                    (isWrongEmail && { borderColor: "red" }) || {
+                        borderColor: colors.black_400,
+                    },
+                ]}
+            >
                 <InputIcon
                     styleContainer={styles.input_container}
                     style={styles.input}
@@ -153,7 +175,14 @@ export default function CadastroInput() {
                     }
                 />
             </View>
-            <View style={styles.input_border}>
+            <View
+                style={[
+                    styles.input_border,
+                    (isWrongUsername && { borderColor: "red" }) || {
+                        borderColor: colors.black_400,
+                    },
+                ]}
+            >
                 <InputIcon
                     styleContainer={styles.input_container}
                     style={styles.input}
@@ -171,7 +200,14 @@ export default function CadastroInput() {
                 />
             </View>
 
-            <View style={styles.input_border}>
+            <View
+                style={[
+                    styles.input_border,
+                    (isWrongBirthday && { borderColor: "red" }) || {
+                        borderColor: colors.black_400,
+                    },
+                ]}
+            >
                 <DatePicker
                     style={[styles.input, { flex: 1 }]}
                     text={birthday}
@@ -180,7 +216,14 @@ export default function CadastroInput() {
                 />
             </View>
 
-            <View style={styles.input_border}>
+            <View
+                style={[
+                    styles.input_border,
+                    (isWrongPassword && { borderColor: "red" }) || {
+                        borderColor: colors.black_400,
+                    },
+                ]}
+            >
                 <InputIcon
                     style={styles.input}
                     onChangeText={setPassword}
