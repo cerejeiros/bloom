@@ -1,7 +1,6 @@
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { GlobalContext } from "../../context/GlobalContext";
+import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import colors from "../../pallete";
 
 const styles = StyleSheet.create({
@@ -23,6 +22,7 @@ const styles = StyleSheet.create({
     cardTitle: {
         marginBottom: 10,
         textAlign: "center",
+        fontFamily: "Poppins-Regular",
     },
     statsRow: {
         justifyContent: "space-around",
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     statsSecondaryText: {
-        fontSize: 12,
-        fontWeight: "400",
+        fontSize: 11,
+        fontFamily: "Poppins-Regular",
     },
 });
 
@@ -59,7 +59,7 @@ export default function UserStatsCard({
 }: {
     info: UserStatsCardProps[];
 }) {
-    const { width, height } = React.useContext(GlobalContext);
+    const { width } = useWindowDimensions();
 
     return (
         <View style={[styles.cardContainer, { width: width * 0.9 }]}>

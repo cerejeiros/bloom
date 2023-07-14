@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
 import { Animated, Easing } from "react-native";
+import palleteGet from "../helpers/pallete";
 import colors from "../pallete";
 import Home from "../screens/home/Home";
 import User from "../screens/profile/User";
@@ -12,7 +13,7 @@ import Today from "../screens/today/Today";
 import Icon from "./navigation_bar/Icon";
 import Label from "./navigation_bar/Label";
 
-export const enum Defaults {
+const enum Defaults {
     icon_size = 22,
     min_top_size = 15,
     bar_radius = 10,
@@ -47,9 +48,9 @@ function listenAnimated(value: Animated.Value) {
         },
     };
 }
-
 export default function NavBar() {
     NavigationBar.setBackgroundColorAsync(colors.black_900);
+    const [fistLoad, setfirstLoad] = React.useState(false);
 
     const animatedValues = {
         today: new Animated.Value(0),
@@ -59,12 +60,14 @@ export default function NavBar() {
         perfil: new Animated.Value(0),
     };
 
+    const pallete = palleteGet(new window.Date());
     return (
         <Tab.Navigator
             backBehavior="none"
             initialRouteName="Home"
             screenOptions={() => ({
                 headerShown: false,
+                lazy: true,
                 tabBarStyle: {
                     position: "absolute",
                     bottom: 0,
@@ -143,18 +146,29 @@ export default function NavBar() {
                 listeners={listenAnimated(animatedValues.home)}
                 options={{
                     tabBarActiveTintColor: colors.black_900,
-                    tabBarLabel: ({ focused }) => (
-                        <Label
-                            color={colors.yellow_300}
-                            focused={focused}
-                            value={animatedValues.home}
-                            name="Home"
-                        />
-                    ),
+                    tabBarLabel: ({ color, focused }) => {
+                        if (color === colors.black_900) {
+                            Animated.timing(animatedValues.home, {
+                                toValue: 1,
+                                duration: 125,
+                                easing: Easing.ease,
+                                useNativeDriver: true,
+                            }).start();
+                        }
+
+                        return (
+                            <Label
+                                color={pallete.accent}
+                                focused={focused}
+                                value={animatedValues.home}
+                                name="Home"
+                            />
+                        );
+                    },
                     tabBarIcon: ({ focused }) => (
                         <Icon
                             value={animatedValues.home}
-                            backgroundColor={colors.yellow_300}
+                            backgroundColor={pallete.accent}
                         >
                             <Feather
                                 name="home"

@@ -8,7 +8,7 @@ const enum Defaults {
 
 const styles = StyleSheet.create({
     label: {
-        fontWeight: "bold",
+        fontFamily: "Poppins-Medium",
         fontSize: 11.5,
     },
 });
@@ -26,7 +26,7 @@ type LabelProps = {
 export default function Label({ focused, color, value, name }: LabelProps) {
     const translateY = value.interpolate({
         inputRange: [0, 1],
-        outputRange: [Defaults.label_bottom * 2, -Defaults.label_bottom * 1.5],
+        outputRange: [Defaults.label_bottom * 2, -Defaults.label_bottom * 2],
         extrapolate: "clamp",
     });
 

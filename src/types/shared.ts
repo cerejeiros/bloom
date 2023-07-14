@@ -3,9 +3,9 @@ export type UserData = {
     bio: string | null;
     name: string | null;
     username: string | null;
-    dateofbirth: string | null;
     gender: string | null;
     photo: string | null;
+    dateofbirth: string | null;
     /*
         For the gamification of tasks, habits, and routines being
         followed.
@@ -20,6 +20,7 @@ export type UserData = {
         The list of habits included in this user.
     */
     habits: Array<Habit>;
+
     /*
         The list of routines included in this user.
     */
@@ -130,7 +131,7 @@ export type Task = {
     */
     done: number;
     times: number;
-    completed: number;
+    completed: boolean;
     /*
         Streak of a task being completed.
         In pseudo-code terms, when reseting the task with its "repeated"

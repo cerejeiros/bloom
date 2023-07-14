@@ -1,10 +1,10 @@
 import { FontAwesome, Fontisto } from "@expo/vector-icons";
-import React, { useContext, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import Button from "../../components/button";
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
-import { GlobalContext } from "../../context/GlobalContext";
+import { useGlobalContext } from "../../context/GlobalContext";
 import checkPassword from "../../helpers/relevantFunctions";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
@@ -19,16 +19,19 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     input: {
-        height: 40,
-        borderBottomWidth: 1,
-        borderColor: colors.black_400,
+        // backgroundColor: "red",
         paddingLeft: 15,
         paddingRight: 25,
         borderRadius: 0,
-        minWidth: 100,
         color: colors.black_500,
         fontSize: 15,
         flex: 1,
+    },
+    input_border: {
+        marginBottom: 20,
+        marginTop: 10,
+        paddingBottom: 7.5,
+        borderBottomWidth: 1,
     },
     title: {
         color: "black",
@@ -42,11 +45,13 @@ const styles = StyleSheet.create({
     },
     button: {
         margin: 10,
+        paddingVertical: 5,
+        borderRadius: 25,
         backgroundColor: colors.rose_300,
+        borderWidth: 2,
+        borderColor: colors.rose_100,
     },
-    button_text: {
-        color: colors.white_50,
-    },
+    button_text: { color: colors.white_50 },
     button_out: {
         margin: 10,
         borderColor: colors.rose_100,
@@ -70,13 +75,17 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function Input() {
+export default function CadastroInput() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
-    const [birthday, setBirth] = useState("");
+    const [birthday, setBirth] = useState<string | null>("");
     const [isloading, setIsLoading] = useState(false);
-    const { signUp } = useContext(GlobalContext);
+    const [isWrongPassword, setisWrongPassword] = React.useState(false);
+    const [isWrongUsername, setisWrongUsername] = React.useState(false);
+    const [isWrongBirthday, setisWrongBirthday] = React.useState(false);
+    const [isWrongEmail, setisWrongEmail] = React.useState(false);
+    const { signUp } = useGlobalContext();
 
     const checkUsernameDuplicated = async () => {
         const { data, error } = await supabase
@@ -92,105 +101,153 @@ export default function Input() {
     };
 
     const handleSubmit = async () => {
+        let notWorked = false;
         if (!email) {
             alert("O email é obrigatório");
-            return false;
-        }
+            setisWrongEmail(true);
+            notWorked = true;
+        } else setisWrongEmail(false);
 
         if (!username) {
             alert("O username é obrigatório");
-            return false;
+            setisWrongUsername(true);
+            notWorked = true;
         }
+        setisWrongUsername(false);
 
         const usernameIsDuplicated = await checkUsernameDuplicated();
         if (usernameIsDuplicated) {
-            alert(`O username ${username} já existe`);
-            return false;
-        }
+            window.alert(`O username ${username} já existe`);
+            setisWrongUsername(true);
+            notWorked = true;
+        } else setisWrongUsername(false);
 
-        if (!birthday) {
-            alert(`A data é obrigatória`);
-            return false;
-        }
-
-        if (!checkPassword(password)) return false;
+        if (!checkPassword(password)) {
+            setisWrongPassword(true);
+            notWorked = true;
+        } else setisWrongPassword(false);
 
         if (!password) {
-            alert("A senha é obrigatória");
-            return false;
-        }
+            window.alert("A senha é obrigatória");
+            setisWrongPassword(true);
+            notWorked = true;
+        } else setisWrongPassword(false);
+
+        if (!birthday || birthday === null) {
+            window.alert(`A data é obrigatória`);
+            setisWrongBirthday(true);
+            notWorked = true;
+        } else setisWrongBirthday(false);
+
+        if (notWorked) return false;
 
         setIsLoading(true);
-        await signUp(email, password, username, birthday);
+        await signUp(email, password, username, birthday!);
         setIsLoading(false);
         return true;
     };
 
-    // TODO: Here we can make a transition screen when sign-up is successful and
-    //       we enter the home screen of the application.
-    /* useEffect(() => {
-        console.log(isloading);
-    }, [isloading]); */
-
     return (
         <View style={styles.container}>
-            <InputIcon
-                styleContainer={styles.input_container}
-                style={styles.input}
-                onChangeText={setEmail}
-                value={email}
-                placeholder="Email"
-                keyboardType="default"
-                autoComplete="email"
-                inputMode="email"
-                Icon={
-                    <Fontisto name="email" size={20} color={colors.black_400} />
-                }
-            />
-            <InputIcon
-                styleContainer={styles.input_container}
-                style={styles.input}
-                onChangeText={setUsername}
-                value={username}
-                placeholder="Usuário"
-                keyboardType="default"
-                Icon={
-                    <FontAwesome
-                        name="user-o"
-                        size={20}
-                        color={colors.black_400}
-                    />
-                }
-            />
+            <View
+                style={[
+                    styles.input_border,
+                    (isWrongEmail && { borderColor: "red" }) || {
+                        borderColor: colors.black_400,
+                    },
+                ]}
+            >
+                <InputIcon
+                    styleContainer={styles.input_container}
+                    style={styles.input}
+                    onChangeText={setEmail}
+                    value={email}
+                    placeholder="Email"
+                    keyboardType="default"
+                    autoComplete="email"
+                    inputMode="email"
+                    Icon={
+                        <Fontisto
+                            name="email"
+                            size={20}
+                            color={colors.black_400}
+                        />
+                    }
+                />
+            </View>
+            <View
+                style={[
+                    styles.input_border,
+                    (isWrongUsername && { borderColor: "red" }) || {
+                        borderColor: colors.black_400,
+                    },
+                ]}
+            >
+                <InputIcon
+                    styleContainer={styles.input_container}
+                    style={styles.input}
+                    onChangeText={setUsername}
+                    value={username}
+                    placeholder="Usuário"
+                    keyboardType="default"
+                    Icon={
+                        <FontAwesome
+                            name="user-o"
+                            size={20}
+                            color={colors.black_400}
+                        />
+                    }
+                />
+            </View>
 
-            <DatePicker
-                style={{ flex: 1 }}
-                text={birthday}
-                textState={setBirth}
-                icon
-            />
+            <View
+                style={[
+                    styles.input_border,
+                    (isWrongBirthday && { borderColor: "red" }) || {
+                        borderColor: colors.black_400,
+                    },
+                ]}
+            >
+                <DatePicker
+                    style={[styles.input, { flex: 1 }]}
+                    text={birthday}
+                    textState={setBirth}
+                    icon
+                />
+            </View>
 
-            <InputIcon
-                style={styles.input}
-                onChangeText={setPassword}
-                placeholder="Senha"
-                secureTextEntry
-                value={password}
-                Icon={
-                    <FontAwesome
-                        name="lock"
-                        size={20}
-                        color={colors.black_400}
-                    />
-                }
-            />
+            <View
+                style={[
+                    styles.input_border,
+                    (isWrongPassword && { borderColor: "red" }) || {
+                        borderColor: colors.black_400,
+                    },
+                ]}
+            >
+                <InputIcon
+                    style={styles.input}
+                    onChangeText={setPassword}
+                    placeholder="Senha"
+                    secureTextEntry
+                    value={password}
+                    Icon={
+                        <FontAwesome
+                            name="lock"
+                            size={20}
+                            color={colors.black_400}
+                        />
+                    }
+                />
+            </View>
             <Button
                 style={styles.button}
                 onPress={handleSubmit}
                 disabled={isloading}
-                title="Cadastrar"
-                titleStyle={styles.button_text}
-            />
+                loading={isloading}
+                textColor={styles.button_text.color}
+            >
+                <Text style={{ fontFamily: "Poppins-Bold" }}>Cadastrar</Text>
+            </Button>
         </View>
     );
 }

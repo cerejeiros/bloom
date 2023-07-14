@@ -1,8 +1,8 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "@supabase/supabase-js";
-import React, { createContext, ReactNode } from "react";
-import { ToastAndroid, useWindowDimensions } from "react-native";
+import React, { ReactNode } from "react";
 import supabase from "../helpers/supabaseClient";
-import { Task, UserData } from "../types/shared";
+import { Habit, Routine, Task, UserData } from "../types/shared";
 
 /*
     Global variables to be used by the client for any kind of mechanism.
@@ -20,31 +20,83 @@ export type GlobalContextDataProps = {
         usern: string,
         birth: string
     ) => Promise<void>;
+    // Fetch the data from user by id
+    // fetchData: (id: string | undefined) => Promise<void>;
 
     // Stores user data of the authentication from the database.
     user: User | null;
-    // Stores user data of the profile from the database.
-    userData: UserData | null;
-    // Set user data of the database.
-    setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
+    // Set the current user logged
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+
+    bio: string | null;
+    setBio: React.Dispatch<React.SetStateAction<string | null>>;
+
+    name: string | null;
+    setName: React.Dispatch<React.SetStateAction<string | null>>;
+
+    username: string | null;
+    setUsername: React.Dispatch<React.SetStateAction<string | null>>;
+
+    gender: string | null;
+    setGender: React.Dispatch<React.SetStateAction<string | null>>;
+
+    photo: string | null;
+    setPhoto: React.Dispatch<React.SetStateAction<string | null>>;
+
+    date: string | null;
+    setDate: React.Dispatch<React.SetStateAction<string | null>>;
 
     /*
-        TODO: Perhaps we should an React.useEffect() for when the screen
-              rotates, so that width and height can be updated.
+        For the gamification of tasks, habits, and routines being
+        followed.
+        We can renderise the "level" of the user with the xp. 
     */
-    // Width of the screen.
-    width: number;
-    // Height of the screen.
-    height: number;
+    xp: number | null;
+    setXp: React.Dispatch<React.SetStateAction<number | null>>;
+
+    /*
+        The list of tasks included in this user.
+    */
+    tasks: Array<Task> | null;
+    setTasks: React.Dispatch<React.SetStateAction<Array<Task> | null>>;
+
+    /*
+        The list of habits included in this user.
+    */
+    habits: Array<Habit> | null;
+    setHabits: React.Dispatch<React.SetStateAction<Array<Habit> | null>>;
+
+    /*
+        The list of routines included in this user.
+    */
+    routines: Routine[] | null;
+    setRoutines: React.Dispatch<React.SetStateAction<Array<Routine> | null>>;
 };
 
 type GlobalContextProviderProps = {
     children: ReactNode;
 };
 
-export const GlobalContext = createContext<GlobalContextDataProps>(
-    {} as GlobalContextDataProps
-);
+export const GlobalContext = React.createContext<
+    GlobalContextDataProps | undefined
+>(undefined);
+
+/*
+    Use this function instead React.useContext() in your components,
+    this already throws if context is being used wrongly.
+*/
+export function useGlobalContext(): GlobalContextDataProps {
+    const context = React.useContext(GlobalContext);
+    if (context === undefined)
+        throw new Error(
+            "GlobalContext: useGlobalContext should be used within a AuthContextProvider"
+        );
+    return context;
+}
+
+/*
+    Load date 
+*/
 
 // Data received from the database.
 type UnparsedProfile = {
@@ -88,10 +140,10 @@ type UnparsedProfile = {
 
 // Data received from the database.
 type UnparsedTask = {
-    completed: number;
+    completed: boolean;
     done: number;
     id: number;
-    habit_id?: number;
+    habit_id: number | null;
     priority: "high" | "medium" | "low";
     streak: number;
     task_id: {
@@ -110,13 +162,22 @@ export default function GlobalContextProvider({
     children,
 }: GlobalContextProviderProps) {
     const [user, setUser] = React.useState<User | null>(null);
-    const [userData, setUserData] = React.useState<UserData | null>(null);
+    const [bio, setBio] = React.useState<string | null>(null);
+    const [name, setName] = React.useState<string | null>(null);
+    const [username, setUsername] = React.useState<string | null>(null);
+    const [gender, setGender] = React.useState<string | null>(null);
+    const [photo, setPhoto] = React.useState<string | null>(null);
+    const [date, setDate] = React.useState<string | null>(null);
+    const [xp, setXp] = React.useState<number | null>(null);
+    const [tasks, setTasks] = React.useState<Array<Task> | null>(null);
+    const [habits, setHabits] = React.useState<Array<Habit> | null>(null);
+    const [routines, setRoutines] = React.useState<Array<Routine> | null>(null);
 
     /*
         Fetch tasks from the `profile_tasks` table and parse to useful data.
     */
     async function fetchTasks(id: string | undefined): Promise<Task[]> {
-        const { data: unparsedData } = await supabase
+        const { data: unparsedData, error: errorProfile } = await supabase
             .from("profiles_tasks")
             .select(
                 `
@@ -130,11 +191,17 @@ export default function GlobalContextProvider({
         `
             )
             .eq("profile_id(id)", id)
-            .returns<UnparsedTask[]>();
+            /*
+                NOTE: the types Supabase generator cannot add types of
+                      relations. So unless there's a Typescript trick I am
+                      unaware of, we have to type the return.
+            */
+            .returns<Array<UnparsedTask>>();
 
-        if (!unparsedData) throw Error("GlobalContext: could not fetch tasks.");
+        if (errorProfile || !unparsedData)
+            throw Error("GlobalContext: could not fetch tasks.");
 
-        const data: Task[] = unparsedData.map((item: UnparsedTask) => {
+        const data: Task[] = unparsedData.map((item) => {
             // Parse to integer iff *repeated* is a number.
             const repeated =
                 (item.task_id.repeated as never) >>> 0 ===
@@ -165,59 +232,104 @@ export default function GlobalContextProvider({
         by selecting with its user ID, then parsing all the content to make it
         usable by this client.
     */
-    const fetchData = React.useCallback(
-        async (id: string | undefined) => {
-            const { data: unparsedData } = await supabase
-                .from("profiles")
-                .select(
-                    `
+    async function fetchData(id: string | undefined) {
+        const { data: unparsedData } = await supabase
+            .from("profiles")
+            .select(
+                `
                     *,
                     habits(id,name,completed,days,period,profiles_tasks(task_id(id))),
                     routines(id,name,completed,habits(id))
                     `
-                )
-                .eq("id", id)
-                .single<UnparsedProfile>();
+            )
+            .eq("id", id)
+            /*
+                    NOTE: the types Supabase generator cannot add types of
+                          relations. So unless there's a Typescript trick I am
+                          unaware of, we have to type the return.
+                */
+            .single<UnparsedProfile>();
 
-            if (!unparsedData)
-                throw Error("GlobalContext: could not fetch data profile.");
+        if (!unparsedData)
+            throw Error("GlobalContext: could not fetch data profile.");
 
-            const data: UserData = {
-                id: unparsedData.id,
-                bio: unparsedData.bio,
-                name: unparsedData.name,
-                username: unparsedData.username,
-                dateofbirth: unparsedData.dateofbirth,
-                gender: unparsedData.gender,
-                photo: unparsedData.photo,
-                xp: unparsedData.xp,
-                tasks: await fetchTasks(id),
-                habits: unparsedData.habits.map((item) => {
-                    return {
-                        id: item.id,
-                        name: item.name,
-                        days: item.days,
-                        period: item.period,
-                        completed: item.completed,
-                        tasks: item.profiles_tasks.map(
-                            (task) => task.task_id.id
-                        ),
-                    };
-                }),
-                routines: unparsedData.routines.map((item) => {
-                    return {
-                        id: item.id,
-                        name: item.name,
-                        completed: item.completed,
-                        habits: item.habits.map((habit) => habit.id),
-                    };
-                }),
-            };
+        const data = {
+            bio: unparsedData.bio,
+            name: unparsedData.name,
+            username: unparsedData.username,
+            dateofbirth: unparsedData.dateofbirth,
+            gender: unparsedData.gender,
+            photo: unparsedData.photo,
+            xp: unparsedData.xp,
+            habits: unparsedData.habits.map((item) => ({
+                id: item.id,
+                name: item.name,
+                days: item.days,
+                period: item.period,
+                completed: item.completed,
+                tasks: item.profiles_tasks.map((task) => task.task_id.id),
+            })),
+            routines: unparsedData.routines.map((item) => ({
+                id: item.id,
+                name: item.name,
+                completed: item.completed,
+                habits: item.habits.map((habit) => habit.id),
+            })),
+        };
+        return data;
+    }
 
-            setUserData(data);
-        },
-        [setUserData]
-    );
+    /*
+        To set context and save the data locally.
+    */
+    const saveData = React.useCallback(async (id: string): Promise<void> => {
+        const userData = {} as UserData;
+
+        {
+            const profile = await fetchData(id);
+
+            /* For context. */
+            setBio(profile.bio);
+            setName(profile.name);
+            setUsername(profile.username);
+            setGender(profile.gender);
+            setPhoto(profile.photo);
+            setDate(profile.dateofbirth);
+            setXp(profile.xp);
+            setHabits(profile.habits);
+            setRoutines(profile.routines);
+
+            /* For local data. */
+            userData.bio = profile.bio;
+            userData.name = profile.name;
+            userData.username = profile.username;
+            userData.gender = profile.gender;
+            userData.photo = profile.photo;
+            userData.dateofbirth = profile.dateofbirth;
+            userData.xp = profile.xp;
+            userData.habits = profile.habits;
+            userData.routines = profile.routines;
+        }
+        {
+            const fetchedTasks = await fetchTasks(id);
+
+            /* For context data. */
+            setTasks(fetchedTasks);
+
+            /* For local data. */
+            userData.tasks = fetchedTasks;
+        }
+
+        console.log("user", userData);
+
+        try {
+            await AsyncStorage.setItem("user-data", JSON.stringify(userData));
+        } catch (e) {
+            throw Error(
+                `GlobalContext: fetchData() -> Could not set user data information. ${e}`
+            );
+        }
+    }, []);
 
     /*
         Sign-in means trying to accessing a row in the table of users in the
@@ -231,22 +343,21 @@ export default function GlobalContextProvider({
                 password,
             });
 
-            if (error || !data.user) {
-                // TODO: Use toast library for both IOS and Android
-                // Note this only show a Toast in android since IOS don't provide a built-in toast API.
-                ToastAndroid.show(
-                    error?.message ?? "Houve um erro no login!",
-                    ToastAndroid.LONG
-                );
+            if (error || !data.user)
                 throw Error("GlobalContext: signIn() -> Could not log-in!");
+
+            setUser(data.user);
+            try {
+                await AsyncStorage.setItem("user", JSON.stringify(data.user));
+            } catch (e) {
+                throw Error(
+                    `Glob1alContext: AsyncStorage -> Could not set user information. ${e}`
+                );
             }
 
-            await setUser(data.user);
-            await fetchData(data.user.id);
-
-            return Promise.resolve();
+            await saveData(data.user.id);
         },
-        [fetchData]
+        [saveData]
     );
 
     /*
@@ -267,13 +378,10 @@ export default function GlobalContextProvider({
 
             if (errorUser || !data?.user)
                 throw Error(
-                    `GlobalContext.signUp: Could not login -> ${errorUser}`
+                    `GlobalContext.signUp: Could not sign up -> ${errorUser}`
                 );
 
-            await setUser(data.user);
-
-            if (!data.user)
-                throw Error("GlobalContext.signup: User was not set.");
+            setUser(data.user);
 
             const { error } = await supabase
                 .from("profiles")
@@ -288,11 +396,9 @@ export default function GlobalContextProvider({
                     `GlobalContext.signUp: Could not update data -> ${error}`
                 );
 
-            await fetchData(data.user.id);
-
-            return Promise.resolve();
+            await saveData(data.user.id);
         },
-        [fetchData]
+        [saveData]
     );
 
     /*
@@ -300,19 +406,28 @@ export default function GlobalContextProvider({
         and removing user information.
     */
     const signOut = async () => {
+        // Take user out of App route immediately.
+        setUser(null);
+        setBio(null);
+        setName(null);
+        setUsername(null);
+        setGender(null);
+        setPhoto(null);
+        setDate(null);
+        setXp(null);
+        setHabits(null);
+        setRoutines(null);
+
+        // Log out remotely.
         const { error } = await supabase.auth.signOut();
 
-        if (error) throw Error("GlobalContext.signOut: Could not log out.");
+        // Clear local cache.
+        await AsyncStorage.setItem("user", "");
+        await AsyncStorage.setItem("user-data", "");
 
-        await setUser(null);
-        await setUserData(null);
+        if (error)
+            throw Error("GlobalContext.signOut: Could not log out.", error);
     };
-
-    /*
-        Get the screen dimensions using the preferred API by React Native.
-        https://reactnative.dev/docs/dimensions
-    */
-    const { width, height } = useWindowDimensions();
 
     /*
         To only recompute when one of the dependencies change.
@@ -324,12 +439,54 @@ export default function GlobalContextProvider({
                 signIn,
                 user,
                 signOut,
-                userData,
-                setUserData,
-                width,
-                height,
+                setUser,
+                bio,
+                setBio,
+                name,
+                setName,
+                username,
+                setUsername,
+                gender,
+                setGender,
+                photo,
+                setPhoto,
+                date,
+                setDate,
+                xp,
+                setXp,
+                tasks,
+                setTasks,
+                habits,
+                setHabits,
+                routines,
+                setRoutines,
             } satisfies GlobalContextDataProps),
-        [signUp, signIn, user, userData, setUserData, width, height]
+        [
+            signUp,
+            signIn,
+            user,
+            setUser,
+            bio,
+            setBio,
+            name,
+            setName,
+            username,
+            setUsername,
+            gender,
+            setGender,
+            photo,
+            setPhoto,
+            date,
+            setDate,
+            xp,
+            setXp,
+            tasks,
+            setTasks,
+            habits,
+            setHabits,
+            routines,
+            setRoutines,
+        ]
     );
 
     return (

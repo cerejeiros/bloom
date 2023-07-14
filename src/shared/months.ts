@@ -1,40 +1,15 @@
 const Months = [
-    {
-        month: "JANEIRO",
-    },
-    {
-        month: "FEVEREIRO",
-    },
-    {
-        month: "MARÇO",
-    },
-    {
-        month: "ABRIL",
-    },
-    {
-        month: "MAIO",
-    },
-    {
-        month: "JUNHO",
-    },
-    {
-        month: "JULHO",
-    },
-    {
-        month: "AGOSTO",
-    },
-    {
-        month: "SETEMBRO",
-    },
-    {
-        month: "OUTUBRO",
-    },
-    {
-        month: "NOVEMBRO",
-    },
-    {
-        month: "DEZEMBRO",
-    },
+    "janeiro",
+    "fevereiro",
+    "março",
+    "abril",
+    "maio",
+    "junho",
+    "julho",
+    "agosto",
+    "setembro",
+    "outubro",
+    "novembro",
 ];
 
 export default Months;

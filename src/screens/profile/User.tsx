@@ -1,20 +1,22 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import * as NavigationBar from "expo-navigation-bar";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
+    Animated,
+    Easing,
+    GestureResponderEvent,
     KeyboardAvoidingView,
-    Modal,
     Pressable,
-    SafeAreaView,
+    ScrollView,
     StyleSheet,
     Text,
     View,
+    useWindowDimensions,
 } from "react-native";
 import { Image } from "react-native-elements";
 import { Button } from "react-native-paper";
 import DatePicker from "../../components/date_picker";
 import InputIcon from "../../components/input_icon";
-import { GlobalContext } from "../../context/GlobalContext";
+import { useGlobalContext } from "../../context/GlobalContext";
 import supabase from "../../helpers/supabaseClient";
 import colors from "../../pallete";
 import UserAvatar from "./UserAvatar";
@@ -30,6 +32,7 @@ const styles = StyleSheet.create({
         rowGap: 50,
         height: "100%",
         backgroundColor: "#ffccd1",
+        alignItems: "center",
     },
     input: {
         marginTop: 0,
@@ -43,6 +46,9 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         minWidth: 280,
         fontSize: 15,
+        fontFamily: "Poppins-Regular",
+        marginBottom: 15,
+        // backgroundColor: "red",
     },
     profileHeader: {
         alignItems: "center",
@@ -70,9 +76,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     modal: {
-        marginHorizontal: 10,
-        marginVertical: 20,
+        position: "absolute",
         backgroundColor: colors.white_50,
+        top: 35,
         borderRadius: 20,
         paddingHorizontal: 35,
         paddingVertical: 30,
@@ -85,16 +91,18 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
+        zIndex: 100,
     },
     modalTitle: {
         fontSize: 32,
         marginBottom: 15,
-        fontWeight: "bold",
+        fontFamily: "Poppins-Regular",
+        textAlign: "center",
     },
     buttonView: {
         flexDirection: "row",
         justifyContent: "space-evenly",
-        marginTop: 30,
+        columnGap: 25,
     },
     buttonTitleColor: {
         color: "#fff",
@@ -107,12 +115,46 @@ const styles = StyleSheet.create({
         alignItems: "center",
         rowGap: 25,
     },
+    button: {
+        paddingVertical: 5,
+        paddingHorizontal: 20,
+        borderRadius: 20,
+    },
     button_leave: {
         alignSelf: "flex-end",
         verticalAlign: "bottom",
         marginRight: "5%",
     },
+    font: {
+        fontFamily: "Poppins-Bold",
+    },
+    block_view: {
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        top: 0,
+        left: 0,
+    },
 });
+
+type ButtonProps = {
+    backgroundColor: string;
+    text: string;
+    onPress: ((event: GestureResponderEvent) => void) | null | undefined;
+};
+
+function OurButton({ backgroundColor, text, onPress }: ButtonProps) {
+    return (
+        <Pressable
+            style={[styles.button, { backgroundColor }]}
+            onPress={onPress}
+        >
+            <Text style={[styles.font, { color: colors.white_50 }]}>
+                {text}
+            </Text>
+        </Pressable>
+    );
+}
 
 /*
     TODO: Discover what it does?
@@ -124,13 +166,51 @@ function Card({ children }: CardProps) {
 } */
 
 function User() {
-    const [name, setName] = React.useState<string | null>(null);
+    const {
+        user,
+        signOut,
+        bio,
+        setBio,
+        name,
+        setName,
+        username,
+        setUsername,
+        photo,
+        setPhoto,
+        date,
+        setDate,
+        xp,
+    } = useGlobalContext();
+
+    const [nameNew, setNameNew] = React.useState<string | null>(name);
+    const [bioNew, setBioNew] = useState<string | null>(bio);
+    const [usernameNew, setUsernameNew] = useState<string | null>(username);
+    const [dateNew, setDateNew] = useState<string | null>(date);
+    const [photoNew, setPhotoNew] = useState<string | null>(photo);
+    const { width, height } = useWindowDimensions();
     const [modalVisible, setModalVisible] = useState(false);
-    const [bio, setBio] = useState<string | null>(null);
-    const [userName, setUserName] = useState<string | null>(null);
-    const [date, setDate] = useState<string>("");
-    const [image, setImage] = useState<string | null>(null);
-    const { userData, setUserData, signOut } = useContext(GlobalContext);
+    const modalPosition = React.useMemo(
+        () => new Animated.Value(height),
+        [height]
+    );
+
+    React.useEffect(() => {
+        if (modalVisible) {
+            Animated.timing(modalPosition, {
+                toValue: 0,
+                duration: 150,
+                easing: Easing.ease,
+                useNativeDriver: true,
+            }).start();
+        } else {
+            Animated.timing(modalPosition, {
+                toValue: height,
+                duration: 150,
+                easing: Easing.ease,
+                useNativeDriver: true,
+            }).start();
+        }
+    }, [modalPosition, modalVisible, height]);
 
     const mockStatistics: UserStatsCardProps[] = [
         {
@@ -138,7 +218,7 @@ function User() {
             textPrimary: "3",
             iconPrimary: "",
             subTextPrimary: "position",
-            textSecondary: userData?.xp.toString() ?? "0",
+            textSecondary: xp?.toString() ?? "0",
             iconSecondary: "",
             subTextSecondary: "xp",
             textPrincipal: "ranking",
@@ -155,99 +235,71 @@ function User() {
         },
     ];
 
-    useEffect(() => {
-        if (!userData)
-            throw Error("User : useEffect() => Could not set userData on UI.");
-
-        setName(userData?.name);
-        setUserName(userData.username);
-        setBio(userData.bio);
-        setDate(userData.dateofbirth ?? "");
-        setImage(userData.photo);
-    }, [userData]);
-
-    // TODO: we can use this to show loading components in the app while
-    //       the supabase fetch is going on.
+    /*
+        TODO: we can use this to show loading components in the app while
+        the supabase fetch is going on.
+    */
     const [visible, setVisible] = React.useState(false);
 
-    const saveUser = async () => {
-        if (!userData)
-            throw Error("User : saveUser() => Could not load userData.");
-
-        setVisible(false);
-
+    async function saveUser() {
+        setVisible(true);
         // Update database with client profile data.
         {
             const { error } = await supabase
                 .from("profiles")
                 .update({
-                    bio,
-                    name,
-                    dateofbirth: date,
-                    username: userName,
-                    photo: image,
+                    bio: bioNew,
+                    name: nameNew,
+                    dateofbirth: dateNew,
+                    username: usernameNew,
+                    photo: photoNew,
                 })
-                .eq("id", userData.id);
+                .eq("id", user?.id);
 
-            if (error) {
-                window.alert(
-                    "Não foi possível salvar as informações do perfil"
-                );
+            if (error)
                 throw Error(
                     "User : saveUser() => Could not update profile data."
                 );
-            }
         }
 
         // Update client data (context) profile data.
-        {
-            const data = userData;
-            data.bio = bio;
-            data.name = name;
-            data.dateofbirth = date;
-            data.username = userName;
-            data.photo = image;
-            setUserData(data);
-        }
+        setBio(bioNew);
+        setName(nameNew);
+        setDate(dateNew);
+        setUsername(usernameNew);
+        setPhoto(photoNew);
 
         setModalVisible(false);
-        setVisible(true);
-    };
-
-    const { width, height } = React.useContext(GlobalContext);
+        setVisible(false);
+    }
 
     return (
-        <KeyboardAvoidingView>
-            <SafeAreaView style={styles.container}>
-                <Modal
-                    visible={modalVisible}
-                    animationType="slide"
-                    statusBarTranslucent
-                    transparent
-                    onShow={() => {
-                        /* TODO: Need to hide the native navigation bar.
-                                 It may be impossible because model is intended
-                                 to have the native navigation bar shown.
-                                 However for questions of normalization of the
-                                 style presented in the application we should
-                                 hide it.
-                                 https://github.com/thebylito/react-native-navigation-bar-color/issues/30
-                        */
-                        NavigationBar.setVisibilityAsync("hidden");
-                    }}
-                    onRequestClose={() => setModalVisible(false)}
+        <View style={styles.container}>
+            <Animated.View
+                style={[
+                    styles.modal,
+                    {
+                        transform: [{ translateY: modalPosition }],
+                        height: height - 50,
+                        width: width - 25,
+                    },
+                ]}
+            >
+                <KeyboardAvoidingView
+                    behavior="padding"
+                    keyboardVerticalOffset={112.5}
                 >
-                    <View style={[styles.modal, { height: height - 70 }]}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <Text style={styles.modalTitle}>Editar perfil</Text>
                         <View>
                             <UserAvatar
-                                image={image}
-                                setImage={setImage}
+                                image={photoNew}
+                                setImage={setPhotoNew}
                                 openPickerOnPress
                             />
                             <InputIcon
-                                onChangeText={setName}
-                                value={name ?? undefined}
+                                onChangeText={setNameNew}
+                                value={nameNew ?? undefined}
                                 placeholder="Nome"
                                 keyboardType="default"
                                 inputMode="text"
@@ -255,8 +307,8 @@ function User() {
                                 label="Nome"
                             />
                             <InputIcon
-                                onChangeText={setUserName}
-                                value={userName ?? undefined}
+                                onChangeText={setUsernameNew}
+                                value={usernameNew ?? undefined}
                                 placeholder="userName"
                                 keyboardType="default"
                                 inputMode="text"
@@ -264,8 +316,8 @@ function User() {
                                 label="Username"
                             />
                             <InputIcon
-                                onChangeText={setBio}
-                                value={bio ?? undefined}
+                                onChangeText={setBioNew}
+                                value={bioNew ?? undefined}
                                 placeholder="Biografia"
                                 keyboardType="default"
                                 inputMode="text"
@@ -274,85 +326,82 @@ function User() {
                             />
                             <DatePicker
                                 icon={false}
-                                text={date}
-                                textState={setDate}
+                                text={dateNew}
+                                textState={setDateNew}
                                 style={styles.input}
                                 label="Data de nascimento"
                             />
+                            <View style={styles.buttonView}>
+                                <OurButton
+                                    onPress={() => {
+                                        setPhotoNew(photo);
+                                        setBioNew(bio);
+                                        setDateNew(date);
+                                        setNameNew(name);
+                                        setUsernameNew(username);
+                                        setModalVisible(false);
+                                    }}
+                                    backgroundColor={colors.rose_400}
+                                    text="Fechar"
+                                />
+                                <OurButton
+                                    onPress={() =>
+                                        saveUser().catch((e) => window.alert(e))
+                                    }
+                                    backgroundColor="green"
+                                    text="Salvar"
+                                />
+                            </View>
                         </View>
-                        <View
-                            style={[styles.buttonView, { width: width - 70 }]}
-                        >
-                            <Button
-                                mode="contained"
-                                buttonColor={colors.rose_500}
-                                onPress={() => setModalVisible(false)}
-                            >
-                                Fechar
-                            </Button>
-
-                            <Button
-                                onPress={() => {
-                                    saveUser();
-                                }}
-                                mode="contained"
-                                buttonColor="green"
-                            >
-                                Salvar
-                            </Button>
-                        </View>
-                    </View>
-                </Modal>
-                <View
-                    style={[
-                        styles.profileHeader,
-                        { width, height: height * 0.3 },
-                    ]}
-                >
-                    <View style={styles.profile_background}>
-                        <Image
-                            source={require("../../../assets/waveheader.png")}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                    </View>
-
-                    <View style={styles.profilePhoto}>
-                        <UserAvatar
-                            image={image}
-                            setImage={setImage}
-                            openPickerOnPress={false}
-                        />
-                        <Pressable
-                            style={styles.editBadge}
-                            onPress={() => setModalVisible(true)}
-                        >
-                            <MaterialCommunityIcons
-                                name="account-edit"
-                                size={Defaults.editBadgeIconSize}
-                                color="black"
-                            />
-                        </Pressable>
-                    </View>
+                    </ScrollView>
+                </KeyboardAvoidingView>
+            </Animated.View>
+            <View
+                style={[styles.profileHeader, { width, height: height * 0.3 }]}
+            >
+                <View style={styles.profile_background}>
+                    <Image
+                        source={require("../../../assets/waveheader.png")}
+                        style={{ width: "100%", height: "100%" }}
+                    />
                 </View>
-                <View style={styles.statsView}>
-                    <UserStatsCard info={mockStatistics} />
+
+                <View style={styles.profilePhoto}>
+                    <UserAvatar
+                        image={photoNew}
+                        setImage={setPhotoNew}
+                        openPickerOnPress={false}
+                    />
+                    <Pressable
+                        style={styles.editBadge}
+                        onPress={() => setModalVisible(true)}
+                    >
+                        <MaterialCommunityIcons
+                            name="account-edit"
+                            size={Defaults.editBadgeIconSize}
+                            color="black"
+                        />
+                    </Pressable>
                 </View>
-                <Button
-                    icon="exit-to-app"
-                    mode="contained"
-                    style={[styles.button_leave, { width: width * 0.4 }]}
-                    buttonColor={colors.rose_400}
-                    onPress={signOut}
-                >
-                    Sair
-                </Button>
-                {/*
+            </View>
+            <View style={styles.statsView}>
+                <UserStatsCard info={mockStatistics} />
+            </View>
+            <Button
+                icon="exit-to-app"
+                mode="contained"
+                style={[styles.button_leave, { width: width * 0.4 }]}
+                buttonColor={colors.rose_400}
+                onPress={signOut}
+            >
+                <Text style={styles.font}>Sair</Text>
+            </Button>
+            {/*
                     TODO: discover what this was meant to be.
                 <Card>
                     <Text>Usuário</Text>
                 </Card> */}
-            </SafeAreaView>
-        </KeyboardAvoidingView>
+        </View>
     );
 }
 

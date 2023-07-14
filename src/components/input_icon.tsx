@@ -35,6 +35,7 @@ import {
 export interface InputProps extends TextInputProps {
     styleIconContainer?: StyleProp<ViewStyle>;
     styleContainer?: StyleProp<ViewStyle>;
+    styleViewContainer?: StyleProp<ViewStyle>;
     position?: "left" | "right";
     Icon?: React.ReactElement;
     label?: string;
@@ -48,14 +49,13 @@ const styles = StyleSheet.create({
         color: "red",
     },
     container_icon: {
-        paddingHorizontal: 5,
-        paddingVertical: 10,
         aspectRatio: 1,
         justifyContent: "center",
         alignItems: "center",
     },
     labelInput: {
         color: "#808080",
+        fontFamily: "Poppins-Regular",
     },
 });
 
@@ -77,6 +77,8 @@ export default function InputIcon(props: InputProps) {
         onChangeText,
         onFocus,
         label,
+        onEndEditing,
+        styleViewContainer,
     } = props;
 
     let direction: "column" | "row" | "column-reverse" | "row-reverse";
@@ -96,10 +98,10 @@ export default function InputIcon(props: InputProps) {
     const inputRef = useRef<TextInput>(null);
 
     if (Icon && label)
-        throw Error("A InoputIcon can't have a label and a icon.");
+        throw Error("A InputIcon can't have a label and a icon.");
 
     return (
-        <View style={{ flexDirection: "column", marginVertical: 15 }}>
+        <View style={[styleViewContainer, { flexDirection: "column" }]}>
             {Icon ? undefined : <Text style={styles.labelInput}>{label}</Text>}
             <View
                 style={[
@@ -120,6 +122,7 @@ export default function InputIcon(props: InputProps) {
                     inputMode={inputMode}
                     onFocus={onFocus}
                     value={value}
+                    onEndEditing={onEndEditing}
                     secureTextEntry={secureTextEntry}
                 />
                 {Icon && (
