@@ -1,6 +1,7 @@
 {
     "expo": {
         "name": "cerejeiros",
+        "owner": "cerejeiros",
         "plugins": [
             [
                 "expo-image-picker",
@@ -27,10 +28,17 @@
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
-            }
+            },
+            "permissions": ["android.permission.RECORD_AUDIO"],
+            "package": "com.kaioenzo.cerejeiros"
         },
         "web": {
             "favicon": "./assets/favicon.png"
+        },
+        "extra": {
+            "eas": {
+                "projectId": "86ddcf2e-697e-4fa6-b901-d051968d2190"
+            }
         }
     }
 }
